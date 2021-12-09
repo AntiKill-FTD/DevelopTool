@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeveloperData", "DeveloperD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{1E7FE3DF-8294-4D9D-B8D6-C948FCE72513}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeveloperTest", "DeveloperTest\DeveloperTest.csproj", "{40AC85B7-D30E-4FBC-A43A-123AD1C1F298}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeveloperTest", "DeveloperTest\DeveloperTest.csproj", "{40AC85B7-D30E-4FBC-A43A-123AD1C1F298}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

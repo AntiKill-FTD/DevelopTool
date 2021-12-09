@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace DeveloperData.Model
@@ -13,17 +14,17 @@ namespace DeveloperData.Model
 
         public BloggingContext()
         {
-            var folder = Environment.SpecialFolder.LocalApplicationData;
-            var path = Environment.GetFolderPath(folder);
+            var path = @"E:/Datas/sqlite";
             DbPath = $"{path}{System.IO.Path.DirectorySeparatorChar}blogging.db";
         }
 
         // The following configures EF to create a Sqlite database file in the
         // special "local" folder for your platform.
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlServer($"Data Source={DbPath}");
+            => options.UseSqlite($"Data Source={DbPath}");
     }
 
+    [Table("Blog")]
     public class Blog
     {
         public int BlogId { get; set; }
@@ -32,6 +33,7 @@ namespace DeveloperData.Model
         public List<Post> Posts { get; } = new List<Post>();
     }
 
+    [Table("Post")]
     public class Post
     {
         public int PostId { get; set; }

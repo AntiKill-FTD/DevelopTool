@@ -1,4 +1,5 @@
 ﻿using DeveloperData.Model;
+using Microsoft.Extensions.DependencyInjection;
 
 using (var db = new BloggingContext())
 {
@@ -27,4 +28,6 @@ using (var db = new BloggingContext())
     Console.WriteLine("Delete the blog");
     db.Remove(blog);
     db.SaveChanges();
+    
+    Console.ReadLine();
 }
