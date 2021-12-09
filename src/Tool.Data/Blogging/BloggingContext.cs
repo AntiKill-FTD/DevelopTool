@@ -3,20 +3,21 @@ using Tool.Business.Model.Blogging;
 
 namespace Tool.Data.Model
 {
-    public class BloggingContext : ToolDbContext
+    public class BloggingContext : ToolDbContext<BloggingContext>
     {
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Post> Posts { get; set; }
 
-        private string DbPath;
+        //private string DbPath;
 
-        public BloggingContext(DbContextOptions<BloggingContext> options)
+        public BloggingContext(DbContextOptions<BloggingContext> options) : base(options)
         {
-            DbPath = $"E:/Datas/sqlite{System.IO.Path.DirectorySeparatorChar}blogging.db";
+            //DbPath = $"E:/Datas/sqlite{System.IO.Path.DirectorySeparatorChar}blogging.db";
+
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite($"Data Source={DbPath}");
+        //protected override void OnConfiguring(DbContextOptionsBuilder options)
+        //    => options.UseSqlite($"Data Source={DbPath}");
 
     }
 }

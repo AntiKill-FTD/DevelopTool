@@ -11,9 +11,12 @@ namespace Tool.Test
 
         public static ServiceProvider Configuration()
         {
+            string DbPath = $"E:/Datas/sqlite{System.IO.Path.DirectorySeparatorChar}blogging.db";
+
             //注入
             //BloggingContext
-            return services.AddDbContext<BloggingContext>()
+            return services.AddDbContext<BloggingContext>(option => option.UseSqlite($"Data Source={DbPath}"))
+                           .AddTransient<IBlogService, BlogService>()
                            .BuildServiceProvider();
         }
     }
