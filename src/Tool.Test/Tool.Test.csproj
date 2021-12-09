@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="StartUp.cs~RF1d9f485.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tool.Data\Tool.Data.csproj" />
+    <ProjectReference Include="..\Tool.Service\Tool.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Business\" />
+  </ItemGroup>
+
+</Project>

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DeveloperTool
+namespace Tool.Main
 {
     public partial class Form1 : Form
     {

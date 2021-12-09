@@ -1,4 +1,4 @@
-﻿namespace DeveloperTool
+﻿namespace Tool.Main
 {
     partial class Form1
     {
