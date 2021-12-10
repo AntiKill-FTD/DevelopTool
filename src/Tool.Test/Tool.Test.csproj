@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Business\" />
+    <Resource Include="Resource\Data\blogging.db" />
   </ItemGroup>
 
 </Project>
