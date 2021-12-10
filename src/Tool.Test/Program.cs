@@ -10,7 +10,7 @@ public class Program
 
         IBlogService bs = serviceProvider.GetService<IBlogService>();
 
-        bs.BlogAct();
+        bs.InsertPost();
 
         //等待输入
         Console.ReadLine();

@@ -1,6 +1,7 @@
 ﻿using Tool.Business.Model.Blogging;
 using Tool.Data;
 using Tool.Data.Model;
+using Tool.IService.Model.Blogging;
 using Tool.IService.Test;
 
 namespace Tool.Test
@@ -12,6 +13,20 @@ namespace Tool.Test
         public BlogService(BloggingContext _iBloggingContext)
         {
             _bloggingContext = _iBloggingContext;
+        }
+
+        /// <summary>
+        /// 插入Test表数据
+        /// </summary>
+        public void InsertPost()
+        {
+            Console.WriteLine("begin insert");
+            for (int i = 0; i < 1000; i++)
+            {
+                _bloggingContext.Add(new TestTable { Name = i.ToString() });
+            }
+            _bloggingContext.SaveChanges();
+            Console.WriteLine("end insert");
         }
 
         /// <summary>

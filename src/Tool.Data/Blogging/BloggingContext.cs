@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Tool.Business.Model.Blogging;
+using Tool.IService.Model.Blogging;
 
 namespace Tool.Data.Model
 {
@@ -7,6 +8,7 @@ namespace Tool.Data.Model
     {
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<TestTable> Tests { get; set; }
 
         //private string DbPath;
 

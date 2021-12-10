@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resource\Data\blogging.db" />
     <None Remove="StartUp.cs~RF1d9f485.TMP" />
   </ItemGroup>
 

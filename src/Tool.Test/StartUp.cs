@@ -11,7 +11,7 @@ namespace Tool.Test
 
         public static ServiceProvider Configuration()
         {
-            string DbPath = $"E:/Datas/sqlite{System.IO.Path.DirectorySeparatorChar}blogging.db";
+            string DbPath = @"E:\GitRepository\GitHub\FTD\GitHubMine\DevelopTool\src\Tool.Test\Resource\Data\blogging.db";
 
             //注入
             //BloggingContext
