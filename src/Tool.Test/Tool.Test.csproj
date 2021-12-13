@@ -5,11 +5,20 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <ApplicationIcon>Resource\BitMap\pt64.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Resource\Data\blogging.db" />
     <None Remove="StartUp.cs~RF1d9f485.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resource\BitMap\pt64.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\Data\blogging.db" />
   </ItemGroup>
 
   <ItemGroup>
