@@ -16,7 +16,7 @@ namespace Tool.Main
         {
             ServiceProvider = StartUp.Configuration();
             ApplicationConfiguration.Initialize();
-            Application.Run(new TestForm());
+            Application.Run(new MainForm());
         }
     }
 }

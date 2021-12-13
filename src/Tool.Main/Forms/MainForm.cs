@@ -6,5 +6,12 @@ namespace Tool.Main.Forms
         {
             InitializeComponent();
         }
+
+        #region PageLoad
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+          
+        }
+        #endregion
     }
 }

@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Tool.Business.Model.Blogging;
-using Tool.IService.Model.Blogging;
+using Tool.IService.Test.Model.Blogging;
 
-namespace Tool.Data.Model
+namespace Tool.Data.Test
 {
     public class BloggingContext : ToolDbContext<BloggingContext>
     {

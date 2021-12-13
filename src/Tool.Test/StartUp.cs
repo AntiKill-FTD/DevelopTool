@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Tool.Data.Model;
+using Tool.Data.Test;
 using Tool.IService.Test;
+using Tool.Service.Test;
 
 namespace Tool.Test
 {

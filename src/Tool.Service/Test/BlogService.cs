@@ -1,11 +1,8 @@
-﻿using System.Linq;
-using Tool.Business.Model.Blogging;
-using Tool.Data;
-using Tool.Data.Model;
-using Tool.IService.Model.Blogging;
+﻿using Tool.Data.Test;
 using Tool.IService.Test;
+using Tool.IService.Test.Model.Blogging;
 
-namespace Tool.Test
+namespace Tool.Service.Test
 {
     public class BlogService : IBlogService
     {

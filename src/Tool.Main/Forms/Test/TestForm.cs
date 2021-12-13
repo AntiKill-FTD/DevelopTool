@@ -1,7 +1,7 @@
-﻿using Tool.IService.Model.Blogging;
-using Tool.IService.Test;
+﻿using Tool.IService.Test;
+using Tool.IService.Test.Model.Blogging;
 
-namespace Tool.Main.Forms
+namespace Tool.Main.Forms.Test
 {
     public partial class TestForm : Form
     {

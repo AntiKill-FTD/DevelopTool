@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Tool.IService.Model.Blogging
+namespace Tool.IService.Test.Model.Blogging
 {
     [Table("Test")]
     public class TestTable

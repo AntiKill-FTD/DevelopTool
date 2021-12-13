@@ -1,4 +1,4 @@
-﻿namespace Tool.Main.Forms
+﻿namespace Tool.Main.Forms.Test
 {
     partial class TestForm
     {
