@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resource\BitMap\pt64.ico" />
+    <None Remove="Resource\Data\DeveloperTool.db" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resource\BitMap\pt64.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\Data\DeveloperTool.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tool.Data\Tool.Data.csproj" />
+    <ProjectReference Include="..\Tool.Service\Tool.Service.csproj" />
+  </ItemGroup>
+
+</Project>

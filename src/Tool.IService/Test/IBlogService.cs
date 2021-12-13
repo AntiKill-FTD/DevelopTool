@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tool.IService.Model.Blogging;
 
 namespace Tool.IService.Test
 {
@@ -17,5 +18,10 @@ namespace Tool.IService.Test
         /// 操作Blog和Post表
         /// </summary>
         public void BlogAct();
+
+        /// <summary>
+        /// 获取Test表数据
+        /// </summary>
+        public List<TestTable> GetTest();
     }
 }

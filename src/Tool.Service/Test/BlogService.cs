@@ -1,4 +1,5 @@
-﻿using Tool.Business.Model.Blogging;
+﻿using System.Linq;
+using Tool.Business.Model.Blogging;
 using Tool.Data;
 using Tool.Data.Model;
 using Tool.IService.Model.Blogging;
@@ -56,6 +57,12 @@ namespace Tool.Test
             Console.WriteLine("Delete the blog");
             _bloggingContext.Remove(blog);
             _bloggingContext.SaveChanges();
+        }
+
+        public List<TestTable> GetTest()
+        {
+            List<TestTable> testTables = _bloggingContext.Tests.Where(item => 1 == 1).ToList();
+            return testTables;
         }
     }
 }

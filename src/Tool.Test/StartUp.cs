@@ -11,7 +11,9 @@ namespace Tool.Test
 
         public static ServiceProvider Configuration()
         {
-            string DbPath = @"E:\GitRepository\GitHub\FTD\GitHubMine\DevelopTool\src\Tool.Test\Resource\Data\blogging.db";
+            string rootPath = Environment.CurrentDirectory.ToString();
+            char sepChar = Path.DirectorySeparatorChar;
+            string DbPath = $"{rootPath}{sepChar}Resource{sepChar}Data{sepChar}blogging.db";
 
             //注入
             //BloggingContext

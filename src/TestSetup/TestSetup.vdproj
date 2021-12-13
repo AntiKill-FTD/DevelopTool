@@ -101,7 +101,7 @@
             "SourcePath" = "8:..\\Tool.Test\\Resource\\Data\\blogging.db"
             "TargetName" = "8:blogging.db"
             "Tag" = "8:"
-            "Folder" = "8:_5D4C1B3AB4D84FACA545947DFC112824"
+            "Folder" = "8:_FF47B6699EDC4C0B8837DB5F764D6965"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -163,6 +163,28 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_F06EBC644CEB4DAB95A8FAD0BE765531"
+                    {
+                    "Name" = "8:Resource"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_CFB8237EE7A14E60A68C9499CF38C74B"
+                        "Folders"
+                        {
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_FF47B6699EDC4C0B8837DB5F764D6965"
+                            {
+                            "Name" = "8:Data"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_D314FDB8A81746E7B6622CE3D66F2CEC"
+                                "Folders"
+                                {
+                                }
+                            }
+                        }
+                    }
                 }
             }
             "{1525181F-901A-416C-8A58-119130FE478E}:_D19F3082C9FC4208BFC143C07AEA122F"
@@ -193,7 +215,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:TestSetup"
         "ProductCode" = "8:{EF206335-B743-4BC6-878E-8445894D7EDF}"
-        "PackageCode" = "8:{E12E6958-5440-49B1-B414-EFBA7B7D69B1}"
+        "PackageCode" = "8:{373FA7F9-A803-444F-B3FD-BA8B1589B829}"
         "UpgradeCode" = "8:{55EC24F8-E8DB-4940-A7A1-FDBF74A56DF5}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
