@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <None Remove="Resource\BitMap\pt64.ico" />
-    <None Remove="Resource\Data\DeveloperTool.db" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,14 +17,34 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resource\Data\DeveloperTool.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <ProjectReference Include="..\Tool.Data\Tool.Data.csproj" />
+    <ProjectReference Include="..\Tool.Service\Tool.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Config\" />
+    <Folder Include="Resource\Data\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Tool.Data\Tool.Data.csproj" />
-    <ProjectReference Include="..\Tool.Service\Tool.Service.csproj" />
+    <None Update="Resource\Data\DeveloperTool.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -1,15 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UseWindowsForms>true</UseWindowsForms>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Tool.Business\Tool.Business.csproj" />
-    <ProjectReference Include="..\Tool.Data\Tool.Data.csproj" />
-    <ProjectReference Include="..\Tool.IService\Tool.IService.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Tool.Business\Tool.Business.csproj" />
+		<ProjectReference Include="..\Tool.Data\Tool.Data.csproj" />
+		<ProjectReference Include="..\Tool.IService\Tool.IService.csproj" />
+	</ItemGroup>
 
 </Project>

@@ -19,9 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tool.IService", "Tool.IServ
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TestSetup", "TestSetup\TestSetup.vdproj", "{C29FCEA2-833E-4C6C-A29D-0F974DFF5C64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tool.Main", "Tool.Main\Tool.Main.csproj", "{97E5D060-DD67-4F42-8E57-DCFDEF1E6BF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tool.Main", "Tool.Main\Tool.Main.csproj", "{97E5D060-DD67-4F42-8E57-DCFDEF1E6BF6}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DeveloperToolSetup", "DeveloperToolSetup\DeveloperToolSetup.vdproj", "{851659E0-CA35-4654-9139-56EC651FF4A2}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DeveloperTool", "DeveloperToolSetup\DeveloperToolSetup.vdproj", "{851659E0-CA35-4654-9139-56EC651FF4A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
