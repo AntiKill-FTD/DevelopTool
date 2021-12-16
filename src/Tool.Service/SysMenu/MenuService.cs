@@ -33,7 +33,7 @@ namespace Tool.Main.Common.MenuA
             //菜单管理对应实例
             if (!MenuStaticObject.MenuCodeUrl.ContainsKey("00.01"))
             {
-                MenuStaticObject.MenuCodeUrl.Add("00.01", "TicketsAnalysis|TicketsAnalysis.Forms.BaseForm|MenuSet");
+                MenuStaticObject.MenuCodeUrl.Add("00.01", "Tool.Main|Tool.Main.Forms.SysForms|MenuSet");
             }
         }
 
@@ -152,7 +152,7 @@ namespace Tool.Main.Common.MenuA
 
         #region Event
 
-        private void MenuClick(object sender, EventArgs e)
+        public void MenuClick(object sender, EventArgs e)
         {
             try
             {
@@ -234,7 +234,7 @@ namespace Tool.Main.Common.MenuA
                 //定义打开菜单
                 ToolStripButton menuItem = new ToolStripButton();
                 //属性定义
-                ResourceManager resourceManager = new ResourceManager("Tool.Main.Properties.Resources", Assembly.GetAssembly(Type.GetType("Tool.Main.Properties.Resources")));
+                ResourceManager resourceManager = new ResourceManager("Tool.Service.Properties.Resources", Assembly.GetAssembly(Type.GetType("Tool.Service.Properties.Resources")));
                 Bitmap bitmapClose = (Bitmap)(resourceManager.GetObject("menuClose64"));
                 Bitmap bitmapBlueBack = (Bitmap)(resourceManager.GetObject("BackColorBlue"));
                 //属性赋值
@@ -318,7 +318,7 @@ namespace Tool.Main.Common.MenuA
                     if (currentMenuCode != string.Empty && sb.Name == currentMenuCode)
                     {
                         //属性定义
-                        ResourceManager resourceManager = new ResourceManager("TicketsAnalysis.Properties.Resources", Assembly.GetAssembly(Type.GetType("TicketsAnalysis.Properties.Resources")));
+                        ResourceManager resourceManager = new ResourceManager("Tool.Service.Properties.Resources", Assembly.GetAssembly(Type.GetType("Tool.Service.Properties.Resources")));
                         Bitmap bitmapBlueBack = (Bitmap)(resourceManager.GetObject("BackColorBlue"));
                         //赋值属性
                         sb.BackgroundImage = bitmapBlueBack;

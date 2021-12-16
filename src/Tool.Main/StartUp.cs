@@ -1,11 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Tool.Data;
-using Tool.Data.Test;
 using Tool.IService.SysMenu;
-using Tool.IService.Test;
 using Tool.Main.Common.MenuA;
-using Tool.Service.Test;
 
 namespace Tool.Main
 {
@@ -21,9 +18,7 @@ namespace Tool.Main
 
             //注入
             //BloggingContext
-            return services.AddDbContext<BloggingContext>(option => option.UseSqlite($"Data Source={DbPath}"))
-                           .AddDbContext<DeveloperToolContext>(option => option.UseSqlite($"Data Source={DbPath}"))
-                           .AddTransient<IBlogService, BlogService>()
+            return services.AddDbContext<DeveloperToolContext>(option => option.UseSqlite($"Data Source={DbPath}"))
                            .AddTransient<IMenuService, MenuService>()
                            .BuildServiceProvider();
         }

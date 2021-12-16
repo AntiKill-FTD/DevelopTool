@@ -1,5 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
-using Tool.Main.Forms;
+using Tool.Main.Forms.SysForms;
 
 namespace Tool.Main
 {

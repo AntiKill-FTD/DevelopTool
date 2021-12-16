@@ -10,5 +10,7 @@
         /// 创建菜单
         /// </summary>
         public void CreateMenu();
+
+        public void MenuClick(object sender, EventArgs e);
     }
 }

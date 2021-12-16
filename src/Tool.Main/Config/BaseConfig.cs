@@ -2,9 +2,12 @@
 
 namespace Tool.Main.Config
 {
-    public class BaseConfig
+    public static class BaseConfig
     {
-        public bool NetStat
+        /// <summary>
+        /// 获取网络状态
+        /// </summary>
+        public static bool NetStat
         {
             get { return NetworkInterface.GetIsNetworkAvailable(); }
         }
