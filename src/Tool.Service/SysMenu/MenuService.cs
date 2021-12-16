@@ -1,13 +1,13 @@
 ﻿using System.Data;
 using System.Reflection;
+using System.Resources;
 using System.Runtime.Remoting;
 using Tool.Business.SysMenu;
 using Tool.Data;
 using Tool.IService.Model.Sys;
 using Tool.IService.SysMenu;
-using System.Resources;
 
-namespace Tool.Main.Common.MenuA
+namespace Tool.Service.SysMenu
 {
     public class MenuService : IMenuService
     {
@@ -50,6 +50,21 @@ namespace Tool.Main.Common.MenuA
 
             //创建菜单控件
             CreateMenuControl();
+        }
+
+        /// <summary>
+        /// 打开菜单管理界面
+        /// </summary>
+        public void OpenMenuManage()
+        {
+            ToolStripMenuItem menuItem = new ToolStripMenuItem();
+
+            //菜单管理的menuCode定义为00.01
+            menuItem.Name = "00.01";
+            menuItem.Text = "菜单管理";
+
+            //调用公共事件打开窗体
+            MenuClick(menuItem, null);
         }
 
         #region Private Create Recursion
@@ -152,7 +167,12 @@ namespace Tool.Main.Common.MenuA
 
         #region Event
 
-        public void MenuClick(object sender, EventArgs e)
+        /// <summary>
+        /// MenuClick
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuClick(object sender, EventArgs e)
         {
             try
             {
@@ -248,7 +268,7 @@ namespace Tool.Main.Common.MenuA
                 menuItem.TextImageRelation = TextImageRelation.TextBeforeImage;
                 menuItem.AutoToolTip = false;
                 //添加点击事件
-                menuItem.Click += MenuListClick;
+                menuItem.Click += SwitchMenuClick;
                 //添加到打开列表
                 ToolStrip menuListPanel = (ToolStrip)MainForm.Controls["panelMain"].Controls["panelMenuList"].Controls["toolStripMenuList"];
                 menuListPanel.Items.Insert(0, menuItem);
@@ -298,7 +318,7 @@ namespace Tool.Main.Common.MenuA
             {
                 //获取菜单清单中，index分别为1,2的菜单
                 string currentMenuCode = MenuStaticObject.CurrentMenuCode;
-                string lastMenuCode = MenuStaticObject.LastMenuCode;
+                string nextMenuCode = MenuStaticObject.NextMenuCode;
 
                 //获取toolStrip，循环设置状态
                 ToolStrip menuListPanel = (ToolStrip)MainForm.Controls["panelMain"].Controls["panelMenuList"].Controls["toolStripMenuList"];
@@ -307,7 +327,7 @@ namespace Tool.Main.Common.MenuA
                     //获取并转换对象
                     ToolStripButton sb = (ToolStripButton)item;
                     //1.修改上次打开窗体属性
-                    if (lastMenuCode != string.Empty && sb.Name == lastMenuCode)
+                    if (nextMenuCode != string.Empty && sb.Name == nextMenuCode)
                     {
                         //赋值属性
                         sb.BackgroundImage = null;
@@ -334,7 +354,12 @@ namespace Tool.Main.Common.MenuA
             }
         }
 
-        private void MenuListClick(object sender, EventArgs e)
+        /// <summary>
+        /// OpenMenuClick:切换菜单
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SwitchMenuClick(object sender, EventArgs e)
         {
             try
             {

@@ -93,14 +93,7 @@ namespace Tool.Main.Forms.SysForms
         {
             try
             {
-                //转换为菜单
-                ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
-                //菜单管理的menuCode定义为00.01
-                menuItem.Name = "00.01";
-                menuItem.Text = "菜单管理";
-
-                //调用公共事件打开窗体
-                ms.MenuClick(menuItem, e);
+                ms.OpenMenuManage();
             }
             catch (Exception ex)
             {

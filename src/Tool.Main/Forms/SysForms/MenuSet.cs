@@ -4,7 +4,7 @@
     {
         public MenuSet()
         {
-            InitializeComponent();
+            //InitializeComponent();
         }
 
         private void MenuSet_Load(object sender, EventArgs e)

@@ -11,6 +11,9 @@
         /// </summary>
         public void CreateMenu();
 
-        public void MenuClick(object sender, EventArgs e);
+        /// <summary>
+        /// 打开菜单管理界面
+        /// </summary>
+        public void OpenMenuManage();
     }
 }

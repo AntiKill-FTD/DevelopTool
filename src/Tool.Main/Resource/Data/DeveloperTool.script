@@ -23,7 +23,7 @@ INSERT INTO P_Menu (
 VALUES (
 	'01'
 	,-- MenuCode - varchar(100)
-	'基础设置'
+	'开发帮助'
 	,-- MenuName - varchar(100)
 	''
 	,-- ParentCode - varchar(100)
@@ -51,97 +51,13 @@ INSERT INTO P_Menu (
 VALUES (
 	'01.01'
 	,-- MenuCode - varchar(100)
-	'网页爬取'
-	,-- MenuName - varchar(100)
-	'01'
-	,-- ParentCode - varchar(100)
-	'Tool.Main'
-	,-- Assembly - varchar(200)
-	'Tool.Main.Forms.BusForms'
-	,-- NameSpace - varchar(200)
-	'InternetWorm'
-	,-- EntityName - varchar(200)
-	2
-	,-- Level - int
-	1 -- IfEnd - tinyint
-	);
-
-INSERT INTO P_Menu (
-	MenuCode
-	,MenuName
-	,ParentCode
-	,Assembly
-	,NameSpace
-	,EntityName
-	,LEVEL
-	,IfEnd
-	)
-VALUES (
-	'01.02'
-	,-- MenuCode - varchar(100)
-	'基础数据'
-	,-- MenuName - varchar(100)
-	'01'
-	,-- ParentCode - varchar(100)
-	'Tool.Main'
-	,-- Assembly - varchar(200)
-	'Tool.Main.Forms.BusForms'
-	,-- NameSpace - varchar(200)
-	'BaseData'
-	,-- EntityName - varchar(200)
-	2
-	,-- Level - int
-	1 -- IfEnd - tinyint
-	);
-
-INSERT INTO P_Menu (
-	MenuCode
-	,MenuName
-	,ParentCode
-	,Assembly
-	,NameSpace
-	,EntityName
-	,LEVEL
-	,IfEnd
-	)
-VALUES (
-	'02'
-	,-- MenuCode - varchar(100)
-	'开发帮助'
-	,-- MenuName - varchar(100)
-	''
-	,-- ParentCode - varchar(100)
-	''
-	,-- Assembly - varchar(200)
-	''
-	,-- NameSpace - varchar(200)
-	''
-	,-- EntityName - varchar(200)
-	1
-	,-- Level - int
-	0 -- IfEnd - tinyint
-	);
-
-INSERT INTO P_Menu (
-	MenuCode
-	,MenuName
-	,ParentCode
-	,Assembly
-	,NameSpace
-	,EntityName
-	,LEVEL
-	,IfEnd
-	)
-VALUES (
-	'02.01'
-	,-- MenuCode - varchar(100)
 	'脚本生成'
 	,-- MenuName - varchar(100)
-	'02'
+	'01'
 	,-- ParentCode - varchar(100)
 	'Tool.Main'
 	,-- Assembly - varchar(200)
-	'Tool.Main.Forms.BusForms'
+	'Tool.Main.Forms.DevForms'
 	,-- NameSpace - varchar(200)
 	'SqlHelper'
 	,-- EntityName - varchar(200)
@@ -161,15 +77,15 @@ INSERT INTO P_Menu (
 	,IfEnd
 	)
 VALUES (
-	'02.02'
+	'01.02'
 	,-- MenuCode - varchar(100)
 	'实体生成'
 	,-- MenuName - varchar(100)
-	'02'
+	'01'
 	,-- ParentCode - varchar(100)
 	'Tool.Main'
 	,-- Assembly - varchar(200)
-	'Tool.Main.Forms.BusForms'
+	'Tool.Main.Forms.DevForms'
 	,-- NameSpace - varchar(200)
 	'EntityHelper'
 	,-- EntityName - varchar(200)
