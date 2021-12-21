@@ -1,5 +1,6 @@
 ﻿using System.Data;
-using Tool.CusControls.DataGridViewEx;
+using Tool.CusControls.Common;
+using Tool.Data.DataHelper;
 //using TicketsDataHelper;
 
 namespace Tool.CusControls.DataGridViewEx
@@ -223,6 +224,21 @@ namespace Tool.CusControls.DataGridViewEx
         }
 
         /// <summary>
+        /// 添加多列
+        /// </summary>
+        /// <param name="dic">列字典[<ColName,HeaderText>]</param>
+        public void AddColumns(Dictionary<string, string> dic)
+        {
+            foreach (string col in dic.Keys)
+            {
+                if (!this.dataGridView1.Columns.Contains(col))
+                {
+                    this.dataGridView1.Columns.Add(col, dic[col]);
+                }
+            }
+        }
+
+        /// <summary>
         /// 插多列
         /// </summary>
         /// <param name="collection"></param>
@@ -236,21 +252,6 @@ namespace Tool.CusControls.DataGridViewEx
                 {
                     this.dataGridView1.Columns.Insert(index, col);
                     index++;
-                }
-            }
-        }
-
-        /// <summary>
-        /// 添加多列
-        /// </summary>
-        /// <param name="dic">列字典[<ColName,HeaderText>]</param>
-        public void AddColumns(Dictionary<string, string> dic)
-        {
-            foreach (string col in dic.Keys)
-            {
-                if (!this.dataGridView1.Columns.Contains(col))
-                {
-                    this.dataGridView1.Columns.Add(col, dic[col]);
                 }
             }
         }
@@ -330,31 +331,27 @@ namespace Tool.CusControls.DataGridViewEx
         {
             try
             {
-                ////移除原有绑定方法事件
-                //if (removeOthers)
-                //{
-                //    string strEventName = Convert.ToString(eventType);
-                //    EventHelper.RemoveHanlder(this._dv, strEventName);
-                //}
+                //移除原有绑定方法事件
+                if (removeOthers)
+                {
+                    string strEventName = Convert.ToString(eventType);
+                    EventHelper.RemoveHanlder(this._dv, strEventName);
+                }
 
-                ////GridView选择改变事件
-                //if (eventType == EventType.SelectionChanged)
-                //{
-                //    this.dataGridView1.SelectionChanged += eh;
-                //}
-                ////GridView双击事件
-                //else if (eventType == EventType.DoubleClick)
-                //{
-                //    this.dataGridView1.DoubleClick += eh;
-                //}
-                //else
-                //{
-
-                //}
+                //GridView选择改变事件
+                if (eventType == EventType.SelectionChanged)
+                {
+                    this.dataGridView1.SelectionChanged += eh;
+                }
+                //GridView双击事件
+                else if (eventType == EventType.DoubleClick)
+                {
+                    this.dataGridView1.DoubleClick += eh;
+                }
             }
             catch (Exception ex)
             {
-
+                throw ex;
             }
         }
         #endregion
@@ -377,13 +374,13 @@ namespace Tool.CusControls.DataGridViewEx
                 if (_isPage)
                 {
                     this.CurrentPageIndex = 1;
-                    this.PerPageCount = 1000000000;
+                    this.PerPageCount = 100;
                     this.panelPage.Visible = true;
                 }
                 else
                 {
                     this.CurrentPageIndex = 1;
-                    this.PerPageCount = 100;
+                    this.PerPageCount = int.MaxValue;
                     this.panelPage.Visible = false;
                 }
             }
@@ -432,7 +429,7 @@ namespace Tool.CusControls.DataGridViewEx
         }
         #endregion
 
-        #region CheckBox public
+        #region CheckBox
 
         #region 是否展示首列单选框
         /// <summary>
@@ -455,7 +452,7 @@ namespace Tool.CusControls.DataGridViewEx
                 }
                 else
                 {
-                    RemoveChkCol(CheckBoxName.FirstCheckColumn);
+                    RemoveChkCol_Private(CheckBoxName.FirstCheckColumn);
                 }
                 //回写值
                 _isShowFirstCheckBox = value;
@@ -524,7 +521,7 @@ namespace Tool.CusControls.DataGridViewEx
             }
         }
 
-        private void RemoveChkCol(CheckBoxName chkName)
+        private void RemoveChkCol_Private(CheckBoxName chkName)
         {
             try
             {
@@ -545,7 +542,7 @@ namespace Tool.CusControls.DataGridViewEx
                         }
                     }
                 }
-                //如果存在，显示列，不存在添加列
+                //如果存在，显示列，不存在不处理
                 if (isHave)
                 {
                     colColection[0].Visible = false;
@@ -672,7 +669,7 @@ namespace Tool.CusControls.DataGridViewEx
         {
             InitializeComponent();
             //对象初始化
-            _dv = this.dataGridView1 as DataGridViewCommonEx;
+            _dv = dataGridView1;
             //翻页控件对象初始化
             _txtCurrentPageIndex = this.txtCurrentPageIndex;
             _bTCurrentPageIndexChange = false;
@@ -704,81 +701,81 @@ namespace Tool.CusControls.DataGridViewEx
         /// <param name="isQuery">默认查询进入，需先修改CurrentPageIndex=1，翻页不允许修改</param>
         public void ViewDataBind(DataGridViewBindType dataGridViewBindType, bool isQuery = true, bool isPage = true)
         {
-            //if (dataGridViewBindType == DataGridViewBindType.DicSql)
-            //{
-            //    if (_dataSourceSql != null
-            //         && _dataSourceSql.Keys.Contains("Query")
-            //         && !string.IsNullOrEmpty(_dataSourceSql["Query"])
-            //         && _dataSourceSql.Keys.Contains("Order")
-            //         && !string.IsNullOrEmpty(_dataSourceSql["Order"]))
-            //    {
-            //        //如果是查询，置为首页
-            //        if (isQuery)
-            //        {
-            //            CurrentPageIndex = 1;
-            //        }
-            //        //查询DataTable
-            //        DataHelper dh = new DataHelper();
-            //        int iDataCount = 0;
-            //        DataTable dt = dh.GetDataTableByPage(_dataSourceSql["Query"], _dataSourceSql["Order"], ref iDataCount, (int)CurrentPageIndex, (int)PerPageCount);
-            //        //绑定数据
-            //        if (dt != null && dt.Rows.Count != 0)
-            //        {
-            //            if (dt.Columns.Contains("RowNum"))
-            //            {
-            //                dt.Columns.Remove("RowNum");
-            //            }
-            //            _dv.DataSource = dt;
-            //            DataCount = iDataCount;
-            //            PageCount = DataCount % (int)PerPageCount == 0 ? DataCount / (int)PerPageCount : DataCount / (int)PerPageCount + 1;
-            //        }
-            //        else
-            //        {
-            //            _dv.DataSource = null;
-            //            DataCount = 0;
-            //            PageCount = 0;
-            //        }
-            //        //更新绑定方式记录
-            //        DvDataGridViewBindType = DataGridViewBindType.DicSql;
-            //    }
-            //}
-            //else if (dataGridViewBindType == DataGridViewBindType.DataTable)
-            //{
-            //    if (_dvDataTabel != null && _dvDataTabel.Rows.Count != 0)
-            //    {
-            //        //如果是查询，置为首页
-            //        if (isQuery)
-            //        {
-            //            CurrentPageIndex = 1;
-            //        }
-            //        //根据分页加载需要显示dt
-            //        int beginRowNum = ((int)CurrentPageIndex - 1) * (int)PerPageCount + 1;
-            //        int endRowNum = (int)CurrentPageIndex * (int)PerPageCount;
-            //        DataTable tempDt = _dvDataTabel.Clone();
-            //        for (int i = beginRowNum; i <= endRowNum; i++)
-            //        {
-            //            tempDt.Rows.Add(_dvDataTabel.Rows[i]);
-            //        }
-            //        //绑定数据
-            //        if (_dvDataTabel.Columns.Contains("RowNum"))
-            //        {
-            //            _dvDataTabel.Columns.Remove("RowNum");
-            //        }
-            //        _dv.DataSource = tempDt;
-            //        DataCount = _dvDataTabel.Rows.Count;
-            //        PageCount = DataCount % (int)PerPageCount == 0 ? DataCount / (int)PerPageCount : DataCount / (int)PerPageCount + 1;
-            //        //更新绑定方式记录
-            //        DvDataGridViewBindType = DataGridViewBindType.DataTable;
-            //    }
-            //    else
-            //    {
-            //        DataCount = 0;
-            //        PageCount = 0;
-            //    }
-            //}
+            if (dataGridViewBindType == DataGridViewBindType.DicSql)
+            {
+                if (_dataSourceSql != null
+                     && _dataSourceSql.Keys.Contains("Query")
+                     && !string.IsNullOrEmpty(_dataSourceSql["Query"])
+                     && _dataSourceSql.Keys.Contains("Order")
+                     && !string.IsNullOrEmpty(_dataSourceSql["Order"]))
+                {
+                    //如果是查询，置为首页
+                    if (isQuery)
+                    {
+                        CurrentPageIndex = 1;
+                    }
+                    //查询DataTable
+                    MSSSDataHelper dh = new MSSSDataHelper();
+                    int iDataCount = 0;
+                    DataTable dt = dh.GetDataTableByPage(_dataSourceSql["Query"], _dataSourceSql["Order"], ref iDataCount, (int)CurrentPageIndex, (int)PerPageCount);
+                    //绑定数据
+                    if (dt != null && dt.Rows.Count != 0)
+                    {
+                        if (dt.Columns.Contains("RowNum"))
+                        {
+                            dt.Columns.Remove("RowNum");
+                        }
+                        _dv.DataSource = dt;
+                        DataCount = iDataCount;
+                        PageCount = DataCount % (int)PerPageCount == 0 ? DataCount / (int)PerPageCount : DataCount / (int)PerPageCount + 1;
+                    }
+                    else
+                    {
+                        _dv.DataSource = null;
+                        DataCount = 0;
+                        PageCount = 0;
+                    }
+                    //更新绑定方式记录
+                    DvDataGridViewBindType = DataGridViewBindType.DicSql;
+                }
+            }
+            else if (dataGridViewBindType == DataGridViewBindType.DataTable)
+            {
+                if (_dvDataTabel != null && _dvDataTabel.Rows.Count != 0)
+                {
+                    //如果是查询，置为首页
+                    if (isQuery)
+                    {
+                        CurrentPageIndex = 1;
+                    }
+                    //根据分页加载需要显示dt
+                    int beginRowNum = ((int)CurrentPageIndex - 1) * (int)PerPageCount + 1;
+                    int endRowNum = (int)CurrentPageIndex * (int)PerPageCount;
+                    DataTable tempDt = _dvDataTabel.Clone();
+                    for (int i = beginRowNum; i <= endRowNum; i++)
+                    {
+                        tempDt.Rows.Add(_dvDataTabel.Rows[i]);
+                    }
+                    //绑定数据
+                    if (_dvDataTabel.Columns.Contains("RowNum"))
+                    {
+                        _dvDataTabel.Columns.Remove("RowNum");
+                    }
+                    _dv.DataSource = tempDt;
+                    DataCount = _dvDataTabel.Rows.Count;
+                    PageCount = DataCount % (int)PerPageCount == 0 ? DataCount / (int)PerPageCount : DataCount / (int)PerPageCount + 1;
+                    //更新绑定方式记录
+                    DvDataGridViewBindType = DataGridViewBindType.DataTable;
+                }
+                else
+                {
+                    DataCount = 0;
+                    PageCount = 0;
+                }
+            }
 
-            ////设置按钮显示
-            //SetPageBtn();
+            //设置按钮显示
+            SetPageBtn();
         }
         #endregion
 
@@ -817,8 +814,8 @@ namespace Tool.CusControls.DataGridViewEx
         private void txtCurrentPageIndex_TextChanged(object sender, EventArgs e)
         {
             string sPageIndex = ((TextBox)sender).Text.ToString().Trim();
-            int iPageIndex = 0;
-            if (Int32.TryParse(sPageIndex, out iPageIndex))
+            int iPageIndex;
+            if (int.TryParse(sPageIndex, out iPageIndex))
             {
                 if (iPageIndex < 1 || iPageIndex > PageCount)
                 {
@@ -942,6 +939,15 @@ namespace Tool.CusControls.DataGridViewEx
     {
         SelectionChanged = 1,
         DoubleClick = 2
+    }
+
+    /// <summary>
+    /// 绑定数据源方式类型
+    /// </summary>
+    public enum DataGridViewBindType
+    {
+        DicSql = 1,
+        DataTable = 2
     }
 
     #endregion

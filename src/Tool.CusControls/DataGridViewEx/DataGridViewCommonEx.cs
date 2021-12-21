@@ -8,16 +8,19 @@
         /// <param name="e"></param>
         public delegate void CheckBoxEventDelegate(DataGridViewCellMouseEventArgs e);
 
+        /// <summary>
+        /// 用户自定义事件集合-CheckBox委托
+        /// </summary>
+        private Dictionary<CheckBoxName, Dictionary<CheckBoxEventType, CheckBoxEventDelegate>> _handlerList = new Dictionary<CheckBoxName, Dictionary<CheckBoxEventType, CheckBoxEventDelegate>>();
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
         public DataGridViewCommonEx()
             : base()
         {
 
         }
-
-        /// <summary>
-        /// 用户自定义事件集合-CheckBox委托
-        /// </summary>
-        private Dictionary<CheckBoxName, Dictionary<CheckBoxEventType, CheckBoxEventDelegate>> _handlerList = new Dictionary<CheckBoxName, Dictionary<CheckBoxEventType, CheckBoxEventDelegate>>();
 
         /// <summary>
         /// 设置用户自定义事件
