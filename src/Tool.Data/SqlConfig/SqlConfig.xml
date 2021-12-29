@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SQLConfig>
+  <BaseForm>
+    <MenuSet>
+      <Query>
+        SELECT  MenuCode AS '菜单编码',
+        MenuName AS '菜单名称',
+        ParentCode AS '父级编码',
+        Assembly AS '程序集',
+        NameSpace AS '命名空间',
+        EntityName AS '实体名称',
+        Level AS '层级',
+        IfEnd AS '是否末级'
+        FROM dbo.P_Menu
+        WHERE (1=1) AND (2=2);
+      </Query>
+      <Order>
+        [菜单编码],[菜单名称]
+      </Order>
+    </MenuSet>
+  </BaseForm>
+  <EntityHelper>
+    <TableEng>
+      <Query>
+        SELECT  so.name AS '表名称' ,
+        ex.value AS '表中文'
+        FROM    sys.sysobjects so
+        LEFT JOIN sys.extended_properties ex ON ex.major_id = so.id
+        AND ex.minor_id = 0
+        WHERE so.xtype IN ( 'U', 'V' )
+        AND (1=1) AND (2=2);
+      </Query>
+      <Order>
+        [表名称]
+      </Order>
+    </TableEng>
+    <ColumnnEng>
+      <Query>
+        SELECT  sc.name AS '列名称' ,
+        ex.value AS '列中文' ,
+        sc.length AS '长度' ,
+        st.name AS '类型'
+        FROM    sys.sysobjects so
+        INNER JOIN sys.syscolumns sc ON sc.id = so.id
+        INNER JOIN sys.systypes st ON st.xtype = sc.xtype
+        LEFT JOIN sys.extended_properties ex ON ex.major_id = so.id
+        AND  ex.minor_id = sc.colid
+        WHERE so.xtype IN ( 'U', 'V' )
+        AND (1=1) AND (2=2);
+      </Query>
+      <Order>
+        [列名称]
+      </Order>
+    </ColumnnEng>
+  </EntityHelper>
+</SQLConfig>

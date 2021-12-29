@@ -22,4 +22,10 @@
 		<ProjectReference Include="..\Tool.IService\Tool.IService.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Update="SqlConfig\SqlConfig.xml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
 </Project>

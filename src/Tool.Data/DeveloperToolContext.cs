@@ -7,12 +7,9 @@ namespace Tool.Data
     {
         public DbSet<Menu> Menus { get; set; }
 
-        //private string DbPath;
-
         public DeveloperToolContext(DbContextOptions<DeveloperToolContext> options) : base(options)
         {
 
         }
-
     }
 }

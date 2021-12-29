@@ -1,10 +1,11 @@
-﻿using System.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Data;
+using System.Data.Common;
 using System.Data.SQLite;
 
 namespace Tool.Data.DataHelper
 {
-    public class SqliteDataHelper
+    public class SqliteDataHelper : ICommonDataHelper
     {
         private SQLiteConnection _con = new SQLiteConnection();
         private SQLiteDataAdapter _adapter;
@@ -18,18 +19,11 @@ namespace Tool.Data.DataHelper
         private string _message = string.Empty;
 
         #region 初始化DataHelper，读取connection
-        public SqliteDataHelper()
+        public SqliteDataHelper(DeveloperToolContext _iDeveloperToolContext)
         {
             if (string.IsNullOrEmpty(_con.ConnectionString))
             {
-                if (ConfigurationManager.ConnectionStrings["XX"] != null)
-                {
-                    _con.ConnectionString = ConfigurationManager.ConnectionStrings["XX"].ToString();
-                }
-                else
-                {
-                    throw new Exception("数据库配置文件错误，连接数据库失败！");
-                }
+                _con.ConnectionString = _iDeveloperToolContext.Database.GetDbConnection().ConnectionString;
             }
         }
         #endregion
@@ -283,7 +277,7 @@ namespace Tool.Data.DataHelper
         #endregion
 
         #region ExcuteProc -- 调用ExcuteProc
-        public DataSet ExcuteProc(string procName, SQLiteParameter[] parameters)
+        public DataSet ExcuteProc(string procName, DbParameter[] parameters)
         {
             _command = new SQLiteCommand(procName, _con);
             _command.CommandType = CommandType.StoredProcedure;

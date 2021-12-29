@@ -1,12 +1,15 @@
 ﻿using System.Data;
 using Tool.CusControls.Common;
 using Tool.Data.DataHelper;
-//using TicketsDataHelper;
 
 namespace Tool.CusControls.DataGridViewEx
 {
     public partial class DataGridViewEx : UserControl
     {
+        #region 注入
+        ICommonDataHelper dh;
+        #endregion
+
         #region Dv get
         /// <summary>
         /// _dv
@@ -715,7 +718,7 @@ namespace Tool.CusControls.DataGridViewEx
                         CurrentPageIndex = 1;
                     }
                     //查询DataTable
-                    MSSSDataHelper dh = new MSSSDataHelper();
+                   
                     int iDataCount = 0;
                     DataTable dt = dh.GetDataTableByPage(_dataSourceSql["Query"], _dataSourceSql["Order"], ref iDataCount, (int)CurrentPageIndex, (int)PerPageCount);
                     //绑定数据

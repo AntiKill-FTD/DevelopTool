@@ -38,9 +38,11 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.panelGrid = new System.Windows.Forms.Panel();
+            this.dataViewMain = new Tool.CusControls.DataGridViewEx.DataGridViewEx();
             this.panelSearch.SuspendLayout();
             this.tlpSearch.SuspendLayout();
             this.tlpButton.SuspendLayout();
+            this.panelGrid.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelSearch
@@ -169,12 +171,28 @@
             // 
             // panelGrid
             // 
+            this.panelGrid.Controls.Add(this.dataViewMain);
             this.panelGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelGrid.Location = new System.Drawing.Point(0, 125);
             this.panelGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panelGrid.Name = "panelGrid";
             this.panelGrid.Size = new System.Drawing.Size(1394, 718);
             this.panelGrid.TabIndex = 1;
+            // 
+            // dataViewMain
+            // 
+            this.dataViewMain.DataSourceSql = null;
+            this.dataViewMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataViewMain.DvDataTable = null;
+            this.dataViewMain.DvSelectionMode = System.Windows.Forms.DataGridViewSelectionMode.RowHeaderSelect;
+            this.dataViewMain.IsPage = true;
+            this.dataViewMain.IsShowFirstCheckBox = false;
+            this.dataViewMain.Location = new System.Drawing.Point(0, 0);
+            this.dataViewMain.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dataViewMain.Name = "dataViewMain";
+            this.dataViewMain.RowEdit = false;
+            this.dataViewMain.Size = new System.Drawing.Size(1394, 718);
+            this.dataViewMain.TabIndex = 0;
             // 
             // MenuSet
             // 
@@ -191,6 +209,7 @@
             this.tlpSearch.ResumeLayout(false);
             this.tlpSearch.PerformLayout();
             this.tlpButton.ResumeLayout(false);
+            this.panelGrid.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

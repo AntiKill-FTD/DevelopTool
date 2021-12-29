@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Tool.Data;
+using Tool.Data.DataHelper;
 using Tool.IService.SysDev;
 using Tool.IService.SysMenu;
 using Tool.Main.Common.SysDev;
@@ -21,6 +22,7 @@ namespace Tool.Main
             //注入
             //BloggingContext
             return services.AddDbContext<DeveloperToolContext>(option => option.UseSqlite($"Data Source={DbPath}"))
+                           .AddTransient<ICommonDataHelper, SqliteDataHelper>()
                            .AddTransient<IMenuService, MenuService>()
                            .AddTransient<IEntityHelperService, EntityHelperService>()
                            .AddTransient<ISqlHelperService, SqlHelperService>()
