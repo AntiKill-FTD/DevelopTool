@@ -33,7 +33,7 @@ namespace Tool.Service.SysMenu
             //菜单管理对应实例
             if (!MenuStaticObject.MenuCodeUrl.ContainsKey("00.01"))
             {
-                MenuStaticObject.MenuCodeUrl.Add("00.01", "Tool.Main|Tool.Main.Forms.SysForms|MenuSet");
+                MenuStaticObject.MenuCodeUrl.Add("00.01", "Tool.Main|Tool.Main.Forms.MainForms|MenuSet");
             }
         }
 

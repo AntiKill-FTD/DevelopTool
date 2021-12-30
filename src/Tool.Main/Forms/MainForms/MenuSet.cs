@@ -2,7 +2,7 @@
 using Tool.Data.DataHelper;
 using Tool.Data.SqlConfig;
 
-namespace Tool.Main.Forms.SysForms
+namespace Tool.Main.Forms.MainForms
 {
     public partial class MenuSet : Form
     {

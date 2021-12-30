@@ -1,4 +1,4 @@
-﻿namespace Tool.Main.Forms.SysForms
+﻿namespace Tool.Main.Forms.MainForms
 {
     partial class MainForm
     {

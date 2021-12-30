@@ -1,7 +1,7 @@
 using Tool.IService.SysMenu;
 using Tool.Main.Config;
 
-namespace Tool.Main.Forms.SysForms
+namespace Tool.Main.Forms.MainForms
 {
     public partial class MainForm : Form
     {
