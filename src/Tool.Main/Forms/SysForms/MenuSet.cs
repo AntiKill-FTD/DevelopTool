@@ -1,4 +1,5 @@
 ﻿using Tool.CusControls.DataGridViewEx;
+using Tool.Data.DataHelper;
 using Tool.Data.SqlConfig;
 
 namespace Tool.Main.Forms.SysForms
@@ -8,6 +9,9 @@ namespace Tool.Main.Forms.SysForms
         public MenuSet()
         {
             InitializeComponent();
+            //注入
+            ICommonDataHelper dataHelper = Program.ServiceProvider.GetService(typeof(ICommonDataHelper)) as ICommonDataHelper;
+            this.dataViewMain.DataHelper = dataHelper;
         }
 
         private void MenuSet_Load(object sender, EventArgs e)
@@ -19,7 +23,7 @@ namespace Tool.Main.Forms.SysForms
         private void Search_Click(object sender, EventArgs e)
         {
             //获取主sql
-            Dictionary<string, string> sqlDic = SqlConfig.GetSql("SQLConfig/BaseForm/MenuSet/");
+            Dictionary<string, string> sqlDic = SqlConfig.GetSql("SQLConfig/BaseForm/MenuSet/", this.dataViewMain.SqlType);
 
             //获取查询参数
             string menuCode = txtMenuCode.Text.ToString().Trim();

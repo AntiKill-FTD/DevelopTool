@@ -9,11 +9,11 @@ namespace Tool.Data.DataHelper
 
         public DataTable GetDataTable(string sqlMain, string sqlOrder);
 
-        public DataTable GetDataTableByPage(string sqlMain, string sqlOrder, ref int allDataCount, int currentPageIndex = 1, int perPageCount = 100);
+        public DataTable GetDataTableByPage(string sqlMain, string sqlOrder, ref long allDataCount, int currentPageIndex = 1, int perPageCount = 100);
 
         public DataRow GetDataRow(string sql);
 
-        public int ExcuteNoQuery(string sql);
+        public long ExcuteNoQuery(string sql);
 
         public T ExcuteScalar<T>(string sql, ref bool result);
 

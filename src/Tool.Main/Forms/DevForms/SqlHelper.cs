@@ -1,5 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using Tool.CusControls.DataGridViewEx;
+using Tool.Data.DataHelper;
 using Tool.IService.Model.Common;
 
 namespace Tool.Main.Forms.DevForms
@@ -9,32 +10,37 @@ namespace Tool.Main.Forms.DevForms
         #region initial
         public SqlHelper()
         {
-            //InitializeComponent();
+            InitializeComponent();
+            //注入
+            ICommonDataHelper dataHelper = Program.ServiceProvider.GetService(typeof(ICommonDataHelper)) as ICommonDataHelper;
+            this.dvEX.DataHelper = dataHelper;
+
+            #region 设置网格属性
+            //不分页
+            this.dvEX.IsPage = false;
+            //不显示checkbox
+            this.dvEX.IsShowFirstCheckBox = false;
+            //Grid数据可编辑
+            this.dvEX.RowEdit = true;
+            //添加列1
+            Dictionary<string, string> colDic = new Dictionary<string, string>();
+            colDic.Add("ColEng", "列英文");
+            colDic.Add("ColChn", "列中文");
+            this.dvEX.AddColumns(colDic);
+            //添加列2            
+            List<string> dataTypes = Enum.GetNames(typeof(SqlServerDataType)).ToList<string>();
+            this.dvEX.AddColumn(this.dvEX.CreateColumn<DataGridViewComboBoxColumn>("ColDataType", "数据类型", dataTypes, 180));
+            //添加列3
+            this.dvEX.AddChkCol(CheckBoxName.CheckBox1, -1, false, "是否主键");//IsPrimarikey
+            this.dvEX.AddChkCol(CheckBoxName.CheckBox2, -1, false, "是否非空");//IsNotNull
+            #endregion
         }
         #endregion
 
         #region PageLoad
         private void SqlHelper_Load(object sender, EventArgs e)
         {
-            //#region 设置网格属性
-            ////不分页
-            //this.dvEX.IsPage = false;
-            ////不显示checkbox
-            //this.dvEX.IsShowFirstCheckBox = false;
-            ////Grid数据可编辑
-            //this.dvEX.RowEdit = true;
-            ////添加列1
-            //Dictionary<string, string> colDic = new Dictionary<string, string>();
-            //colDic.Add("ColEng", "列英文");
-            //colDic.Add("ColChn", "列中文");
-            //this.dvEX.AddColumns(colDic);
-            ////添加列2            
-            //List<string> dataTypes = Enum.GetNames(typeof(SqlServerDataType)).ToList<string>();
-            //this.dvEX.AddColumn(this.dvEX.CreateColumn<DataGridViewComboBoxColumn>("ColDataType", "数据类型", dataTypes, 180));
-            ////添加列3
-            //this.dvEX.AddChkCol(CheckBoxName.CheckBox1, -1, false, "是否主键");//IsPrimarikey
-            //this.dvEX.AddChkCol(CheckBoxName.CheckBox2, -1, false, "是否非空");//IsNotNull
-            //#endregion
+
         }
         #endregion
 

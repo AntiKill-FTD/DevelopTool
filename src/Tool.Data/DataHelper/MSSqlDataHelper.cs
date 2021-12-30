@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace Tool.Data.DataHelper
 {
-    public class MSSSDataHelper : ICommonDataHelper
+    public class MSSqlDataHelper : ICommonDataHelper
     {
         private SqlConnection _con = new SqlConnection();
         private SqlDataAdapter _adapter;
@@ -15,11 +15,11 @@ namespace Tool.Data.DataHelper
         private DataTable _dt;
         private DataRow _dr;
         private object _scalarObject;
-        private int _resultCount;
+        private long _resultCount;
         private string _message = string.Empty;
 
         #region 初始化DataHelper，读取connection
-        public MSSSDataHelper(DeveloperToolContext _iDeveloperToolContext)
+        public MSSqlDataHelper(DeveloperToolContext _iDeveloperToolContext)
         {
             if (string.IsNullOrEmpty(_con.ConnectionString))
             {
@@ -80,7 +80,7 @@ namespace Tool.Data.DataHelper
             return _dt;
         }
 
-        public DataTable GetDataTableByPage(string sqlMain, string sqlOrder, ref int allDataCount, int currentPageIndex = 1, int perPageCount = 100)
+        public DataTable GetDataTableByPage(string sqlMain, string sqlOrder, ref long allDataCount, int currentPageIndex = 1, int perPageCount = 100)
         {
             //拼接查询总数SQL
             string rSqlCount = @"SELECT COUNT(*)
@@ -188,7 +188,7 @@ namespace Tool.Data.DataHelper
         #endregion
 
         #region ExcuteNoQuery -- 调用ExcuteNoQuery
-        public int ExcuteNoQuery(string sql)
+        public long ExcuteNoQuery(string sql)
         {
             _command = new SqlCommand(sql, _con);
 

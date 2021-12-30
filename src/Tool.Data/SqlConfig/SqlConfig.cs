@@ -40,7 +40,7 @@ namespace Tool.Data.SqlConfig
         /// </summary>
         /// <param name="xmlPath"></param>
         /// <returns></returns>
-        public static Dictionary<string, string> GetSql(string xmlPath)
+        public static Dictionary<string, string> GetSql(string xmlPath, string sqlType = "MSSql")
         {
             //处理xmlPath
             if (xmlPath.EndsWith("/"))
@@ -50,7 +50,7 @@ namespace Tool.Data.SqlConfig
             //定义返回结果
             Dictionary<string, string> result = new Dictionary<string, string>();
             //1.获取查询
-            XmlNode xnQuery = xmlDoc.SelectSingleNode(xmlPath + "/Query");
+            XmlNode xnQuery = xmlDoc.SelectSingleNode(xmlPath + "/" + sqlType + "/Query");
             string strQuery = string.Empty;
             if (xnQuery != null)
             {
@@ -63,7 +63,7 @@ namespace Tool.Data.SqlConfig
                 result.Add("Query", "");
             }
             //2.获取排序
-            XmlNode xnOrder = xmlDoc.SelectSingleNode(xmlPath + "/Order");
+            XmlNode xnOrder = xmlDoc.SelectSingleNode(xmlPath + "/" + sqlType + "/Order");
             string strOrder = string.Empty;
             if (xnOrder != null)
             {

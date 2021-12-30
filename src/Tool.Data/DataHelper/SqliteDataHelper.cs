@@ -80,13 +80,13 @@ namespace Tool.Data.DataHelper
             return _dt;
         }
 
-        public DataTable GetDataTableByPage(string sqlMain, string sqlOrder, ref int allDataCount, int currentPageIndex = 1, int perPageCount = 100)
+        public DataTable GetDataTableByPage(string sqlMain, string sqlOrder, ref long allDataCount, int currentPageIndex = 1, int perPageCount = 100)
         {
             //拼接查询总数SQL
             string rSqlCount = @"SELECT COUNT(*)
                                   FROM ( " + sqlMain + @" ) _t1";
             bool rResult = true;
-            allDataCount = ExcuteScalar<int>(rSqlCount, ref rResult);
+            allDataCount = ExcuteScalar<long>(rSqlCount, ref rResult);
             if (!rResult)
             {
                 allDataCount = 0;
@@ -188,7 +188,7 @@ namespace Tool.Data.DataHelper
         #endregion
 
         #region ExcuteNoQuery -- 调用ExcuteNoQuery
-        public int ExcuteNoQuery(string sql)
+        public long ExcuteNoQuery(string sql)
         {
             _command = new SQLiteCommand(sql, _con);
 

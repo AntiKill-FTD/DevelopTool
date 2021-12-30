@@ -6,8 +6,36 @@ namespace Tool.CusControls.DataGridViewEx
 {
     public partial class DataGridViewEx : UserControl
     {
-        #region 注入
-        ICommonDataHelper dh;
+        #region 注入数据接口
+        private ICommonDataHelper iDataHelper;
+        private string _sqlType;
+        public string SqlType
+        {
+            get
+            {
+                return _sqlType;
+            }
+        }
+        public ICommonDataHelper DataHelper
+        {
+            set
+            {
+                iDataHelper = value;
+                //数据类型
+                if (iDataHelper.GetType() == typeof(MSSqlDataHelper))
+                {
+                    _sqlType = "MSSql";
+                }
+                else if (iDataHelper.GetType() == typeof(SqliteDataHelper))
+                {
+                    _sqlType = "Sqlite";
+                }
+                else
+                {
+                    _sqlType = "MSSql";
+                }
+            }
+        }
         #endregion
 
         #region Dv get
@@ -321,7 +349,7 @@ namespace Tool.CusControls.DataGridViewEx
             this.dataGridView1.Rows.Clear();
         }
 
-        #endregion        
+        #endregion
 
         #region Dv事件对象 public
         /// <summary>
@@ -568,14 +596,14 @@ namespace Tool.CusControls.DataGridViewEx
         private TextBox _txtCurrentPageIndex;
         private bool _bTCurrentPageIndexChange;
 
-        private int? _currentPageIndex;
-        private int? CurrentPageIndex
+        private long? _currentPageIndex;
+        private long? CurrentPageIndex
         {
             get
             {
                 if (_currentPageIndex == null)
                 {
-                    _currentPageIndex = Convert.ToInt32(_txtCurrentPageIndex.Text.ToString().Trim());
+                    _currentPageIndex = Convert.ToInt64(_txtCurrentPageIndex.Text.ToString().Trim());
                 }
                 return _currentPageIndex;
             }
@@ -591,7 +619,7 @@ namespace Tool.CusControls.DataGridViewEx
         /// </summary>
         private Label _labPageCount;
 
-        private int PageCount
+        private long PageCount
         {
             get
             {
@@ -632,11 +660,11 @@ namespace Tool.CusControls.DataGridViewEx
         /// </summary>
         private Label _labDataCount;
 
-        private int DataCount
+        private long DataCount
         {
             get
             {
-                return Convert.ToInt32(_labDataCount.Text.ToString().Trim());
+                return Convert.ToInt64(_labDataCount.Text.ToString().Trim());
             }
             set
             {
@@ -718,9 +746,9 @@ namespace Tool.CusControls.DataGridViewEx
                         CurrentPageIndex = 1;
                     }
                     //查询DataTable
-                   
-                    int iDataCount = 0;
-                    DataTable dt = dh.GetDataTableByPage(_dataSourceSql["Query"], _dataSourceSql["Order"], ref iDataCount, (int)CurrentPageIndex, (int)PerPageCount);
+
+                    long iDataCount = 0;
+                    DataTable dt = iDataHelper.GetDataTableByPage(_dataSourceSql["Query"], _dataSourceSql["Order"], ref iDataCount, (int)CurrentPageIndex, (int)PerPageCount);
                     //绑定数据
                     if (dt != null && dt.Rows.Count != 0)
                     {

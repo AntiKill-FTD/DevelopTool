@@ -1,5 +1,7 @@
 ﻿using Tool.Business.Common;
 using Tool.CusControls.DataGridViewEx;
+using Tool.Data.DataHelper;
+using Tool.Data.SqlConfig;
 using Tool.IService.Model.Common;
 using static Tool.CusControls.DataGridViewEx.DataGridViewCommonEx;
 
@@ -10,42 +12,49 @@ namespace Tool.Main.Forms.DevForms
         #region initial
         public EntityHelper()
         {
-            //InitializeComponent();
-            ////设置网格行选中
-            //this.dataViewDataTable.DvSelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            //this.dataViewColumn.DvSelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            ////设置不显示分页
-            //this.dataViewDataTable.IsPage = false;
-            //this.dataViewColumn.IsPage = false;
-            ////设置显示首列checkBox
-            //this.dataViewColumn.IsShowFirstCheckBox = true;
-            ////添加行事件
-            //EventHandler eventHandler = new EventHandler(DGV_Dt_SelectionChanged);
-            //this.dataViewDataTable.DvEventBind(EventType.SelectionChanged, eventHandler);
-            ////添加  FirstCheckColumn---checkbox All/Cell  扩展事件
-            //Dictionary<CheckBoxEventType, CheckBoxEventDelegate> dicFirstCheck = new Dictionary<CheckBoxEventType, CheckBoxEventDelegate>();
-            //dicFirstCheck.Add(CheckBoxEventType.All, new CheckBoxEventDelegate(DGV_Co_FirstCheck));
-            //dicFirstCheck.Add(CheckBoxEventType.Cell, new CheckBoxEventDelegate(DGV_Co_FirstCheck));
-            //this.dataViewColumn.Dv.SetDelegate(CheckBoxName.FirstCheckColumn, dicFirstCheck);
+            InitializeComponent();
+            //注入
+            ICommonDataHelper dataHelper = Program.ServiceProvider.GetService(typeof(ICommonDataHelper)) as ICommonDataHelper;
+            this.dataViewDataTable.DataHelper = dataHelper;
+            this.dataViewColumn.DataHelper = dataHelper;
+
+            #region 设置网格属性
+            //设置网格行选中
+            this.dataViewDataTable.DvSelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            this.dataViewColumn.DvSelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            //设置不显示分页
+            this.dataViewDataTable.IsPage = false;
+            this.dataViewColumn.IsPage = false;
+            //设置显示首列checkBox
+            this.dataViewColumn.IsShowFirstCheckBox = true;
+            //添加行事件
+            EventHandler eventHandler = new EventHandler(DGV_Dt_SelectionChanged);
+            this.dataViewDataTable.DvEventBind(EventType.SelectionChanged, eventHandler);
+            //添加  FirstCheckColumn---checkbox All/Cell  扩展事件
+            Dictionary<CheckBoxEventType, CheckBoxEventDelegate> dicFirstCheck = new Dictionary<CheckBoxEventType, CheckBoxEventDelegate>();
+            dicFirstCheck.Add(CheckBoxEventType.All, new CheckBoxEventDelegate(DGV_Co_FirstCheck));
+            dicFirstCheck.Add(CheckBoxEventType.Cell, new CheckBoxEventDelegate(DGV_Co_FirstCheck));
+            this.dataViewColumn.Dv.SetDelegate(CheckBoxName.FirstCheckColumn, dicFirstCheck);
+            #endregion
         }
         #endregion
 
         #region PageLoad
         private void EntityHelper_Load(object sender, EventArgs e)
         {
-            //Search_Click(null, null);
-            ////自定义添加3个checkBox
-            //int colCount = this.dataViewColumn.Dv.Columns.Count;
-            //this.dataViewColumn.AddChkCol(CheckBoxName.CheckBox1, colCount, false, "查询");
-            //this.dataViewColumn.AddChkCol(CheckBoxName.CheckBox2, colCount + 1, false, "编辑");
-            //this.dataViewColumn.AddChkCol(CheckBoxName.CheckBox3, colCount + 2, false, "查看");
-            ////添加  自定义CheckColumn---checkbox All/Cell  扩展事件
-            //Dictionary<CheckBoxEventType, CheckBoxEventDelegate> dicCheck = new Dictionary<CheckBoxEventType, CheckBoxEventDelegate>();
-            //dicCheck.Add(CheckBoxEventType.All, new CheckBoxEventDelegate(DGV_Co_FirstCheck));
-            //dicCheck.Add(CheckBoxEventType.Cell, new CheckBoxEventDelegate(DGV_Co_FirstCheck));
-            //this.dataViewColumn.Dv.SetDelegate(CheckBoxName.CheckBox1, dicCheck);
-            //this.dataViewColumn.Dv.SetDelegate(CheckBoxName.CheckBox2, dicCheck);
-            //this.dataViewColumn.Dv.SetDelegate(CheckBoxName.CheckBox3, dicCheck);
+            Search_Click(null, null);
+            //自定义添加3个checkBox
+            int colCount = this.dataViewColumn.Dv.Columns.Count;
+            this.dataViewColumn.AddChkCol(CheckBoxName.CheckBox1, colCount, false, "查询");
+            this.dataViewColumn.AddChkCol(CheckBoxName.CheckBox2, colCount + 1, false, "编辑");
+            this.dataViewColumn.AddChkCol(CheckBoxName.CheckBox3, colCount + 2, false, "查看");
+            //添加  自定义CheckColumn---checkbox All/Cell  扩展事件
+            Dictionary<CheckBoxEventType, CheckBoxEventDelegate> dicCheck = new Dictionary<CheckBoxEventType, CheckBoxEventDelegate>();
+            dicCheck.Add(CheckBoxEventType.All, new CheckBoxEventDelegate(DGV_Co_FirstCheck));
+            dicCheck.Add(CheckBoxEventType.Cell, new CheckBoxEventDelegate(DGV_Co_FirstCheck));
+            this.dataViewColumn.Dv.SetDelegate(CheckBoxName.CheckBox1, dicCheck);
+            this.dataViewColumn.Dv.SetDelegate(CheckBoxName.CheckBox2, dicCheck);
+            this.dataViewColumn.Dv.SetDelegate(CheckBoxName.CheckBox3, dicCheck);
         }
         #endregion
 
@@ -156,76 +165,76 @@ namespace Tool.Main.Forms.DevForms
         #region 绑定数据方法
         private void BindDataViewTable()
         {
-            ////获取主sql
-            //Dictionary<string, string> sqlDicTable = SqlConfig.GetSql("SQLConfig/EntityHelper/TableEng/");
-            ////获取查询参数
-            //string tableEngName = txtTableEngName.Text.ToString().Trim();
-            ////拼接参数
-            //string sqlWhereTable = string.Empty;
-            //if (!string.IsNullOrEmpty(tableEngName))
-            //{
-            //    sqlWhereTable += "AND so.name LIKE '%" + tableEngName + "%' ";
-            //}
-            ////拼接SQL
-            //if (!string.IsNullOrEmpty(sqlWhereTable))
-            //{
-            //    sqlWhereTable = sqlWhereTable.Substring(0, 3) == "AND" ? sqlWhereTable.Substring(3) : sqlWhereTable;
-            //    //组装SQL
-            //    sqlDicTable["Query"] = sqlDicTable["Query"].Replace("1=1", sqlWhereTable);
-            //}
-            //else
-            //{
-            //    sqlDicTable["Query"] = sqlDicTable["Query"];
-            //}
-            ////dv绑定数据
-            //this.dataViewDataTable.DataSourceSql = sqlDicTable;
-            //this.dataViewDataTable.ViewDataBind(DataGridViewBindType.DicSql, true, true);
-            //this.dataViewDataTable.SetSelectRow(0);
+            //获取主sql
+            Dictionary<string, string> sqlDicTable = SqlConfig.GetSql("SQLConfig/EntityHelper/TableEng/", this.dataViewDataTable.SqlType);
+            //获取查询参数
+            string tableEngName = txtTableEngName.Text.ToString().Trim();
+            //拼接参数
+            string sqlWhereTable = string.Empty;
+            if (!string.IsNullOrEmpty(tableEngName))
+            {
+                sqlWhereTable += "AND so.name LIKE '%" + tableEngName + "%' ";
+            }
+            //拼接SQL
+            if (!string.IsNullOrEmpty(sqlWhereTable))
+            {
+                sqlWhereTable = sqlWhereTable.Substring(0, 3) == "AND" ? sqlWhereTable.Substring(3) : sqlWhereTable;
+                //组装SQL
+                sqlDicTable["Query"] = sqlDicTable["Query"].Replace("1=1", sqlWhereTable);
+            }
+            else
+            {
+                sqlDicTable["Query"] = sqlDicTable["Query"];
+            }
+            //dv绑定数据
+            this.dataViewDataTable.DataSourceSql = sqlDicTable;
+            this.dataViewDataTable.ViewDataBind(DataGridViewBindType.DicSql, true, true);
+            this.dataViewDataTable.SetSelectRow(0);
         }
         private void BindDataViewColumn()
         {
-            ////获取主sql
-            //Dictionary<string, string> sqlDicColumn = SqlConfig.GetSql("SQLConfig/EntityHelper/ColumnnEng/");
-            ////获取查询参数
-            //string columnEngName = txtColumnEngName.Text.ToString().Trim();
-            ////拼接参数
-            //string sqlWhereColumn = string.Empty;
-            ////table名称
-            //if (dataViewDataTable.SelectRow != null && dataViewDataTable.SelectIndex >= 0)
-            //{
-            //    DataGridViewRow dgr = dataViewDataTable.SelectRow;
-            //    string tabEngName = dgr.Cells["表名称"].Value.ToString();
-            //    if (!string.IsNullOrEmpty(tabEngName))
-            //    {
-            //        sqlWhereColumn += "AND so.name LIKE '%" + tabEngName + "%' ";
-            //    }
-            //    else
-            //    {
-            //        sqlWhereColumn += "AND 1!=1 ";
-            //    }
-            //}
-            //else
-            //{
-            //    sqlWhereColumn += "AND 1!=1 ";
-            //}
-            ////查询条件
-            //if (!string.IsNullOrEmpty(columnEngName))
-            //{
-            //    sqlWhereColumn += "AND sc.name LIKE '%" + columnEngName + "%' ";
-            //}
-            ////拼接SQL
-            //if (!string.IsNullOrEmpty(sqlWhereColumn))
-            //{
-            //    sqlWhereColumn = sqlWhereColumn.Substring(0, 3) == "AND" ? sqlWhereColumn.Substring(3) : sqlWhereColumn;
-            //    //组装SQL
-            //    sqlDicColumn["Query"] = sqlDicColumn["Query"].Replace("1=1", sqlWhereColumn);
-            //}
-            //else
-            //{
-            //    sqlDicColumn["Query"] = sqlDicColumn["Query"];
-            //}
-            //this.dataViewColumn.DataSourceSql = sqlDicColumn;
-            //this.dataViewColumn.ViewDataBind(DataGridViewBindType.DicSql, true, true);
+            //获取主sql
+            Dictionary<string, string> sqlDicColumn = SqlConfig.GetSql("SQLConfig/EntityHelper/ColumnnEng/", this.dataViewColumn.SqlType);
+            //获取查询参数
+            string columnEngName = txtColumnEngName.Text.ToString().Trim();
+            //拼接参数
+            string sqlWhereColumn = string.Empty;
+            //table名称
+            if (dataViewDataTable.SelectRow != null && dataViewDataTable.SelectIndex >= 0)
+            {
+                DataGridViewRow dgr = dataViewDataTable.SelectRow;
+                string tabEngName = dgr.Cells["表名称"].Value.ToString();
+                if (!string.IsNullOrEmpty(tabEngName))
+                {
+                    sqlWhereColumn += "AND so.name LIKE '%" + tabEngName + "%' ";
+                }
+                else
+                {
+                    sqlWhereColumn += "AND 1!=1 ";
+                }
+            }
+            else
+            {
+                sqlWhereColumn += "AND 1!=1 ";
+            }
+            //查询条件
+            if (!string.IsNullOrEmpty(columnEngName))
+            {
+                sqlWhereColumn += "AND sc.name LIKE '%" + columnEngName + "%' ";
+            }
+            //拼接SQL
+            if (!string.IsNullOrEmpty(sqlWhereColumn))
+            {
+                sqlWhereColumn = sqlWhereColumn.Substring(0, 3) == "AND" ? sqlWhereColumn.Substring(3) : sqlWhereColumn;
+                //组装SQL
+                sqlDicColumn["Query"] = sqlDicColumn["Query"].Replace("1=1", sqlWhereColumn);
+            }
+            else
+            {
+                sqlDicColumn["Query"] = sqlDicColumn["Query"];
+            }
+            this.dataViewColumn.DataSourceSql = sqlDicColumn;
+            this.dataViewColumn.ViewDataBind(DataGridViewBindType.DicSql, true, true);
         }
         #endregion
 
