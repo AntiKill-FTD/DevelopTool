@@ -493,7 +493,7 @@ namespace Tool.CusControls.DataGridViewEx
         #endregion
 
         #region CheckBox公有方法
-        public void AddChkCol(CheckBoxName chkName, int index, bool isChangeHeader = false, string headerText = "")
+        public void AddChkCol(CheckBoxName chkName, int index, bool isChangeHeaderToText = false, string headerText = "")
         {
             //自定义添加列，不能使用FirstCheckColumn，不能加到首列
             if (chkName == CheckBoxName.FirstCheckColumn || index == 0)
@@ -501,7 +501,7 @@ namespace Tool.CusControls.DataGridViewEx
                 return;
             }
             //调用私有方法
-            AddChkCol_Private(chkName, index, isChangeHeader, headerText);
+            AddChkCol_Private(chkName, index, isChangeHeaderToText, headerText);
         }
         #endregion
 
