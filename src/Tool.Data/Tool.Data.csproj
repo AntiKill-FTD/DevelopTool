@@ -5,6 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<UseWindowsForms>true</UseWindowsForms>
+		<BaseOutputPath>E:\01GitRepository\GitHub\FTD\GitHubMine\DevelopTool\src\Tool.Main\bin\Debug\net6.0-windows</BaseOutputPath>
 	</PropertyGroup>
 
 	<ItemGroup>
