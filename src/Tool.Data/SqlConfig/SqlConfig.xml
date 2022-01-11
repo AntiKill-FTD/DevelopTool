@@ -56,10 +56,12 @@
 			</MSSql>
 			<Sqlite>
 				<Query>
-
+					SELECT name AS '表名称'
+					FROM sqlite_master
+					WHERE type='table'
 				</Query>
 				<Order>
-
+					[表名称]
 				</Order>
 			</Sqlite>
 		</TableEng>
@@ -83,7 +85,12 @@
 				</Order>
 			</MSSql>
 			<Sqlite>
+				<Query>
+					PRAGMA table_info('{tableName}')
+				</Query>
+				<Order>
 
+				</Order>
 			</Sqlite>
 		</ColumnnEng>
 	</EntityHelper>

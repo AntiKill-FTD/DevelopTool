@@ -736,9 +736,7 @@ namespace Tool.CusControls.DataGridViewEx
             {
                 if (_dataSourceSql != null
                      && _dataSourceSql.Keys.Contains("Query")
-                     && !string.IsNullOrEmpty(_dataSourceSql["Query"])
-                     && _dataSourceSql.Keys.Contains("Order")
-                     && !string.IsNullOrEmpty(_dataSourceSql["Order"]))
+                     && !string.IsNullOrEmpty(_dataSourceSql["Query"]))
                 {
                     //如果是查询，置为首页
                     if (isQuery)
