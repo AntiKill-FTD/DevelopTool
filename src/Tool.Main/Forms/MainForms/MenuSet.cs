@@ -23,7 +23,7 @@ namespace Tool.Main.Forms.MainForms
         private void Search_Click(object sender, EventArgs e)
         {
             //获取主sql
-            Dictionary<string, string> sqlDic = SqlConfig.GetSql("SQLConfig/BaseForm/MenuSet/", this.dataViewMain.SqlType);
+            Dictionary<string, string> sqlDic = SqlConfig.GetSql("SQLConfig/BaseForm/MenuSet/", this.dataViewMain.SqlType.ToString());
 
             //获取查询参数
             string menuCode = txtMenuCode.Text.ToString().Trim();

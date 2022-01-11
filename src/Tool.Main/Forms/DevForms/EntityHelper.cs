@@ -1,4 +1,5 @@
-﻿using Tool.Business.Common;
+﻿using System.Data;
+using Tool.Business.Common;
 using Tool.CusControls.DataGridViewEx;
 using Tool.Data.DataHelper;
 using Tool.Data.SqlConfig;
@@ -166,14 +167,14 @@ namespace Tool.Main.Forms.DevForms
         private void BindDataViewTable()
         {
             //获取主sql
-            Dictionary<string, string> sqlDicTable = SqlConfig.GetSql("SQLConfig/EntityHelper/TableEng/", this.dataViewDataTable.SqlType);
+            Dictionary<string, string> sqlDicTable = SqlConfig.GetSql("SQLConfig/EntityHelper/TableEng/", this.dataViewDataTable.SqlType.ToString());
             //获取查询参数
             string tableEngName = txtTableEngName.Text.ToString().Trim();
             //拼接参数
             string sqlWhereTable = string.Empty;
             if (!string.IsNullOrEmpty(tableEngName))
             {
-                sqlWhereTable += "AND so.name LIKE '%" + tableEngName + "%' ";
+                sqlWhereTable += "AND [表名称] LIKE '%" + tableEngName + "%' ";
             }
             //拼接SQL
             if (!string.IsNullOrEmpty(sqlWhereTable))
@@ -182,59 +183,107 @@ namespace Tool.Main.Forms.DevForms
                 //组装SQL
                 sqlDicTable["Query"] = sqlDicTable["Query"].Replace("1=1", sqlWhereTable);
             }
-            else
-            {
-                sqlDicTable["Query"] = sqlDicTable["Query"];
-            }
+
             //dv绑定数据
-            this.dataViewDataTable.DataSourceSql = sqlDicTable;
-            this.dataViewDataTable.ViewDataBind(DataGridViewBindType.DicSql, true, true);
+            DataTable dt = this.dataViewDataTable.DataHelper.GetDataTable(sqlDicTable["Query"], sqlDicTable["Order"]);
+            this.dataViewDataTable.DvDataTable = dt;
+            this.dataViewDataTable.ViewDataBind(DataGridViewBindType.DataTable, true, false);
             this.dataViewDataTable.SetSelectRow(0);
         }
         private void BindDataViewColumn()
         {
             //获取主sql
-            Dictionary<string, string> sqlDicColumn = SqlConfig.GetSql("SQLConfig/EntityHelper/ColumnnEng/", this.dataViewColumn.SqlType);
+            Dictionary<string, string> sqlDicColumn = SqlConfig.GetSql("SQLConfig/EntityHelper/ColumnnEng/", this.dataViewColumn.SqlType.ToString());
             //获取查询参数
             string columnEngName = txtColumnEngName.Text.ToString().Trim();
             //拼接参数
             string sqlWhereColumn = string.Empty;
             //table名称
+            DataGridViewRow dgr = dataViewDataTable.SelectRow;
             if (dataViewDataTable.SelectRow != null && dataViewDataTable.SelectIndex >= 0)
             {
-                DataGridViewRow dgr = dataViewDataTable.SelectRow;
                 string tabEngName = dgr.Cells["表名称"].Value.ToString();
-                if (!string.IsNullOrEmpty(tabEngName))
+                //MSSql查询
+                if (this.dataViewColumn.SqlType == EnumSqlType.MSSql)
                 {
-                    sqlWhereColumn += "AND so.name LIKE '%" + tabEngName + "%' ";
+                    //选择表名称
+                    if (!string.IsNullOrEmpty(tabEngName))
+                    {
+                        sqlWhereColumn += "AND [表名称] LIKE '%" + tabEngName + "%' ";
+                    }
+                    else
+                    {
+                        sqlWhereColumn += "AND 1!=1 ";
+                    }
+                    //列名称查询条件
+                    if (!string.IsNullOrEmpty(columnEngName))
+                    {
+                        sqlWhereColumn += "AND [列名称] LIKE '%" + columnEngName + "%' ";
+                    }
+                    //拼接SQL
+                    if (!string.IsNullOrEmpty(sqlWhereColumn))
+                    {
+                        sqlWhereColumn = sqlWhereColumn.Substring(0, 3) == "AND" ? sqlWhereColumn.Substring(3) : sqlWhereColumn;
+                        //组装SQL
+                        sqlDicColumn["Query"] = sqlDicColumn["Query"].Replace("1=1", sqlWhereColumn);
+                    }
                 }
-                else
+                else if (this.dataViewColumn.SqlType == EnumSqlType.Sqlite)
                 {
-                    sqlWhereColumn += "AND 1!=1 ";
+                    //Sqlite查询
+                    sqlWhereColumn += tabEngName;
+                    sqlDicColumn["Query"] = sqlDicColumn["Query"].Replace("1=1", sqlWhereColumn);
                 }
+
+                //dv绑定数据
+                DataTable dt = this.dataViewDataTable.DataHelper.GetDataTable(sqlDicColumn["Query"], sqlDicColumn["Order"]);
+
+                //如果为sqlite，需要处理列
+                /**
+                 * 表名称
+                 * 列名称
+                 * 列中文
+                 * 长度
+                 * 类型
+                 */
+                if (this.dataViewColumn.SqlType == EnumSqlType.MSSql)
+                {
+                    dt.Columns.Remove("表名称");
+                    this.dataViewColumn.DvDataTable = dt;
+                }
+                else if (this.dataViewColumn.SqlType == EnumSqlType.Sqlite)
+                {
+                    DataTable newDt = new DataTable();
+                    newDt.Columns.Add("列名称");
+                    newDt.Columns.Add("列中文");
+                    newDt.Columns.Add("长度");
+                    newDt.Columns.Add("类型");
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        DataRow nr = newDt.NewRow();
+                        nr["列名称"] = dr["name"];
+                        nr["列中文"] = "Sqlite无中文备注";
+                        string strType = dr["type"].ToString();
+                        string length = "0";
+                        int startIndex = strType.IndexOf("(");
+                        int endIndex = strType.IndexOf(")");
+                        if (startIndex > 0 && endIndex > 0 && startIndex < endIndex)
+                        {
+                            length = strType.Substring(startIndex + 1, endIndex - startIndex - 1);
+                            strType = strType.Substring(0, startIndex);
+                        }
+                        nr["类型"] = strType;
+                        nr["长度"] = length;                        
+                        newDt.Rows.Add(nr);
+                    }
+                    this.dataViewColumn.DvDataTable = newDt;
+                }
+                this.dataViewColumn.ViewDataBind(DataGridViewBindType.DataTable, true, false);
             }
             else
             {
-                sqlWhereColumn += "AND 1!=1 ";
+                this.dataViewColumn.ClearRow();
             }
-            //查询条件
-            if (!string.IsNullOrEmpty(columnEngName))
-            {
-                sqlWhereColumn += "AND sc.name LIKE '%" + columnEngName + "%' ";
-            }
-            //拼接SQL
-            if (!string.IsNullOrEmpty(sqlWhereColumn))
-            {
-                sqlWhereColumn = sqlWhereColumn.Substring(0, 3) == "AND" ? sqlWhereColumn.Substring(3) : sqlWhereColumn;
-                //组装SQL
-                sqlDicColumn["Query"] = sqlDicColumn["Query"].Replace("1=1", sqlWhereColumn);
-            }
-            else
-            {
-                sqlDicColumn["Query"] = sqlDicColumn["Query"];
-            }
-            this.dataViewColumn.DataSourceSql = sqlDicColumn;
-            this.dataViewColumn.ViewDataBind(DataGridViewBindType.DicSql, true, true);
         }
         #endregion
 

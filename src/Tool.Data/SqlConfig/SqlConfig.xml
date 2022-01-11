@@ -42,13 +42,15 @@
 		<TableEng>
 			<MSSql>
 				<Query>
+					SELECT * FROM (
 					SELECT  so.name AS '表名称' ,
 					ex.value AS '表中文'
 					FROM sys.sysobjects so
 					LEFT JOIN sys.extended_properties ex ON ex.major_id = so.id
 					AND ex.minor_id = 0
 					WHERE so.xtype IN ( 'U', 'V' )
-					AND (1=1) AND (2=2);
+					) T 
+					WHERE (1=1) AND (2=2)
 				</Query>
 				<Order>
 					[表名称]
@@ -56,9 +58,13 @@
 			</MSSql>
 			<Sqlite>
 				<Query>
-					SELECT name AS '表名称'
+					SELECT * FROM (
+					SELECT name AS '表名称',
+					'Sqlite无中文备注' AS '表中文'
 					FROM sqlite_master
 					WHERE type='table'
+					) T 
+					WHERE (1=1) AND (2=2)
 				</Query>
 				<Order>
 					[表名称]
@@ -68,17 +74,20 @@
 		<ColumnnEng>
 			<MSSql>
 				<Query>
-					SELECT  sc.name AS '列名称' ,
+					SELECT * FROM (
+					SELECT  so.name AS '表名称',
+					sc.name AS '列名称' ,
 					ex.value AS '列中文' ,
-					sc.length AS '长度' ,
-					st.name AS '类型'
+					st.name AS '类型' ,
+					sc.length AS '长度'
 					FROM    sys.sysobjects so
 					INNER JOIN sys.syscolumns sc ON sc.id = so.id
 					INNER JOIN sys.systypes st ON st.xtype = sc.xtype
 					LEFT JOIN sys.extended_properties ex ON ex.major_id = so.id
 					AND  ex.minor_id = sc.colid
 					WHERE so.xtype IN ( 'U', 'V' )
-					AND (1=1) AND (2=2);
+					) T
+					WHERE (1=1) AND (2=2)
 				</Query>
 				<Order>
 					[列名称]
@@ -86,10 +95,10 @@
 			</MSSql>
 			<Sqlite>
 				<Query>
-					PRAGMA table_info('{tableName}')
+					PRAGMA table_info('1=1')
 				</Query>
 				<Order>
-
+					
 				</Order>
 			</Sqlite>
 		</ColumnnEng>

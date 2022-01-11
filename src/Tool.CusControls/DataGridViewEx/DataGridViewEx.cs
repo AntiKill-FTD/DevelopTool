@@ -8,8 +8,8 @@ namespace Tool.CusControls.DataGridViewEx
     {
         #region 注入数据接口
         private ICommonDataHelper iDataHelper;
-        private string _sqlType;
-        public string SqlType
+        private EnumSqlType _sqlType;
+        public EnumSqlType SqlType
         {
             get
             {
@@ -24,16 +24,20 @@ namespace Tool.CusControls.DataGridViewEx
                 //数据类型
                 if (iDataHelper.GetType() == typeof(MSSqlDataHelper))
                 {
-                    _sqlType = "MSSql";
+                    _sqlType = EnumSqlType.MSSql;
                 }
                 else if (iDataHelper.GetType() == typeof(SqliteDataHelper))
                 {
-                    _sqlType = "Sqlite";
+                    _sqlType = EnumSqlType.Sqlite;
                 }
                 else
                 {
-                    _sqlType = "MSSql";
+                    _sqlType = EnumSqlType.MSSql;
                 }
+            }
+            get
+            {
+                return iDataHelper;
             }
         }
         #endregion
@@ -346,7 +350,17 @@ namespace Tool.CusControls.DataGridViewEx
         /// </summary>
         public void ClearRow()
         {
-            this.dataGridView1.Rows.Clear();
+            try
+            {
+                this.dataGridView1.Rows.Clear();
+            }
+            catch (Exception ex)
+            {
+                while (this.dataGridView1.Rows.Count > 0)
+                {
+                    this.DeleteRow();
+                }
+            }
         }
 
         #endregion
@@ -770,7 +784,7 @@ namespace Tool.CusControls.DataGridViewEx
             }
             else if (dataGridViewBindType == DataGridViewBindType.DataTable)
             {
-                if (_dvDataTabel != null && _dvDataTabel.Rows.Count != 0)
+                if (_dvDataTabel != null)
                 {
                     //如果是查询，置为首页
                     if (isQuery)
@@ -780,17 +794,24 @@ namespace Tool.CusControls.DataGridViewEx
                     //根据分页加载需要显示dt
                     int beginRowNum = ((int)CurrentPageIndex - 1) * (int)PerPageCount + 1;
                     int endRowNum = (int)CurrentPageIndex * (int)PerPageCount;
-                    DataTable tempDt = _dvDataTabel.Clone();
-                    for (int i = beginRowNum; i <= endRowNum; i++)
+                    if (isPage)
                     {
-                        tempDt.Rows.Add(_dvDataTabel.Rows[i]);
+                        DataTable tempDt = _dvDataTabel.Clone();
+                        for (int i = beginRowNum; i <= endRowNum; i++)
+                        {
+                            tempDt.Rows.Add(_dvDataTabel.Rows[i]);
+                        }
+                        //绑定数据
+                        if (_dvDataTabel.Columns.Contains("RowNum"))
+                        {
+                            _dvDataTabel.Columns.Remove("RowNum");
+                        }
+                        _dv.DataSource = tempDt;
                     }
-                    //绑定数据
-                    if (_dvDataTabel.Columns.Contains("RowNum"))
+                    else
                     {
-                        _dvDataTabel.Columns.Remove("RowNum");
+                        _dv.DataSource = _dvDataTabel;
                     }
-                    _dv.DataSource = tempDt;
                     DataCount = _dvDataTabel.Rows.Count;
                     PageCount = DataCount % (int)PerPageCount == 0 ? DataCount / (int)PerPageCount : DataCount / (int)PerPageCount + 1;
                     //更新绑定方式记录
@@ -977,6 +998,15 @@ namespace Tool.CusControls.DataGridViewEx
     {
         DicSql = 1,
         DataTable = 2
+    }
+
+    /// <summary>
+    /// 数据库类型
+    /// </summary>
+    public enum EnumSqlType
+    {
+        MSSql = 1,
+        Sqlite = 2,
     }
 
     #endregion
