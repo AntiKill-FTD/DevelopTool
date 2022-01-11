@@ -40,7 +40,7 @@
 	</BaseForm>
 	<EntityHelper>
 		<TableEng>
-			<MSSQL>
+			<MSSql>
 				<Query>
 					SELECT  so.name AS '表名称' ,
 					ex.value AS '表中文'
@@ -53,7 +53,7 @@
 				<Order>
 					[表名称]
 				</Order>
-			</MSSQL>
+			</MSSql>
 			<Sqlite>
 				<Query>
 
@@ -64,7 +64,7 @@
 			</Sqlite>
 		</TableEng>
 		<ColumnnEng>
-			<MSSQL>
+			<MSSql>
 				<Query>
 					SELECT  sc.name AS '列名称' ,
 					ex.value AS '列中文' ,
@@ -81,7 +81,7 @@
 				<Order>
 					[列名称]
 				</Order>
-			</MSSQL>
+			</MSSql>
 			<Sqlite>
 
 			</Sqlite>

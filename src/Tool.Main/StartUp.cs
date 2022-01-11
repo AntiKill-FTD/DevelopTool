@@ -17,12 +17,16 @@ namespace Tool.Main
         {
             string rootPath = Environment.CurrentDirectory.ToString();
             char sepChar = Path.DirectorySeparatorChar;
-            string DbPath = $"{rootPath}{sepChar}Resource{sepChar}Data{sepChar}DeveloperTool.db";
+            //string SqliteDbPath = $"{rootPath}{sepChar}Resource{sepChar}Data{sepChar}DeveloperTool.db";
+            string SqlServerPath = $"ISS390002000096\\MSSQLSERVER2016;Initial Catalog=TicketsAnalysis;User id=sa;Password=95938;";
 
             //注入
             //BloggingContext
-            return services.AddDbContext<DeveloperToolContext>(option => option.UseSqlite($"Data Source={DbPath}"))
-                           .AddTransient<ICommonDataHelper, SqliteDataHelper>()
+            return services
+                           //.AddDbContext<DeveloperToolContext>(option => option.UseSqlite($"Data Source={SqliteDbPath}"))
+                           //.AddTransient<ICommonDataHelper, SqliteDataHelper>()
+                           .AddDbContext<DeveloperToolContext>(option => option.UseSqlServer($"Data Source={SqlServerPath}"))
+                           .AddTransient<ICommonDataHelper, MSSqlDataHelper>()
                            .AddTransient<IMenuService, MenuService>()
                            .AddTransient<IEntityHelperService, EntityHelperService>()
                            .AddTransient<ISqlHelperService, SqlHelperService>()

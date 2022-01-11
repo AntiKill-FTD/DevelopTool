@@ -23,7 +23,7 @@ namespace Tool.Data.DataHelper
         {
             if (string.IsNullOrEmpty(_con.ConnectionString))
             {
-                _con.ConnectionString = _iDeveloperToolContext.Database.GetDbConnection().ConnectionString;
+                _con.ConnectionString = _iDeveloperToolContext.Database.GetConnectionString();
             }
         }
         #endregion
