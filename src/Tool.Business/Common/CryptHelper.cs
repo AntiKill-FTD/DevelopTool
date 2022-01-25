@@ -25,7 +25,7 @@ namespace Tool.Business.Common
             set { _iv = value; }
         }
 
-        private string EncryptString(string strContent)
+        public string EncryptString(string strContent)
         {
             string result = "";
             if (string.IsNullOrEmpty(strContent) || strContent == "NULL" || strContent.Trim() == "")
@@ -66,7 +66,7 @@ namespace Tool.Business.Common
             return result;
         }
 
-        private string DecryptString(string strContent)
+        public string DecryptString(string strContent)
         {
             string result = "";
             if (string.IsNullOrEmpty(strContent) || strContent == "NULL" || strContent.Trim() == "")

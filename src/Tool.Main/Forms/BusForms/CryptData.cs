@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tool.Business.Common;
 using Tool.CusControls.DataGridViewEx;
 using Tool.Data;
 using Tool.Data.DataHelper;
@@ -18,6 +19,7 @@ namespace Tool.Main.Forms.BusForms
     {
         private ICommonDataHelper dataHelper;
         private bool isConnect = false;
+        private DataTable dtModel = null;
 
         public CryptData()
         {
@@ -80,7 +82,7 @@ namespace Tool.Main.Forms.BusForms
                 }
                 //查询数据
                 string strMainSql = rtb_MainSql.Text.Trim();
-                DataTable dtModel = dataHelper.GetDataTable(strMainSql, "");
+                dtModel = dataHelper.GetDataTable(strMainSql, "");
                 //定义列数据DataTable
                 DataTable dtColumns = new DataTable();
                 dtColumns.Columns.Add("字段名称");
@@ -134,7 +136,6 @@ namespace Tool.Main.Forms.BusForms
                 DataTable dtColumns = new DataTable();
                 dtColumns.Columns.Add("字段名称");
                 dtColumns.Columns.Add("数据类型");
-                dtColumns.Columns.Add("固定值");
                 //处理列
                 DataColumnCollection cols = dtModel.Columns;
                 foreach (DataColumn col in cols)
@@ -144,20 +145,25 @@ namespace Tool.Main.Forms.BusForms
                     DataRow nRow = dtColumns.NewRow();
                     nRow["字段名称"] = colName;
                     nRow["数据类型"] = colType;
-                    nRow["固定值"] = "";
                     dtColumns.Rows.Add(nRow);
                 }
                 //绑定网格
                 this.dvInputSource.DvDataTable = dtColumns;
                 this.dvInputSource.ViewDataBind(CusControls.DataGridViewEx.DataGridViewBindType.DataTable, false, false);
-                //添加关联字段和是否主键
+                //添加关联字段
                 List<string> colNames = new List<string>();
                 foreach (DataRow row in dvDataSource.DvDataTable.Rows)
                 {
                     colNames.Add(row["字段名称"].ToString());
                 }
-                this.dvInputSource.AddChkCol(CheckBoxName.CheckBox1, 2, true, "是否解密");
-                this.dvInputSource.InsertColumn(this.dvInputSource.CreateColumn<DataGridViewComboBoxColumn>("SourceField", "源字段", colNames, 180), 3);
+                this.dvInputSource.AddColumn(this.dvInputSource.CreateColumn<DataGridViewComboBoxColumn>("SourceField", "源字段", colNames, 180));
+                //添加固定值
+                List<string> constValue = new List<string>();
+                constValue.Add("");
+                constValue.Add("GetDate()");
+                this.dvInputSource.AddColumn(this.dvInputSource.CreateColumn<DataGridViewComboBoxColumn>("ConstValue", "固定值", constValue, 180));
+                //添加是否解密
+                this.dvInputSource.AddChkCol(CheckBoxName.CheckBox1, 4, true, "是否解密");
             }
             catch (Exception ex)
             {
@@ -172,15 +178,16 @@ namespace Tool.Main.Forms.BusForms
             try
             {
                 //校验选择字段和固定值不能同时存在
-                DataTable dtIn = dvInputSource.DvDataTable;
-                foreach (DataRow row in dtIn.Rows)
+                DataGridViewCommonEx dv = dvInputSource.Dv;
+                foreach (DataGridViewRow row in dv.Rows)
                 {
-                    if (row["源字段"] != null && row["固定值"].ToString().Trim() != "")
+                    if (row.Cells[2].Value != null && row.Cells[3].Value != null
+                        && !string.IsNullOrEmpty(row.Cells[2].Value.ToString()) && !string.IsNullOrEmpty(row.Cells[3].Value.ToString()))
                     {
-
+                        MessageBox.Show("【源字段】和【固定值】只能存在一个", "警告");
+                        return;
                     }
                 }
-
                 //写入数据表名称
                 string inputTableName = tb_DataInput.Text.Trim();
                 //定义写入sql
@@ -203,8 +210,66 @@ namespace Tool.Main.Forms.BusForms
                     }
                 }
                 sbSql.Clear();
-                //写入数据
-
+                //写入数据 1.拼接SQL
+                string strTempField = string.Empty;
+                foreach (DataGridViewRow row in dv.Rows)
+                {
+                    strTempField += "," + row.Cells[0].Value.ToString();
+                }
+                strTempField = strTempField.Substring(1);
+                //写入数据 2.循环数据
+                string sqlPassword = tb_SqlEncrypt.Text.Trim();
+                CryptHelper cryptHelper = new CryptHelper();
+                cryptHelper.Key = tb_Key.Text.Trim();
+                cryptHelper.IV = tb_IV.Text.Trim();
+                foreach (DataRow dtRow in dtModel.Rows)
+                {
+                    string strTempValue = string.Empty;
+                    foreach (DataGridViewRow dvRow in dv.Rows)
+                    {
+                        //标识是否转换字段，转换字段加引号
+                        bool isChangeField = false;
+                        //转换信息
+                        string sourceField = dvRow.Cells[2].Value != null ? dvRow.Cells[2].Value.ToString() : string.Empty;
+                        string constField = dvRow.Cells[3].Value != null ? dvRow.Cells[3].Value.ToString() : string.Empty;
+                        bool isCrypt = dvRow.Cells[4].Value != null ? (bool)dvRow.Cells[4].Value : false;
+                        //数据信息
+                        string trueValue;
+                        if (!string.IsNullOrEmpty(sourceField))
+                        {
+                            trueValue = dtRow[sourceField].ToString();
+                            //转换字段默认加引号
+                            isChangeField = true;
+                        }
+                        else if (!string.IsNullOrEmpty(constField))
+                        {
+                            trueValue = constField;
+                        }
+                        else
+                        {
+                            trueValue = "NULL";
+                        }
+                        //解密
+                        if (isCrypt)
+                        {
+                            //解密再SQL加密
+                            trueValue = cryptHelper.DecryptString(trueValue);
+                            trueValue = $"ENCRYPTBYPASSPHRASE('{sqlPassword}','{trueValue}')";
+                            //转换字段添加加解密后不加引号
+                            isChangeField = false;
+                        }
+                        //最后转换字段加引号
+                        if (isChangeField)
+                        {
+                            trueValue = "'" + trueValue + "'";
+                        }
+                        //添加字段值
+                        strTempValue += "," + trueValue;
+                    }
+                    strTempValue = strTempValue.Substring(1);
+                    //插入语句
+                    string strTempInsert = $"INSERT INTO {inputTableName} ({strTempField}) VALUES ( {strTempValue} );";
+                }
             }
             catch (Exception ex)
             {
