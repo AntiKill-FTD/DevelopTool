@@ -1,0 +1,120 @@
+﻿<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="rtb_MainSql.Text" xml:space="preserve">
+    <value>--正式员工    审批通过   2021年指入职日期
+WITH dicEG
+AS (SELECT DISTINCT
+           DicParent.D_Name,
+           DicChild.D_ID
+    FROM PSAData..RRA_Dictionary DicParent
+        LEFT JOIN PSAData..RRA_Dictionary DicChild
+            ON DicParent.D_UID = DicChild.D_ParentUID
+    WHERE DicParent.D_Type = 'EmpGroup'
+          AND DicParent.D_ParentUID IS NULL
+          AND DicParent.D_Name = '正式员工'),
+     dicStudy
+AS (SELECT D_Name,
+           D_UID,
+           D_ID
+    FROM PSAData..RRA_Dictionary
+    WHERE D_Type = 'StudyAge'
+          AND D_Name IN ( '博士研究生', '硕士研究生', '大学本科', '大专/高职', '无证书' )),
+     origin
+AS (SELECT TOP 100
+           org.AreaName,
+           --dicStudy.D_Name AS StudyAge,
+           CASE
+               WHEN DATEPART(DAY, GETDATE()) - DATEPART(DAY, emp.emp_Workday) &gt; 0 THEN
+                   DATEDIFF(MONTH, emp.emp_Workday, GETDATE()) / 12
+               ELSE
+           (DATEDIFF(MONTH, emp.emp_Workday, GETDATE()) - 1) / 12
+           END AS WorkYear,
+           Detail.EAD_RealSalary,
+           Offer.EO_SalePSYearBonusPer,
+           EDA.*
+    FROM dbo.EDA_EntryInfo EDA
+        LEFT JOIN dbo.EDA_EnterApplyDetail Detail
+            ON Detail.EI_ID = EDA.EI_ID
+        LEFT JOIN dbo.EDA_ElectronicOffer Offer
+            ON Offer.EO_EI_ID = EDA.EI_ID
+        LEFT JOIN PSAData..mng_Employee emp
+            ON emp.emp_EmployeeNo = EDA.EI_EmployeeNo
+        --INNER JOIN dicEG
+        --    ON dicEG.D_ID = Detail.EAD_EmployeeSubGroup
+        --INNER JOIN dicStudy
+        --    ON dicStudy.D_UID = Detail.EAD_StudyAge
+        LEFT JOIN PSAData..mng_DeptOrganizationRelation org
+            ON org.HRDeptID = EDA.EI_EnterDeptID
+    WHERE 1 = 1
+          --AND EDA.EI_Status = 2
+          AND DATEPART(YEAR, EDA.EI_EnterDate) = 2021)
+SELECT origin.AreaName,
+       --origin.StudyAge,
+       CASE
+           WHEN CAST(origin.WorkYear AS VARCHAR(3)) &gt; 12 THEN
+               '12年以上'
+           ELSE
+               CAST(origin.WorkYear AS VARCHAR(3))
+       END AS WorkYear,
+       origin.EAD_RealSalary,
+       origin.EO_SalePSYearBonusPer
+FROM origin;</value>
+  </data>
+</root>

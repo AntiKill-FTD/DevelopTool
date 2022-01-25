@@ -28,11 +28,20 @@ namespace Tool.Main.Forms.DevForms
             colDic.Add("ColChn", "列中文");
             this.dvEX.AddColumns(colDic);
             //添加列2            
-            List<string> dataTypes = Enum.GetNames(typeof(SqlServerDataType)).ToList<string>();
+            List<string> dataTypes;
+            if (dataHelper.GetType() == typeof(MSSqlDataHelper))
+            {
+                dataTypes = Enum.GetNames(typeof(SqlServerDataType)).ToList<string>();
+            }
+            else
+            {
+                dataTypes = Enum.GetNames(typeof(SqliteDataType)).ToList<string>();
+            }
+            dataTypes = ChangeDataTypeName(dataTypes);
             this.dvEX.AddColumn(this.dvEX.CreateColumn<DataGridViewComboBoxColumn>("ColDataType", "数据类型", dataTypes, 180));
             //添加列3
-            this.dvEX.AddChkCol(CheckBoxName.CheckBox1, -1, false, "是否主键");//IsPrimarikey
-            this.dvEX.AddChkCol(CheckBoxName.CheckBox2, -1, false, "是否非空");//IsNotNull
+            this.dvEX.AddChkCol(CheckBoxName.CheckBox1, -1, true, "是否主键");//IsPrimarikey
+            this.dvEX.AddChkCol(CheckBoxName.CheckBox2, -1, true, "是否非空");//IsNotNull
             #endregion
         }
         #endregion
@@ -42,6 +51,33 @@ namespace Tool.Main.Forms.DevForms
         {
 
         }
+        #endregion
+
+        #region Common
+
+        /// <summary>
+        /// 格式处理：
+        /// 1.首下划线删除
+        /// 2.三下划线转(
+        /// 3.二下划线转,
+        /// 4.一下换线转)
+        /// </summary>
+        /// <param name="origin"></param>
+        /// <returns></returns>
+        private List<string> ChangeDataTypeName(List<string> origin)
+        {
+            List<string> vs = new List<string>();
+            origin.ForEach(item =>
+            {
+                if (item.StartsWith("_")) item = item.Substring(1);
+                item = item.Replace("___", "(");
+                item = item.Replace("__", ",");
+                item = item.Replace("_", ")");
+                vs.Add(item);
+            });
+            return vs;
+        }
+
         #endregion
 
         #region 按钮事件

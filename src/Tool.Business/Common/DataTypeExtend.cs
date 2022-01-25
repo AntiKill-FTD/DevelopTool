@@ -13,39 +13,28 @@ namespace Tool.Business.Common
         {
             switch (dataTypeEnum)
             {
-                case SqlServerDataType.BIT:
-                case SqlServerDataType.INT:
-                case SqlServerDataType.TINYINT:
-                case SqlServerDataType.SMALLINT:
-                case SqlServerDataType.BIGINT:
-                case SqlServerDataType.INTEGER:
+                case SqlServerDataType.bit:
+                case SqlServerDataType.tinyint:
+                case SqlServerDataType.smallint:
+                case SqlServerDataType._int:
+                case SqlServerDataType.bigint:
                     return "int";
-                case SqlServerDataType.NUMERIC:
-                case SqlServerDataType.FLOAT:
-                case SqlServerDataType.REAL:
-                case SqlServerDataType.DECIMAL:
-                case SqlServerDataType.MONEY:
-                case SqlServerDataType.SMALLMONEY:
+                case SqlServerDataType._float:
+                case SqlServerDataType.smallmoney:
+                case SqlServerDataType.money:
+                case SqlServerDataType.numeric___18__2_:
+                case SqlServerDataType._decimal___18__0_:
                     return "float";
-                case SqlServerDataType.UNIQUEIDENTIFIER:
-                case SqlServerDataType.CHAR:
-                case SqlServerDataType.NCHAR:
-                case SqlServerDataType.VARCHAR:
-                case SqlServerDataType.NVARCHAR:
-                case SqlServerDataType.TEXT:
-                case SqlServerDataType.NTEXT:
-                case SqlServerDataType.XML:
-                case SqlServerDataType.TIMESTAMP:
-                case SqlServerDataType.BINARY:
-                case SqlServerDataType.VARBINARY:
-                case SqlServerDataType.CHARACTER:
-                case SqlServerDataType.IMAGE:
-                case SqlServerDataType.TIME:
-                case SqlServerDataType.DATE:
-                case SqlServerDataType.DATETIME:
-                case SqlServerDataType.DATETIME2:
-                case SqlServerDataType.SMALLDATETIME:
-                case SqlServerDataType.DATETIMEOFFSET:
+                case SqlServerDataType.uniqueidentifier:
+                case SqlServerDataType.binary___50_:
+                case SqlServerDataType.varbinary___50_:
+                case SqlServerDataType._char___10_:
+                case SqlServerDataType.varchar___50_:
+                case SqlServerDataType.nchar_10:
+                case SqlServerDataType.nvarchar___50_:
+                case SqlServerDataType.text:
+                case SqlServerDataType.ntext:
+                case SqlServerDataType.xml:
                     return "string";
                 default:
                     return "string";

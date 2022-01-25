@@ -57,6 +57,7 @@
             // 
             // tlpSearch
             // 
+            this.tlpSearch.BackColor = System.Drawing.Color.Azure;
             this.tlpSearch.ColumnCount = 13;
             this.tlpSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 22F));
             this.tlpSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
@@ -82,8 +83,8 @@
             this.tlpSearch.Name = "tlpSearch";
             this.tlpSearch.RowCount = 4;
             this.tlpSearch.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlpSearch.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tlpSearch.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tlpSearch.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.2F));
+            this.tlpSearch.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40.8F));
             this.tlpSearch.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tlpSearch.Size = new System.Drawing.Size(1394, 125);
             this.tlpSearch.TabIndex = 0;
@@ -94,7 +95,7 @@
             this.labMenuCode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labMenuCode.Location = new System.Drawing.Point(25, 12);
             this.labMenuCode.Name = "labMenuCode";
-            this.labMenuCode.Size = new System.Drawing.Size(154, 50);
+            this.labMenuCode.Size = new System.Drawing.Size(154, 49);
             this.labMenuCode.TabIndex = 0;
             this.labMenuCode.Text = "菜单编码：";
             this.labMenuCode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -105,7 +106,7 @@
             this.labMenuName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labMenuName.Location = new System.Drawing.Point(367, 12);
             this.labMenuName.Name = "labMenuName";
-            this.labMenuName.Size = new System.Drawing.Size(154, 50);
+            this.labMenuName.Size = new System.Drawing.Size(154, 49);
             this.labMenuName.TabIndex = 1;
             this.labMenuName.Text = "菜单名称：";
             this.labMenuName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -136,13 +137,13 @@
             this.tlpButton.Controls.Add(this.btnSearch, 0, 0);
             this.tlpButton.Controls.Add(this.btnReset, 1, 0);
             this.tlpButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpButton.Location = new System.Drawing.Point(1051, 66);
+            this.tlpButton.Location = new System.Drawing.Point(1051, 65);
             this.tlpButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tlpButton.Name = "tlpButton";
             this.tlpButton.RowCount = 1;
             this.tlpButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpButton.Size = new System.Drawing.Size(154, 42);
+            this.tlpButton.Size = new System.Drawing.Size(154, 43);
             this.tlpButton.TabIndex = 4;
             // 
             // btnSearch
@@ -151,7 +152,7 @@
             this.btnSearch.Location = new System.Drawing.Point(3, 4);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(71, 34);
+            this.btnSearch.Size = new System.Drawing.Size(71, 35);
             this.btnSearch.TabIndex = 0;
             this.btnSearch.Text = "查询";
             this.btnSearch.UseVisualStyleBackColor = true;
@@ -163,7 +164,7 @@
             this.btnReset.Location = new System.Drawing.Point(80, 4);
             this.btnReset.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(71, 34);
+            this.btnReset.Size = new System.Drawing.Size(71, 35);
             this.btnReset.TabIndex = 1;
             this.btnReset.Text = "重置";
             this.btnReset.UseVisualStyleBackColor = true;
@@ -181,6 +182,7 @@
             // 
             // dataViewMain
             // 
+            this.dataViewMain.DataHelper = null;
             this.dataViewMain.DataSourceSql = null;
             this.dataViewMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataViewMain.DvDataTable = null;

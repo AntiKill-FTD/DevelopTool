@@ -114,7 +114,7 @@ namespace Tool.CusControls.DataGridViewEx
         protected override void Paint(System.Drawing.Graphics graphics, System.Drawing.Rectangle clipBounds, System.Drawing.Rectangle cellBounds, int rowIndex, DataGridViewElementStates dataGridViewElementState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
         {
             //绘制checkbox还是绘制文字
-            if (this.IsChangeHeader)
+            if (!this.IsChangeHeader)
             {
                 base.Paint(graphics, clipBounds, cellBounds, rowIndex, dataGridViewElementState, @"", @"", errorText, cellStyle, advancedBorderStyle, paintParts);
                 this.m_chkboxRegion = RectangleCommon.GetSmallRectOfRectangle(cellBounds, CheckBoxRenderer.GetGlyphSize(graphics, CheckBoxState.UncheckedNormal), out m_absChkboxRegion);
@@ -288,7 +288,7 @@ namespace Tool.CusControls.DataGridViewEx
             DataGridViewCheckBoxColumnEx col = this.DataGridView.Columns[e.ColumnIndex] as DataGridViewCheckBoxColumnEx;
             DataGridViewCheckBoxColumnHeaderCellEx cell = col.HeaderCell as DataGridViewCheckBoxColumnHeaderCellEx;
             //执行默认事件
-            if (cell.IsChangeHeader)
+            if (!cell.IsChangeHeader)
             {
                 ((DataGridViewCommonEx)this.DataGridView).OnCheckBoxCellCheckedChange(e.ColumnIndex, e.RowIndex, this.Checked);
             }

@@ -5,6 +5,8 @@ namespace Tool.Data.DataHelper
 {
     public interface ICommonDataHelper
     {
+        public bool CheckConnect();
+
         public DataSet GetDataSet(string sql);
 
         public DataTable GetDataTable(string sqlMain, string sqlOrder);

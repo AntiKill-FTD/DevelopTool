@@ -26,7 +26,6 @@
     <Folder Include="Config\" />
     <Folder Include="Forms\DevForms\" />
     <Folder Include="Resource\Data\" />
-    <Folder Include="Forms\BusForms\" />
   </ItemGroup>
 
   <ItemGroup>

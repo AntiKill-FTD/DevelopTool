@@ -113,9 +113,11 @@
             // 
             // dvEX
             // 
+            this.dvEX.DataHelper = null;
             this.dvEX.DataSourceSql = null;
             this.dvEX.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dvEX.DvDataTable = null;
+            this.dvEX.DvSelectionMode = System.Windows.Forms.DataGridViewSelectionMode.RowHeaderSelect;
             this.dvEX.IsPage = true;
             this.dvEX.IsShowFirstCheckBox = false;
             this.dvEX.Location = new System.Drawing.Point(0, 0);

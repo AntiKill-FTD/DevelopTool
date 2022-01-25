@@ -199,4 +199,6 @@ SET IDENTITY_INSERT [dbo].[P_Menu] ON
 INSERT [dbo].[P_Menu] ([Id], [MenuCode], [MenuName], [ParentCode], [Assembly], [NameSpace], [EntityName], [Level], [IfEnd]) VALUES (1, N'01', N'开发帮助', N'', N'', N'', N'', 1, 0)
 INSERT [dbo].[P_Menu] ([Id], [MenuCode], [MenuName], [ParentCode], [Assembly], [NameSpace], [EntityName], [Level], [IfEnd]) VALUES (2, N'01.01', N'脚本生成', N'01', N'Tool.Main', N'Tool.Main.Forms.DevForms', N'SqlHelper', 2, 1)
 INSERT [dbo].[P_Menu] ([Id], [MenuCode], [MenuName], [ParentCode], [Assembly], [NameSpace], [EntityName], [Level], [IfEnd]) VALUES (3, N'01.02', N'实体生成', N'01', N'Tool.Main', N'Tool.Main.Forms.DevForms', N'EntityHelper', 2, 1)
+INSERT [dbo].[P_Menu] ([Id], [MenuCode], [MenuName], [ParentCode], [Assembly], [NameSpace], [EntityName], [Level], [IfEnd]) VALUES (4, N'02', N'软通动力', N'', N'', N'', N'', 1, 0)
+INSERT [dbo].[P_Menu] ([Id], [MenuCode], [MenuName], [ParentCode], [Assembly], [NameSpace], [EntityName], [Level], [IfEnd]) VALUES (5, N'02.01', N'数据库解密', N'02', N'Tool.Main', N'Tool.Main.Forms.BusForms', N'CryptData', 2, 1)
 SET IDENTITY_INSERT [dbo].[P_Menu] OFF

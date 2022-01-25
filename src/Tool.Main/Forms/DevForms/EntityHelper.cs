@@ -46,9 +46,9 @@ namespace Tool.Main.Forms.DevForms
             Search_Click(null, null);
             //自定义添加3个checkBox
             int colCount = this.dataViewColumn.Dv.Columns.Count;
-            this.dataViewColumn.AddChkCol(CheckBoxName.CheckBox1, colCount, false, "查询");
-            this.dataViewColumn.AddChkCol(CheckBoxName.CheckBox2, colCount + 1, false, "编辑");
-            this.dataViewColumn.AddChkCol(CheckBoxName.CheckBox3, colCount + 2, false, "查看");
+            this.dataViewColumn.AddChkCol(CheckBoxName.CheckBox1, colCount, true, "查询");
+            this.dataViewColumn.AddChkCol(CheckBoxName.CheckBox2, colCount + 1, true, "编辑");
+            this.dataViewColumn.AddChkCol(CheckBoxName.CheckBox3, colCount + 2, true, "查看");
             //添加  自定义CheckColumn---checkbox All/Cell  扩展事件
             Dictionary<CheckBoxEventType, CheckBoxEventDelegate> dicCheck = new Dictionary<CheckBoxEventType, CheckBoxEventDelegate>();
             dicCheck.Add(CheckBoxEventType.All, new CheckBoxEventDelegate(DGV_Co_FirstCheck));
@@ -273,7 +273,7 @@ namespace Tool.Main.Forms.DevForms
                             strType = strType.Substring(0, startIndex);
                         }
                         nr["类型"] = strType;
-                        nr["长度"] = length;                        
+                        nr["长度"] = length;
                         newDt.Rows.Add(nr);
                     }
                     this.dataViewColumn.DvDataTable = newDt;

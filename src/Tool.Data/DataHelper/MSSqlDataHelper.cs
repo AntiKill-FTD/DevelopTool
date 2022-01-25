@@ -28,6 +28,25 @@ namespace Tool.Data.DataHelper
         }
         #endregion
 
+        #region 测试连接
+        public bool CheckConnect()
+        {
+            try
+            {
+                _con.Open();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                _con.Close();
+            }
+        }
+        #endregion
+
         #region GetDataSet -- 调用FillDataSet
         public DataSet GetDataSet(string sql)
         {
@@ -127,6 +146,7 @@ namespace Tool.Data.DataHelper
             {
                 _dt = null;
                 _message = ex.Message;
+                throw ex;
             }
             finally
             {

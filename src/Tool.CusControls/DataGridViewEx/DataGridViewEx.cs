@@ -21,6 +21,7 @@ namespace Tool.CusControls.DataGridViewEx
             set
             {
                 iDataHelper = value;
+                if (value == null) return;
                 //数据类型
                 if (iDataHelper.GetType() == typeof(MSSqlDataHelper))
                 {
@@ -313,6 +314,14 @@ namespace Tool.CusControls.DataGridViewEx
         }
 
         /// <summary>
+        /// 清除字段
+        /// </summary>
+        public void ClearColumns()
+        {
+            this.dataGridView1.Columns.Clear();
+        }
+
+        /// <summary>
         /// 添加空行
         /// </summary>
         public void AddEmptyRow()
@@ -552,7 +561,7 @@ namespace Tool.CusControls.DataGridViewEx
                     //添加
                     DataGridViewCheckBoxColumnEx checkColumn = new DataGridViewCheckBoxColumnEx(isChangeHeader);
                     checkColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-                    checkColumn.Width = isChangeHeader ? 35 : headerText.Trim().Length * 30;
+                    checkColumn.Width = isChangeHeader ? headerText.Trim().Length * 30 : 35;
                     checkColumn.Name = chkName.ToString();
                     checkColumn.HeaderText = headerText.Trim();
                     checkColumn.Visible = true;
