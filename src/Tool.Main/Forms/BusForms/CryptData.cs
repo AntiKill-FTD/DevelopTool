@@ -205,7 +205,7 @@ namespace Tool.Main.Forms.BusForms
                     {
                         sbSql.Append($"DELETE {inputTableName};");
                         dataHelper.ExcuteNoQuery(sbSql.ToString());
-                        sbLog.Append($"删除写入表成功！      {DateTime.Now}");
+                        sbLog.Append($"删除写入表成功！       {DateTime.Now}\r\n");
                         this.rtbLogInfo.Text = sbLog.ToString(); ;
                     }
                 }
@@ -222,53 +222,80 @@ namespace Tool.Main.Forms.BusForms
                 CryptHelper cryptHelper = new CryptHelper();
                 cryptHelper.Key = tb_Key.Text.Trim();
                 cryptHelper.IV = tb_IV.Text.Trim();
-                foreach (DataRow dtRow in dtModel.Rows)
+
+                //将集合esList按10次插入数据库
+                int rowCount = dtModel.Rows.Count;
+                int perCount = (int)Math.Ceiling((double)rowCount / 10);
+                for (int perIndex = 0; perIndex < 10; perIndex++)
                 {
-                    string strTempValue = string.Empty;
-                    foreach (DataGridViewRow dvRow in dv.Rows)
+                    int insertMIndex = perIndex * perCount;
+                    if (insertMIndex >= rowCount) break;
+
+                    for (int per = 0; per < perCount; per++)
                     {
-                        //标识是否转换字段，转换字段加引号
-                        bool isChangeField = false;
-                        //转换信息
-                        string sourceField = dvRow.Cells[2].Value != null ? dvRow.Cells[2].Value.ToString() : string.Empty;
-                        string constField = dvRow.Cells[3].Value != null ? dvRow.Cells[3].Value.ToString() : string.Empty;
-                        bool isCrypt = dvRow.Cells[4].Value != null ? (bool)dvRow.Cells[4].Value : false;
-                        //数据信息
-                        string trueValue;
-                        if (!string.IsNullOrEmpty(sourceField))
+                        int insertIndex = perIndex * perCount + per;
+                        if (insertIndex >= rowCount) break;
+
+                        #region 核心SQL拼接逻辑
+                        DataRow dtRow = dtModel.Rows[insertIndex];
+                        string strTempValue = string.Empty;
+                        foreach (DataGridViewRow dvRow in dv.Rows)
                         {
-                            trueValue = dtRow[sourceField].ToString();
-                            //转换字段默认加引号
-                            isChangeField = true;
+                            //标识是否转换字段，转换字段加引号
+                            bool isChangeField = false;
+                            //转换信息
+                            string sourceField = dvRow.Cells[2].Value != null ? dvRow.Cells[2].Value.ToString() : string.Empty;
+                            string constField = dvRow.Cells[3].Value != null ? dvRow.Cells[3].Value.ToString() : string.Empty;
+                            bool isCrypt = dvRow.Cells[4].Value != null ? (bool)dvRow.Cells[4].Value : false;
+                            //数据信息
+                            string trueValue;
+                            if (!string.IsNullOrEmpty(sourceField))
+                            {
+                                trueValue = dtRow[sourceField].ToString();
+                                //转换字段默认加引号
+                                isChangeField = true;
+                            }
+                            else if (!string.IsNullOrEmpty(constField))
+                            {
+                                trueValue = constField;
+                            }
+                            else
+                            {
+                                trueValue = "NULL";
+                            }
+                            //解密
+                            if (isCrypt)
+                            {
+                                //解密再SQL加密
+                                trueValue = cryptHelper.DecryptString(trueValue);
+                                trueValue = $"ENCRYPTBYPASSPHRASE('{sqlPassword}','{trueValue}')";
+                                //转换字段添加加解密后不加引号
+                                isChangeField = false;
+                            }
+                            //最后转换字段加引号
+                            if (isChangeField)
+                            {
+                                trueValue = "'" + trueValue + "'";
+                            }
+                            //添加字段值
+                            strTempValue += "," + trueValue;
                         }
-                        else if (!string.IsNullOrEmpty(constField))
-                        {
-                            trueValue = constField;
-                        }
-                        else
-                        {
-                            trueValue = "NULL";
-                        }
-                        //解密
-                        if (isCrypt)
-                        {
-                            //解密再SQL加密
-                            trueValue = cryptHelper.DecryptString(trueValue);
-                            trueValue = $"ENCRYPTBYPASSPHRASE('{sqlPassword}','{trueValue}')";
-                            //转换字段添加加解密后不加引号
-                            isChangeField = false;
-                        }
-                        //最后转换字段加引号
-                        if (isChangeField)
-                        {
-                            trueValue = "'" + trueValue + "'";
-                        }
-                        //添加字段值
-                        strTempValue += "," + trueValue;
+                        strTempValue = strTempValue.Substring(1);
+                        //插入语句
+                        string strTempInsert = $"INSERT INTO {inputTableName} ({strTempField}) VALUES ( {strTempValue} );\r\n";
+                        sbSql.Append(strTempInsert);
+                        //Log
+                        sbLog.Append($"第{insertIndex + 1}条数据拼接成功！       {DateTime.Now}\r\n");
+                        this.rtbLogInfo.Text = sbLog.ToString();
+                        #endregion
                     }
-                    strTempValue = strTempValue.Substring(1);
-                    //插入语句
-                    string strTempInsert = $"INSERT INTO {inputTableName} ({strTempField}) VALUES ( {strTempValue} );";
+                    //提交
+                    dataHelper.ExcuteNoQuery(sbSql.ToString());
+                    //清空
+                    sbSql.Clear();
+                    //Log
+                    sbLog.Append($"第{perIndex + 1}次提交成功！       {DateTime.Now}\r\n");
+                    this.rtbLogInfo.Text = sbLog.ToString();
                 }
             }
             catch (Exception ex)

@@ -78,6 +78,7 @@ AS (SELECT D_Name,
           AND D_Name IN ( '博士研究生', '硕士研究生', '大学本科', '大专/高职', '无证书' )),
      origin
 AS (SELECT TOP 100
+           Detail.EAD_ID,
            org.AreaName,
            --dicStudy.D_Name AS StudyAge,
            CASE
@@ -92,8 +93,14 @@ AS (SELECT TOP 100
     FROM dbo.EDA_EntryInfo EDA
         LEFT JOIN dbo.EDA_EnterApplyDetail Detail
             ON Detail.EI_ID = EDA.EI_ID
-        LEFT JOIN dbo.EDA_ElectronicOffer Offer
-            ON Offer.EO_EI_ID = EDA.EI_ID
+        CROSS APPLY
+    (
+        SELECT TOP 1
+               *
+        FROM dbo.EDA_ElectronicOffer
+        WHERE EDA_ElectronicOffer.EO_EI_ID = EDA.EI_ID
+        ORDER BY EO_ApproveFinishedDate
+    ) Offer
         LEFT JOIN PSAData..mng_Employee emp
             ON emp.emp_EmployeeNo = EDA.EI_EmployeeNo
         --INNER JOIN dicEG
@@ -105,7 +112,9 @@ AS (SELECT TOP 100
     WHERE 1 = 1
           --AND EDA.EI_Status = 2
           AND DATEPART(YEAR, EDA.EI_EnterDate) = 2021)
-SELECT origin.AreaName,
+SELECT origin.EAD_ID,
+       origin.EI_ID,
+       origin.AreaName,
        --origin.StudyAge,
        CASE
            WHEN CAST(origin.WorkYear AS VARCHAR(3)) &gt; 12 THEN

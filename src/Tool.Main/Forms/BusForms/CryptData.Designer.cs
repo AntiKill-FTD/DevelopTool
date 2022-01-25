@@ -427,6 +427,7 @@
             // 
             // rtbLogInfo
             // 
+            this.rtbLogInfo.BackColor = System.Drawing.SystemColors.Window;
             this.rtbLogInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtbLogInfo.Location = new System.Drawing.Point(3, 45);
             this.rtbLogInfo.Name = "rtbLogInfo";

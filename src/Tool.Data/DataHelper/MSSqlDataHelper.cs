@@ -231,6 +231,7 @@ namespace Tool.Data.DataHelper
             {
                 _message = ex.Message;
                 _resultCount = -1;
+                throw ex;
             }
             finally
             {
