@@ -221,6 +221,21 @@ namespace Tool.Main.Forms.BusForms
                 cryptHelper.Key = tb_Key.Text.Trim();
                 cryptHelper.IV = tb_IV.Text.Trim();
 
+                //获取数据处理方案
+                List<ChangeScheme> changeSchemesList = new List<ChangeScheme>();
+                foreach (DataGridViewRow dvRow in dv.Rows)
+                {
+                    //标识是否转换字段，转换字段加引号
+                    bool isChangeField = false;
+                    //转换信息
+                    ChangeScheme changeScheme = new ChangeScheme();
+                    changeScheme.SourceField = dvRow.Cells[2].Value != null ? dvRow.Cells[2].Value.ToString() : string.Empty;
+                    changeScheme.ConstField = dvRow.Cells[3].Value != null ? dvRow.Cells[3].Value.ToString() : string.Empty;
+                    changeScheme.IsCrypt = dvRow.Cells[4].Value != null ? (bool)dvRow.Cells[4].Value : false;
+                    changeScheme.IsChangeField = !string.IsNullOrEmpty(changeScheme.SourceField) && !changeScheme.IsCrypt; //只有是转换源字段且不加密的时候才加引号
+                    changeSchemesList.Add(changeScheme);
+                }
+
                 //将集合esList按10次插入数据库
                 int rowCount = dtModel.Rows.Count;
                 int perCount = (int)Math.Ceiling((double)rowCount / 10);
@@ -238,41 +253,31 @@ namespace Tool.Main.Forms.BusForms
                         #region 核心SQL拼接逻辑
                         DataRow dtRow = dtModel.Rows[insertIndex];
                         string strTempValue = string.Empty;
-                        foreach (DataGridViewRow dvRow in dv.Rows)
+                        foreach (ChangeScheme changeScheme in changeSchemesList)
                         {
-                            //标识是否转换字段，转换字段加引号
-                            bool isChangeField = false;
-                            //转换信息
-                            string sourceField = dvRow.Cells[2].Value != null ? dvRow.Cells[2].Value.ToString() : string.Empty;
-                            string constField = dvRow.Cells[3].Value != null ? dvRow.Cells[3].Value.ToString() : string.Empty;
-                            bool isCrypt = dvRow.Cells[4].Value != null ? (bool)dvRow.Cells[4].Value : false;
                             //数据信息
                             string trueValue;
-                            if (!string.IsNullOrEmpty(sourceField))
+                            if (!string.IsNullOrEmpty(changeScheme.SourceField))
                             {
-                                trueValue = dtRow[sourceField].ToString();
-                                //转换字段默认加引号
-                                isChangeField = true;
+                                trueValue = dtRow[changeScheme.SourceField].ToString();
                             }
-                            else if (!string.IsNullOrEmpty(constField))
+                            else if (!string.IsNullOrEmpty(changeScheme.ConstField))
                             {
-                                trueValue = constField;
+                                trueValue = changeScheme.ConstField;
                             }
                             else
                             {
                                 trueValue = "NULL";
                             }
                             //解密
-                            if (isCrypt)
+                            if (changeScheme.IsCrypt)
                             {
                                 //解密再SQL加密
                                 trueValue = cryptHelper.DecryptString(trueValue);
                                 trueValue = $"ENCRYPTBYPASSPHRASE('{sqlPassword}','{trueValue}')";
-                                //转换字段添加加解密后不加引号
-                                isChangeField = false;
                             }
                             //最后转换字段加引号
-                            if (isChangeField)
+                            if (changeScheme.IsChangeField)
                             {
                                 trueValue = "'" + trueValue + "'";
                             }
@@ -310,5 +315,13 @@ namespace Tool.Main.Forms.BusForms
             this.rtbLogInfo.Select(this.rtbLogInfo.TextLength, 0);
             this.rtbLogInfo.ScrollToCaret();
         }
+    }
+
+    public class ChangeScheme
+    {
+        public bool IsChangeField;
+        public string SourceField;
+        public string ConstField;
+        public bool IsCrypt;
     }
 }

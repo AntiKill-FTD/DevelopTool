@@ -58,8 +58,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="rtb_MainSql.Text" xml:space="preserve">
-    <value>--正式员工    审批通过   2021年指入职日期
-WITH dicEGroup
+    <value>WITH dicEGroup
 AS (SELECT DISTINCT
            DicParent.D_Name,
            DicChild.D_ID
@@ -69,69 +68,56 @@ AS (SELECT DISTINCT
     WHERE DicParent.D_Type = 'EmpGroup'
           AND DicParent.D_ParentUID IS NULL
           AND DicParent.D_Name = '正式员工'
-          AND DicParent.D_Status = 1),
-     origin
-AS (SELECT EDA.EI_ID,
-           EDA.EI_RRD_RequirementNO,
-           Detail.EAD_ID,
-           Detail.EAD_RealSalary,
-           org.AreaName,
-           Study.PA0022_STEXT AS StudyAge,
-           CASE
-               WHEN emp.emp_Workday IS NULL THEN
-                   0
-               ELSE
-                   CASE
-                       WHEN DATEPART(DAY, GETDATE()) - DATEPART(DAY, emp.emp_Workday) &gt; 0 THEN
-                           DATEDIFF(MONTH, emp.emp_Workday, GETDATE()) / 12
-                       ELSE
-           (DATEDIFF(MONTH, emp.emp_Workday, GETDATE()) - 1) / 12
-                   END
-           END AS WorkYear,
-           Offer.EO_SalePSYearBonusPer
-    FROM IOA..EDA_EntryInfo EDA
-        LEFT JOIN IOA..EDA_EnterApplyDetail Detail
-            ON Detail.EI_ID = EDA.EI_ID
-        INNER JOIN dicEGroup
-            ON dicEGroup.D_ID = Detail.EAD_EmployeeSubGroup
-        LEFT JOIN PSAData..mng_DeptOrganizationRelation org
-            ON org.HRDeptID = EDA.EI_EnterDeptID
-        LEFT JOIN PSAData..mng_Employee emp
-            ON emp.emp_EmployeeNo = EDA.EI_EmployeeNo
-        OUTER APPLY
-    (
-        SELECT TOP 1
-               PA0022_STEXT
-        FROM IOA..SAP_HR_InfoType_PA0022
-        WHERE PA0022_PERNR = EDA.EI_EmployeeNo
-        ORDER BY PA0022_ENDDA DESC
-    ) Study
-        OUTER APPLY
-    (
-        SELECT TOP 1
-               EO_SalePSYearBonusPer
-        FROM dbo.EDA_ElectronicOffer
-        WHERE EDA_ElectronicOffer.EO_EI_ID = EDA.EI_ID
-        ORDER BY EO_ApproveFinishedDate DESC
-    ) Offer
-    WHERE EDA.EI_Status IN ( -1, 2, 4 )
-          AND EDA.EI_Flag = 0
-          AND EDA.EI_EnterApproveStatus = 2
-          AND EDA.EI_PrepareApproveStatus = 2
-          AND DATEPART(YEAR, EDA.EI_EnterDate) = 2021)
-SELECT origin.EI_ID,
-       origin.EAD_ID,
-       origin.EI_RRD_RequirementNO,
-       origin.AreaName,
-       origin.StudyAge,
+          AND DicParent.D_Status = 1)
+SELECT EDA.EI_ID,
+       EDA.EI_RRD_RequirementNO,
+       DATEPART(YEAR, EDA.EI_EnterDate) AS Years,
+       Detail.EAD_ID,
+       Detail.EAD_RealSalary,
+       org.AreaName,
+       Study.PA0022_STEXT AS StudyAge,
        CASE
-           WHEN CAST(origin.WorkYear AS VARCHAR(3)) &gt; 12 THEN
-               '12年以上'
+           WHEN emp.emp_Workday IS NULL THEN
+               0
            ELSE
-               CAST(origin.WorkYear AS VARCHAR(3))
+               CASE
+                   WHEN DATEPART(DAY, GETDATE()) - DATEPART(DAY, emp.emp_Workday) &gt; 0 THEN
+                       DATEDIFF(MONTH, emp.emp_Workday, GETDATE()) / 12
+                   ELSE
+       (DATEDIFF(MONTH, emp.emp_Workday, GETDATE()) - 1) / 12
+               END
        END AS WorkYear,
-       origin.EAD_RealSalary,
-       origin.EO_SalePSYearBonusPer
-FROM origin;</value>
+       Offer.EO_SalePSYearBonusPer
+FROM IOA..EDA_EntryInfo EDA
+    LEFT JOIN IOA..EDA_EnterApplyDetail Detail
+        ON Detail.EI_ID = EDA.EI_ID
+    INNER JOIN dicEGroup
+        ON dicEGroup.D_ID = Detail.EAD_EmployeeSubGroup
+    LEFT JOIN PSAData..mng_DeptOrganizationRelation org
+        ON org.HRDeptID = EDA.EI_EnterDeptID
+    LEFT JOIN PSAData..mng_Employee emp
+        ON emp.emp_EmployeeNo = EDA.EI_EmployeeNo
+    OUTER APPLY
+(
+    SELECT TOP 1
+           PA0022_STEXT
+    FROM IOA..SAP_HR_InfoType_PA0022
+    WHERE PA0022_PERNR = EDA.EI_EmployeeNo
+    ORDER BY PA0022_ENDDA DESC
+) Study
+    OUTER APPLY
+(
+    SELECT TOP 1
+           EO_SalePSYearBonusPer
+    FROM dbo.EDA_ElectronicOffer
+    WHERE EDA_ElectronicOffer.EO_EI_ID = EDA.EI_ID
+    ORDER BY EO_ApproveFinishedDate DESC
+) Offer
+WHERE EDA.EI_Status IN ( -1, 2, 4 )
+      AND EDA.EI_Flag = 0
+      AND EDA.EI_EnterApproveStatus = 2
+      AND EDA.EI_PrepareApproveStatus = 2
+      AND DATEPART(YEAR, EDA.EI_EnterDate) IN ( 2019, 2020, 2021 )
+      AND Study.PA0022_STEXT IN ( '博士研究生', '硕士研究生', '大学本科', '大专/高职', '无证书' );</value>
   </data>
 </root>
