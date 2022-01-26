@@ -177,6 +177,8 @@ namespace Tool.Main.Forms.BusForms
         {
             try
             {
+                //记录开始时间
+                DateTime dtBegin = DateTime.Now;
                 //校验选择字段和固定值不能同时存在
                 DataGridViewCommonEx dv = dvInputSource.Dv;
                 foreach (DataGridViewRow row in dv.Rows)
@@ -290,6 +292,11 @@ namespace Tool.Main.Forms.BusForms
                         sbSql.Append(strTempInsert);
                         //Log
                         WriteLog($"第{insertIndex + 1}条数据拼接成功！------共{rowCount}条数据");
+                        //每1000条清空一次日志
+                        if ((perIndex + 1) % 1000 == 0)
+                        {
+                            this.rtbLogInfo.Clear();
+                        }
                         #endregion
                     }
                     //提交
@@ -299,6 +306,13 @@ namespace Tool.Main.Forms.BusForms
                     //Log
                     WriteLog($"第{perIndex + 1}次提交成功！");
                 }
+
+                //记录结束时间
+                DateTime dtEnd = DateTime.Now;
+                TimeSpan ts = dtEnd - dtBegin;
+                string useTime = "总共用时" + ts.ToString();
+                this.rtbLogInfo.Clear();
+                WriteLog(useTime);
             }
             catch (Exception ex)
             {
