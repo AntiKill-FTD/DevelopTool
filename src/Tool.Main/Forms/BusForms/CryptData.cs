@@ -293,7 +293,7 @@ namespace Tool.Main.Forms.BusForms
                         //Log
                         WriteLog($"第{insertIndex + 1}条数据拼接成功！------共{rowCount}条数据");
                         //每1000条清空一次日志
-                        if ((perIndex + 1) % 1000 == 0)
+                        if ((insertIndex + 1) % 1000 == 0)
                         {
                             this.rtbLogInfo.Clear();
                         }
