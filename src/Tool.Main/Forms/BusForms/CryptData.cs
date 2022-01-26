@@ -192,7 +192,6 @@ namespace Tool.Main.Forms.BusForms
                 string inputTableName = tb_DataInput.Text.Trim();
                 //定义写入sql
                 StringBuilder sbSql = new StringBuilder();
-                StringBuilder sbLog = new StringBuilder();
                 //校验是否要删除原有数据源
                 if (this.rbDeleteTrue.Checked)
                 {
@@ -205,8 +204,7 @@ namespace Tool.Main.Forms.BusForms
                     {
                         sbSql.Append($"DELETE {inputTableName};");
                         dataHelper.ExcuteNoQuery(sbSql.ToString());
-                        sbLog.Append($"删除写入表成功！       {DateTime.Now}\r\n");
-                        this.rtbLogInfo.Text = sbLog.ToString(); ;
+                        WriteLog($"删除写入表成功！");
                     }
                 }
                 sbSql.Clear();
@@ -226,6 +224,7 @@ namespace Tool.Main.Forms.BusForms
                 //将集合esList按10次插入数据库
                 int rowCount = dtModel.Rows.Count;
                 int perCount = (int)Math.Ceiling((double)rowCount / 10);
+                WriteLog($"开始处理数据，共{rowCount}条数据！");
                 for (int perIndex = 0; perIndex < 10; perIndex++)
                 {
                     int insertMIndex = perIndex * perCount;
@@ -285,8 +284,7 @@ namespace Tool.Main.Forms.BusForms
                         string strTempInsert = $"INSERT INTO {inputTableName} ({strTempField}) VALUES ( {strTempValue} );\r\n";
                         sbSql.Append(strTempInsert);
                         //Log
-                        sbLog.Append($"第{insertIndex + 1}条数据拼接成功！       {DateTime.Now}\r\n");
-                        this.rtbLogInfo.Text = sbLog.ToString();
+                        WriteLog($"第{insertIndex + 1}条数据拼接成功！------共{rowCount}条数据");
                         #endregion
                     }
                     //提交
@@ -294,15 +292,23 @@ namespace Tool.Main.Forms.BusForms
                     //清空
                     sbSql.Clear();
                     //Log
-                    sbLog.Append($"第{perIndex + 1}次提交成功！       {DateTime.Now}\r\n");
-                    this.rtbLogInfo.Text = sbLog.ToString();
+                    WriteLog($"第{perIndex + 1}次提交成功！");
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "错误");
+                this.rtbLogInfo.Clear();
             }
         }
         #endregion
+
+        private void WriteLog(string message)
+        {
+            this.rtbLogInfo.AppendText($"{message}         {DateTime.Now}\r\n");
+            this.rtbLogInfo.Focus();
+            this.rtbLogInfo.Select(this.rtbLogInfo.TextLength, 0);
+            this.rtbLogInfo.ScrollToCaret();
+        }
     }
 }
