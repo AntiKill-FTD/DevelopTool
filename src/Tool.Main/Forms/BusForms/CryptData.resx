@@ -58,18 +58,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="rtb_MainSql.Text" xml:space="preserve">
-    <value>WITH dicEGroup
-AS (SELECT DISTINCT
-           DicParent.D_Name,
-           DicChild.D_ID
-    FROM PSAData..RRA_Dictionary DicParent
-        LEFT JOIN PSAData..RRA_Dictionary DicChild
-            ON DicParent.D_UID = DicChild.D_ParentUID
-    WHERE DicParent.D_Type = 'EmpGroup'
-          AND DicParent.D_ParentUID IS NULL
-          AND DicParent.D_Name = '正式员工'
-          AND DicParent.D_Status = 1)
-SELECT EDA.EI_ID,
+    <value>SELECT EDA.EI_ID,
        EDA.EI_RRD_RequirementNO,
        DATEPART(YEAR, EDA.EI_EnterDate) AS Years,
        Detail.EAD_ID,
@@ -91,7 +80,19 @@ SELECT EDA.EI_ID,
 FROM IOA..EDA_EntryInfo EDA
     LEFT JOIN IOA..EDA_EnterApplyDetail Detail
         ON Detail.EI_ID = EDA.EI_ID
-    INNER JOIN dicEGroup
+    INNER JOIN
+    (
+        SELECT DISTINCT
+               DicParent.D_Name,
+               DicChild.D_ID
+        FROM PSAData..RRA_Dictionary DicParent
+            LEFT JOIN PSAData..RRA_Dictionary DicChild
+                ON DicParent.D_UID = DicChild.D_ParentUID
+        WHERE DicParent.D_Type = 'EmpGroup'
+              AND DicParent.D_ParentUID IS NULL
+              AND DicParent.D_Name = '正式员工'
+              AND DicParent.D_Status = 1
+    ) dicEGroup
         ON dicEGroup.D_ID = Detail.EAD_EmployeeSubGroup
     LEFT JOIN PSAData..mng_DeptOrganizationRelation org
         ON org.HRDeptID = EDA.EI_EnterDeptID

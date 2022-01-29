@@ -18,7 +18,7 @@ namespace Tool.Main
             string rootPath = Environment.CurrentDirectory.ToString();
             char sepChar = Path.DirectorySeparatorChar;
             //string SqliteDbPath = $"{rootPath}{sepChar}Resource{sepChar}Data{sepChar}DeveloperTool.db";
-            string SqlServerPath = $"ISS390002000096\\MSSQLSERVER2016;Initial Catalog=DeveloperTool;User id=sa;Password=95938;Connection Timeout=10;";
+            string SqlServerPath = $"ISS390002000096\\MSSQLSERVER2016;Initial Catalog=DeveloperTool;User id=sa;Password=95938;Connection Timeout=30;";
 
             //注入
             //BloggingContext

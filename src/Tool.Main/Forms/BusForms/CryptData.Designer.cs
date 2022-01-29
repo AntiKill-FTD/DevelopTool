@@ -58,14 +58,15 @@
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.rtbLogInfo = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.tb_Key = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.btnAnaly = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.rbDeleteFalse = new System.Windows.Forms.RadioButton();
             this.rbDeleteTrue = new System.Windows.Forms.RadioButton();
             this.label7 = new System.Windows.Forms.Label();
             this.tb_IV = new System.Windows.Forms.TextBox();
+            this.tb_Key = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btnStop = new System.Windows.Forms.Button();
             this.panelConnect.SuspendLayout();
             this.tlp_Connect.SuspendLayout();
             this.tlp_Info.SuspendLayout();
@@ -438,23 +439,25 @@
             // 
             // tableLayoutPanel6
             // 
-            this.tableLayoutPanel6.ColumnCount = 8;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel6.ColumnCount = 9;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9F));
-            this.tableLayoutPanel6.Controls.Add(this.tb_Key, 0, 0);
-            this.tableLayoutPanel6.Controls.Add(this.label6, 0, 0);
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6F));
             this.tableLayoutPanel6.Controls.Add(this.btnAnaly, 0, 0);
-            this.tableLayoutPanel6.Controls.Add(this.label5, 5, 0);
-            this.tableLayoutPanel6.Controls.Add(this.rbDeleteFalse, 7, 0);
-            this.tableLayoutPanel6.Controls.Add(this.rbDeleteTrue, 6, 0);
-            this.tableLayoutPanel6.Controls.Add(this.label7, 3, 0);
-            this.tableLayoutPanel6.Controls.Add(this.tb_IV, 4, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label5, 6, 0);
+            this.tableLayoutPanel6.Controls.Add(this.rbDeleteFalse, 8, 0);
+            this.tableLayoutPanel6.Controls.Add(this.rbDeleteTrue, 7, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label7, 4, 0);
+            this.tableLayoutPanel6.Controls.Add(this.tb_IV, 5, 0);
+            this.tableLayoutPanel6.Controls.Add(this.tb_Key, 3, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label6, 2, 0);
+            this.tableLayoutPanel6.Controls.Add(this.btnStop, 1, 0);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
@@ -463,33 +466,13 @@
             this.tableLayoutPanel6.Size = new System.Drawing.Size(692, 36);
             this.tableLayoutPanel6.TabIndex = 3;
             // 
-            // tb_Key
-            // 
-            this.tb_Key.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_Key.Location = new System.Drawing.Point(182, 3);
-            this.tb_Key.Name = "tb_Key";
-            this.tb_Key.Size = new System.Drawing.Size(97, 27);
-            this.tb_Key.TabIndex = 16;
-            this.tb_Key.Text = "omc4good";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label6.Location = new System.Drawing.Point(141, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 36);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "Key：";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // btnAnaly
             // 
-            this.btnAnaly.BackColor = System.Drawing.Color.Crimson;
+            this.btnAnaly.BackColor = System.Drawing.Color.Green;
             this.btnAnaly.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAnaly.Location = new System.Drawing.Point(3, 3);
             this.btnAnaly.Name = "btnAnaly";
-            this.btnAnaly.Size = new System.Drawing.Size(132, 30);
+            this.btnAnaly.Size = new System.Drawing.Size(118, 30);
             this.btnAnaly.TabIndex = 6;
             this.btnAnaly.Text = "开始解密";
             this.btnAnaly.UseVisualStyleBackColor = false;
@@ -499,9 +482,9 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Location = new System.Drawing.Point(429, 0);
+            this.label5.Location = new System.Drawing.Point(499, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(132, 36);
+            this.label5.Size = new System.Drawing.Size(104, 36);
             this.label5.TabIndex = 10;
             this.label5.Text = "是否删除写入源表：";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -511,9 +494,9 @@
             this.rbDeleteFalse.AutoSize = true;
             this.rbDeleteFalse.Checked = true;
             this.rbDeleteFalse.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rbDeleteFalse.Location = new System.Drawing.Point(629, 3);
+            this.rbDeleteFalse.Location = new System.Drawing.Point(650, 3);
             this.rbDeleteFalse.Name = "rbDeleteFalse";
-            this.rbDeleteFalse.Size = new System.Drawing.Size(60, 30);
+            this.rbDeleteFalse.Size = new System.Drawing.Size(39, 30);
             this.rbDeleteFalse.TabIndex = 8;
             this.rbDeleteFalse.TabStop = true;
             this.rbDeleteFalse.Text = "否";
@@ -523,9 +506,9 @@
             // 
             this.rbDeleteTrue.AutoSize = true;
             this.rbDeleteTrue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rbDeleteTrue.Location = new System.Drawing.Point(567, 3);
+            this.rbDeleteTrue.Location = new System.Drawing.Point(609, 3);
             this.rbDeleteTrue.Name = "rbDeleteTrue";
-            this.rbDeleteTrue.Size = new System.Drawing.Size(56, 30);
+            this.rbDeleteTrue.Size = new System.Drawing.Size(35, 30);
             this.rbDeleteTrue.TabIndex = 7;
             this.rbDeleteTrue.Text = "是";
             this.rbDeleteTrue.UseVisualStyleBackColor = true;
@@ -534,7 +517,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Location = new System.Drawing.Point(285, 0);
+            this.label7.Location = new System.Drawing.Point(375, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(35, 36);
             this.label7.TabIndex = 12;
@@ -544,11 +527,43 @@
             // tb_IV
             // 
             this.tb_IV.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_IV.Location = new System.Drawing.Point(326, 3);
+            this.tb_IV.Location = new System.Drawing.Point(416, 3);
             this.tb_IV.Name = "tb_IV";
-            this.tb_IV.Size = new System.Drawing.Size(97, 27);
+            this.tb_IV.Size = new System.Drawing.Size(77, 27);
             this.tb_IV.TabIndex = 15;
             this.tb_IV.Text = "1s2o4f5t";
+            // 
+            // tb_Key
+            // 
+            this.tb_Key.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_Key.Location = new System.Drawing.Point(292, 3);
+            this.tb_Key.Name = "tb_Key";
+            this.tb_Key.Size = new System.Drawing.Size(77, 27);
+            this.tb_Key.TabIndex = 16;
+            this.tb_Key.Text = "omc4good";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label6.Location = new System.Drawing.Point(251, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 36);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Key：";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnStop
+            // 
+            this.btnStop.BackColor = System.Drawing.Color.Red;
+            this.btnStop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnStop.Location = new System.Drawing.Point(127, 3);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(118, 30);
+            this.btnStop.TabIndex = 6;
+            this.btnStop.Text = "停止解密";
+            this.btnStop.UseVisualStyleBackColor = false;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // CryptData
             // 
@@ -617,5 +632,6 @@
         private TextBox tb_IV;
         private Label label8;
         private TextBox tb_SqlEncrypt;
+        private Button btnStop;
     }
 }

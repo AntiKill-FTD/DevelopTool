@@ -16,14 +16,17 @@ namespace Tool.Data.DataHelper
         private DataRow _dr;
         private object _scalarObject;
         private int _resultCount;
+        private string _connectString = string.Empty;
         private string _message = string.Empty;
 
         #region 初始化DataHelper，读取connection
         public SqliteDataHelper(DeveloperToolContext _iDeveloperToolContext)
         {
-            if (string.IsNullOrEmpty(_con.ConnectionString))
+            if (string.IsNullOrEmpty(_con.ConnectionString) && _iDeveloperToolContext != null)
             {
-                _con.ConnectionString = _iDeveloperToolContext.Database.GetConnectionString();
+                string strConnect = _iDeveloperToolContext.Database.GetConnectionString();
+                _con.ConnectionString = strConnect;
+                _connectString = strConnect;
             }
         }
         #endregion
@@ -339,6 +342,16 @@ namespace Tool.Data.DataHelper
                 if (_commandBuilder != null) _commandBuilder.Dispose();
                 if (_adapter != null) _adapter.Dispose();
             }
+        }
+        #endregion
+
+        #region Clone
+        public object Clone()
+        {
+            SqliteDataHelper sqliteDataHelper = new SqliteDataHelper(null);
+            sqliteDataHelper._con.ConnectionString = this._connectString;
+            sqliteDataHelper._connectString = this._connectString;
+            return sqliteDataHelper;
         }
         #endregion
 

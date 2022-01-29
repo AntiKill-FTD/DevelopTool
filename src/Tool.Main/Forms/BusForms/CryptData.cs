@@ -1,13 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using Tool.Business.Common;
 using Tool.CusControls.DataGridViewEx;
 using Tool.Data;
@@ -17,19 +10,50 @@ namespace Tool.Main.Forms.BusForms
 {
     public partial class CryptData : Form
     {
-        private ICommonDataHelper dataHelper;
-        private bool isConnect = false;
-        private DataTable dtModel = null;
+        CryptHelper cryptHelper = new CryptHelper(); //解密类
 
+        private ICommonDataHelper dataHelper;   //数据库操作类
+        private bool isConnect = false;         //判断是否连接成功
+        private DataTable dtModel = null;       //需要处理的数据源对象
+
+        DateTime dtBegin = DateTime.Now;        //解密操作开始时间【全局变量】
+        private Int64 dataIndex = 0;            //当前操作的数据Index
+        private Int64 dataCount = 0;            //需要处理的数据源总条数
+
+        private int needCommitCount = 0;        //需要提交的次数
+        private int preCommitCount = 0;         //准备提交的次数
+        private int downCommmitCount = 0;       //已经提交的次数
+        private List<StringBuilder> sbList = new List<StringBuilder>();    //所有个线程的StringBuild汇总
+
+        private StringBuilder errorMessage = new StringBuilder();         //线程内部错误消息提示
+
+        System.Windows.Forms.Timer logTimer = new System.Windows.Forms.Timer();    //日志监听
+        System.Windows.Forms.Timer submitTimer = new System.Windows.Forms.Timer(); //提交监听
+
+        //中间变量
+        int[] numbers = new int[10000];
+
+        #region Ctor
         public CryptData()
         {
             InitializeComponent();
         }
+        #endregion
 
         #region PageLoad
         private void CryptData_Load(object sender, EventArgs e)
         {
+            //定时器
+            logTimer.Tick += LogTimer_Tick;
+            logTimer.Interval = 1000;
+            submitTimer.Tick += CommitTimer_Tick;
+            submitTimer.Interval = 1000;
 
+            //中间变量
+            for (int i = 0; i < 10000; i++)
+            {
+                numbers[i] = i;
+            }
         }
         #endregion
 
@@ -43,7 +67,7 @@ namespace Tool.Main.Forms.BusForms
                 string strAccount = tb_LoginAccount.Text.Trim();
                 string strPassword = tb_LoginPassword.Text.Trim();
                 string strDataBase = tb_DataBase.Text.Trim();
-                string connectString = $"{strIP};Initial Catalog={strDataBase};User id={strAccount};Password={strPassword};Connection Timeout=1;";
+                string connectString = $"{strIP};Initial Catalog={strDataBase};User id={strAccount};Password={strPassword};Connection Timeout=300;Pooling=true;Max Pool Size=100;";
                 //创建数据连接
                 DbContextOptionsBuilder<DeveloperToolContext> dbOptionBuild = new DbContextOptionsBuilder<DeveloperToolContext>();
                 dbOptionBuild.UseSqlServer($"Data Source={connectString}");
@@ -173,12 +197,12 @@ namespace Tool.Main.Forms.BusForms
         #endregion
 
         #region 开始解密
-        private void btnAnaly_Click(object sender, EventArgs e)
+        private async void btnAnaly_Click(object sender, EventArgs e)
         {
             try
             {
                 //记录开始时间
-                DateTime dtBegin = DateTime.Now;
+                dtBegin = DateTime.Now;
                 //校验选择字段和固定值不能同时存在
                 DataGridViewCommonEx dv = dvInputSource.Dv;
                 foreach (DataGridViewRow row in dv.Rows)
@@ -193,7 +217,7 @@ namespace Tool.Main.Forms.BusForms
                 //写入数据表名称
                 string inputTableName = tb_DataInput.Text.Trim();
                 //定义写入sql
-                StringBuilder sbSql = new StringBuilder();
+                StringBuilder sbSqlDel = new StringBuilder();
                 //校验是否要删除原有数据源
                 if (this.rbDeleteTrue.Checked)
                 {
@@ -204,12 +228,12 @@ namespace Tool.Main.Forms.BusForms
                     }
                     else
                     {
-                        sbSql.Append($"DELETE {inputTableName};");
-                        dataHelper.ExcuteNoQuery(sbSql.ToString());
+                        sbSqlDel.Append($"DELETE {inputTableName};");
+                        dataHelper.ExcuteNoQuery(sbSqlDel.ToString());
                         WriteLog($"删除写入表成功！");
                     }
                 }
-                sbSql.Clear();
+                sbSqlDel.Clear();
                 //写入数据 1.拼接SQL
                 string strTempField = string.Empty;
                 foreach (DataGridViewRow row in dv.Rows)
@@ -219,7 +243,6 @@ namespace Tool.Main.Forms.BusForms
                 strTempField = strTempField.Substring(1);
                 //写入数据 2.循环数据
                 string sqlPassword = tb_SqlEncrypt.Text.Trim();
-                CryptHelper cryptHelper = new CryptHelper();
                 cryptHelper.Key = tb_Key.Text.Trim();
                 cryptHelper.IV = tb_IV.Text.Trim();
 
@@ -238,81 +261,21 @@ namespace Tool.Main.Forms.BusForms
                     changeSchemesList.Add(changeScheme);
                 }
 
-                //将集合esList按10次插入数据库
-                int rowCount = dtModel.Rows.Count;
-                int perCount = (int)Math.Ceiling((double)rowCount / 10);
-                WriteLog($"开始处理数据，共{rowCount}条数据！");
-                for (int perIndex = 0; perIndex < 10; perIndex++)
+                //将集合esList按每3000条一次插入数据库
+                dataCount = dtModel.Rows.Count;
+                needCommitCount = (int)Math.Ceiling((double)dataCount / 5000);
+                WriteLog($"开始处理数据，共{dataCount}条数据！");
+                //开始处理定时任务！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+                logTimer.Start();
+                submitTimer.Start();
+                //开始处理定时任务！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+                for (int perIndex = 0; perIndex < needCommitCount; perIndex++)
                 {
-                    int insertMIndex = perIndex * perCount;
-                    if (insertMIndex >= rowCount) break;
-
-                    for (int per = 0; per < perCount; per++)
-                    {
-                        int insertIndex = perIndex * perCount + per;
-                        if (insertIndex >= rowCount) break;
-
-                        #region 核心SQL拼接逻辑
-                        DataRow dtRow = dtModel.Rows[insertIndex];
-                        string strTempValue = string.Empty;
-                        foreach (ChangeScheme changeScheme in changeSchemesList)
-                        {
-                            //数据信息
-                            string trueValue;
-                            if (!string.IsNullOrEmpty(changeScheme.SourceField))
-                            {
-                                trueValue = dtRow[changeScheme.SourceField].ToString();
-                            }
-                            else if (!string.IsNullOrEmpty(changeScheme.ConstField))
-                            {
-                                trueValue = changeScheme.ConstField;
-                            }
-                            else
-                            {
-                                trueValue = "NULL";
-                            }
-                            //解密
-                            if (changeScheme.IsCrypt)
-                            {
-                                //解密再SQL加密
-                                trueValue = cryptHelper.DecryptString(trueValue);
-                                trueValue = $"ENCRYPTBYPASSPHRASE('{sqlPassword}','{trueValue}')";
-                            }
-                            //最后转换字段加引号
-                            if (changeScheme.IsChangeField)
-                            {
-                                trueValue = "'" + trueValue + "'";
-                            }
-                            //添加字段值
-                            strTempValue += "," + trueValue;
-                        }
-                        strTempValue = strTempValue.Substring(1);
-                        //插入语句
-                        string strTempInsert = $"INSERT INTO {inputTableName} ({strTempField}) VALUES ( {strTempValue} );\r\n";
-                        sbSql.Append(strTempInsert);
-                        //Log
-                        WriteLog($"第{insertIndex + 1}条数据拼接成功！------共{rowCount}条数据");
-                        //每1000条清空一次日志
-                        if ((insertIndex + 1) % 1000 == 0)
-                        {
-                            this.rtbLogInfo.Clear();
-                        }
-                        #endregion
-                    }
-                    //提交
-                    dataHelper.ExcuteNoQuery(sbSql.ToString());
-                    //清空
-                    sbSql.Clear();
-                    //Log
-                    WriteLog($"第{perIndex + 1}次提交成功！");
+                    var midNumber = perIndex;
+#pragma warning disable CS4014 // 由于此调用不会等待，因此在调用完成前将继续执行当前方法
+                    Task.Run(() => CoreFunction(inputTableName, strTempField, sqlPassword, changeSchemesList, numbers[midNumber]));
+#pragma warning restore CS4014 // 由于此调用不会等待，因此在调用完成前将继续执行当前方法
                 }
-
-                //记录结束时间
-                DateTime dtEnd = DateTime.Now;
-                TimeSpan ts = dtEnd - dtBegin;
-                string useTime = "总共用时" + ts.ToString();
-                this.rtbLogInfo.Clear();
-                WriteLog(useTime);
             }
             catch (Exception ex)
             {
@@ -322,6 +285,160 @@ namespace Tool.Main.Forms.BusForms
         }
         #endregion
 
+        #region CoreFunction
+        private void CoreFunction(string inputTableName, string strTempField, string sqlPassword, List<ChangeScheme> changeSchemesList, int perIndex)
+        {
+            StringBuilder sbTaks = new StringBuilder();
+            for (int per = 0; per < 5000; per++)
+            {
+                int insertIndex = perIndex * 5000 + per;
+                if (insertIndex >= dataCount) break;
+
+                #region 核心SQL拼接逻辑
+                DataRow dtRow = dtModel.Rows[insertIndex];
+                string strTempValue = string.Empty;
+                foreach (ChangeScheme changeScheme in changeSchemesList)
+                {
+                    //数据信息
+                    string trueValue;
+                    if (!string.IsNullOrEmpty(changeScheme.SourceField))
+                    {
+                        trueValue = dtRow[changeScheme.SourceField].ToString();
+                    }
+                    else if (!string.IsNullOrEmpty(changeScheme.ConstField))
+                    {
+                        trueValue = changeScheme.ConstField;
+                    }
+                    else
+                    {
+                        trueValue = "NULL";
+                    }
+                    //解密
+                    if (changeScheme.IsCrypt)
+                    {
+                        //解密再SQL加密
+                        trueValue = cryptHelper.DecryptString(trueValue);
+                        trueValue = $"ENCRYPTBYPASSPHRASE('{sqlPassword}','{trueValue}')";
+                    }
+                    //最后转换字段加引号
+                    if (changeScheme.IsChangeField)
+                    {
+                        trueValue = "'" + trueValue + "'";
+                    }
+                    //添加字段值
+                    strTempValue += "," + trueValue;
+                }
+                strTempValue = strTempValue.Substring(1);
+                //插入语句
+                string strTempInsert = $"INSERT INTO {inputTableName} ({strTempField}) VALUES ( {strTempValue} );\r\n";
+                sbTaks.Append(strTempInsert);
+                //Log Index
+                dataIndex++;
+                #endregion
+            }
+            sbList.Add(sbTaks);
+        }
+        #endregion
+
+        #region 停止解密
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            //结束重置所有全局标识对象
+            logTimer.Stop();
+            submitTimer.Stop();
+            //数据条数清空
+            dataIndex = 0;
+            dataCount = 0;
+            //提交次数清空
+            needCommitCount = 0;
+            preCommitCount = 0;
+            downCommmitCount = 0;
+            //缓存和日志清空
+            sbList.Clear();
+            this.rtbLogInfo.Clear();
+            //线程内错误信息清空
+            errorMessage.Clear();
+        }
+        #endregion
+
+        #region LogTimer_Tick 记录日志使用
+        private void LogTimer_Tick(object? sender, EventArgs e)
+        {
+            //如果全部提交完成
+            if (downCommmitCount == needCommitCount)
+            {
+                //结束重置所有全局标识对象
+                logTimer.Stop();
+                submitTimer.Stop();
+                //数据条数清空
+                dataIndex = 0;
+                dataCount = 0;
+                //提交次数清空
+                needCommitCount = 0;
+                preCommitCount = 0;
+                downCommmitCount = 0;
+                //缓存和日志清空
+                sbList.Clear();
+                this.rtbLogInfo.Clear();
+                //线程内错误信息清空
+                errorMessage.Clear();
+                //结束重置所有全局标识对象
+                //记录结束时间
+                DateTime dtEnd = DateTime.Now;
+                TimeSpan ts = dtEnd - dtBegin;
+                string strUseTime = "解密完成，总共用时" + ts.ToString();
+                WriteLog(strUseTime);
+            }
+            else
+            {
+                WriteLog($"第{dataIndex}条数据拼接成功！------共{dataCount}条数据");
+                WriteLog($"第{downCommmitCount}次提交成功！");
+                if (errorMessage.ToString().Length > 0)
+                {
+                    WriteLog(errorMessage.ToString());
+                }
+            }
+        }
+        #endregion
+
+        #region CommitTimer_Tick 提交数据使用
+        private void CommitTimer_Tick(object? sender, EventArgs e)
+        {
+            try
+            {
+                //commitCount小于sbList.Count表示有需要提交的数据
+                if (preCommitCount < sbList.Count)
+                {
+                    //提交
+                    preCommitCount++;
+                    var midNumber = preCommitCount;
+                    Task.Run(() =>
+                    {
+                        var tempMiddleNum = numbers[midNumber];
+                        try
+                        {
+                            ICommonDataHelper dh = (ICommonDataHelper)dataHelper.Clone();
+                            long commitResult = dh.ExcuteNoQuery(sbList[tempMiddleNum - 1].ToString());
+                            if (commitResult > 0)
+                            {
+                                downCommmitCount++;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            errorMessage.Append($"第{tempMiddleNum}提交错误信息：{ex.Message.ToString()}\r\n");
+                        }
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                WriteLog($"错误：{ex.Message}");
+            }
+        }
+        #endregion
+
+        #region WriteLog
         private void WriteLog(string message)
         {
             this.rtbLogInfo.AppendText($"{message}         {DateTime.Now}\r\n");
@@ -329,8 +446,10 @@ namespace Tool.Main.Forms.BusForms
             this.rtbLogInfo.Select(this.rtbLogInfo.TextLength, 0);
             this.rtbLogInfo.ScrollToCaret();
         }
+        #endregion
     }
 
+    #region Class ： ChangeScheme
     public class ChangeScheme
     {
         public bool IsChangeField;
@@ -338,4 +457,6 @@ namespace Tool.Main.Forms.BusForms
         public string ConstField;
         public bool IsCrypt;
     }
+    #endregion
+
 }

@@ -3,7 +3,7 @@ using System.Data.Common;
 
 namespace Tool.Data.DataHelper
 {
-    public interface ICommonDataHelper
+    public interface ICommonDataHelper : ICloneable
     {
         public bool CheckConnect();
 
