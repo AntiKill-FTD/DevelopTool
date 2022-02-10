@@ -1,4 +1,6 @@
-﻿namespace Tool.CusControls.DataGridViewEx
+﻿using System.ComponentModel;
+
+namespace Tool.CusControls.DataGridViewEx
 {
     public class DataGridViewComboBoxColumnEx : DataGridViewComboBoxColumn
     {
@@ -7,14 +9,17 @@
         /// 以此重新记录
         /// </summary>
         public int RowCountCurrent = -1;
+        public bool IsEdit = false;
 
         /// <summary>
         /// 构造函数，包括：表头单元格、行单元格
         /// </summary>
         /// <param name="isChangeHeader">是否修改标题为CheckBox</param>
-        public DataGridViewComboBoxColumnEx()
+        public DataGridViewComboBoxColumnEx(bool isEdit = false)
             : base()
         {
+            this.IsEdit = isEdit;
+
             //建立表头单元格
             this.HeaderCell = new DataGridViewComboBoxColumnHeaderCellEx();
 
@@ -39,6 +44,46 @@
     /// </summary>
     public class DataGridViewComboBoxCellEx : DataGridViewComboBoxCell
     {
+        #region "InitializeEditingControl"
+
+        public override void InitializeEditingControl(int rowIndex, object initialFormattedValue,
+           DataGridViewCellStyle dataGridViewCellStyle)
+        {
+            base.InitializeEditingControl(rowIndex, initialFormattedValue, dataGridViewCellStyle);
+
+            if (((DataGridViewComboBoxColumnEx)base.OwningColumn).IsEdit)
+            {
+                ComboBox comboBox = (ComboBox)base.DataGridView.EditingControl;
+                if (comboBox != null)
+                {
+                    comboBox.DropDownStyle = ComboBoxStyle.DropDown;
+                    comboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
+                    comboBox.Validating += new CancelEventHandler(comboBox_Validating);
+                }
+            }
+        }
+
+        private void comboBox_Validating(object sender, CancelEventArgs e)
+        {
+            DataGridViewComboBoxEditingControl cbo = (DataGridViewComboBoxEditingControl)sender;
+            if (cbo.Text.Trim() == string.Empty)
+                return;
+
+            DataGridView grid = cbo.EditingControlDataGridView;
+            object value = cbo.Text;
+
+            if (cbo.Items.IndexOf(value) == -1)
+            {
+                DataGridViewComboBoxColumn cboCol = (DataGridViewComboBoxColumn)grid.Columns[grid.CurrentCell.ColumnIndex];
+                // 添加到当前下拉框中以及模版中，避免出现重复项
+                cbo.Items.Add(value);
+                cboCol.Items.Add(value);
+                grid.CurrentCell.Value = value;
+            }
+        }
+
+        #endregion
+
         #region "type:paint"
 
         protected override void Paint(System.Drawing.Graphics graphics, System.Drawing.Rectangle clipBounds, System.Drawing.Rectangle cellBounds, int rowIndex, DataGridViewElementStates dataGridViewElementState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)

@@ -182,6 +182,7 @@ namespace Tool.Main.Forms.BusForms
                 this.dvInputSource.ViewDataBind(CusControls.DataGridViewEx.DataGridViewBindType.DataTable, false, false);
                 //添加关联字段
                 List<string> colNames = new List<string>();
+                colNames.Add("");
                 foreach (DataRow row in dvDataSource.DvDataTable.Rows)
                 {
                     colNames.Add(row["字段名称"].ToString());
@@ -191,7 +192,7 @@ namespace Tool.Main.Forms.BusForms
                 List<string> constValue = new List<string>();
                 constValue.Add("");
                 constValue.Add("GetDate()");
-                this.dvInputSource.AddColumn(this.dvInputSource.CreateColumn<DataGridViewComboBoxColumn>("ConstValue", "固定值", constValue, 180));
+                this.dvInputSource.AddColumn(this.dvInputSource.CreateColumn<DataGridViewComboBoxColumn>("ConstValue", "固定值", constValue, 180, true));
                 //添加是否解密
                 this.dvInputSource.AddChkCol(CheckBoxName.CheckBox1, 4, true, "是否解密");
             }
