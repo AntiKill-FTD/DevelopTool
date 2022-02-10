@@ -219,6 +219,12 @@ namespace Tool.Main.Forms.BusForms
                 }
                 //加密数据库字符串对应的十进制数
                 string sqlPassword = tb_SqlEncrypt.Text.Trim();
+                //数据加密长度必须为8位
+                if (sqlPassword.Length != 8)
+                {
+                    MessageBox.Show("数据加密长度必须为8位", "警告");
+                    return;
+                }
                 bigIntegerEncrypt = BigInteger.Parse(BinaryHelper.StringToDecimal(sqlPassword));
                 //写入数据表名称
                 inputTableName = tb_DataInput.Text.Trim();
@@ -322,7 +328,7 @@ namespace Tool.Main.Forms.BusForms
                     {
                         //解密再二进制加密
                         trueValue = cryptHelper.DecryptString(trueValue.ToString());
-                        if (string.IsNullOrEmpty(trueValue.ToString()))
+                        if (trueValue == null || string.IsNullOrEmpty(trueValue.ToString()))
                         {
                             trueValue = DBNull.Value;
                         }
@@ -330,7 +336,9 @@ namespace Tool.Main.Forms.BusForms
                         {
                             BigInteger passwordValue = BigInteger.Parse(BinaryHelper.StringToDecimal(trueValue.ToString()));
                             BigInteger sumValue = passwordValue + bigIntegerEncrypt;
-                            //trueValue = BitConverter.GetBytes(sumValue.ToString());
+                            //Sqlserver 从数字/字符串转2进制：
+                            //数字是高位在前；字符串是低位在前；
+                            trueValue = sumValue.ToByteArray().Reverse().ToArray();
                         }
                     }
 

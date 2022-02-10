@@ -383,17 +383,18 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(97, 38);
             this.label8.TabIndex = 4;
-            this.label8.Text = "数据库加密：";
+            this.label8.Text = "数据加密：";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tb_SqlEncrypt
             // 
             this.tb_SqlEncrypt.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tb_SqlEncrypt.Location = new System.Drawing.Point(347, 3);
+            this.tb_SqlEncrypt.MaxLength = 8;
             this.tb_SqlEncrypt.Name = "tb_SqlEncrypt";
             this.tb_SqlEncrypt.Size = new System.Drawing.Size(132, 27);
             this.tb_SqlEncrypt.TabIndex = 5;
-            this.tb_SqlEncrypt.Text = "isoftstone";
+            this.tb_SqlEncrypt.Text = "iz@8$k_=";
             // 
             // dvInputSource
             // 
