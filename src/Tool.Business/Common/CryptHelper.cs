@@ -69,7 +69,7 @@ namespace Tool.Business.Common
         public string DecryptString(string strContent)
         {
             string result = "";
-            if (string.IsNullOrEmpty(strContent) || strContent == "NULL" || strContent.Trim() == "")
+            if (string.IsNullOrWhiteSpace(strContent) || strContent == "NULL" || strContent.Trim() == "")
             {
                 return strContent;
             }

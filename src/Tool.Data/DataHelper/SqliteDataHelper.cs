@@ -8,6 +8,10 @@ namespace Tool.Data.DataHelper
     public class SqliteDataHelper : ICommonDataHelper
     {
         private SQLiteConnection _con = new SQLiteConnection();
+        public DbConnection Con()
+        {
+            return _con;
+        }
         private SQLiteDataAdapter _adapter;
         private SQLiteCommandBuilder _commandBuilder;
         private SQLiteCommand _command;
@@ -28,6 +32,20 @@ namespace Tool.Data.DataHelper
                 _con.ConnectionString = strConnect;
                 _connectString = strConnect;
             }
+        }
+        #endregion
+
+        #region 打开连接
+        public void OpenCon()
+        {
+            this._con.Open();
+        }
+        #endregion
+
+        #region 关闭连接
+        public void CloseCon()
+        {
+            this._con.Close();
         }
         #endregion
 

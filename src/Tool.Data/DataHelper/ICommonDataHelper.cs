@@ -5,6 +5,12 @@ namespace Tool.Data.DataHelper
 {
     public interface ICommonDataHelper : ICloneable
     {
+        public DbConnection Con();
+
+        public void OpenCon();
+
+        public void CloseCon();
+
         public bool CheckConnect();
 
         public DataSet GetDataSet(string sql);

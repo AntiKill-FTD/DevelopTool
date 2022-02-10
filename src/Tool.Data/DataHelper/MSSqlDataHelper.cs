@@ -8,6 +8,10 @@ namespace Tool.Data.DataHelper
     public class MSSqlDataHelper : ICommonDataHelper
     {
         private SqlConnection _con = new SqlConnection();
+        public DbConnection Con()
+        {
+            return _con;
+        }
         private SqlDataAdapter _adapter;
         private SqlCommandBuilder _commandBuilder;
         private SqlCommand _command;
@@ -28,6 +32,20 @@ namespace Tool.Data.DataHelper
                 _con.ConnectionString = strConnect;
                 _connectString = strConnect;
             }
+        }
+        #endregion
+
+        #region 打开连接
+        public void OpenCon()
+        {
+            this._con.Open();
+        }
+        #endregion
+
+        #region 关闭连接
+        public void CloseCon()
+        {
+            this._con.Close();
         }
         #endregion
 
