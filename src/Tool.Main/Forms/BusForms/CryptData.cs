@@ -20,12 +20,15 @@ namespace Tool.Main.Forms.BusForms
         private bool isConnect = false;         //判断是否连接成功
         private DataTable dtSource = null;      //需要处理的数据源对象
 
-        DateTime dtBegin = DateTime.Now;        //解密操作开始时间【全局变量】
-        private Int32 perCount = 5000;          //每多少条一个线程进行解密
-        private Int32 dataIndex = 0;            //当前操作的数据Index
-        private Int32 dataCount = 0;            //需要处理的数据源总条数
+        DateTime dtBegin = DateTime.Now;                                //解密操作开始时间【全局变量】
+        private Int32 perCount = 5000;                                  //每多少条一个线程进行解密
+        private List<Int32> dataIndexList = new List<int>();            //当前操作的数据Index
+        private Int32 dataCount = 0;                                    //需要处理的数据源总条数
 
-        private BigInteger bigIntegerEncrypt = 0;       //加密数据库字符串对应的十进制数
+        private BigInteger bigIntegerEncrypt = 0;              //加密数据库字符串对应的十进制数
+        private int passMod1 = 1;                              //秘钥取模数1
+        private int passMod2 = 1;                              //秘钥取模数2
+        private int passMod3 = 1;                              //秘钥取模数3
         private string inputTableName = string.Empty;          //要写入的表名称
         private DataTable dtDistination = null;                //要写入的表数据
         private List<DataRow> rowList = new List<DataRow>();   //所有个线程的DataRow汇总
@@ -226,6 +229,18 @@ namespace Tool.Main.Forms.BusForms
                     return;
                 }
                 bigIntegerEncrypt = BigInteger.Parse(BinaryHelper.StringToDecimal(sqlPassword));
+                //取秘钥后3位，如果为0，则定义为3
+                string bigStrEncrypt = bigIntegerEncrypt.ToString();
+                int passLen = bigStrEncrypt.Length;
+                passMod1 = Convert.ToInt32(bigStrEncrypt.Substring(passLen - 1, 1));
+                if (passMod1 == 0) passMod1 = 3;
+                if (passMod1 == 1) passMod1 = 5;
+                passMod2 = Convert.ToInt32(bigStrEncrypt.Substring(passLen - 2, 1));
+                if (passMod2 == 0) passMod2 = 3;
+                if (passMod2 == 1) passMod2 = 5;
+                passMod3 = Convert.ToInt32(bigStrEncrypt.Substring(passLen - 3, 1));
+                if (passMod3 == 0) passMod3 = 3;
+                if (passMod3 == 1) passMod3 = 5;
                 //写入数据表名称
                 inputTableName = tb_DataInput.Text.Trim();
                 //定义写入sql
@@ -281,6 +296,9 @@ namespace Tool.Main.Forms.BusForms
                 //开始处理定时任务！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
                 for (int perIndex = 0; perIndex < taskCount; perIndex++)
                 {
+                    //统计数据赋值
+                    dataIndexList.Add(0);
+                    //多线程
                     var midNumber = perIndex;
 #pragma warning disable CS4014 // 由于此调用不会等待，因此在调用完成前将继续执行当前方法
                     Task.Run(() => CoreFunction(strTempField, changeSchemesList, numbers[midNumber]));
@@ -299,6 +317,7 @@ namespace Tool.Main.Forms.BusForms
         private void CoreFunction(string strTempField, List<ChangeScheme> changeSchemesList, int perIndex)
         {
             StringBuilder sbTaks = new StringBuilder();
+            List<DataRow> taskRowList = new List<DataRow>();
             for (int per = 0; per < perCount; per++)
             {
                 int insertIndex = perIndex * perCount + per;
@@ -306,7 +325,7 @@ namespace Tool.Main.Forms.BusForms
 
                 #region 核心SQL拼接逻辑
                 DataRow dtRowSource = dtSource.Rows[insertIndex];
-                DataRow dtRowDistination = dtDistination.NewRow();
+                DataRow dtRowDistination = dtDistination.Clone().NewRow();
                 foreach (ChangeScheme changeScheme in changeSchemesList)
                 {
                     //数据信息
@@ -317,7 +336,14 @@ namespace Tool.Main.Forms.BusForms
                     }
                     else if (!string.IsNullOrEmpty(changeScheme.ConstField))
                     {
-                        trueValue = changeScheme.ConstField;
+                        if (changeScheme.ConstField == "GetDate()")
+                        {
+                            trueValue = dtBegin.ToShortTimeString();
+                        }
+                        else
+                        {
+                            trueValue = changeScheme.ConstField;
+                        }
                     }
                     else
                     {
@@ -334,23 +360,33 @@ namespace Tool.Main.Forms.BusForms
                         }
                         else
                         {
-                            BigInteger passwordValue = BigInteger.Parse(BinaryHelper.StringToDecimal(trueValue.ToString()));
-                            BigInteger sumValue = passwordValue + bigIntegerEncrypt;
-                            //Sqlserver 从数字/字符串转2进制：
-                            //数字是高位在前；字符串是低位在前；
-                            trueValue = sumValue.ToByteArray().Reverse().ToArray();
+                            string newSalary = string.Empty;
+                            //将字符串薪资转成整型
+                            int iSalary = Convert.ToInt32(float.Parse(trueValue.ToString()));
+                            //对秘钥mod值取3次模并插入：积,余数,余数,余数
+                            int pro1 = iSalary / passMod1;
+                            int remain1 = iSalary % passMod1;
+                            int pro2 = pro1 / passMod2;
+                            int remain2 = pro1 % passMod2;
+                            int pro3 = pro2 / passMod3;
+                            int remain3 = pro2 % passMod3;
+                            //拼接,固定存5位
+                            newSalary = pro3.ToString().PadLeft(5, '0') + "." + remain3.ToString().PadLeft(5, '0') + "." + remain2.ToString().PadLeft(5, '0') + "." + remain1.ToString().PadLeft(5, '0');
+                            trueValue = Encoding.ASCII.GetBytes(newSalary);
                         }
                     }
 
                     //添加字段值
                     dtRowDistination[changeScheme.ColumnName] = trueValue;
                 }
-                //添加数据行
-                rowList.Add(dtRowDistination);
-                //Log Index
-                dataIndex++;
                 #endregion
+
+                //添加数据行
+                taskRowList.Add(dtRowDistination);
+                //Log Index
+                dataIndexList[perIndex]++;
             }
+            rowList.AddRange(taskRowList);
         }
         #endregion
 
@@ -360,7 +396,7 @@ namespace Tool.Main.Forms.BusForms
             //结束重置所有全局标识对象
             logTimer.Stop();
             //数据条数清空
-            dataIndex = 0;
+            dataIndexList.Clear();
             dataCount = 0;
             //BlukCopy缓存清空
             rowList.Clear();
@@ -375,7 +411,8 @@ namespace Tool.Main.Forms.BusForms
         private void LogTimer_Tick(object? sender, EventArgs e)
         {
             //如果全部提交完成
-            if (dataIndex == dataCount)
+            int sumIndex = dataIndexList.ToList().Sum();
+            if (sumIndex == dataCount)
             {
                 //提交
                 SqlConnection con = (SqlConnection)dataHelper.Con();
@@ -401,7 +438,7 @@ namespace Tool.Main.Forms.BusForms
                         //结束重置所有全局标识对象
                         logTimer.Stop();
                         //数据条数清空
-                        dataIndex = 0;
+                        dataIndexList.Clear();
                         dataCount = 0;
                         //缓存清空
                         rowList.Clear();
@@ -419,7 +456,7 @@ namespace Tool.Main.Forms.BusForms
             }
             else
             {
-                WriteLog($"第{dataIndex}条数据拼接成功！------共{dataCount}条数据");
+                WriteLog($"第{sumIndex}条数据拼接成功！------共{dataCount}条数据");
                 if (errorMessage.ToString().Length > 0)
                 {
                     WriteLog(errorMessage.ToString());
