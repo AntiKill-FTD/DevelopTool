@@ -7,11 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tool.Business.Common;
 
 namespace Tool.Main.Forms.ComForms
 {
     public partial class StringHelper : Form
     {
+        private CryptHelper cryptHelper = new CryptHelper();
+
         public StringHelper()
         {
             InitializeComponent();
@@ -127,5 +130,66 @@ namespace Tool.Main.Forms.ComForms
         #endregion
 
         #endregion
+
+        #region Encrypt
+
+        #region 加密
+        private void btn_Encrypt_Encode_Click(object sender, EventArgs e)
+        {
+            cryptHelper.Key = this.tb_Encrypt_Key_En.Text;
+            cryptHelper.IV = this.tb_Encrypt_IV_En.Text;
+
+            string strDecode = this.tb_Encrypt_Decode.Text;
+            string strEncode = cryptHelper.EncryptString(strDecode);
+            this.lb_Encrypt_Encode.Text = strEncode;
+        }
+        #endregion
+
+        #region 解密
+        private void btn_Encrypt_Decode_Click(object sender, EventArgs e)
+        {
+            cryptHelper.Key = this.tb_Encrypt_Key_De.Text;
+            cryptHelper.IV = this.tb_Encrypt_IV_De.Text;
+
+            string strEncode = this.tb_Encrypt_Encode.Text;
+            string strDecode = cryptHelper.DecryptString(strEncode);
+            this.lb_Encrypt_Decode.Text = strDecode;
+        }
+        #endregion
+
+        #region 批量加密
+        private void btnMuti_EncryptEncode_Click(object sender, EventArgs e)
+        {
+            cryptHelper.Key = this.tb_Encrypt_Key_En.Text;
+            cryptHelper.IV = this.tb_Encrypt_IV_En.Text;
+
+            this.rtb_Encrypt_Distination.Clear();
+            string[] strEncodeList = this.rtb_Encrypt_Source.Text.Split('\n');
+            foreach (string str in strEncodeList)
+            {
+                string strDecode = cryptHelper.EncryptString(str);
+                this.rtb_Encrypt_Distination.AppendText(strDecode + "\n");
+            }
+        }
+        #endregion
+
+        #region 批量解密
+        private void btnMuti_EncryptDecode_Click(object sender, EventArgs e)
+        {
+            cryptHelper.Key = this.tb_Encrypt_Key_De.Text;
+            cryptHelper.IV = this.tb_Encrypt_IV_De.Text;
+
+            this.rtb_Encrypt_Distination.Clear();
+            string[] strEncodeList = this.rtb_Encrypt_Source.Text.Split('\n');
+            foreach (string str in strEncodeList)
+            {
+                string strDecode = cryptHelper.DecryptString(str);
+                this.rtb_Encrypt_Distination.AppendText(strDecode + "\n");
+            }
+        }
+        #endregion
+
+        #endregion
+
     }
 }
