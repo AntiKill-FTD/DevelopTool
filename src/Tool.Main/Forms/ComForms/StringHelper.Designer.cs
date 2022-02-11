@@ -43,6 +43,9 @@
             this.tlp_StringList_Operate_AddEndChar = new System.Windows.Forms.TableLayoutPanel();
             this.tb_StringList_AddEndChar = new System.Windows.Forms.TextBox();
             this.btn_StringList_AddEndChar = new System.Windows.Forms.Button();
+            this.tlp_StringList_Operate_AddBeginChar = new System.Windows.Forms.TableLayoutPanel();
+            this.tb_StringList_AddBeginChar = new System.Windows.Forms.TextBox();
+            this.btn_StringList_AddBeginChar = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -53,6 +56,7 @@
             this.tlp_StringList_Operate_SplitChar.SuspendLayout();
             this.tlp_StringList_Operate_AddBEChar.SuspendLayout();
             this.tlp_StringList_Operate_AddEndChar.SuspendLayout();
+            this.tlp_StringList_Operate_AddBeginChar.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -124,7 +128,8 @@
             this.tlp_StringList_Operate.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlp_StringList_Operate.Controls.Add(this.tlp_StringList_Operate_SplitChar, 0, 0);
             this.tlp_StringList_Operate.Controls.Add(this.tlp_StringList_Operate_AddBEChar, 0, 1);
-            this.tlp_StringList_Operate.Controls.Add(this.tlp_StringList_Operate_AddEndChar, 0, 2);
+            this.tlp_StringList_Operate.Controls.Add(this.tlp_StringList_Operate_AddEndChar, 0, 3);
+            this.tlp_StringList_Operate.Controls.Add(this.tlp_StringList_Operate_AddBeginChar, 0, 2);
             this.tlp_StringList_Operate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlp_StringList_Operate.Location = new System.Drawing.Point(256, 3);
             this.tlp_StringList_Operate.Name = "tlp_StringList_Operate";
@@ -226,7 +231,7 @@
             this.tlp_StringList_Operate_AddEndChar.Controls.Add(this.tb_StringList_AddEndChar, 0, 0);
             this.tlp_StringList_Operate_AddEndChar.Controls.Add(this.btn_StringList_AddEndChar, 1, 0);
             this.tlp_StringList_Operate_AddEndChar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_StringList_Operate_AddEndChar.Location = new System.Drawing.Point(3, 79);
+            this.tlp_StringList_Operate_AddEndChar.Location = new System.Drawing.Point(3, 117);
             this.tlp_StringList_Operate_AddEndChar.Name = "tlp_StringList_Operate_AddEndChar";
             this.tlp_StringList_Operate_AddEndChar.RowCount = 1;
             this.tlp_StringList_Operate_AddEndChar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -255,6 +260,44 @@
             this.btn_StringList_AddEndChar.Text = "结尾字符";
             this.btn_StringList_AddEndChar.UseVisualStyleBackColor = true;
             this.btn_StringList_AddEndChar.Click += new System.EventHandler(this.btn_StringList_AddEndChar_Click);
+            // 
+            // tlp_StringList_Operate_AddBeginChar
+            // 
+            this.tlp_StringList_Operate_AddBeginChar.ColumnCount = 2;
+            this.tlp_StringList_Operate_AddBeginChar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33F));
+            this.tlp_StringList_Operate_AddBeginChar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.67F));
+            this.tlp_StringList_Operate_AddBeginChar.Controls.Add(this.tb_StringList_AddBeginChar, 0, 0);
+            this.tlp_StringList_Operate_AddBeginChar.Controls.Add(this.btn_StringList_AddBeginChar, 1, 0);
+            this.tlp_StringList_Operate_AddBeginChar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlp_StringList_Operate_AddBeginChar.Location = new System.Drawing.Point(3, 79);
+            this.tlp_StringList_Operate_AddBeginChar.Name = "tlp_StringList_Operate_AddBeginChar";
+            this.tlp_StringList_Operate_AddBeginChar.RowCount = 1;
+            this.tlp_StringList_Operate_AddBeginChar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlp_StringList_Operate_AddBeginChar.Size = new System.Drawing.Size(114, 32);
+            this.tlp_StringList_Operate_AddBeginChar.TabIndex = 3;
+            // 
+            // tb_StringList_AddBeginChar
+            // 
+            this.tb_StringList_AddBeginChar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_StringList_AddBeginChar.Location = new System.Drawing.Point(3, 3);
+            this.tb_StringList_AddBeginChar.Name = "tb_StringList_AddBeginChar";
+            this.tb_StringList_AddBeginChar.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.tb_StringList_AddBeginChar.Size = new System.Drawing.Size(31, 27);
+            this.tb_StringList_AddBeginChar.TabIndex = 4;
+            this.tb_StringList_AddBeginChar.Text = ",";
+            this.tb_StringList_AddBeginChar.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // btn_StringList_AddBeginChar
+            // 
+            this.btn_StringList_AddBeginChar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_StringList_AddBeginChar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_StringList_AddBeginChar.Location = new System.Drawing.Point(40, 3);
+            this.btn_StringList_AddBeginChar.Name = "btn_StringList_AddBeginChar";
+            this.btn_StringList_AddBeginChar.Size = new System.Drawing.Size(71, 26);
+            this.btn_StringList_AddBeginChar.TabIndex = 5;
+            this.btn_StringList_AddBeginChar.Text = "开始字符";
+            this.btn_StringList_AddBeginChar.UseVisualStyleBackColor = true;
+            this.btn_StringList_AddBeginChar.Click += new System.EventHandler(this.btn_StringList_AddBeginChar_Click);
             // 
             // panel2
             // 
@@ -301,6 +344,8 @@
             this.tlp_StringList_Operate_AddBEChar.PerformLayout();
             this.tlp_StringList_Operate_AddEndChar.ResumeLayout(false);
             this.tlp_StringList_Operate_AddEndChar.PerformLayout();
+            this.tlp_StringList_Operate_AddBeginChar.ResumeLayout(false);
+            this.tlp_StringList_Operate_AddBeginChar.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -325,5 +370,8 @@
         private TableLayoutPanel tlp_StringList_Operate_AddEndChar;
         private TextBox tb_StringList_AddEndChar;
         private Button btn_StringList_AddEndChar;
+        private TableLayoutPanel tlp_StringList_Operate_AddBeginChar;
+        private TextBox tb_StringList_AddBeginChar;
+        private Button btn_StringList_AddBeginChar;
     }
 }

@@ -68,6 +68,35 @@ namespace Tool.Main.Forms.ComForms
         }
         #endregion
 
+        #region 开始字符
+        private void btn_StringList_AddBeginChar_Click(object sender, EventArgs e)
+        {
+            //获取  【开始字符串】   和  【目标字符串】
+            string addString = this.tb_StringList_AddBeginChar.Text;
+            int addLength = addString.Length;
+            string distinaString = this.rtb_StringList_Distination.Text;
+            //按照换行取出目标字符串
+            List<string> disListOld = distinaString.Split('\n').ToList();
+            //循环判断每个字符串尾部是否存在需要添加的字符串，如果存在则删除，不存在则添加
+            List<string> disListNew = new List<string>();
+            disListOld.ForEach(item =>
+            {
+                if (item.StartsWith(addString))
+                {
+                    item = item.Substring(addLength);
+                }
+                else
+                {
+                    item = addString + item;
+                }
+                disListNew.Add(item.Trim());
+            });
+            //换行拼接
+            string newDistination = string.Join('\n', disListNew);
+            this.rtb_StringList_Distination.Text = newDistination;
+        }
+        #endregion
+
         #region 结尾字符
         private void btn_StringList_AddEndChar_Click(object sender, EventArgs e)
         {
