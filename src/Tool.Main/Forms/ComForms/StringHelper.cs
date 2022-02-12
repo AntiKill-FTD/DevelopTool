@@ -191,5 +191,60 @@ namespace Tool.Main.Forms.ComForms
 
         #endregion
 
+        #region Dichotomy(二分法)
+
+        #region 获取上半部分
+        private void btn_Dichotomy_UpHalf_Click(object sender, EventArgs e)
+        {
+            //获取【源字符串】
+            string sourceString = this.rtb_Dichotomy_Source.Text;
+            //按照换行取出目标字符串
+            List<string> sourceList = sourceString.Split('\n').ToList();
+            //获取行数
+            int count = sourceList.Count;
+            //获取一半的数量，增位：譬如5的一半取3
+            int halfCount = (int)Math.Ceiling(count / 2.0);
+            //定义新的集合存储一半的量
+            List<string> newSourceList = new List<string>();
+            for (int i = 0; i < halfCount; i++)
+            {
+                newSourceList.Add(sourceList[i]);
+            }
+            //输出
+            this.rtb_Dichotomy_Distination.Text = String.Join('\n', newSourceList);
+        }
+        #endregion
+
+        #region 获取下半部分
+        private void btn_Dichotomy_DownHalf_Click(object sender, EventArgs e)
+        {
+            //获取【源字符串】
+            string sourceString = this.rtb_Dichotomy_Source.Text;
+            //按照换行取出目标字符串
+            List<string> sourceList = sourceString.Split('\n').ToList();
+            //获取行数
+            int count = sourceList.Count;
+            //获取一半的数量，减位：譬如5的一半取4到5
+            int halfCount = (int)Math.Ceiling(count / 2.0);
+            //定义新的集合存储一半的量
+            List<string> newSourceList = new List<string>();
+            for (int i = halfCount; i < count; i++)
+            {
+                newSourceList.Add(sourceList[i]);
+            }
+            //输出
+            this.rtb_Dichotomy_Distination.Text = String.Join('\n', newSourceList);
+        }
+        #endregion
+
+        #region 回写
+        private void btn_Dichotomy_WriteBack_Click(object sender, EventArgs e)
+        {
+            this.rtb_Dichotomy_Source.Text = this.rtb_Dichotomy_Distination.Text;
+        }
+        #endregion
+
+        #endregion
+
     }
 }

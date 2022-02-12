@@ -70,6 +70,13 @@
             this.lbl_Encrypt_Des1 = new System.Windows.Forms.Label();
             this.lbl_Encrypt_Des2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.tlp_Dichotomy = new System.Windows.Forms.TableLayoutPanel();
+            this.rtb_Dichotomy_Source = new System.Windows.Forms.RichTextBox();
+            this.rtb_Dichotomy_Distination = new System.Windows.Forms.RichTextBox();
+            this.tlp_Dichotomy_Operate = new System.Windows.Forms.TableLayoutPanel();
+            this.btn_Dichotomy_UpHalf = new System.Windows.Forms.Button();
+            this.btn_Dichotomy_DownHalf = new System.Windows.Forms.Button();
+            this.btn_Dichotomy_WriteBack = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.mainPanel.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -84,6 +91,9 @@
             this.tlp_Encrypt_PlButton.SuspendLayout();
             this.tlp_Encrypt_Key.SuspendLayout();
             this.tlp_Encrypt_IV.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.tlp_Dichotomy.SuspendLayout();
+            this.tlp_Dichotomy_Operate.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -602,11 +612,107 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.Lavender;
+            this.panel3.Controls.Add(this.tlp_Dichotomy);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 403);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(634, 395);
             this.panel3.TabIndex = 2;
+            // 
+            // tlp_Dichotomy
+            // 
+            this.tlp_Dichotomy.ColumnCount = 3;
+            this.tlp_Dichotomy.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tlp_Dichotomy.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tlp_Dichotomy.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tlp_Dichotomy.Controls.Add(this.rtb_Dichotomy_Source, 0, 0);
+            this.tlp_Dichotomy.Controls.Add(this.rtb_Dichotomy_Distination, 2, 0);
+            this.tlp_Dichotomy.Controls.Add(this.tlp_Dichotomy_Operate, 1, 0);
+            this.tlp_Dichotomy.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlp_Dichotomy.Location = new System.Drawing.Point(0, 0);
+            this.tlp_Dichotomy.Name = "tlp_Dichotomy";
+            this.tlp_Dichotomy.RowCount = 1;
+            this.tlp_Dichotomy.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlp_Dichotomy.Size = new System.Drawing.Size(634, 395);
+            this.tlp_Dichotomy.TabIndex = 0;
+            // 
+            // rtb_Dichotomy_Source
+            // 
+            this.rtb_Dichotomy_Source.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtb_Dichotomy_Source.Location = new System.Drawing.Point(3, 3);
+            this.rtb_Dichotomy_Source.Name = "rtb_Dichotomy_Source";
+            this.rtb_Dichotomy_Source.Size = new System.Drawing.Size(247, 389);
+            this.rtb_Dichotomy_Source.TabIndex = 0;
+            this.rtb_Dichotomy_Source.Text = "";
+            // 
+            // rtb_Dichotomy_Distination
+            // 
+            this.rtb_Dichotomy_Distination.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtb_Dichotomy_Distination.Location = new System.Drawing.Point(382, 3);
+            this.rtb_Dichotomy_Distination.Name = "rtb_Dichotomy_Distination";
+            this.rtb_Dichotomy_Distination.Size = new System.Drawing.Size(249, 389);
+            this.rtb_Dichotomy_Distination.TabIndex = 1;
+            this.rtb_Dichotomy_Distination.Text = "";
+            // 
+            // tlp_Dichotomy_Operate
+            // 
+            this.tlp_Dichotomy_Operate.ColumnCount = 1;
+            this.tlp_Dichotomy_Operate.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlp_Dichotomy_Operate.Controls.Add(this.btn_Dichotomy_UpHalf, 0, 0);
+            this.tlp_Dichotomy_Operate.Controls.Add(this.btn_Dichotomy_DownHalf, 0, 1);
+            this.tlp_Dichotomy_Operate.Controls.Add(this.btn_Dichotomy_WriteBack, 0, 2);
+            this.tlp_Dichotomy_Operate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlp_Dichotomy_Operate.Location = new System.Drawing.Point(256, 3);
+            this.tlp_Dichotomy_Operate.Name = "tlp_Dichotomy_Operate";
+            this.tlp_Dichotomy_Operate.RowCount = 10;
+            this.tlp_Dichotomy_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tlp_Dichotomy_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tlp_Dichotomy_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tlp_Dichotomy_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tlp_Dichotomy_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tlp_Dichotomy_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tlp_Dichotomy_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tlp_Dichotomy_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tlp_Dichotomy_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tlp_Dichotomy_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tlp_Dichotomy_Operate.Size = new System.Drawing.Size(120, 389);
+            this.tlp_Dichotomy_Operate.TabIndex = 2;
+            // 
+            // btn_Dichotomy_UpHalf
+            // 
+            this.btn_Dichotomy_UpHalf.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_Dichotomy_UpHalf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Dichotomy_UpHalf.Location = new System.Drawing.Point(3, 3);
+            this.btn_Dichotomy_UpHalf.Name = "btn_Dichotomy_UpHalf";
+            this.btn_Dichotomy_UpHalf.Size = new System.Drawing.Size(114, 32);
+            this.btn_Dichotomy_UpHalf.TabIndex = 3;
+            this.btn_Dichotomy_UpHalf.Text = "上半部分->";
+            this.btn_Dichotomy_UpHalf.UseVisualStyleBackColor = true;
+            this.btn_Dichotomy_UpHalf.Click += new System.EventHandler(this.btn_Dichotomy_UpHalf_Click);
+            // 
+            // btn_Dichotomy_DownHalf
+            // 
+            this.btn_Dichotomy_DownHalf.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_Dichotomy_DownHalf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Dichotomy_DownHalf.Location = new System.Drawing.Point(3, 41);
+            this.btn_Dichotomy_DownHalf.Name = "btn_Dichotomy_DownHalf";
+            this.btn_Dichotomy_DownHalf.Size = new System.Drawing.Size(114, 32);
+            this.btn_Dichotomy_DownHalf.TabIndex = 4;
+            this.btn_Dichotomy_DownHalf.Text = "下半部分->";
+            this.btn_Dichotomy_DownHalf.UseVisualStyleBackColor = true;
+            this.btn_Dichotomy_DownHalf.Click += new System.EventHandler(this.btn_Dichotomy_DownHalf_Click);
+            // 
+            // btn_Dichotomy_WriteBack
+            // 
+            this.btn_Dichotomy_WriteBack.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_Dichotomy_WriteBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Dichotomy_WriteBack.Location = new System.Drawing.Point(3, 79);
+            this.btn_Dichotomy_WriteBack.Name = "btn_Dichotomy_WriteBack";
+            this.btn_Dichotomy_WriteBack.Size = new System.Drawing.Size(114, 32);
+            this.btn_Dichotomy_WriteBack.TabIndex = 5;
+            this.btn_Dichotomy_WriteBack.Text = "<-回写";
+            this.btn_Dichotomy_WriteBack.UseVisualStyleBackColor = true;
+            this.btn_Dichotomy_WriteBack.Click += new System.EventHandler(this.btn_Dichotomy_WriteBack_Click);
             // 
             // panel4
             // 
@@ -645,6 +751,9 @@
             this.tlp_Encrypt_Key.PerformLayout();
             this.tlp_Encrypt_IV.ResumeLayout(false);
             this.tlp_Encrypt_IV.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.tlp_Dichotomy.ResumeLayout(false);
+            this.tlp_Dichotomy_Operate.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -694,5 +803,12 @@
         private Button btnMuti_EncryptEncode;
         private Label lbl_Encrypt_Des1;
         private Label lbl_Encrypt_Des2;
+        private TableLayoutPanel tlp_Dichotomy;
+        private RichTextBox rtb_Dichotomy_Source;
+        private RichTextBox rtb_Dichotomy_Distination;
+        private TableLayoutPanel tlp_Dichotomy_Operate;
+        private Button btn_Dichotomy_UpHalf;
+        private Button btn_Dichotomy_DownHalf;
+        private Button btn_Dichotomy_WriteBack;
     }
 }
