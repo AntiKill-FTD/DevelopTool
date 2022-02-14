@@ -161,7 +161,7 @@
             this.tb_LoginAccount.Name = "tb_LoginAccount";
             this.tb_LoginAccount.Size = new System.Drawing.Size(154, 27);
             this.tb_LoginAccount.TabIndex = 1;
-            this.tb_LoginAccount.Text = "ipsa";
+            this.tb_LoginAccount.Text = "hruser";
             // 
             // label2
             // 
@@ -181,7 +181,7 @@
             this.tb_LoginPassword.Name = "tb_LoginPassword";
             this.tb_LoginPassword.Size = new System.Drawing.Size(154, 27);
             this.tb_LoginPassword.TabIndex = 1;
-            this.tb_LoginPassword.Text = "ipsa@20200705";
+            this.tb_LoginPassword.Text = "rmohr123@abc";
             // 
             // label3
             // 

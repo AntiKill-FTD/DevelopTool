@@ -363,7 +363,9 @@ namespace Tool.Main.Forms.BusForms
                         {
                             string newSalary = string.Empty;
                             //将字符串薪资转成整型
-                            int iSalary = Convert.ToInt32(float.Parse(trueValue.ToString()));
+                            float fSalary = 0;
+                            float.TryParse(trueValue.ToString(), out fSalary);
+                            int iSalary = (int)fSalary;
                             //对秘钥mod值取3次模并插入：积,余数,余数,余数
                             int pro1 = iSalary / passMod1;
                             int remain1 = iSalary % passMod1;
