@@ -77,7 +77,7 @@ namespace Tool.Main.Forms.MainForms
         #region 新增
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            MenuSetChild menuSetChild = new MenuSetChild(ChildMenuType.Add);
+            MenuSetChild menuSetChild = new MenuSetChild(ChildMenuType.Add, this.dataViewMain.SqlType);
             menuSetChild.ShowDialog();
         }
         #endregion
@@ -85,7 +85,7 @@ namespace Tool.Main.Forms.MainForms
         #region 修改
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            MenuSetChild menuSetChild = new MenuSetChild(ChildMenuType.Edit);
+            MenuSetChild menuSetChild = new MenuSetChild(ChildMenuType.Edit, this.dataViewMain.SqlType);
             menuSetChild.ShowDialog();
         }
         #endregion
