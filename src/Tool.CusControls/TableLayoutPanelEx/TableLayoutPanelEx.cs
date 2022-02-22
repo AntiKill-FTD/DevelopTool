@@ -13,6 +13,7 @@ namespace Tool.CusControls.TableLayoutPanelEx
         {
             //填充
             this.Dock = DockStyle.Fill;
+            this.BackColor = Color.Azure;
         }
         #endregion
 

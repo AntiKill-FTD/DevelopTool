@@ -77,9 +77,7 @@ namespace Tool.Main.Forms.MainForms
         #region 新增
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            //MenuSetChild menuSetChild = new MenuSetChild(ChildMenuType.Add);
-            //menuSetChild.ShowDialog();
-            MenuSetChild menuSetChild = new MenuSetChild();
+            MenuSetChild menuSetChild = new MenuSetChild(ChildMenuType.Add);
             menuSetChild.ShowDialog();
         }
         #endregion
@@ -87,8 +85,8 @@ namespace Tool.Main.Forms.MainForms
         #region 修改
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            //MenuSetChild menuSetChild = new MenuSetChild(ChildMenuType.Edit);
-            //menuSetChild.ShowDialog();
+            MenuSetChild menuSetChild = new MenuSetChild(ChildMenuType.Edit);
+            menuSetChild.ShowDialog();
         }
         #endregion
 
@@ -96,7 +94,15 @@ namespace Tool.Main.Forms.MainForms
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            DataGridViewRow[] rows = this.dataViewMain.GetCheckRows();
+            if (rows.Length > 0)
+            {
 
+            }
+            else
+            {
+                MessageBox.Show("请选择需要删除的菜单！", "提醒");
+            }
         }
         #endregion
 

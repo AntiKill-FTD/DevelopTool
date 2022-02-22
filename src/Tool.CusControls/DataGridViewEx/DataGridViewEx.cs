@@ -148,6 +148,36 @@ namespace Tool.CusControls.DataGridViewEx
             }
         }
 
+        public DataGridViewRow[] GetSelectRows()
+        {
+            List<DataGridViewRow> rows = new List<DataGridViewRow>();
+            foreach (DataGridViewRow r in _dv.SelectedRows)
+            {
+                if (r.Selected)
+                {
+                    rows.Add(r);
+                }
+            }
+            return rows.ToArray();
+        }
+
+        public DataGridViewRow[] GetCheckRows()
+        {
+            List<DataGridViewRow> rows = new List<DataGridViewRow>();
+            if (this.dataGridView1.Columns[0].GetType() == typeof(DataGridViewCheckBoxColumnEx))
+            {
+                foreach (DataGridViewRow r in _dv.Rows)
+                {
+                    if (((DataGridViewCheckBoxCellEx)r.Cells[0]).Checked)
+                    {
+                        rows.Add(r);
+                    }
+                }
+            }
+
+            return rows.ToArray();
+        }
+
         /// <summary>
         /// 添加列
         /// </summary>
