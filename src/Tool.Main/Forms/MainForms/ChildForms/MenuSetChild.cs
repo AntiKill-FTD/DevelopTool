@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -93,7 +94,24 @@ namespace Tool.Main.Forms.MainForms.ChildForms
         #region 获取程序集
         private void GetProgram()
         {
-
+            //从dll文件中获取Assembly对象
+            Assembly assembly = Assembly.Load("Tool.Main");
+            //获取所有的类
+            Type[] types = assembly.GetExportedTypes();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Name");
+            dt.Columns.Add("Value");
+            foreach (Type type in types)
+            {
+                DataRow dr = dt.NewRow();
+                dr["Name"] = type.Name;
+                dr["Value"] = type.Namespace;
+                dt.Rows.Add(dr);
+            }
+            //绑定
+            this.cbx_MenuProgram.DataSource = dt;
+            this.cbx_MenuProgram.DisplayMember = "Name";
+            this.cbx_MenuProgram.ValueMember = "Value";
         }
         #endregion
 
