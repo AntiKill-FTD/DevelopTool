@@ -502,7 +502,7 @@ namespace Tool.CusControls.DataGridViewEx
                 //设置列
                 if (value)
                 {
-                    AddChkCol_Private(CheckBoxName.FirstCheckColumn, 0, true, "");
+                    AddChkCol_Private(CheckBoxName.FirstCheckColumn, 0, false, "");
                 }
                 else
                 {

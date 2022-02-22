@@ -37,11 +37,18 @@
             this.tlpButton = new System.Windows.Forms.TableLayoutPanel();
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.panelGrid = new System.Windows.Forms.Panel();
             this.dataViewMain = new Tool.CusControls.DataGridViewEx.DataGridViewEx();
             this.panelSearch.SuspendLayout();
             this.tlpSearch.SuspendLayout();
             this.tlpButton.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.panelGrid.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,7 +83,9 @@
             this.tlpSearch.Controls.Add(this.labMenuName, 4, 1);
             this.tlpSearch.Controls.Add(this.txtMenuCode, 2, 1);
             this.tlpSearch.Controls.Add(this.txtMenuName, 5, 1);
-            this.tlpSearch.Controls.Add(this.tlpButton, 10, 2);
+            this.tlpSearch.Controls.Add(this.tlpButton, 8, 2);
+            this.tlpSearch.Controls.Add(this.tableLayoutPanel1, 10, 2);
+            this.tlpSearch.Controls.Add(this.tableLayoutPanel2, 11, 2);
             this.tlpSearch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpSearch.Location = new System.Drawing.Point(0, 0);
             this.tlpSearch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -137,7 +146,7 @@
             this.tlpButton.Controls.Add(this.btnSearch, 0, 0);
             this.tlpButton.Controls.Add(this.btnReset, 1, 0);
             this.tlpButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpButton.Location = new System.Drawing.Point(1051, 65);
+            this.tlpButton.Location = new System.Drawing.Point(869, 65);
             this.tlpButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tlpButton.Name = "tlpButton";
             this.tlpButton.RowCount = 1;
@@ -170,6 +179,74 @@
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.Reset_Click);
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.btnEdit, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnAdd, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(1051, 65);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(154, 43);
+            this.tableLayoutPanel1.TabIndex = 6;
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnEdit.Location = new System.Drawing.Point(80, 4);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(71, 35);
+            this.btnEdit.TabIndex = 1;
+            this.btnEdit.Text = "修改";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnAdd.Location = new System.Drawing.Point(3, 4);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(71, 35);
+            this.btnAdd.TabIndex = 0;
+            this.btnAdd.Text = "新增";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.btnDelete, 0, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(1211, 65);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(154, 43);
+            this.tableLayoutPanel2.TabIndex = 7;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnDelete.Location = new System.Drawing.Point(3, 4);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(71, 35);
+            this.btnDelete.TabIndex = 1;
+            this.btnDelete.Text = "删除";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // panelGrid
             // 
             this.panelGrid.Controls.Add(this.dataViewMain);
@@ -188,7 +265,7 @@
             this.dataViewMain.DvDataTable = null;
             this.dataViewMain.DvSelectionMode = System.Windows.Forms.DataGridViewSelectionMode.RowHeaderSelect;
             this.dataViewMain.IsPage = true;
-            this.dataViewMain.IsShowFirstCheckBox = false;
+            this.dataViewMain.IsShowFirstCheckBox = true;
             this.dataViewMain.Location = new System.Drawing.Point(0, 0);
             this.dataViewMain.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataViewMain.Name = "dataViewMain";
@@ -211,6 +288,8 @@
             this.tlpSearch.ResumeLayout(false);
             this.tlpSearch.PerformLayout();
             this.tlpButton.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.panelGrid.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -229,5 +308,10 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnReset;
         private CusControls.DataGridViewEx.DataGridViewEx dataViewMain;
+        private TableLayoutPanel tableLayoutPanel1;
+        private Button btnAdd;
+        private Button btnDelete;
+        private Button btnEdit;
+        private TableLayoutPanel tableLayoutPanel2;
     }
 }
