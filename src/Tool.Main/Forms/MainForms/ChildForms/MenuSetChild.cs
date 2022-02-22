@@ -105,8 +105,10 @@ namespace Tool.Main.Forms.MainForms.ChildForms
         //父级菜单改变
         private void cbx_ParentName_SelectedValueChanged(object sender, EventArgs e)
         {
+            //默认值
             this.tb_ParentCode.Text = String.Empty;
-            this.tb_ParentLevel.Text = String.Empty;
+            this.tb_ParentLevel.Text = "-1";
+            //赋值
             if (this.cbx_ParentName.SelectedValue != null)
             {
                 string codeAndLevel = this.cbx_ParentName.SelectedValue.ToString();
@@ -117,6 +119,9 @@ namespace Tool.Main.Forms.MainForms.ChildForms
                     this.tb_ParentLevel.Text = clList[1];
                 }
             }
+            //当前菜单编号赋值
+            string parentCode = this.tb_ParentCode.Text;
+            this.tb_MenuCode.Text = String.IsNullOrEmpty(parentCode) ? "01" : parentCode + ".01";
         }
         #endregion
     }
