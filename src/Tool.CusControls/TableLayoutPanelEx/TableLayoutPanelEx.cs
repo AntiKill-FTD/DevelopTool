@@ -89,9 +89,21 @@ namespace Tool.CusControls.TableLayoutPanelEx
                 int sumWidth = 0;
                 sumWidth += this._newColumnCount * 300;
                 sumWidth += 20;
-                this.Parent.MinimumSize = new System.Drawing.Size(sumWidth + 20, sumHeight + 45);
+                this.Parent.Size = new System.Drawing.Size(sumWidth + 20, sumHeight + 45);
                 this.MinimumSize = new System.Drawing.Size(sumWidth, sumHeight);
             }
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            //如果行和列长度都是2，设置成 行15 列3
+            if (this.RowCount == 2 && this.ColumnCount == 2)
+            {
+                this.NewRowCount = 15;
+                this.NewColumnCount = 3;
+            }
+            //重绘
+            base.OnPaint(e);
         }
     }
 }
