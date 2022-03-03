@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+﻿using System.Data;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using Tool.CusControls.DataGridViewEx;
 using Tool.Data.DataHelper;
 using Tool.Data.SqlConfig;
@@ -26,7 +18,11 @@ namespace Tool.Main.Forms.MainForms.ChildForms
             //注入
             _dataHelper = Program.ServiceProvider.GetService(typeof(ICommonDataHelper)) as ICommonDataHelper;
 
-            //更改标题
+            //初始化控件绑定
+            GetParentMenu();
+            GetProgram();
+
+            //更改标题，绑定数据
             _sqlType = sqlType;
             if (type == ChildMenuType.Add)
             {
@@ -35,10 +31,8 @@ namespace Tool.Main.Forms.MainForms.ChildForms
             else if (type == ChildMenuType.Edit)
             {
                 this.Text = "编辑菜单";
+
             }
-            //初始化查询
-            GetParentMenu();
-            GetProgram();
         }
 
         #region 按钮

@@ -85,6 +85,16 @@ namespace Tool.Main.Forms.MainForms
         #region 修改
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            DataGridViewRow[] rows = this.dataViewMain.GetCheckRows();
+            if (rows.Length == 1)
+            {
+
+            }
+            else
+            {
+                MessageBox.Show("请选择需要删除的菜单,仅可选择一条！", "提醒");
+            }
+
             MenuSetChild menuSetChild = new MenuSetChild(ChildMenuType.Edit, this.dataViewMain.SqlType);
             menuSetChild.ShowDialog();
         }
