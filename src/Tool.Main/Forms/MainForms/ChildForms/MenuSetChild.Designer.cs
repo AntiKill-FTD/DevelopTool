@@ -114,6 +114,7 @@
             // 
             this.cbx_MenuProgram.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbx_MenuProgram.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbx_MenuProgram.DropDownWidth = 500;
             this.cbx_MenuProgram.FormattingEnabled = true;
             this.cbx_MenuProgram.Location = new System.Drawing.Point(734, 83);
             this.cbx_MenuProgram.Name = "cbx_MenuProgram";

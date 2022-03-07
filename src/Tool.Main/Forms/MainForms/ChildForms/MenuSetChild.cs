@@ -24,6 +24,7 @@ namespace Tool.Main.Forms.MainForms.ChildForms
             GetParentMenu();
             GetProgram();
 
+            //更新菜单、修改数据绑定
             if (type == ChildMenuType.Add)
             {
                 this.Text = "新增菜单";
@@ -31,6 +32,7 @@ namespace Tool.Main.Forms.MainForms.ChildForms
             else if (type == ChildMenuType.Edit)
             {
                 this.Text = "编辑菜单";
+                BindModifyData();
 
             }
         }
@@ -98,8 +100,8 @@ namespace Tool.Main.Forms.MainForms.ChildForms
             foreach (Type type in types)
             {
                 DataRow dr = dt.NewRow();
-                dr["Name"] = type.Name;
-                dr["Value"] = type.Namespace;
+                dr["Name"] = type.FullName;
+                dr["Value"] = "Tool.Main" + " | " + type.Namespace + "|" + type.Name;
                 dt.Rows.Add(dr);
             }
             //绑定
@@ -108,6 +110,11 @@ namespace Tool.Main.Forms.MainForms.ChildForms
             this.cbx_MenuProgram.ValueMember = "Value";
         }
         #endregion
+
+        private void BindModifyData()
+        {
+
+        }
 
         #endregion
 
