@@ -28,8 +28,11 @@ namespace Tool.CusControls.TableLayoutPanelEx
             get { return this._newRowCount; }
             set
             {
-                this._newRowCount = value;
-                SetRowCount(value);
+                if (this._newRowCount != value)
+                {
+                    this._newRowCount = value;
+                    SetRowCount(value);
+                }
             }
         }
 
@@ -38,8 +41,11 @@ namespace Tool.CusControls.TableLayoutPanelEx
             get { return this._newColumnCount; }
             set
             {
-                this._newColumnCount = value;
-                SetColumnCount(value);
+                if (this._newColumnCount != value)
+                {
+                    this._newColumnCount = value;
+                    SetColumnCount(value);
+                }
             }
         }
         #endregion
