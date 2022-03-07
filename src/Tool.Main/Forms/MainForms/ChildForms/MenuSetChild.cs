@@ -17,13 +17,13 @@ namespace Tool.Main.Forms.MainForms.ChildForms
             InitializeComponent();
             //注入
             _dataHelper = Program.ServiceProvider.GetService(typeof(ICommonDataHelper)) as ICommonDataHelper;
+            //更改标题，绑定数据
+            _sqlType = sqlType;
 
             //初始化控件绑定
             GetParentMenu();
             GetProgram();
 
-            //更改标题，绑定数据
-            _sqlType = sqlType;
             if (type == ChildMenuType.Add)
             {
                 this.Text = "新增菜单";
