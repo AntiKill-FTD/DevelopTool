@@ -3,6 +3,7 @@ using System.Reflection;
 using Tool.CusControls.DataGridViewEx;
 using Tool.Data.DataHelper;
 using Tool.Data.SqlConfig;
+using Tool.IService.Model.Sys;
 using Tool.Service.Common;
 
 namespace Tool.Main.Forms.MainForms.ChildForms
@@ -12,7 +13,7 @@ namespace Tool.Main.Forms.MainForms.ChildForms
         private EnumSqlType _sqlType;
         private ICommonDataHelper _dataHelper;
 
-        public MenuSetChild(ChildMenuType type, EnumSqlType sqlType)
+        public MenuSetChild(ChildMenuType type, EnumSqlType sqlType, Menu menu = null)
         {
             InitializeComponent();
             //注入
@@ -32,8 +33,7 @@ namespace Tool.Main.Forms.MainForms.ChildForms
             else if (type == ChildMenuType.Edit)
             {
                 this.Text = "编辑菜单";
-                BindModifyData();
-
+                BindModifyData(menu);
             }
         }
 
@@ -111,10 +111,25 @@ namespace Tool.Main.Forms.MainForms.ChildForms
         }
         #endregion
 
-        private void BindModifyData()
+        #region 绑定编辑数据
+        private void BindModifyData(Menu menu)
         {
+            this.lbl_ID.Text = menu.Id.ToString();
 
+            int level = menu.Level - 1;
+            this.tb_ParentCode.Text = menu.ParentCode;
+            this.cbx_ParentName.SelectedValue = menu.ParentCode + "///" + level.ToString();
+            this.tb_ParentLevel.Text = level.ToString();
+
+            string assembly = menu.Assembly;
+            string nameSpace = menu.NameSpace;
+            string entityName = menu.EntityName;
+            string fullName = assembly + " | " + nameSpace + "|" + entityName;
+            this.tb_MenuCode.Text = menu.MenuCode;
+            this.tb_MenuName.Text = menu.MenuName;
+            this.cbx_MenuProgram.SelectedValue = fullName;
         }
+        #endregion
 
         #endregion
 

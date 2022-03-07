@@ -1,6 +1,7 @@
 ﻿using Tool.CusControls.DataGridViewEx;
 using Tool.Data.DataHelper;
 using Tool.Data.SqlConfig;
+using Tool.IService.Model.Sys;
 using Tool.Main.Forms.MainForms.ChildForms;
 using Tool.Service.Common;
 
@@ -88,15 +89,23 @@ namespace Tool.Main.Forms.MainForms
             DataGridViewRow[] rows = this.dataViewMain.GetCheckRows();
             if (rows.Length == 1)
             {
-
+                Menu menu = new Menu();
+                menu.Id = Convert.ToInt32(rows[0].Cells["菜单序号"].Value);
+                menu.MenuCode = rows[0].Cells["菜单编码"].Value.ToString();
+                menu.MenuName = rows[0].Cells["菜单名称"].Value.ToString();
+                menu.ParentCode = rows[0].Cells["父级编码"].Value.ToString();
+                menu.Assembly = rows[0].Cells["程序集"].Value.ToString();
+                menu.NameSpace = rows[0].Cells["命名空间"].Value.ToString();
+                menu.EntityName = rows[0].Cells["实体名称"].Value.ToString();
+                menu.Level = Convert.ToInt32(rows[0].Cells["层级"].Value);
+                menu.IfEnd = rows[0].Cells["是否末级"].Value.ToString() == "是" ? 1 : 0;
+                MenuSetChild menuSetChild = new MenuSetChild(ChildMenuType.Edit, this.dataViewMain.SqlType, menu);
+                menuSetChild.ShowDialog();
             }
             else
             {
                 MessageBox.Show("请选择需要删除的菜单,仅可选择一条！", "提醒");
             }
-
-            MenuSetChild menuSetChild = new MenuSetChild(ChildMenuType.Edit, this.dataViewMain.SqlType);
-            menuSetChild.ShowDialog();
         }
         #endregion
 

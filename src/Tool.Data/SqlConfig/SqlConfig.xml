@@ -4,7 +4,8 @@
 		<MenuSet>
 			<MSSql>
 				<Query>
-					SELECT  MenuCode AS '菜单编码',
+					SELECT   Id AS '菜单序号',
+					MenuCode AS '菜单编码',
 					MenuName AS '菜单名称',
 					ParentCode AS '父级编码',
 					Assembly AS '程序集',
@@ -21,7 +22,8 @@
 			</MSSql>
 			<Sqlite>
 				<Query>
-					SELECT  MenuCode AS '菜单编码',
+					SELECT Id AS '菜单序号',
+					MenuCode AS '菜单编码',
 					MenuName AS '菜单名称',
 					ParentCode AS '父级编码',
 					Assembly AS '程序集',
