@@ -9,13 +9,19 @@ namespace Tool.Main.Forms.MainForms
 {
     public partial class MenuSet : Form
     {
+        #region 私有变量
+
+        private ICommonDataHelper _dataHelper;
+
+        #endregion
+
         #region Ctor
         public MenuSet()
         {
             InitializeComponent();
             //注入
-            ICommonDataHelper dataHelper = Program.ServiceProvider.GetService(typeof(ICommonDataHelper)) as ICommonDataHelper;
-            this.dataViewMain.DataHelper = dataHelper;
+            _dataHelper = Program.ServiceProvider.GetService(typeof(ICommonDataHelper)) as ICommonDataHelper;
+            this.dataViewMain.DataHelper = _dataHelper;
         }
         #endregion
 
@@ -31,7 +37,7 @@ namespace Tool.Main.Forms.MainForms
         #region 按钮事件
 
         #region 查询
-        private void Search_Click(object sender, EventArgs e)
+        internal void Search_Click(object sender, EventArgs e)
         {
             //获取主sql
             Dictionary<string, string> sqlDic = SqlConfig.GetSql("SQLConfig/BaseForm/MenuSet/", this.dataViewMain.SqlType.ToString());
@@ -79,6 +85,7 @@ namespace Tool.Main.Forms.MainForms
         private void btnAdd_Click(object sender, EventArgs e)
         {
             MenuSetChild menuSetChild = new MenuSetChild(ChildMenuType.Add, this.dataViewMain.SqlType);
+            menuSetChild.Tag = this;
             menuSetChild.ShowDialog();
         }
         #endregion
@@ -100,6 +107,7 @@ namespace Tool.Main.Forms.MainForms
                 menu.Level = Convert.ToInt32(rows[0].Cells["层级"].Value);
                 menu.IfEnd = rows[0].Cells["是否末级"].Value.ToString() == "是" ? 1 : 0;
                 MenuSetChild menuSetChild = new MenuSetChild(ChildMenuType.Edit, this.dataViewMain.SqlType, menu);
+                menuSetChild.Tag = this;
                 menuSetChild.ShowDialog();
             }
             else
@@ -113,14 +121,43 @@ namespace Tool.Main.Forms.MainForms
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DataGridViewRow[] rows = this.dataViewMain.GetCheckRows();
-            if (rows.Length > 0)
+            try
             {
-
+                DataGridViewRow[] rows = this.dataViewMain.GetCheckRows();
+                if (rows.Length > 0)
+                {
+                    //id处理
+                    List<string> idList = new List<string>();
+                    foreach (DataGridViewRow row in rows)
+                    {
+                        idList.Add(row.Cells["菜单序号"].Value.ToString());
+                    }
+                    string strId = $"'{ string.Join("','", idList)}'";
+                    //sql
+                    string sql = string.Empty;
+                    sql = $"DELETE FROM P_Menu WHERE ID IN ({strId});";
+                    long result = _dataHelper.ExcuteNoQuery(sql);
+                    if (result > 0)
+                    {
+                        MessageBox.Show("删除成功", "提示");
+                    }
+                    else
+                    {
+                        MessageBox.Show("删除失败", "提示");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("请选择需要删除的菜单！", "提醒");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("请选择需要删除的菜单！", "提醒");
+                MessageBox.Show(ex.Message, "提醒");
+            }
+            finally
+            {
+                Search_Click(null, null);
             }
         }
         #endregion

@@ -12,6 +12,7 @@ namespace Tool.Main.Forms.MainForms.ChildForms
     {
         private EnumSqlType _sqlType;
         private ICommonDataHelper _dataHelper;
+        private ChildMenuType _childMenuType;
 
         public MenuSetChild(ChildMenuType type, EnumSqlType sqlType, Menu menu = null)
         {
@@ -19,6 +20,7 @@ namespace Tool.Main.Forms.MainForms.ChildForms
             //注入
             _dataHelper = Program.ServiceProvider.GetService(typeof(ICommonDataHelper)) as ICommonDataHelper;
             //更改标题，绑定数据
+            _childMenuType = type;
             _sqlType = sqlType;
 
             //初始化控件绑定
@@ -42,7 +44,63 @@ namespace Tool.Main.Forms.MainForms.ChildForms
         #region 保存
         private void btn_Save_Click(object sender, EventArgs e)
         {
+            try
+            {
+                //必填校验、是否末级
 
+                //提取实例
+                Menu menu = new Menu();
+                if (_childMenuType == ChildMenuType.Edit)
+                {
+                    menu.Id = Convert.ToInt32(lbl_ID.Text);
+                }
+                menu.MenuCode = tb_MenuCode.Text;
+                menu.MenuName = tb_MenuName.Text;
+                menu.ParentCode = tb_ParentCode.Text;
+                string[] entityInfo = cbx_MenuProgram.SelectedValue.ToString().Split("|");
+                menu.Assembly = entityInfo[0];
+                menu.NameSpace = entityInfo[1];
+                menu.EntityName = entityInfo[2];
+                menu.Level = Convert.ToInt32(tb_ParentLevel.Text.ToString()) + 1;
+                menu.IfEnd = 1;
+                //校验菜单编号不能重复
+                string checkSql = $"select count(*) from P_Menu where MenuCode='{menu.MenuCode}' AND ID <> {menu.Id};";
+                bool checkResult = false;
+                Int64 checkIResult = _dataHelper.ExcuteScalar<Int64>(checkSql, ref checkResult);
+                if (checkIResult > 0)
+                {
+                    MessageBox.Show("菜单编号重复！", "提示");
+                    return;
+                }
+                //sql
+                string sql = string.Empty;
+                if (_childMenuType == ChildMenuType.Add)
+                {
+                    sql = $"Insert into P_Menu (MenuCode,MenuName,ParentCode,Assembly,NameSpace,EntityName,Level,IfEnd) values ('{menu.MenuCode}','{menu.MenuName}','{menu.ParentCode}','{menu.Assembly}','{menu.NameSpace}','{menu.EntityName}',{menu.Level},{menu.IfEnd});";
+                }
+                else
+                {
+                    sql = $"Update P_Menu set MenuCode='{menu.MenuCode}',MenuName='{menu.MenuName}',ParentCode='{menu.ParentCode}',Assembly='{menu.Assembly}',NameSpace='{menu.NameSpace}',EntityName='{menu.EntityName}',Level={menu.Level},IfEnd={menu.IfEnd} WHERE ID={menu.Id};";
+                }
+                //执行
+                long result = _dataHelper.ExcuteNoQuery(sql);
+                if (result > 0)
+                {
+                    MessageBox.Show("保存成功", "提示");
+                    //刷新父界面
+                    ((MenuSet)this.Tag).Search_Click(null, null);
+                    //关闭弹窗
+                    btn_Exit_Click(null, null);
+                }
+                else
+                {
+                    MessageBox.Show("保存失败", "提示");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "提示");
+            }
         }
         #endregion
 
@@ -101,7 +159,7 @@ namespace Tool.Main.Forms.MainForms.ChildForms
             {
                 DataRow dr = dt.NewRow();
                 dr["Name"] = type.FullName;
-                dr["Value"] = "Tool.Main" + " | " + type.Namespace + "|" + type.Name;
+                dr["Value"] = "Tool.Main" + "|" + type.Namespace + "|" + type.Name;
                 dt.Rows.Add(dr);
             }
             //绑定
@@ -124,7 +182,7 @@ namespace Tool.Main.Forms.MainForms.ChildForms
             string assembly = menu.Assembly;
             string nameSpace = menu.NameSpace;
             string entityName = menu.EntityName;
-            string fullName = assembly + " | " + nameSpace + "|" + entityName;
+            string fullName = assembly + "|" + nameSpace + "|" + entityName;
             this.tb_MenuCode.Text = menu.MenuCode;
             this.tb_MenuName.Text = menu.MenuName;
             this.cbx_MenuProgram.SelectedValue = fullName;
