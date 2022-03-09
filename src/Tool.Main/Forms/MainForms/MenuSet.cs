@@ -70,6 +70,17 @@ namespace Tool.Main.Forms.MainForms
             //dv绑定数据
             this.dataViewMain.DataSourceSql = sqlDic;
             this.dataViewMain.ViewDataBind(DataGridViewBindType.DicSql);
+
+            //根据层级控制菜单名称编码缩进显示
+            DataGridViewRow[] rows = this.dataViewMain.GetAllRows();
+            foreach (DataGridViewRow row in rows)
+            {
+                int level = (int)row.Cells["层级"].Value;
+                string ifEnd = row.Cells["是否末级"].Value.ToString();
+                string strBegin = ifEnd == "是" ? "" : "-";
+                row.Cells["菜单编码"].Value = "".PadLeft((level - 1) * 3, ' ') + strBegin + row.Cells["菜单编码"].Value.ToString();
+                row.Cells["菜单名称"].Value = "".PadLeft((level - 1) * 3, ' ') + strBegin + row.Cells["菜单名称"].Value.ToString();
+            }
         }
         #endregion
 
@@ -98,8 +109,8 @@ namespace Tool.Main.Forms.MainForms
             {
                 Menu menu = new Menu();
                 menu.Id = Convert.ToInt32(rows[0].Cells["菜单序号"].Value);
-                menu.MenuCode = rows[0].Cells["菜单编码"].Value.ToString();
-                menu.MenuName = rows[0].Cells["菜单名称"].Value.ToString();
+                menu.MenuCode = rows[0].Cells["菜单编码"].Value.ToString().TrimStart(new char[] { ' ', '-' });
+                menu.MenuName = rows[0].Cells["菜单名称"].Value.ToString().TrimStart(new char[] { ' ', '-' });
                 menu.ParentCode = rows[0].Cells["父级编码"].Value.ToString();
                 menu.Assembly = rows[0].Cells["程序集"].Value.ToString();
                 menu.NameSpace = rows[0].Cells["命名空间"].Value.ToString();
@@ -112,7 +123,7 @@ namespace Tool.Main.Forms.MainForms
             }
             else
             {
-                MessageBox.Show("请选择需要删除的菜单,仅可选择一条！", "提醒");
+                MessageBox.Show("请选择需要编辑的菜单,仅可选择一条！", "提醒");
             }
         }
         #endregion

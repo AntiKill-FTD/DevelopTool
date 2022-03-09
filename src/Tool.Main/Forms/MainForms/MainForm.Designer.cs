@@ -147,15 +147,17 @@
             // 
             // tsmi00_01
             // 
+            this.tsmi00_01.ForeColor = System.Drawing.Color.DarkBlue;
             this.tsmi00_01.Name = "tsmi00_01";
-            this.tsmi00_01.Size = new System.Drawing.Size(152, 26);
+            this.tsmi00_01.Size = new System.Drawing.Size(224, 26);
             this.tsmi00_01.Text = "菜单管理";
             this.tsmi00_01.Click += new System.EventHandler(this.菜单管理ToolStripMenuItem_Click);
             // 
             // tsmi00_02
             // 
+            this.tsmi00_02.ForeColor = System.Drawing.Color.DarkBlue;
             this.tsmi00_02.Name = "tsmi00_02";
-            this.tsmi00_02.Size = new System.Drawing.Size(152, 26);
+            this.tsmi00_02.Size = new System.Drawing.Size(224, 26);
             this.tsmi00_02.Text = "退出";
             this.tsmi00_02.Click += new System.EventHandler(this.退出ToolStripMenuItem_Click);
             // 

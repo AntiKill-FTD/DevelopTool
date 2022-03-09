@@ -178,6 +178,16 @@ namespace Tool.CusControls.DataGridViewEx
             return rows.ToArray();
         }
 
+        public DataGridViewRow[] GetAllRows()
+        {
+            List<DataGridViewRow> rows = new List<DataGridViewRow>();
+            foreach (DataGridViewRow r in _dv.Rows)
+            {
+                rows.Add(r);
+            }
+            return rows.ToArray();
+        }
+
         /// <summary>
         /// 添加列
         /// </summary>

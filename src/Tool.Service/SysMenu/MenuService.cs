@@ -147,6 +147,11 @@ namespace Tool.Service.SysMenu
             if (fullMenu.currentMenu.IfEnd == 1)
             {
                 toolStripParentMenuItem.Click += MenuClick;
+                toolStripParentMenuItem.ForeColor = Color.DarkBlue;
+            }
+            else if (fullMenu.currentMenu.Level != 1)
+            {
+                toolStripParentMenuItem.BackColor = Color.LightBlue;
             }
 
             //循环子集DropDown
