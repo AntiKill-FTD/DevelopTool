@@ -77,6 +77,7 @@ namespace Tool.Main.Forms.MainForms
             foreach (DataGridViewRow row in rows)
             {
                 int level = (int)row.Cells["层级"].Value;
+                if (level < 1) level = 1;
                 string ifEnd = row.Cells["是否末级"].Value.ToString();
                 string strBegin = ifEnd == "是" ? "" : "-";
                 row.Cells["菜单编码"].Value = "".PadLeft((level - 1) * 3, ' ') + strBegin + row.Cells["菜单编码"].Value.ToString();

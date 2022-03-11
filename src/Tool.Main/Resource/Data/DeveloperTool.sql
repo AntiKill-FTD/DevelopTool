@@ -195,6 +195,8 @@ GO
 USE [DeveloperTool]
 GO
 
+INSERT INTO P_Menu ( MenuCode, MenuName, ParentCode, Assembly, NameSpace, EntityName, Level, IfEnd) VALUES ( N'00', N'系统配置', N'', N'', N'', N'', 1, 0);
+INSERT INTO P_Menu ( MenuCode, MenuName, ParentCode, Assembly, NameSpace, EntityName, Level, IfEnd) VALUES ( N'00.01', N'配置参数', N'00', N'Tool.Main', N'Tool.Main.Forms.SysConfig', N'SysConfig', 2, 1);
 INSERT INTO P_Menu ( MenuCode, MenuName, ParentCode, Assembly, NameSpace, EntityName, Level, IfEnd) VALUES ( N'01', N'开发帮助', N'', N'', N'', N'', 1, 0);
 INSERT INTO P_Menu ( MenuCode, MenuName, ParentCode, Assembly, NameSpace, EntityName, Level, IfEnd) VALUES ( N'01.01', N'脚本生成', N'01', N'Tool.Main', N'Tool.Main.Forms.DevForms', N'SqlHelper', 2, 1);
 INSERT INTO P_Menu ( MenuCode, MenuName, ParentCode, Assembly, NameSpace, EntityName, Level, IfEnd) VALUES ( N'01.02', N'实体生成', N'01', N'Tool.Main', N'Tool.Main.Forms.DevForms', N'EntityHelper', 2, 1);

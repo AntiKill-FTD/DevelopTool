@@ -31,9 +31,9 @@ namespace Tool.Service.SysMenu
             _developerToolContext = _iDeveloperToolContext;
 
             //菜单管理对应实例
-            if (!MenuStaticObject.MenuCodeUrl.ContainsKey("00.01"))
+            if (!MenuStaticObject.MenuCodeUrl.ContainsKey("100.01"))
             {
-                MenuStaticObject.MenuCodeUrl.Add("00.01", "Tool.Main|Tool.Main.Forms.MainForms|MenuSet");
+                MenuStaticObject.MenuCodeUrl.Add("100.01", "Tool.Main|Tool.Main.Forms.MainForms|MenuSet");
             }
         }
 
@@ -60,7 +60,7 @@ namespace Tool.Service.SysMenu
             ToolStripMenuItem menuItem = new ToolStripMenuItem();
 
             //菜单管理的menuCode定义为00.01
-            menuItem.Name = "00.01";
+            menuItem.Name = "100.01";
             menuItem.Text = "菜单管理";
 
             //调用公共事件打开窗体
@@ -76,7 +76,7 @@ namespace Tool.Service.SysMenu
         private void CreateFirstMenu()
         {
             //获取所有一级菜单
-            List<Menu> menuLF = menus.Where(item => item.Level == 1).ToList();
+            List<Menu> menuLF = menus.Where(item => item.Level == 1).OrderBy(item => item.MenuCode).ToList();
             //定义一级菜单集合
             fullMenuList = new List<FullMenuEntity>();
             //循环创建一级实例

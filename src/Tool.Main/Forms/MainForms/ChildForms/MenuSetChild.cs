@@ -53,10 +53,7 @@ namespace Tool.Main.Forms.MainForms.ChildForms
             try
             {
                 //必填校验
-                if (string.IsNullOrEmpty(tb_ParentCode.Text)
-                    || cbx_ParentName.SelectedIndex < 0
-                    || string.IsNullOrEmpty(tb_ParentLevel.Text)
-                    || string.IsNullOrEmpty(tb_MenuCode.Text)
+                if (string.IsNullOrEmpty(tb_MenuCode.Text)
                     || string.IsNullOrEmpty(tb_MenuName.Text)
                     || (string.IsNullOrEmpty(cbx_MenuProgram.SelectedValue.ToString()) && cbx_IfEnd.SelectedValue.ToString() == "1"))
                 {
@@ -259,7 +256,7 @@ namespace Tool.Main.Forms.MainForms.ChildForms
         {
             //默认值
             this.tb_ParentCode.Text = String.Empty;
-            this.tb_ParentLevel.Text = "-1";
+            this.tb_ParentLevel.Text = "0";
             //赋值
             if (this.cbx_ParentName.SelectedValue != null)
             {
