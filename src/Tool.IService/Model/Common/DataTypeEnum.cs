@@ -9,6 +9,44 @@
     /// </summary>
     public enum SqlServerDataType
     {
+        /* 数据库设计原始类型
+        bigint
+        binary(50)
+        bit
+        char(10)
+        date
+        datetime
+        datetime2(7)
+        datetimeoffset(7)
+        decimal(18, 0)
+        float
+        geography
+        geometry
+        hierarchyid
+        image
+        int
+        money
+        nchar(10)
+        ntext
+        numeric(18, 0)
+        nvarchar(50)
+        nvarchar(MAX)
+        real
+        smalldatetime
+        smallint
+        smallmoney
+        sql_variant
+        text
+        time(7)
+        timestamp
+        tinyint
+        uniqueidentifier
+        varbinary(50)
+        varbinary(MAX)
+        varchar(50)
+        varchar(MAX)
+        xml
+        */
         bit = 1,
         tinyint = 2,
         smallint = 3,
@@ -26,7 +64,7 @@
         varbinary___50_ = 13,
         _char___10_ = 14,
         varchar___50_ = 15,
-        nchar_10 = 16,
+        nchar___10_ = 16,
         nvarchar___50_ = 17,
         text = 18,
         ntext = 19,
@@ -67,7 +105,7 @@
         varbinary___50_ = 13,
         _char___10_ = 14,
         varchar___50_ = 15,
-        nchar_10 = 16,
+        nchar___10_ = 16,
         nvarchar___50_ = 17,
         text = 18,
         ntext = 19,

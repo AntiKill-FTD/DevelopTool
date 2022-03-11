@@ -30,7 +30,7 @@ namespace Tool.Business.Common
                 case SqlServerDataType.varbinary___50_:
                 case SqlServerDataType._char___10_:
                 case SqlServerDataType.varchar___50_:
-                case SqlServerDataType.nchar_10:
+                case SqlServerDataType.nchar___10_:
                 case SqlServerDataType.nvarchar___50_:
                 case SqlServerDataType.text:
                 case SqlServerDataType.ntext:
