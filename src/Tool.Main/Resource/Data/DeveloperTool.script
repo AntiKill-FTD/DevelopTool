@@ -11,197 +11,204 @@ CREATE TABLE P_Menu (
 	);
 
 INSERT INTO P_Menu (
-	MenuCode
-	,MenuName
-	,ParentCode
-	,Assembly
-	,NameSpace
-	,EntityName
-	,LEVEL
-	,IfEnd
-	)
-VALUES (
-	'01'
-	,-- MenuCode - varchar(100)
-	'开发帮助'
-	,-- MenuName - varchar(100)
-	''
-	,-- ParentCode - varchar(100)
-	''
-	,-- Assembly - varchar(200)
-	''
-	,-- NameSpace - varchar(200)
-	''
-	,-- EntityName - varchar(200)
-	1
-	,-- Level - int
-	0 -- IfEnd - tinyint
-	);
+    MenuCode
+    ,MenuName
+    ,ParentCode
+    ,Assembly
+    ,NameSpace
+    ,EntityName
+    ,Level
+    ,IfEnd
+    )
+Values (
+    '01'
+    ,-- MenuCode - varchar(100)
+    '开发帮助'
+    ,-- MenuName - varchar(100)
+    ''
+    ,-- ParentCode - varchar(100)
+    ''
+    ,-- Assembly - varchar(200)
+    ''    
+    ,-- NameSpace - varchar(200)
+    ''
+    ,--EntityName - varchar(200)
+    1
+    ,-- Level - int
+    0
+    --IfEnd - tinyint    
+    );
 
 INSERT INTO P_Menu (
-	MenuCode
-	,MenuName
-	,ParentCode
-	,Assembly
-	,NameSpace
-	,EntityName
-	,LEVEL
-	,IfEnd
-	)
-VALUES (
-	'01.01'
-	,-- MenuCode - varchar(100)
-	'脚本生成'
-	,-- MenuName - varchar(100)
-	'01'
-	,-- ParentCode - varchar(100)
-	'Tool.Main'
-	,-- Assembly - varchar(200)
-	'Tool.Main.Forms.DevForms'
-	,-- NameSpace - varchar(200)
-	'SqlHelper'
-	,-- EntityName - varchar(200)
-	2
-	,-- Level - int
-	1 -- IfEnd - tinyint
-	);
+    MenuCode
+    ,MenuName
+    ,ParentCode
+    ,Assembly
+    ,NameSpace
+    ,EntityName
+    ,Level
+    ,IfEnd
+    )
+Values (
+    '01.01'
+    ,-- MenuCode - varchar(100)
+    '脚本生成'
+    ,-- MenuName - varchar(100)
+    '01'
+    ,-- ParentCode - varchar(100)
+    'Tool.Main'
+    ,-- Assembly - varchar(200)
+    'Tool.Main.Forms.DevForms'    
+    ,-- NameSpace - varchar(200)
+    'SqlHelper'
+    ,--EntityName - varchar(200)
+    2
+    ,-- Level - int
+    1
+    --IfEnd - tinyint    
+    );
 
 INSERT INTO P_Menu (
-	MenuCode
-	,MenuName
-	,ParentCode
-	,Assembly
-	,NameSpace
-	,EntityName
-	,LEVEL
-	,IfEnd
-	)
-VALUES (
-	'01.02'
-	,-- MenuCode - varchar(100)
-	'实体生成'
-	,-- MenuName - varchar(100)
-	'01'
-	,-- ParentCode - varchar(100)
-	'Tool.Main'
-	,-- Assembly - varchar(200)
-	'Tool.Main.Forms.DevForms'
-	,-- NameSpace - varchar(200)
-	'EntityHelper'
-	,-- EntityName - varchar(200)
-	2
-	,-- Level - int
-	1 -- IfEnd - tinyint
-	);
+    MenuCode
+    ,MenuName
+    ,ParentCode
+    ,Assembly
+    ,NameSpace
+    ,EntityName
+    ,Level
+    ,IfEnd
+    )
+Values (
+    '01.02'
+    ,-- MenuCode - varchar(100)
+    '实体生成'
+    ,-- MenuName - varchar(100)
+    '01'
+    ,-- ParentCode - varchar(100)
+    'Tool.Main'
+    ,-- Assembly - varchar(200)
+    'Tool.Main.Forms.DevForms'    
+    ,-- NameSpace - varchar(200)
+    'EntityHelper'
+    ,--EntityName - varchar(200)
+    2
+    ,-- Level - int
+    1
+    --IfEnd - tinyint    
+    );
 
 INSERT INTO P_Menu (
-	MenuCode
-	,MenuName
-	,ParentCode
-	,Assembly
-	,NameSpace
-	,EntityName
-	,LEVEL
-	,IfEnd
-	)
-VALUES (
-	'02'
-	,-- MenuCode - varchar(100)
-	'软通动力'
-	,-- MenuName - varchar(100)
-	''
-	,-- ParentCode - varchar(100)
-	''
-	,-- Assembly - varchar(200)
-	''
-	,-- NameSpace - varchar(200)
-	''
-	,-- EntityName - varchar(200)
-	1
-	,-- Level - int
-	0 -- IfEnd - tinyint
-	);
+    MenuCode
+    ,MenuName
+    ,ParentCode
+    ,Assembly
+    ,NameSpace
+    ,EntityName
+    ,Level
+    ,IfEnd
+    )
+Values (
+    '02'
+    ,-- MenuCode - varchar(100)
+    '软通动力'
+    ,-- MenuName - varchar(100)
+    ''
+    ,-- ParentCode - varchar(100)
+    ''
+    ,-- Assembly - varchar(200)
+    ''    
+    ,-- NameSpace - varchar(200)
+    ''
+    ,--EntityName - varchar(200)
+    1
+    ,-- Level - int
+    0
+    --IfEnd - tinyint    
+    );
 
 INSERT INTO P_Menu (
-	MenuCode
-	,MenuName
-	,ParentCode
-	,Assembly
-	,NameSpace
-	,EntityName
-	,LEVEL
-	,IfEnd
-	)
-VALUES (
-	'02.01'
-	,-- MenuCode - varchar(100)
-	'数据库解密'
-	,-- MenuName - varchar(100)
-	'02'
-	,-- ParentCode - varchar(100)
-	'Tool.Main'
-	,-- Assembly - varchar(200)
-	'Tool.Main.Forms.BusForms'
-	,-- NameSpace - varchar(200)
-	'CryptData'
-	,-- EntityName - varchar(200)
-	2
-	,-- Level - int
-	1 -- IfEnd - tinyint
-	);
+    MenuCode
+    ,MenuName
+    ,ParentCode
+    ,Assembly
+    ,NameSpace
+    ,EntityName
+    ,Level
+    ,IfEnd
+    )
+Values (
+    '02.01'
+    ,-- MenuCode - varchar(100)
+    '数据库解密'
+    ,-- MenuName - varchar(100)
+    '02'
+    ,-- ParentCode - varchar(100)
+    'Tool.Main'
+    ,-- Assembly - varchar(200)
+    'Tool.Main.Forms.BusForms'    
+    ,-- NameSpace - varchar(200)
+    'CryptData'
+    ,--EntityName - varchar(200)
+    2
+    ,-- Level - int
+    1
+    --IfEnd - tinyint    
+    );
 
 INSERT INTO P_Menu (
-	MenuCode
-	,MenuName
-	,ParentCode
-	,Assembly
-	,NameSpace
-	,EntityName
-	,LEVEL
-	,IfEnd
-	)
-VALUES (
-	'03'
-	,-- MenuCode - varchar(100)
-	'字符处理'
-	,-- MenuName - varchar(100)
-	''
-	,-- ParentCode - varchar(100)
-	''
-	,-- Assembly - varchar(200)
-	''
-	,-- NameSpace - varchar(200)
-	''
-	,-- EntityName - varchar(200)
-	1
-	,-- Level - int
-	0 -- IfEnd - tinyint
-	);
+    MenuCode
+    ,MenuName
+    ,ParentCode
+    ,Assembly
+    ,NameSpace
+    ,EntityName
+    ,Level
+    ,IfEnd
+    )
+Values (
+    '03'
+    ,-- MenuCode - varchar(100)
+    '字符处理'
+    ,-- MenuName - varchar(100)
+    ''
+    ,-- ParentCode - varchar(100)
+    ''
+    ,-- Assembly - varchar(200)
+    ''    
+    ,-- NameSpace - varchar(200)
+    ''
+    ,--EntityName - varchar(200)
+    1
+    ,-- Level - int
+    0
+    --IfEnd - tinyint    
+    );
 
 INSERT INTO P_Menu (
-	MenuCode
-	,MenuName
-	,ParentCode
-	,Assembly
-	,NameSpace
-	,EntityName
-	,LEVEL
-	,IfEnd
-	)
-VALUES (
-	'03.01'
-	,-- MenuCode - varchar(100)
-	'字符串处理'
-	,-- MenuName - varchar(100)
-	'03'
-	,-- ParentCode - varchar(100)
-	'Tool.Main'
-	,-- Assembly - varchar(200)
-	'Tool.Main.Forms.ComForms'
-	,-- NameSpace - varchar(200)
-	'StringHelper'
-	,-- EntityName - varchar(200)
-	2
-	,-- Level - int
-	1 -- IfEnd - tinyint
-	);
+    MenuCode
+    ,MenuName
+    ,ParentCode
+    ,Assembly
+    ,NameSpace
+    ,EntityName
+    ,Level
+    ,IfEnd
+    )
+Values (
+    '03.01'
+    ,-- MenuCode - varchar(100)
+    '字符串处理'
+    ,-- MenuName - varchar(100)
+    '03'
+    ,-- ParentCode - varchar(100)
+    'Tool.Main'
+    ,-- Assembly - varchar(200)
+    'Tool.Main.Forms.ComForms'    
+    ,-- NameSpace - varchar(200)
+    'StringHelper'
+    ,--EntityName - varchar(200)
+    2
+    ,-- Level - int
+    1
+    --IfEnd - tinyint    
+    );

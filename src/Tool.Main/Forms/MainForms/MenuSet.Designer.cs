@@ -43,6 +43,12 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.btnDelete = new System.Windows.Forms.Button();
             this.panelGrid = new System.Windows.Forms.Panel();
+            this.tlp_ExportScript = new System.Windows.Forms.TableLayoutPanel();
+            this.tlp_ExportScript_Split = new System.Windows.Forms.TableLayoutPanel();
+            this.btn_ExportScript = new System.Windows.Forms.Button();
+            this.tlp_ExportScript_SqlSplit = new System.Windows.Forms.TableLayoutPanel();
+            this.rtb_ExportScript_MySql = new System.Windows.Forms.RichTextBox();
+            this.rtb_ExportScript_MSSql = new System.Windows.Forms.RichTextBox();
             this.dataViewMain = new Tool.CusControls.DataGridViewEx.DataGridViewEx();
             this.panelSearch.SuspendLayout();
             this.tlpSearch.SuspendLayout();
@@ -50,6 +56,9 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panelGrid.SuspendLayout();
+            this.tlp_ExportScript.SuspendLayout();
+            this.tlp_ExportScript_Split.SuspendLayout();
+            this.tlp_ExportScript_SqlSplit.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelSearch
@@ -249,6 +258,7 @@
             // 
             // panelGrid
             // 
+            this.panelGrid.Controls.Add(this.tlp_ExportScript);
             this.panelGrid.Controls.Add(this.dataViewMain);
             this.panelGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelGrid.Location = new System.Drawing.Point(0, 125);
@@ -256,6 +266,83 @@
             this.panelGrid.Name = "panelGrid";
             this.panelGrid.Size = new System.Drawing.Size(1394, 718);
             this.panelGrid.TabIndex = 1;
+            // 
+            // tlp_ExportScript
+            // 
+            this.tlp_ExportScript.ColumnCount = 1;
+            this.tlp_ExportScript.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_ExportScript.Controls.Add(this.tlp_ExportScript_Split, 0, 0);
+            this.tlp_ExportScript.Controls.Add(this.tlp_ExportScript_SqlSplit, 0, 1);
+            this.tlp_ExportScript.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tlp_ExportScript.Location = new System.Drawing.Point(0, 292);
+            this.tlp_ExportScript.Name = "tlp_ExportScript";
+            this.tlp_ExportScript.RowCount = 2;
+            this.tlp_ExportScript.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.25F));
+            this.tlp_ExportScript.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.75F));
+            this.tlp_ExportScript.Size = new System.Drawing.Size(1394, 426);
+            this.tlp_ExportScript.TabIndex = 1;
+            // 
+            // tlp_ExportScript_Split
+            // 
+            this.tlp_ExportScript_Split.ColumnCount = 3;
+            this.tlp_ExportScript_Split.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_ExportScript_Split.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tlp_ExportScript_Split.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_ExportScript_Split.Controls.Add(this.btn_ExportScript, 1, 0);
+            this.tlp_ExportScript_Split.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlp_ExportScript_Split.Location = new System.Drawing.Point(0, 0);
+            this.tlp_ExportScript_Split.Margin = new System.Windows.Forms.Padding(0);
+            this.tlp_ExportScript_Split.Name = "tlp_ExportScript_Split";
+            this.tlp_ExportScript_Split.RowCount = 1;
+            this.tlp_ExportScript_Split.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlp_ExportScript_Split.Size = new System.Drawing.Size(1394, 39);
+            this.tlp_ExportScript_Split.TabIndex = 0;
+            // 
+            // btn_ExportScript
+            // 
+            this.btn_ExportScript.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_ExportScript.Location = new System.Drawing.Point(650, 3);
+            this.btn_ExportScript.Name = "btn_ExportScript";
+            this.btn_ExportScript.Size = new System.Drawing.Size(94, 33);
+            this.btn_ExportScript.TabIndex = 0;
+            this.btn_ExportScript.Text = "导出脚本";
+            this.btn_ExportScript.UseVisualStyleBackColor = true;
+            this.btn_ExportScript.Click += new System.EventHandler(this.btn_ExportScript_Click);
+            // 
+            // tlp_ExportScript_SqlSplit
+            // 
+            this.tlp_ExportScript_SqlSplit.ColumnCount = 2;
+            this.tlp_ExportScript_SqlSplit.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_ExportScript_SqlSplit.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_ExportScript_SqlSplit.Controls.Add(this.rtb_ExportScript_MySql, 0, 0);
+            this.tlp_ExportScript_SqlSplit.Controls.Add(this.rtb_ExportScript_MSSql, 1, 0);
+            this.tlp_ExportScript_SqlSplit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlp_ExportScript_SqlSplit.Location = new System.Drawing.Point(3, 42);
+            this.tlp_ExportScript_SqlSplit.Name = "tlp_ExportScript_SqlSplit";
+            this.tlp_ExportScript_SqlSplit.RowCount = 1;
+            this.tlp_ExportScript_SqlSplit.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_ExportScript_SqlSplit.Size = new System.Drawing.Size(1388, 381);
+            this.tlp_ExportScript_SqlSplit.TabIndex = 1;
+            // 
+            // rtb_ExportScript_MySql
+            // 
+            this.rtb_ExportScript_MySql.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtb_ExportScript_MySql.Location = new System.Drawing.Point(3, 3);
+            this.rtb_ExportScript_MySql.Name = "rtb_ExportScript_MySql";
+            this.rtb_ExportScript_MySql.ReadOnly = true;
+            this.rtb_ExportScript_MySql.Size = new System.Drawing.Size(688, 375);
+            this.rtb_ExportScript_MySql.TabIndex = 2;
+            this.rtb_ExportScript_MySql.Text = "";
+            // 
+            // rtb_ExportScript_MSSql
+            // 
+            this.rtb_ExportScript_MSSql.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtb_ExportScript_MSSql.Location = new System.Drawing.Point(697, 3);
+            this.rtb_ExportScript_MSSql.Name = "rtb_ExportScript_MSSql";
+            this.rtb_ExportScript_MSSql.ReadOnly = true;
+            this.rtb_ExportScript_MSSql.Size = new System.Drawing.Size(688, 375);
+            this.rtb_ExportScript_MSSql.TabIndex = 3;
+            this.rtb_ExportScript_MSSql.Text = "";
             // 
             // dataViewMain
             // 
@@ -291,6 +378,9 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.panelGrid.ResumeLayout(false);
+            this.tlp_ExportScript.ResumeLayout(false);
+            this.tlp_ExportScript_Split.ResumeLayout(false);
+            this.tlp_ExportScript_SqlSplit.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -313,5 +403,11 @@
         private Button btnDelete;
         private Button btnEdit;
         private TableLayoutPanel tableLayoutPanel2;
+        private TableLayoutPanel tlp_ExportScript_Split;
+        private TableLayoutPanel tlp_ExportScript;
+        private Button btn_ExportScript;
+        private TableLayoutPanel tlp_ExportScript_SqlSplit;
+        private RichTextBox rtb_ExportScript_MySql;
+        private RichTextBox rtb_ExportScript_MSSql;
     }
 }

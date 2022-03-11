@@ -1,4 +1,5 @@
-﻿using Tool.CusControls.DataGridViewEx;
+﻿using System.Text;
+using Tool.CusControls.DataGridViewEx;
 using Tool.Data.DataHelper;
 using Tool.Data.SqlConfig;
 using Tool.IService.Model.Sys;
@@ -174,5 +175,45 @@ namespace Tool.Main.Forms.MainForms
         #endregion
 
         #endregion
+
+        #region 导出脚本
+        private void btn_ExportScript_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow[] rows = this.dataViewMain.GetCheckRows();
+            if (rows.Length > 0)
+            {
+                List<Menu> menus = new List<Menu>();
+                foreach (DataGridViewRow row in rows)
+                {
+                    Menu menu = new Menu();
+                    menu.Id = Convert.ToInt32(row.Cells["菜单序号"].Value);
+                    menu.MenuCode = row.Cells["菜单编码"].Value.ToString().TrimStart(new char[] { ' ', '-' });
+                    menu.MenuName = row.Cells["菜单名称"].Value.ToString().TrimStart(new char[] { ' ', '-' });
+                    menu.ParentCode = row.Cells["父级编码"].Value.ToString();
+                    menu.Assembly = row.Cells["程序集"].Value.ToString();
+                    menu.NameSpace = row.Cells["命名空间"].Value.ToString();
+                    menu.EntityName = row.Cells["实体名称"].Value.ToString();
+                    menu.Level = Convert.ToInt32(row.Cells["层级"].Value);
+                    menu.IfEnd = row.Cells["是否末级"].Value.ToString() == "是" ? 1 : 0;
+                    menus.Add(menu);
+                }
+                //拼接
+                StringBuilder sbMysql = new StringBuilder();
+                StringBuilder sbMSSql = new StringBuilder();
+                foreach (Menu menu in menus)
+                {
+                    sbMysql.Append($"INSERT INTO P_Menu (\n    MenuCode\n    ,MenuName\n    ,ParentCode\n    ,Assembly\n    ,NameSpace\n    ,EntityName\n    ,Level\n    ,IfEnd\n    )\nValues (\n    '{menu.MenuCode}'\n    ,-- MenuCode - varchar(100)\n    '{menu.MenuName}'\n    ,-- MenuName - varchar(100)\n    '{menu.ParentCode}'\n    ,-- ParentCode - varchar(100)\n    '{menu.Assembly}'\n    ,-- Assembly - varchar(200)\n    '{menu.NameSpace}'    \n    ,-- NameSpace - varchar(200)\n    '{menu.EntityName}'\n    ,--EntityName - varchar(200)\n    {menu.Level}\n    ,-- Level - int\n    {menu.IfEnd}\n    --IfEnd - tinyint    \n    );\n\n");
+                    sbMSSql.Append($"INSERT INTO P_Menu ( MenuCode, MenuName, ParentCode, Assembly, NameSpace, EntityName, Level, IfEnd) VALUES ( N'{menu.MenuCode}', N'{menu.MenuName}', N'{menu.ParentCode}', N'{menu.Assembly}', N'{menu.NameSpace}', N'{menu.EntityName}', {menu.Level}, {menu.IfEnd});\n");
+                }
+                //赋值
+                this.rtb_ExportScript_MySql.Text = sbMysql.ToString();
+                this.rtb_ExportScript_MSSql.Text = sbMSSql.ToString();
+            }
+            else
+            {
+                MessageBox.Show("请选择需要导出的脚本！", "提醒");
+            }
+        }
+        #endregion 导出脚本
     }
 }
