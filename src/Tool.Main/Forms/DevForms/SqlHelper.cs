@@ -22,12 +22,12 @@ namespace Tool.Main.Forms.DevForms
             this.dvEX.IsShowFirstCheckBox = false;
             //Grid数据可编辑
             this.dvEX.RowEdit = true;
-            //添加列1
+            //添加列1-列中文、列英文
             Dictionary<string, string> colDic = new Dictionary<string, string>();
             colDic.Add("ColEng", "列英文");
             colDic.Add("ColChn", "列中文");
             this.dvEX.AddColumns(colDic);
-            //添加列2            
+            //添加列2-列类型
             List<string> dataTypes;
             if (dataHelper.GetType() == typeof(MSSqlDataHelper))
             {
@@ -38,8 +38,11 @@ namespace Tool.Main.Forms.DevForms
                 dataTypes = Enum.GetNames(typeof(SqliteDataType)).ToList<string>();
             }
             dataTypes = ChangeDataTypeName(dataTypes);
-            this.dvEX.AddColumn(this.dvEX.CreateColumn<DataGridViewComboBoxColumn>("ColDataType", "数据类型", dataTypes, 180));
-            //添加列3
+            DataGridViewComboBoxColumn dataTypeCol = this.dvEX.CreateColumn<DataGridViewComboBoxColumn>("ColDataType", "数据类型", dataTypes, 180);
+            this.dvEX.AddColumn(dataTypeCol);
+            //添加列3-列长度
+            this.dvEX.AddColumn(this.dvEX.CreateColumn<DataGridViewComboBoxColumn>("ColLength", "数据长度", new List<string>(), 180));
+            //添加列4-是否主键、是否费控
             this.dvEX.AddChkCol(CheckBoxName.CheckBox1, -1, true, "是否主键");//IsPrimarikey
             this.dvEX.AddChkCol(CheckBoxName.CheckBox2, -1, true, "是否非空");//IsNotNull
             #endregion
@@ -57,22 +60,16 @@ namespace Tool.Main.Forms.DevForms
 
         /// <summary>
         /// 格式处理：
-        /// 1.首下划线删除
-        /// 2.三下划线转(
-        /// 3.二下划线转,
-        /// 4.一下换线转)
+        /// 移除首位下划线
         /// </summary>
-        /// <param name="origin"></param>
+        /// <param name="origin"></param> 
         /// <returns></returns>
         private List<string> ChangeDataTypeName(List<string> origin)
         {
             List<string> vs = new List<string>();
             origin.ForEach(item =>
             {
-                if (item.StartsWith("_")) item = item.Substring(1);
-                item = item.Replace("___", "(");
-                item = item.Replace("__", ",");
-                item = item.Replace("_", ")");
+                item = item.Substring(1);
                 vs.Add(item);
             });
             return vs;

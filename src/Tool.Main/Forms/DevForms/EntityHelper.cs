@@ -105,8 +105,8 @@ namespace Tool.Main.Forms.DevForms
                     string colName = r.Cells["列名称"].Value.ToString();
                     string colNameChn = r.Cells["列中文"].Value.ToString();
                     string colType = r.Cells["类型"].Value.ToString();
-                    SqlServerDataType colTypeEnum = (SqlServerDataType)Enum.Parse(typeof(SqlServerDataType), colType, true);
-                    string realColType = DataTypeExtend.ChangeDataType(colTypeEnum);
+                    //SqlServerDataType colTypeEnum = (SqlServerDataType)Enum.Parse(typeof(SqlServerDataType), colType, true);
+                    //string realColType = DataTypeExtend.ChangeDataType(colTypeEnum);
                     bool colQuery = r.Cells["CheckBox1"].Value == null ? false : (bool)r.Cells["CheckBox1"].Value;
                     bool colModify = r.Cells["CheckBox2"].Value == null ? false : (bool)r.Cells["CheckBox2"].Value;
                     bool colView = r.Cells["CheckBox3"].Value == null ? false : (bool)r.Cells["CheckBox3"].Value;
@@ -116,14 +116,14 @@ namespace Tool.Main.Forms.DevForms
                     fullCode += "    /// <summary>\r\n";
                     fullCode += "    /// " + colNameChn + "\r\n";
                     fullCode += "    /// </summary>\r\n";
-                    fullCode += "    private " + realColType + " _" + colName + ";\r\n";
+                    //fullCode += "    private " + realColType + " _" + colName + ";\r\n";
                     fullCode += "\r\n";
 
                     //拼接列2-Attribute
                     fullCode += GetAttributeCode(colQuery, colModify, colView);
 
                     //拼接列3-public
-                    fullCode += "    public " + realColType + " " + colName.ToUpper() + "\r\n";
+                    //fullCode += "    public " + realColType + " " + colName.ToUpper() + "\r\n";
                     fullCode += "    {" + "\r\n"
                              + "         get{ return _" + colName + ";}\r\n"
                              + "     }\r\n";
