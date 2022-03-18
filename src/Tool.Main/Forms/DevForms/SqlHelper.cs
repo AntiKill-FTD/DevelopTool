@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using Tool.Business.Common;
 using Tool.CusControls.DataGridViewEx;
 using Tool.Data.DataHelper;
 using Tool.IService.Model.Common;
@@ -40,6 +41,7 @@ namespace Tool.Main.Forms.DevForms
             dataTypes = ChangeDataTypeName(dataTypes);
             DataGridViewComboBoxColumn dataTypeCol = this.dvEX.CreateColumn<DataGridViewComboBoxColumn>("ColDataType", "数据类型", dataTypes, 180);
             this.dvEX.AddColumn(dataTypeCol);
+            this.dvEX.Dv.SetComboBoxDelegate("ColDataType", ColDateTypeSelectIndexChange);
             //添加列3-列长度
             this.dvEX.AddColumn(this.dvEX.CreateColumn<DataGridViewComboBoxColumn>("ColLength", "数据长度", new List<string>(), 180, true));
             //添加列4-是否主键、是否费控
@@ -75,6 +77,35 @@ namespace Tool.Main.Forms.DevForms
             return vs;
         }
 
+        #endregion
+
+        #region ComboBoxEvent
+        private void ColDateTypeSelectIndexChange(object? sender, EventArgs e)
+        {
+            //选中数据类型
+            string dataType = "_" + ((ComboBox)sender).Text;
+            SqlServerDataType sqlDataType = (SqlServerDataType)Enum.Parse(typeof(SqlServerDataType), dataType, true);
+            //字典
+            Dictionary<SqlServerDataType, List<string>> dic = DataTypeExtend.SqlLengTypeDic;
+            //获取集合
+            List<string> lengthList = new List<string>();
+            if (dic.Keys.Contains(sqlDataType))
+            {
+                lengthList = dic[sqlDataType];
+            }
+            else
+            {
+                lengthList.Add("");
+            }
+            //获取数据长度单元格
+            DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
+            DataGridView dv = cb.EditingControlDataGridView;
+            int rowIndex = dv.CurrentCell.RowIndex;
+            int colIndex = dv.CurrentCell.ColumnIndex;
+            DataGridViewComboBoxCell lengthCell = (DataGridViewComboBoxCell)dv.Rows[rowIndex].Cells[colIndex + 1];
+            //绑定
+            lengthCell.DataSource = lengthList;
+        }
         #endregion
 
         #region 按钮事件

@@ -9,11 +9,25 @@ namespace Tool.Business.Common
 {
     public static class DataTypeExtend
     {
+        private static Dictionary<SqlServerDataType, List<string>> _lengthInfoDic;
+
+        public static Dictionary<SqlServerDataType, List<string>> SqlLengTypeDic
+        {
+            get
+            {
+                if (_lengthInfoDic == null)
+                {
+                    _lengthInfoDic = GetSqlServerDataTypeLengthInfo();
+                }
+                return _lengthInfoDic;
+            }
+        }
+
         /// <summary>
         /// 返回数据类型长度模板
         /// </summary>
         /// <returns></returns>
-        public static Dictionary<SqlServerDataType, List<string>> SqlServerDataTypeLengthInfo()
+        private static Dictionary<SqlServerDataType, List<string>> GetSqlServerDataTypeLengthInfo()
         {
             Dictionary<SqlServerDataType, List<string>> dic = new Dictionary<SqlServerDataType, List<string>>();
             List<string> stringLengthType = new List<string> { "(10)", "(20)", "(50)", "(100)", "(200)", "(500)", "(1000)", "(MAX)" };

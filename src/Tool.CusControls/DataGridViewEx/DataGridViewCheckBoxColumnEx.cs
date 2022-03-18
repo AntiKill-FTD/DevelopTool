@@ -224,7 +224,7 @@ namespace Tool.CusControls.DataGridViewEx
                     if (Enum.IsDefined(typeof(CheckBoxName), chkName))
                     {
                         CheckBoxName eC = (CheckBoxName)Enum.Parse(typeof(CheckBoxName), chkName, true);
-                        ((DataGridViewCommonEx)this.DataGridView).GetDelegate(eC, CheckBoxEventType.All)?.Invoke(e);
+                        ((DataGridViewCommonEx)this.DataGridView).GetCheckBoxDelegate(eC, CheckBoxEventType.All)?.Invoke(e);
                     }
                 }
                 catch (Exception ex)
@@ -299,7 +299,7 @@ namespace Tool.CusControls.DataGridViewEx
                 if (Enum.IsDefined(typeof(CheckBoxName), chkName))
                 {
                     CheckBoxName eC = (CheckBoxName)Enum.Parse(typeof(CheckBoxName), chkName, true);
-                    ((DataGridViewCommonEx)this.DataGridView).GetDelegate(eC, CheckBoxEventType.Cell)?.Invoke(e);
+                    ((DataGridViewCommonEx)this.DataGridView).GetCheckBoxDelegate(eC, CheckBoxEventType.Cell)?.Invoke(e);
                 }
             }
             catch (Exception ex)

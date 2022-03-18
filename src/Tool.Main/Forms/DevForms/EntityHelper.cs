@@ -35,7 +35,7 @@ namespace Tool.Main.Forms.DevForms
             Dictionary<CheckBoxEventType, CheckBoxEventDelegate> dicFirstCheck = new Dictionary<CheckBoxEventType, CheckBoxEventDelegate>();
             dicFirstCheck.Add(CheckBoxEventType.All, new CheckBoxEventDelegate(DGV_Co_FirstCheck));
             dicFirstCheck.Add(CheckBoxEventType.Cell, new CheckBoxEventDelegate(DGV_Co_FirstCheck));
-            this.dataViewColumn.Dv.SetDelegate(CheckBoxName.FirstCheckColumn, dicFirstCheck);
+            this.dataViewColumn.Dv.SetCheckBoxDelegate(CheckBoxName.FirstCheckColumn, dicFirstCheck);
             #endregion
         }
         #endregion
@@ -53,9 +53,9 @@ namespace Tool.Main.Forms.DevForms
             Dictionary<CheckBoxEventType, CheckBoxEventDelegate> dicCheck = new Dictionary<CheckBoxEventType, CheckBoxEventDelegate>();
             dicCheck.Add(CheckBoxEventType.All, new CheckBoxEventDelegate(DGV_Co_FirstCheck));
             dicCheck.Add(CheckBoxEventType.Cell, new CheckBoxEventDelegate(DGV_Co_FirstCheck));
-            this.dataViewColumn.Dv.SetDelegate(CheckBoxName.CheckBox1, dicCheck);
-            this.dataViewColumn.Dv.SetDelegate(CheckBoxName.CheckBox2, dicCheck);
-            this.dataViewColumn.Dv.SetDelegate(CheckBoxName.CheckBox3, dicCheck);
+            this.dataViewColumn.Dv.SetCheckBoxDelegate(CheckBoxName.CheckBox1, dicCheck);
+            this.dataViewColumn.Dv.SetCheckBoxDelegate(CheckBoxName.CheckBox2, dicCheck);
+            this.dataViewColumn.Dv.SetCheckBoxDelegate(CheckBoxName.CheckBox3, dicCheck);
         }
         #endregion
 

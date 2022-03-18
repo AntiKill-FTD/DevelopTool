@@ -136,19 +136,17 @@ namespace Tool.CusControls.DataGridViewEx
         private void ComboBox_SelectedIndexChanged(object? sender, EventArgs e)
         {
             //对象
-            int i = 1;
+            DataGridViewComboBoxEditingControl cbo = (DataGridViewComboBoxEditingControl)sender;
+            DataGridView grid = cbo.EditingControlDataGridView;
+            DataGridViewComboBoxColumn cboCol = (DataGridViewComboBoxColumn)grid.Columns[grid.CurrentCell.ColumnIndex];
+            string colName = cboCol.Name;
 
             //执行默认事件---None
 
-            //执行用户绑定事件
+            //执行用户绑定事件 
             try
             {
-                //string chkName = col.Name;
-                //if (Enum.IsDefined(typeof(CheckBoxName), chkName))
-                //{
-                //    CheckBoxName eC = (CheckBoxName)Enum.Parse(typeof(CheckBoxName), chkName, true);
-                //    ((DataGridViewCommonEx)this.DataGridView).GetDelegate(eC, CheckBoxEventType.Cell)?.Invoke(e);
-                //}
+                ((DataGridViewCommonEx)this.DataGridView).GetComboBoxDelegate(colName)?.Invoke(sender, e);
             }
             catch (Exception ex)
             {

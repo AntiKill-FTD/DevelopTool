@@ -7,11 +7,14 @@
         /// </summary>
         /// <param name="e"></param>
         public delegate void CheckBoxEventDelegate(DataGridViewCellMouseEventArgs e);
+        public delegate void ComboBoxEventDelegate(object? sender, EventArgs e);
 
         /// <summary>
         /// 用户自定义事件集合-CheckBox委托
+        /// 用户自定义事件集合-ComboBox委托
         /// </summary>
-        private Dictionary<CheckBoxName, Dictionary<CheckBoxEventType, CheckBoxEventDelegate>> _handlerList = new Dictionary<CheckBoxName, Dictionary<CheckBoxEventType, CheckBoxEventDelegate>>();
+        private Dictionary<CheckBoxName, Dictionary<CheckBoxEventType, CheckBoxEventDelegate>> _checkboxHandlerList = new Dictionary<CheckBoxName, Dictionary<CheckBoxEventType, CheckBoxEventDelegate>>();
+        private Dictionary<string, ComboBoxEventDelegate> _comboboxHandlerList = new Dictionary<string, ComboBoxEventDelegate>();
 
         /// <summary>
         /// Ctor
@@ -23,14 +26,14 @@
         }
 
         /// <summary>
-        /// 设置用户自定义事件
+        /// 设置CheckBox用户自定义事件
         /// </summary>
         /// <param name="handlerList"></param>
-        public void SetDelegate(CheckBoxName chkName, Dictionary<CheckBoxEventType, CheckBoxEventDelegate> dic)
+        public void SetCheckBoxDelegate(CheckBoxName chkName, Dictionary<CheckBoxEventType, CheckBoxEventDelegate> dic)
         {
-            if (_handlerList.Keys.Contains(chkName))
+            if (_checkboxHandlerList.Keys.Contains(chkName))
             {
-                Dictionary<CheckBoxEventType, CheckBoxEventDelegate> oldDic = _handlerList[chkName];
+                Dictionary<CheckBoxEventType, CheckBoxEventDelegate> oldDic = _checkboxHandlerList[chkName];
                 foreach (CheckBoxEventType ct in dic.Keys)
                 {
                     if (oldDic.Keys.Contains(ct))
@@ -42,23 +45,23 @@
                         oldDic.Add(ct, dic[ct]);
                     }
                 }
-                _handlerList[chkName] = oldDic;
+                _checkboxHandlerList[chkName] = oldDic;
             }
             else
             {
-                _handlerList.Add(chkName, dic);
+                _checkboxHandlerList.Add(chkName, dic);
             }
         }
 
         /// <summary>
-        /// 获取用户自定义事件
+        /// 获取CheckBox用户自定义事件
         /// </summary>
         /// <param name="handlerList"></param>
-        public Dictionary<CheckBoxEventType, CheckBoxEventDelegate> GetDelegate(CheckBoxName chkName)
+        public Dictionary<CheckBoxEventType, CheckBoxEventDelegate> GetCheckBoxDelegate(CheckBoxName chkName)
         {
-            if (_handlerList.Keys.Contains(chkName))
+            if (_checkboxHandlerList.Keys.Contains(chkName))
             {
-                return _handlerList[chkName];
+                return _checkboxHandlerList[chkName];
             }
             else
             {
@@ -67,16 +70,16 @@
         }
 
         /// <summary>
-        /// 获取用户自定义事件
+        /// 获取CheckBox用户自定义事件
         /// </summary>
         /// <param name="colName"></param>
         /// <param name="eventType"></param>
         /// <returns></returns>
-        public CheckBoxEventDelegate GetDelegate(CheckBoxName chkName, CheckBoxEventType eventType)
+        public CheckBoxEventDelegate GetCheckBoxDelegate(CheckBoxName chkName, CheckBoxEventType eventType)
         {
-            if (_handlerList.Keys.Contains(chkName))
+            if (_checkboxHandlerList.Keys.Contains(chkName))
             {
-                Dictionary<CheckBoxEventType, CheckBoxEventDelegate> dic = _handlerList[chkName];
+                Dictionary<CheckBoxEventType, CheckBoxEventDelegate> dic = _checkboxHandlerList[chkName];
                 if (dic != null)
                 {
                     if (dic.Keys.Contains(eventType))
@@ -92,6 +95,40 @@
                 {
                     return null;
                 }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 设置ComboBox用户自定义事件
+        /// </summary>
+        /// <param name="colName"></param>
+        /// <param name="dele"></param>
+        public void SetComboBoxDelegate(string colName, ComboBoxEventDelegate dele)
+        {
+            if (_comboboxHandlerList.Keys.Contains(colName))
+            {
+                _comboboxHandlerList[colName] = dele;
+            }
+            else
+            {
+                _comboboxHandlerList.Add(colName, dele);
+            }
+        }
+
+        /// <summary>
+        /// 获取ComboBox用户自定义事件
+        /// </summary>
+        /// <param name="colName"></param>
+        /// <returns></returns>
+        public ComboBoxEventDelegate GetComboBoxDelegate(string colName)
+        {
+            if (_comboboxHandlerList.Keys.Contains(colName))
+            {
+                return _comboboxHandlerList[colName];
             }
             else
             {
