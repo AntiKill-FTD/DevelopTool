@@ -49,20 +49,23 @@ namespace Tool.CusControls.DataGridViewEx
         public override void InitializeEditingControl(int rowIndex, object initialFormattedValue,
            DataGridViewCellStyle dataGridViewCellStyle)
         {
+            //执行父级初始化操作
             base.InitializeEditingControl(rowIndex, initialFormattedValue, dataGridViewCellStyle);
-
+            //获取下拉框对象
+            ComboBox comboBox = (ComboBox)base.DataGridView.EditingControl;
+            //当下拉框可编辑的时候，设置样式以及自动保存输入值
             if (((DataGridViewComboBoxColumnEx)base.OwningColumn).IsEdit)
             {
-                ComboBox comboBox = (ComboBox)base.DataGridView.EditingControl;
                 if (comboBox != null)
                 {
                     comboBox.DropDownStyle = ComboBoxStyle.DropDown;
                     comboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
                     comboBox.Validating += new CancelEventHandler(comboBox_Validating);
-                    //添加事件
-                    comboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
                 }
             }
+
+            //添加事件
+            comboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
         }
 
         private void comboBox_Validating(object sender, CancelEventArgs e)
@@ -132,7 +135,25 @@ namespace Tool.CusControls.DataGridViewEx
 
         private void ComboBox_SelectedIndexChanged(object? sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            //对象
+            int i = 1;
+
+            //执行默认事件---None
+
+            //执行用户绑定事件
+            try
+            {
+                //string chkName = col.Name;
+                //if (Enum.IsDefined(typeof(CheckBoxName), chkName))
+                //{
+                //    CheckBoxName eC = (CheckBoxName)Enum.Parse(typeof(CheckBoxName), chkName, true);
+                //    ((DataGridViewCommonEx)this.DataGridView).GetDelegate(eC, CheckBoxEventType.Cell)?.Invoke(e);
+                //}
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
         }
 
         #endregion
