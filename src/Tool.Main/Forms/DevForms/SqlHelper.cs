@@ -8,6 +8,27 @@ namespace Tool.Main.Forms.DevForms
 {
     public partial class SqlHelper : Form
     {
+        //数据库类型
+        private string DataBaseType
+        {
+            get
+            {
+                if (rb_DataBase_SqlServer.Checked)
+                {
+                    return "SqlServer";
+                }
+                else if (rb_DataBase_Sqlite.Checked)
+                {
+                    return "Sqlite";
+                }
+                else
+                {
+                    //默认SqlServer
+                    return "SqlServer";
+                }
+            }
+        }
+
         #region initial
         public SqlHelper()
         {
@@ -28,19 +49,27 @@ namespace Tool.Main.Forms.DevForms
             colDic.Add("ColEng", "列英文");
             colDic.Add("ColChn", "列中文");
             this.dvEX.AddColumns(colDic);
-            //添加列2-列类型
+            //添加列2-获取列类型
             List<string> dataTypes;
-            if (dataHelper.GetType() == typeof(MSSqlDataHelper))
+            if (DataBaseType == "SqlServer")
             {
                 dataTypes = Enum.GetNames(typeof(SqlServerDataType)).ToList<string>();
             }
-            else
+            else if (DataBaseType == "Sqlite")
             {
                 dataTypes = Enum.GetNames(typeof(SqliteDataType)).ToList<string>();
             }
+            else
+            {
+                //默认SqlServer
+                dataTypes = Enum.GetNames(typeof(SqlServerDataType)).ToList<string>();
+            }
+            //移除枚举前面的下划线
             dataTypes = ChangeDataTypeName(dataTypes);
+            //添加列2-添加具体列
             DataGridViewComboBoxColumn dataTypeCol = this.dvEX.CreateColumn<DataGridViewComboBoxColumn>("ColDataType", "数据类型", dataTypes, 180);
             this.dvEX.AddColumn(dataTypeCol);
+            //添加列2-添加事件
             this.dvEX.Dv.SetComboBoxDelegate("ColDataType", ColDateTypeSelectIndexChange);
             //添加列3-列长度
             this.dvEX.AddColumn(this.dvEX.CreateColumn<DataGridViewComboBoxColumn>("ColLength", "数据长度", new List<string>(), 180, true));
@@ -82,29 +111,43 @@ namespace Tool.Main.Forms.DevForms
         #region ComboBoxEvent
         private void ColDateTypeSelectIndexChange(object? sender, EventArgs e)
         {
-            //选中数据类型
-            string dataType = "_" + ((ComboBox)sender).Text;
-            SqlServerDataType sqlDataType = (SqlServerDataType)Enum.Parse(typeof(SqlServerDataType), dataType, true);
-            //字典
-            Dictionary<SqlServerDataType, List<string>> dic = DataTypeExtend.SqlLengTypeDic;
-            //获取集合
-            List<string> lengthList = new List<string>();
-            if (dic.Keys.Contains(sqlDataType))
+            try
             {
-                lengthList = dic[sqlDataType];
+                //选中数据类型
+                string dataType = ((ComboBox)sender).Text;
+                if (string.IsNullOrEmpty(dataType)) return;
+                dataType = "_" + dataType;
+                //长度集合定义
+                List<string> lengthList = new List<string>();
+
+                //获取长度定义
+                if (DataBaseType == "SqlServer")
+                {
+                    lengthList = DataTypeExtend.GetSqlServerLengthTypeList(dataType);
+                }
+                else if (DataBaseType == "Sqlite")
+                {
+                    lengthList = DataTypeExtend.GetSqliteLengthTypeList(dataType);
+                }
+                else
+                {
+                    //默认SqlServer
+                    lengthList = DataTypeExtend.GetSqlServerLengthTypeList(dataType);
+                }
+
+                //获取数据长度单元格
+                DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
+                DataGridView dv = cb.EditingControlDataGridView;
+                int rowIndex = dv.CurrentCell.RowIndex;
+                int colIndex = dv.CurrentCell.ColumnIndex;
+                DataGridViewComboBoxCell lengthCell = (DataGridViewComboBoxCell)dv.Rows[rowIndex].Cells[colIndex + 1];
+                //绑定
+                lengthCell.DataSource = lengthList;
             }
-            else
+            catch (Exception ex)
             {
-                lengthList.Add("");
+                MessageBox.Show(ex.Message, "错误");
             }
-            //获取数据长度单元格
-            DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
-            DataGridView dv = cb.EditingControlDataGridView;
-            int rowIndex = dv.CurrentCell.RowIndex;
-            int colIndex = dv.CurrentCell.ColumnIndex;
-            DataGridViewComboBoxCell lengthCell = (DataGridViewComboBoxCell)dv.Rows[rowIndex].Cells[colIndex + 1];
-            //绑定
-            lengthCell.DataSource = lengthList;
         }
         #endregion
 

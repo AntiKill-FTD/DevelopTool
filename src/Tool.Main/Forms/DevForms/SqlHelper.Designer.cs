@@ -40,6 +40,10 @@
             this.lbTEng = new System.Windows.Forms.Label();
             this.tbTChn = new System.Windows.Forms.TextBox();
             this.tbTEng = new System.Windows.Forms.TextBox();
+            this.lbDataBaseType = new System.Windows.Forms.Label();
+            this.tlp_DataBaseType = new System.Windows.Forms.TableLayoutPanel();
+            this.rb_DataBase_SqlServer = new System.Windows.Forms.RadioButton();
+            this.rb_DataBase_Sqlite = new System.Windows.Forms.RadioButton();
             this.panelButtonMain = new System.Windows.Forms.Panel();
             this.tlpButton = new System.Windows.Forms.TableLayoutPanel();
             this.btnAddRow = new System.Windows.Forms.Button();
@@ -52,6 +56,7 @@
             this.panelGrid.SuspendLayout();
             this.panelTableMain.SuspendLayout();
             this.tlpTable.SuspendLayout();
+            this.tlp_DataBaseType.SuspendLayout();
             this.panelButtonMain.SuspendLayout();
             this.tlpButton.SuspendLayout();
             this.SuspendLayout();
@@ -140,17 +145,21 @@
             // tlpTable
             // 
             this.tlpTable.BackColor = System.Drawing.Color.Azure;
-            this.tlpTable.ColumnCount = 6;
+            this.tlpTable.ColumnCount = 8;
             this.tlpTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tlpTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
             this.tlpTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
             this.tlpTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 225F));
             this.tlpTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
             this.tlpTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 225F));
             this.tlpTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpTable.Controls.Add(this.lbTChn, 1, 0);
-            this.tlpTable.Controls.Add(this.lbTEng, 3, 0);
-            this.tlpTable.Controls.Add(this.tbTChn, 2, 0);
-            this.tlpTable.Controls.Add(this.tbTEng, 4, 0);
+            this.tlpTable.Controls.Add(this.lbTChn, 3, 0);
+            this.tlpTable.Controls.Add(this.lbTEng, 5, 0);
+            this.tlpTable.Controls.Add(this.tbTChn, 4, 0);
+            this.tlpTable.Controls.Add(this.tbTEng, 6, 0);
+            this.tlpTable.Controls.Add(this.lbDataBaseType, 1, 0);
+            this.tlpTable.Controls.Add(this.tlp_DataBaseType, 2, 0);
             this.tlpTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpTable.Location = new System.Drawing.Point(0, 0);
             this.tlpTable.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -163,7 +172,7 @@
             // lbTChn
             // 
             this.lbTChn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbTChn.Location = new System.Drawing.Point(359, 0);
+            this.lbTChn.Location = new System.Drawing.Point(529, 0);
             this.lbTChn.Name = "lbTChn";
             this.lbTChn.Size = new System.Drawing.Size(84, 45);
             this.lbTChn.TabIndex = 0;
@@ -173,7 +182,7 @@
             // lbTEng
             // 
             this.lbTEng.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbTEng.Location = new System.Drawing.Point(674, 0);
+            this.lbTEng.Location = new System.Drawing.Point(844, 0);
             this.lbTEng.Name = "lbTEng";
             this.lbTEng.Size = new System.Drawing.Size(84, 45);
             this.lbTEng.TabIndex = 1;
@@ -183,7 +192,7 @@
             // tbTChn
             // 
             this.tbTChn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbTChn.Location = new System.Drawing.Point(449, 4);
+            this.tbTChn.Location = new System.Drawing.Point(619, 4);
             this.tbTChn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbTChn.Name = "tbTChn";
             this.tbTChn.Size = new System.Drawing.Size(219, 27);
@@ -192,11 +201,63 @@
             // tbTEng
             // 
             this.tbTEng.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbTEng.Location = new System.Drawing.Point(764, 4);
+            this.tbTEng.Location = new System.Drawing.Point(934, 4);
             this.tbTEng.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbTEng.Name = "tbTEng";
             this.tbTEng.Size = new System.Drawing.Size(219, 27);
             this.tbTEng.TabIndex = 3;
+            // 
+            // lbDataBaseType
+            // 
+            this.lbDataBaseType.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbDataBaseType.Location = new System.Drawing.Point(189, 0);
+            this.lbDataBaseType.Name = "lbDataBaseType";
+            this.lbDataBaseType.Size = new System.Drawing.Size(84, 45);
+            this.lbDataBaseType.TabIndex = 4;
+            this.lbDataBaseType.Text = "数据库：";
+            this.lbDataBaseType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tlp_DataBaseType
+            // 
+            this.tlp_DataBaseType.ColumnCount = 2;
+            this.tlp_DataBaseType.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_DataBaseType.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_DataBaseType.Controls.Add(this.rb_DataBase_SqlServer, 0, 0);
+            this.tlp_DataBaseType.Controls.Add(this.rb_DataBase_Sqlite, 1, 0);
+            this.tlp_DataBaseType.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlp_DataBaseType.Location = new System.Drawing.Point(279, 3);
+            this.tlp_DataBaseType.Name = "tlp_DataBaseType";
+            this.tlp_DataBaseType.RowCount = 1;
+            this.tlp_DataBaseType.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_DataBaseType.Size = new System.Drawing.Size(244, 39);
+            this.tlp_DataBaseType.TabIndex = 5;
+            // 
+            // rb_DataBase_SqlServer
+            // 
+            this.rb_DataBase_SqlServer.AutoSize = true;
+            this.rb_DataBase_SqlServer.Checked = true;
+            this.rb_DataBase_SqlServer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rb_DataBase_SqlServer.Location = new System.Drawing.Point(3, 3);
+            this.rb_DataBase_SqlServer.Name = "rb_DataBase_SqlServer";
+            this.rb_DataBase_SqlServer.Size = new System.Drawing.Size(116, 33);
+            this.rb_DataBase_SqlServer.TabIndex = 0;
+            this.rb_DataBase_SqlServer.TabStop = true;
+            this.rb_DataBase_SqlServer.Text = "SqlServer";
+            this.rb_DataBase_SqlServer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rb_DataBase_SqlServer.UseVisualStyleBackColor = true;
+            // 
+            // rb_DataBase_Sqlite
+            // 
+            this.rb_DataBase_Sqlite.AutoSize = true;
+            this.rb_DataBase_Sqlite.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rb_DataBase_Sqlite.Location = new System.Drawing.Point(125, 3);
+            this.rb_DataBase_Sqlite.Name = "rb_DataBase_Sqlite";
+            this.rb_DataBase_Sqlite.Size = new System.Drawing.Size(116, 33);
+            this.rb_DataBase_Sqlite.TabIndex = 1;
+            this.rb_DataBase_Sqlite.TabStop = true;
+            this.rb_DataBase_Sqlite.Text = "Sqlite";
+            this.rb_DataBase_Sqlite.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rb_DataBase_Sqlite.UseVisualStyleBackColor = true;
             // 
             // panelButtonMain
             // 
@@ -296,6 +357,8 @@
             this.panelTableMain.ResumeLayout(false);
             this.tlpTable.ResumeLayout(false);
             this.tlpTable.PerformLayout();
+            this.tlp_DataBaseType.ResumeLayout(false);
+            this.tlp_DataBaseType.PerformLayout();
             this.panelButtonMain.ResumeLayout(false);
             this.tlpButton.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -322,5 +385,9 @@
         private System.Windows.Forms.Label lbTEng;
         private System.Windows.Forms.TextBox tbTChn;
         private System.Windows.Forms.TextBox tbTEng;
+        private Label lbDataBaseType;
+        private TableLayoutPanel tlp_DataBaseType;
+        private RadioButton rb_DataBase_SqlServer;
+        private RadioButton rb_DataBase_Sqlite;
     }
 }

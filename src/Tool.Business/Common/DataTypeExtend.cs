@@ -9,22 +9,79 @@ namespace Tool.Business.Common
 {
     public static class DataTypeExtend
     {
-        private static Dictionary<SqlServerDataType, List<string>> _lengthInfoDic;
+        //SqlServer长度类型字典-私有
+        private static Dictionary<SqlServerDataType, List<string>> _sqlServerLengTypeDic;
+        //Sqlite   长度类型字段-私有
+        private static Dictionary<SqliteDataType, List<string>> _sqliteLengthTypeDic;
 
-        public static Dictionary<SqlServerDataType, List<string>> SqlLengTypeDic
+        //SqlServer长度类型字典-公有
+        public static Dictionary<SqlServerDataType, List<string>> SqlServerLengTypeDic
         {
             get
             {
-                if (_lengthInfoDic == null)
+                if (_sqlServerLengTypeDic == null)
                 {
-                    _lengthInfoDic = GetSqlServerDataTypeLengthInfo();
+                    _sqlServerLengTypeDic = GetSqlServerDataTypeLengthInfo();
                 }
-                return _lengthInfoDic;
+                return _sqlServerLengTypeDic;
             }
         }
 
+        //Sqlite长度类型字典-公有
+        public static Dictionary<SqliteDataType, List<string>> SqliteLengTypeDic
+        {
+            get
+            {
+                if (_sqliteLengthTypeDic == null)
+                {
+                    _sqliteLengthTypeDic = GetSqliteDataTypeLengthInfo();
+                }
+                return _sqliteLengthTypeDic;
+            }
+        }
+
+        //SqlServer长度类型具体集合
+        public static List<string> GetSqlServerLengthTypeList(string dataType)
+        {
+            //长度集合定义
+            List<string> lengthList = new List<string>();
+            //枚举
+            SqlServerDataType sqlDataType = (SqlServerDataType)Enum.Parse(typeof(SqlServerDataType), dataType, true);
+            //获取集合
+            if (SqlServerLengTypeDic.Keys.Contains(sqlDataType))
+            {
+                lengthList = SqlServerLengTypeDic[sqlDataType];
+            }
+            else
+            {
+                lengthList.Add("");
+            }
+            //返回
+            return lengthList;
+        }
+
+        //Sqlite长度类型具体集合
+        public static List<string> GetSqliteLengthTypeList(string dataType)
+        {
+            //长度集合定义
+            List<string> lengthList = new List<string>();
+            //枚举
+            SqliteDataType sqlDataType = (SqliteDataType)Enum.Parse(typeof(SqliteDataType), dataType, true);
+            //获取集合
+            if (SqliteLengTypeDic.Keys.Contains(sqlDataType))
+            {
+                lengthList = SqliteLengTypeDic[sqlDataType];
+            }
+            else
+            {
+                lengthList.Add("");
+            }
+            //返回
+            return lengthList;
+        }
+
         /// <summary>
-        /// 返回数据类型长度模板
+        /// 返回数据类型长度模板-SqlServer
         /// </summary>
         /// <returns></returns>
         private static Dictionary<SqlServerDataType, List<string>> GetSqlServerDataTypeLengthInfo()
@@ -47,6 +104,34 @@ namespace Tool.Business.Common
             dic.Add(SqlServerDataType._time, timeLengthType);
             dic.Add(SqlServerDataType._datetimeoffset, timeLengthType);
             dic.Add(SqlServerDataType._datetime2, timeLengthType);
+
+            return dic;
+        }
+
+        /// <summary>
+        /// 返回数据类型长度模板-Sqlite
+        /// </summary>
+        /// <returns></returns>
+        private static Dictionary<SqliteDataType, List<string>> GetSqliteDataTypeLengthInfo()
+        {
+            Dictionary<SqliteDataType, List<string>> dic = new Dictionary<SqliteDataType, List<string>>();
+            List<string> stringLengthType = new List<string> { "(10)", "(20)", "(50)", "(100)", "(200)", "(500)", "(1000)", "(MAX)" };
+            List<string> decimalLengthType = new List<string> { "(18,0)", "(18,2)", "(18,6)" };
+            List<string> timeLengthType = new List<string> { "(7)" };
+            //string
+            dic.Add(SqliteDataType._binary, stringLengthType);
+            dic.Add(SqliteDataType._varbinary, stringLengthType);
+            dic.Add(SqliteDataType._char, stringLengthType);
+            dic.Add(SqliteDataType._nchar, stringLengthType);
+            dic.Add(SqliteDataType._varchar, stringLengthType);
+            dic.Add(SqliteDataType._nvarchar, stringLengthType);
+            //decimal
+            dic.Add(SqliteDataType._decimal, decimalLengthType);
+            dic.Add(SqliteDataType._numeric, decimalLengthType);
+            //time
+            dic.Add(SqliteDataType._time, timeLengthType);
+            dic.Add(SqliteDataType._datetimeoffset, timeLengthType);
+            dic.Add(SqliteDataType._datetime2, timeLengthType);
 
             return dic;
         }
