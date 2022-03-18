@@ -59,6 +59,8 @@ namespace Tool.CusControls.DataGridViewEx
                     comboBox.DropDownStyle = ComboBoxStyle.DropDown;
                     comboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
                     comboBox.Validating += new CancelEventHandler(comboBox_Validating);
+                    //添加事件
+                    comboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
                 }
             }
         }
@@ -122,6 +124,15 @@ namespace Tool.CusControls.DataGridViewEx
             }
             //重绘ComboBox前景色
             base.Paint(graphics, clipBounds, cellBounds, rowIndex, dataGridViewElementState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, paintParts);
+        }
+
+        #endregion
+
+        #region "type:events"
+
+        private void ComboBox_SelectedIndexChanged(object? sender, EventArgs e)
+        {
+            //throw new NotImplementedException();
         }
 
         #endregion
