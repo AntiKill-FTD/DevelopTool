@@ -8,6 +8,7 @@ namespace Tool.Main.Forms.DevForms
 {
     public partial class SqlHelper : Form
     {
+        #region private prob
         //数据库类型
         private string DataBaseType
         {
@@ -28,6 +29,7 @@ namespace Tool.Main.Forms.DevForms
                 }
             }
         }
+        #endregion
 
         #region initial
         public SqlHelper()
@@ -39,6 +41,13 @@ namespace Tool.Main.Forms.DevForms
 
             //设置网格属性
             SetDVProb();
+        }
+        #endregion
+
+        #region PageLoad
+        private void SqlHelper_Load(object sender, EventArgs e)
+        {
+
         }
         #endregion
 
@@ -88,13 +97,6 @@ namespace Tool.Main.Forms.DevForms
         }
         #endregion
 
-        #region PageLoad
-        private void SqlHelper_Load(object sender, EventArgs e)
-        {
-
-        }
-        #endregion
-
         #region ChangeDataTypeName
 
         /// <summary>
@@ -116,7 +118,7 @@ namespace Tool.Main.Forms.DevForms
 
         #endregion
 
-        #region CheckChanged
+        #region DataTypeCheckChanged
         private void rb_DataBase_SqlServer_CheckedChanged(object sender, EventArgs e)
         {
             SetDVProb();
@@ -134,21 +136,8 @@ namespace Tool.Main.Forms.DevForms
                 dataType = "_" + dataType;
                 //长度集合定义
                 List<string> lengthList = new List<string>();
-
-                //获取长度定义
-                if (DataBaseType == "SqlServer")
-                {
-                    lengthList = DataTypeExtend.GetSqlServerLengthTypeList(dataType);
-                }
-                else if (DataBaseType == "Sqlite")
-                {
-                    lengthList = DataTypeExtend.GetSqliteLengthTypeList(dataType);
-                }
-                else
-                {
-                    //默认SqlServer
-                    lengthList = DataTypeExtend.GetSqlServerLengthTypeList(dataType);
-                }
+                //获取数据长度信息
+                lengthList = GetLengthInfo(dataType);
 
                 //获取数据长度单元格
                 DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
@@ -163,6 +152,29 @@ namespace Tool.Main.Forms.DevForms
             {
                 MessageBox.Show(ex.Message, "错误");
             }
+        }
+        #endregion
+
+        #region GetLengthInfo
+        private List<string> GetLengthInfo(string dataType)
+        {
+            List<string> lengthList;
+            //获取长度定义
+            if (DataBaseType == "SqlServer")
+            {
+                lengthList = DataTypeExtend.GetSqlServerLengthTypeList(dataType);
+            }
+            else if (DataBaseType == "Sqlite")
+            {
+                lengthList = DataTypeExtend.GetSqliteLengthTypeList(dataType);
+            }
+            else
+            {
+                //默认SqlServer
+                lengthList = DataTypeExtend.GetSqlServerLengthTypeList(dataType);
+            }
+
+            return lengthList;
         }
         #endregion
 
@@ -207,9 +219,15 @@ namespace Tool.Main.Forms.DevForms
         /// <param name="e"></param>
         private void btnBuild_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(Validate()))
+            //校验
+            string strVali = Validate();
+            if (string.IsNullOrEmpty(strVali))
             {
                 Build();
+            }
+            else
+            {
+                this.rtbScript.Text = strVali;
             }
         }
 
@@ -225,28 +243,55 @@ namespace Tool.Main.Forms.DevForms
         {
             //临时结果
             bool result = false;
-            //校验1:表中文只能是【字母、数字、下划线、汉字】
-            string regExprTableNameChn = "";
-            result = RegexCheck(this.tbTChn.Text.Trim(), regExprTableNameChn);
+            //正则表达式
+            string regExprNameChn = "";
+            string regExprNameEng = "";
+            //校验1:表中文英文校验
+            //1.1校验表中文英文-不为空
+            if (string.IsNullOrEmpty(this.tbTChn.Text.Trim()) || string.IsNullOrEmpty(this.tbTEng.Text.Trim()))
+            {
+                return "表中文名称、英文名称不能为空;";
+            }
+            //1.2校验表中文英文-规范
+            result = RegexCheck(this.tbTChn.Text.Trim(), regExprNameChn);
             if (!result) return "表中文只能是【字母、数字、下划线、汉字】";
-            //校验2:表英文只能是【字母、数字、下划线】
-            string regExprTableNameEng = "";
-            result = RegexCheck(this.tbTEng.Text.Trim(), regExprTableNameEng);
+            result = RegexCheck(this.tbTEng.Text.Trim(), regExprNameEng);
             if (!result) return "表英文只能是【字母、数字、下划线】";
+            //校验2:校验字段个数
+            if (dvEX.Dv.RowCount < 1)
+            {
+                return "表包含列数不能为空";
+            }
             //校验3:循环行数据
             for (int i = 0; i < dvEX.Dv.RowCount; i++)
             {
+                //获取数据行
                 DataGridViewRow dr = dvEX.Dv.Rows[i];
-                //校验列数据
+                //获取列数据
+                var colChn = dr.Cells["ColChn"].Value;
                 var colEng = dr.Cells["ColEng"].Value;
-                if (colEng == null || string.IsNullOrEmpty(colEng.ToString().Trim()))
+                var colDataType = dr.Cells["ColDataType"].Value;
+                var colLength = dr.Cells["ColLength"].Value;
+                //3.1 校验列数据-不为空
+                //3.1.1 列中文、列英文、列类型
+                if (colChn == null || string.IsNullOrEmpty(colChn.ToString().Trim())
+                    || colEng == null || string.IsNullOrEmpty(colEng.ToString().Trim())
+                    || colDataType == null || string.IsNullOrEmpty(colDataType.ToString().Trim()))
                 {
-                    return "第" + i.ToString() + "行，列英文名称不能为空;";
+                    return "第" + (i + 1).ToString() + "行，列英文名称、中文名称、数据类型 不能为空;";
                 }
-                string regExprColEng = "";
-                result = RegexCheck(colEng.ToString().Trim(), regExprColEng);
+                //3.1.2数据长度
+                List<string> lengthInfo = GetLengthInfo("_" + colDataType.ToString().Trim());
+                if (lengthInfo.Count > 0 && lengthInfo[0] != ""
+                    && (colLength == null || string.IsNullOrEmpty(colLength.ToString().Trim())))
+                {
+                    return "第" + (i + 1).ToString() + "行，数据长度 不能为空;";
+                }
+                //3.2校验列数据-规范
+                result = RegexCheck(colChn.ToString().Trim(), regExprNameChn);
+                if (!result) return "列中文只能是【字母、数字、下划线、汉字】";
+                result = RegexCheck(colEng.ToString().Trim(), regExprNameEng);
                 if (!result) return "列英文只能是【字母、数字、下划线】";
-
             }
 
             return string.Empty;
@@ -275,7 +320,7 @@ namespace Tool.Main.Forms.DevForms
         /// </summary>
         private void Build()
         {
-
+            this.rtbScript.Text = DateTime.Now.ToString();
         }
 
         #endregion
