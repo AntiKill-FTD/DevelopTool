@@ -11,6 +11,7 @@ namespace Tool.Business.Common
     {
         //SqlServer长度类型字典-私有
         private static Dictionary<SqlServerDataType, List<string>> _sqlServerLengTypeDic;
+
         //Sqlite   长度类型字段-私有
         private static Dictionary<SqliteDataType, List<string>> _sqliteLengthTypeDic;
 
@@ -115,23 +116,9 @@ namespace Tool.Business.Common
         private static Dictionary<SqliteDataType, List<string>> GetSqliteDataTypeLengthInfo()
         {
             Dictionary<SqliteDataType, List<string>> dic = new Dictionary<SqliteDataType, List<string>>();
-            List<string> stringLengthType = new List<string> { "(10)", "(20)", "(50)", "(100)", "(200)", "(500)", "(1000)", "(MAX)" };
-            List<string> decimalLengthType = new List<string> { "(18,0)", "(18,2)", "(18,6)" };
-            List<string> timeLengthType = new List<string> { "(7)" };
+            List<string> stringLengthType = new List<string> { "(10)", "(20)", "(50)", "(100)", "(200)", "(500)", "(1000)" };
             //string
-            dic.Add(SqliteDataType._binary, stringLengthType);
-            dic.Add(SqliteDataType._varbinary, stringLengthType);
-            dic.Add(SqliteDataType._char, stringLengthType);
-            dic.Add(SqliteDataType._nchar, stringLengthType);
-            dic.Add(SqliteDataType._varchar, stringLengthType);
-            dic.Add(SqliteDataType._nvarchar, stringLengthType);
-            //decimal
-            dic.Add(SqliteDataType._decimal, decimalLengthType);
-            dic.Add(SqliteDataType._numeric, decimalLengthType);
-            //time
-            dic.Add(SqliteDataType._time, timeLengthType);
-            dic.Add(SqliteDataType._datetimeoffset, timeLengthType);
-            dic.Add(SqliteDataType._datetime2, timeLengthType);
+            dic.Add(SqliteDataType._TEXT, stringLengthType);
 
             return dic;
         }

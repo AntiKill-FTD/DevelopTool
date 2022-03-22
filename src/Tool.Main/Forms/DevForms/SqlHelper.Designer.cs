@@ -245,6 +245,7 @@
             this.rb_DataBase_SqlServer.Text = "SqlServer";
             this.rb_DataBase_SqlServer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.rb_DataBase_SqlServer.UseVisualStyleBackColor = true;
+            this.rb_DataBase_SqlServer.CheckedChanged += new System.EventHandler(this.rb_DataBase_SqlServer_CheckedChanged);
             // 
             // rb_DataBase_Sqlite
             // 

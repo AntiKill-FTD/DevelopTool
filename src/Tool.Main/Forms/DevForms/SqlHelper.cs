@@ -37,13 +37,22 @@ namespace Tool.Main.Forms.DevForms
             ICommonDataHelper dataHelper = Program.ServiceProvider.GetService(typeof(ICommonDataHelper)) as ICommonDataHelper;
             this.dvEX.DataHelper = dataHelper;
 
-            #region 设置网格属性
+            //设置网格属性
+            SetDVProb();
+        }
+        #endregion
+
+        #region SetDVProb
+        private void SetDVProb()
+        {
             //不分页
             this.dvEX.IsPage = false;
             //不显示checkbox
             this.dvEX.IsShowFirstCheckBox = false;
             //Grid数据可编辑
             this.dvEX.RowEdit = true;
+            //移除所有列
+            this.dvEX.ClearColumns();
             //添加列1-列中文、列英文
             Dictionary<string, string> colDic = new Dictionary<string, string>();
             colDic.Add("ColEng", "列英文");
@@ -76,7 +85,6 @@ namespace Tool.Main.Forms.DevForms
             //添加列4-是否主键、是否费控
             this.dvEX.AddChkCol(CheckBoxName.CheckBox1, -1, true, "是否主键");//IsPrimarikey
             this.dvEX.AddChkCol(CheckBoxName.CheckBox2, -1, true, "是否非空");//IsNotNull
-            #endregion
         }
         #endregion
 
@@ -87,7 +95,7 @@ namespace Tool.Main.Forms.DevForms
         }
         #endregion
 
-        #region Common
+        #region ChangeDataTypeName
 
         /// <summary>
         /// 格式处理：
@@ -106,6 +114,13 @@ namespace Tool.Main.Forms.DevForms
             return vs;
         }
 
+        #endregion
+
+        #region CheckChanged
+        private void rb_DataBase_SqlServer_CheckedChanged(object sender, EventArgs e)
+        {
+            SetDVProb();
+        }
         #endregion
 
         #region ComboBoxEvent
@@ -264,6 +279,5 @@ namespace Tool.Main.Forms.DevForms
         }
 
         #endregion
-
     }
 }
