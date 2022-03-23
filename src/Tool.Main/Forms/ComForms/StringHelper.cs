@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -242,6 +243,105 @@ namespace Tool.Main.Forms.ComForms
         {
             this.rtb_Dichotomy_Source.Text = this.rtb_Dichotomy_Distination.Text;
         }
+        #endregion
+
+        #endregion
+
+        #region C#代码加密 JS解密
+
+        #region 明文改变事件
+        private void tb_DE_Decrypt_KeyUp(object sender, KeyEventArgs e)
+        {
+            //秘钥为空直接返回
+            if (string.IsNullOrEmpty(this.tb_DE_PassWord.Text.Trim())) this.tb_DE_Encrypt.Text = string.Empty;
+            //获取秘钥和明文
+            string strPassWord = this.tb_DE_PassWord.Text;
+            string strDecrypt = this.tb_DE_Decrypt.Text;
+            //加密
+            //1.秘钥Decimal
+            string binaryPassWord = BinaryHelper.StringToBinary(strPassWord);
+            string decimalPassWord = BinaryHelper.BinaryToDecimal(binaryPassWord);
+            //2.源Decimal
+            string binaryOrigin = BinaryHelper.StringToBinary(strDecrypt);
+            string decimalOrigin = BinaryHelper.BinaryToDecimal(binaryOrigin);
+            //3.相加输出
+            string addBigInteger = BigInteger.Add(BigInteger.Parse(decimalPassWord), BigInteger.Parse(decimalOrigin)).ToString();
+            //输出密文
+            this.tb_DE_Encrypt.Text = addBigInteger;
+        }
+        #endregion
+
+        #region JS解密方案
+        //      //明文内容改变事件
+        //      function tbEncode_Changed()
+        //      {
+        //          //秘钥和密文
+        //          var strPassWord = $("#tbPassWord").val();
+        //          var strEncode = $("#tbEncode").val();
+        //          //秘钥 str -> decimal
+        //          var binaryPass = strToBinary(strPassWord);
+        //          var decimalPass = binaryToDecimal(binaryPass);
+        //          //解密
+        //          var strDecode = DecodeStr(strEncode, decimalPass);
+        //          //输出
+        //          $("#tbDecode").val(strDecode);
+        //      }
+
+        //      //解密
+        //      function DecodeStr(strEncode, decimalPass)
+        //      {
+        //          //BigIntegerSum - decimalPass
+        //          var decimalOrigin = BigInt(strEncode) - BigInt(decimalPass);
+        //          //BigInteger -> Binary
+        //          var binaryEncode = decimalToBinary(decimalOrigin);
+        //          //Binary -> String
+        //          var strEncode = binaryToStr(binaryEncode);
+        //          return strEncode;
+        //      }
+
+        //      //将十进制转换为二进制，每个转换8位
+        //      function decimalToBinary(num)
+        //      {
+        //          var binaryStr = BigInt(num).toString(2);
+        //          binaryStr = new Array(8 - binaryStr.length % 8 + 1).join('0') + binaryStr;
+        //          return binaryStr;
+        //      }
+
+        //      //将二进制转换为10进制
+        //      function binaryToDecimal(binary)
+        //      {
+        //          var num = BigInt("0b" + binary);
+        //          return num;
+        //      }
+
+        //      //将字符串转换成二进制形式，每个转换8位
+        //      function strToBinary(str)
+        //      {
+        //          var result = [];
+        //          var list = str.split("");
+        //          for (var i = 0; i < list.length; i++)
+        //          {
+        //              var item = list[i];
+        //              var binaryStr = item.charCodeAt().toString(2);
+        //              binaryStr = new Array(8 - binaryStr.length + 1).join('0') + binaryStr;
+        //              result.push(binaryStr);
+        //          }
+        //          return result.join("");
+        //      }
+
+        //      //将二进制字符串转换成Unicode字符串
+        //      function binaryToStr(str)
+        //      {
+        //          var result = [];
+        //          for (var i = 0; i < str.length / 8; i++)
+        //          {
+        //              var item = str.substr(i * 8, 8);
+        //              var asciiCode = parseInt(item, 2);
+        //              var charValue = String.fromCharCode(asciiCode);
+        //              result.push(charValue);
+        //          }
+        //          return result.join("");
+        //      }
         #endregion
 
         #endregion

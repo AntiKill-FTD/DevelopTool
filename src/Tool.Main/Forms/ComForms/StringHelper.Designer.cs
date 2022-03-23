@@ -78,6 +78,13 @@
             this.btn_Dichotomy_DownHalf = new System.Windows.Forms.Button();
             this.btn_Dichotomy_WriteBack = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.tlp_CodeEnCryptJSDecrypt = new System.Windows.Forms.TableLayoutPanel();
+            this.lbl_DE_PassWord = new System.Windows.Forms.Label();
+            this.lbl_DE_Encrypt = new System.Windows.Forms.Label();
+            this.lbl_DE_Decrypt = new System.Windows.Forms.Label();
+            this.tb_DE_PassWord = new System.Windows.Forms.TextBox();
+            this.tb_DE_Decrypt = new System.Windows.Forms.TextBox();
+            this.tb_DE_Encrypt = new System.Windows.Forms.TextBox();
             this.mainPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tlp_StringList.SuspendLayout();
@@ -94,6 +101,8 @@
             this.panel3.SuspendLayout();
             this.tlp_Dichotomy.SuspendLayout();
             this.tlp_Dichotomy_Operate.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.tlp_CodeEnCryptJSDecrypt.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -717,11 +726,97 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.LightYellow;
+            this.panel4.Controls.Add(this.tlp_CodeEnCryptJSDecrypt);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(643, 403);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(634, 395);
             this.panel4.TabIndex = 3;
+            // 
+            // tlp_CodeEnCryptJSDecrypt
+            // 
+            this.tlp_CodeEnCryptJSDecrypt.ColumnCount = 2;
+            this.tlp_CodeEnCryptJSDecrypt.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tlp_CodeEnCryptJSDecrypt.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            this.tlp_CodeEnCryptJSDecrypt.Controls.Add(this.lbl_DE_PassWord, 0, 0);
+            this.tlp_CodeEnCryptJSDecrypt.Controls.Add(this.lbl_DE_Encrypt, 0, 1);
+            this.tlp_CodeEnCryptJSDecrypt.Controls.Add(this.lbl_DE_Decrypt, 0, 2);
+            this.tlp_CodeEnCryptJSDecrypt.Controls.Add(this.tb_DE_PassWord, 1, 0);
+            this.tlp_CodeEnCryptJSDecrypt.Controls.Add(this.tb_DE_Decrypt, 1, 1);
+            this.tlp_CodeEnCryptJSDecrypt.Controls.Add(this.tb_DE_Encrypt, 1, 2);
+            this.tlp_CodeEnCryptJSDecrypt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlp_CodeEnCryptJSDecrypt.Location = new System.Drawing.Point(0, 0);
+            this.tlp_CodeEnCryptJSDecrypt.Name = "tlp_CodeEnCryptJSDecrypt";
+            this.tlp_CodeEnCryptJSDecrypt.RowCount = 10;
+            this.tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tlp_CodeEnCryptJSDecrypt.Size = new System.Drawing.Size(634, 395);
+            this.tlp_CodeEnCryptJSDecrypt.TabIndex = 0;
+            // 
+            // lbl_DE_PassWord
+            // 
+            this.lbl_DE_PassWord.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_DE_PassWord.Location = new System.Drawing.Point(3, 0);
+            this.lbl_DE_PassWord.Name = "lbl_DE_PassWord";
+            this.lbl_DE_PassWord.Size = new System.Drawing.Size(120, 39);
+            this.lbl_DE_PassWord.TabIndex = 0;
+            this.lbl_DE_PassWord.Text = "秘钥：";
+            this.lbl_DE_PassWord.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_DE_Encrypt
+            // 
+            this.lbl_DE_Encrypt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_DE_Encrypt.Location = new System.Drawing.Point(3, 39);
+            this.lbl_DE_Encrypt.Name = "lbl_DE_Encrypt";
+            this.lbl_DE_Encrypt.Size = new System.Drawing.Size(120, 39);
+            this.lbl_DE_Encrypt.TabIndex = 1;
+            this.lbl_DE_Encrypt.Text = "明文：";
+            this.lbl_DE_Encrypt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_DE_Decrypt
+            // 
+            this.lbl_DE_Decrypt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_DE_Decrypt.Location = new System.Drawing.Point(3, 78);
+            this.lbl_DE_Decrypt.Name = "lbl_DE_Decrypt";
+            this.lbl_DE_Decrypt.Size = new System.Drawing.Size(120, 39);
+            this.lbl_DE_Decrypt.TabIndex = 2;
+            this.lbl_DE_Decrypt.Text = "密文：";
+            this.lbl_DE_Decrypt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_DE_PassWord
+            // 
+            this.tb_DE_PassWord.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_DE_PassWord.Location = new System.Drawing.Point(129, 3);
+            this.tb_DE_PassWord.Name = "tb_DE_PassWord";
+            this.tb_DE_PassWord.Size = new System.Drawing.Size(502, 27);
+            this.tb_DE_PassWord.TabIndex = 3;
+            this.tb_DE_PassWord.Text = "isoftstone";
+            // 
+            // tb_DE_Decrypt
+            // 
+            this.tb_DE_Decrypt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_DE_Decrypt.Location = new System.Drawing.Point(129, 42);
+            this.tb_DE_Decrypt.Name = "tb_DE_Decrypt";
+            this.tb_DE_Decrypt.Size = new System.Drawing.Size(502, 27);
+            this.tb_DE_Decrypt.TabIndex = 3;
+            this.tb_DE_Decrypt.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tb_DE_Decrypt_KeyUp);
+            // 
+            // tb_DE_Encrypt
+            // 
+            this.tb_DE_Encrypt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_DE_Encrypt.Location = new System.Drawing.Point(129, 81);
+            this.tb_DE_Encrypt.Name = "tb_DE_Encrypt";
+            this.tb_DE_Encrypt.ReadOnly = true;
+            this.tb_DE_Encrypt.Size = new System.Drawing.Size(502, 27);
+            this.tb_DE_Encrypt.TabIndex = 3;
             // 
             // StringHelper
             // 
@@ -754,6 +849,9 @@
             this.panel3.ResumeLayout(false);
             this.tlp_Dichotomy.ResumeLayout(false);
             this.tlp_Dichotomy_Operate.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.tlp_CodeEnCryptJSDecrypt.ResumeLayout(false);
+            this.tlp_CodeEnCryptJSDecrypt.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -810,5 +908,12 @@
         private Button btn_Dichotomy_UpHalf;
         private Button btn_Dichotomy_DownHalf;
         private Button btn_Dichotomy_WriteBack;
+        private TableLayoutPanel tlp_CodeEnCryptJSDecrypt;
+        private Label lbl_DE_PassWord;
+        private Label lbl_DE_Encrypt;
+        private Label lbl_DE_Decrypt;
+        private TextBox tb_DE_PassWord;
+        private TextBox tb_DE_Decrypt;
+        private TextBox tb_DE_Encrypt;
     }
 }
