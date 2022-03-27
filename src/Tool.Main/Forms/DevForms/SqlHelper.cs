@@ -244,8 +244,9 @@ namespace Tool.Main.Forms.DevForms
             //临时结果
             bool result = false;
             //正则表达式
-            string regExprNameChn = "";
-            string regExprNameEng = "";
+            string regExprNameChn = "^[a-z,A-Z,0-9,_,\u4e00-\u9fa5]+$";
+            string regExprNameEng = "^[a-z,A-Z,0-9,_]+$";
+            RegexCheck("123", regExprNameChn);
             //校验1:表中文英文校验
             //1.1校验表中文英文-不为空
             if (string.IsNullOrEmpty(this.tbTChn.Text.Trim()) || string.IsNullOrEmpty(this.tbTEng.Text.Trim()))
@@ -263,6 +264,7 @@ namespace Tool.Main.Forms.DevForms
                 return "表包含列数不能为空";
             }
             //校验3:循环行数据
+            List<string> colNameList = new List<string>();
             for (int i = 0; i < dvEX.Dv.RowCount; i++)
             {
                 //获取数据行
@@ -292,6 +294,15 @@ namespace Tool.Main.Forms.DevForms
                 if (!result) return "列中文只能是【字母、数字、下划线、汉字】";
                 result = RegexCheck(colEng.ToString().Trim(), regExprNameEng);
                 if (!result) return "列英文只能是【字母、数字、下划线】";
+                //3.3列英文不能重复
+                if (colNameList.Contains(colEng.ToString().Trim()))
+                {
+                    return "第" + (i + 1).ToString() + "行，列英文重复;";
+                }
+                else
+                {
+                    colNameList.Add(colEng.ToString().Trim());
+                }
             }
 
             return string.Empty;
