@@ -380,7 +380,6 @@ namespace Tool.Main.Forms.DevForms
                 var colIsNull = dr.Cells["CheckBox2"].Value;
                 //3.1表字段
                 string strIsNull = colIsNull != null && (bool)colIsNull ? "NOT NULL" : "";
-                string strSplit = i != rowCount - 1 ? "," : "";
                 if (colIsPrimaryKey != null && (bool)colIsPrimaryKey)
                 {
                     if (string.IsNullOrEmpty(strIsNull))
@@ -390,6 +389,7 @@ namespace Tool.Main.Forms.DevForms
                     }
                     primaryKeyFieldList.Add(colEng.ToString());
                 }
+                string strSplit = i != rowCount - 1 ? "," : "";
                 sbSql.AppendLine($"        {colEng} {colDataType}{colLength} {strIsNull} {strSplit}");
                 //3.2字段扩展说明
                 sbExtend.AppendLine($"EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'{colChn}' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'{tbEng}', @level2type=N'COLUMN',@level2name=N'{colEng}'");
@@ -421,9 +421,59 @@ namespace Tool.Main.Forms.DevForms
         #region SqliteBuild
         private void Build_Sqlite()
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sbSql = new StringBuilder();
+            StringBuilder sbExtend = new StringBuilder();
+            //1.表外层
+            string tbEng = tbTEng.Text.Trim();
+            string tbChn = tbTChn.Text.Trim();
+            sbSql.AppendLine($"CREATE TABLE {tbEng} (");
+            //2.表扩展说明
+            //sbExtend.AppendLine($"EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'{tbChn}' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'{tbEng}'");
+            //3.循环字段
+            int rowCount = dvEX.Dv.RowCount;
+            List<string> primaryKeyFieldList = new List<string>();
+            for (int i = 0; i < rowCount; i++)
+            {
+                //获取数据行
+                DataGridViewRow dr = dvEX.Dv.Rows[i];
+                //获取列数据
+                var colChn = dr.Cells["ColChn"].Value;
+                var colEng = dr.Cells["ColEng"].Value;
+                var colDataType = dr.Cells["ColDataType"].Value;
+                var colLength = dr.Cells["ColLength"].Value;
+                var colIsPrimaryKey = dr.Cells["CheckBox1"].Value;
+                var colIsNull = dr.Cells["CheckBox2"].Value;
+                //3.1表字段
+                string strIsNull = colIsNull != null && (bool)colIsNull ? "NOT NULL" : "";
+                if (colIsPrimaryKey != null && (bool)colIsPrimaryKey)
+                {
+                    if (string.IsNullOrEmpty(strIsNull))
+                    {
+                        this.rtbScript.Text = "不能在非空列上设置主键！";
+                        return;
+                    }
+                    primaryKeyFieldList.Add(colEng.ToString());
+                }
+                string strSplit = i != rowCount - 1 ? "," : primaryKeyFieldList.Count > 0 ? "," : "";
+                sbSql.AppendLine($"        {colEng} {colDataType}{colLength} {strIsNull} {strSplit}");
+                //3.2字段扩展说明
+                //sbExtend.AppendLine($"EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'{colChn}' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'{tbEng}', @level2type=N'COLUMN',@level2name=N'{colEng}'");
+            }
+            //4.添加主键
+            if (primaryKeyFieldList.Count > 0)
+            {
+                sbSql.AppendLine($"        CONSTRAINT Test_PK PRIMARY KEY");
+                sbSql.AppendLine("         (");
+                for (int i = 0; i < primaryKeyFieldList.Count; i++)
+                {
+                    string tempSplit = i != primaryKeyFieldList.Count - 1 ? "," : "";
+                    sbSql.AppendLine($"           {primaryKeyFieldList[i]}{tempSplit}");
+                }
+                sbSql.AppendLine("         )");
+            }
+            sbSql.AppendLine($");");
 
-            this.rtbScript.Text = sb.ToString();
+            this.rtbScript.Text = sbSql.ToString() + "\n\n" + sbExtend.ToString();
         }
         #endregion
     }
