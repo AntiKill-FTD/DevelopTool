@@ -452,6 +452,30 @@ namespace Tool.CusControls.DataGridViewEx
 
         #region 数据源 public
         /// <summary>
+        /// 是否排序
+        /// </summary>
+        private bool _isSort;
+
+        /// <summary>
+        /// 设置是否排序，需要在所有列添加完成后设置
+        /// </summary>
+        public bool IsSort
+        {
+            get { return _isSort; }
+            set
+            {
+                _isSort = value;
+                if (!_isSort)
+                {
+                    for (int i = 0; i < this.dataGridView1.Columns.Count; i++)
+                    {
+                        this.dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// 是否分页
         /// </summary>
         private bool _isPage;

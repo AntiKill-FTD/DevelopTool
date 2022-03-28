@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Text;
+using System.Text.RegularExpressions;
 using Tool.Business.Common;
 using Tool.CusControls.DataGridViewEx;
 using Tool.Data.DataHelper;
@@ -94,6 +95,8 @@ namespace Tool.Main.Forms.DevForms
             //添加列4-是否主键、是否费控
             this.dvEX.AddChkCol(CheckBoxName.CheckBox1, -1, true, "是否主键");//IsPrimarikey
             this.dvEX.AddChkCol(CheckBoxName.CheckBox2, -1, true, "是否非空");//IsNotNull
+            //禁止排序
+            this.dvEX.IsSort = false;
         }
         #endregion
 
@@ -325,15 +328,103 @@ namespace Tool.Main.Forms.DevForms
         #endregion
 
         #region Build
-
         /// <summary>
         /// 生成脚本
         /// </summary>
         private void Build()
         {
-            this.rtbScript.Text = DateTime.Now.ToString();
+            if (DataBaseType == "SqlServer")
+            {
+                Build_SqlServer();
+            }
+            else if (DataBaseType == "Sqlite")
+            {
+                Build_Sqlite();
+            }
+            else
+            {
+                Build_SqlServer();
+            }
         }
+        #endregion
 
+        #region SqlServerBuild
+        private void Build_SqlServer()
+        {
+            StringBuilder sbSql = new StringBuilder();
+            StringBuilder sbExtend = new StringBuilder();
+            //Begin.开始事务
+            sbSql.AppendLine("BEGIN TRANSACTION");
+            sbSql.AppendLine("GO");
+            //1.表外层
+            string tbEng = tbTEng.Text.Trim();
+            string tbChn = tbTChn.Text.Trim();
+            sbSql.AppendLine($"CREATE TABLE dbo.{tbEng}");
+            sbSql.AppendLine($"        (");
+            //2.表扩展说明
+            sbExtend.AppendLine($"EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'{tbChn}' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'{tbEng}'");
+            sbExtend.AppendLine("GO");
+            //3.循环字段
+            int rowCount = dvEX.Dv.RowCount;
+            List<string> primaryKeyFieldList = new List<string>();
+            for (int i = 0; i < rowCount; i++)
+            {
+                //获取数据行
+                DataGridViewRow dr = dvEX.Dv.Rows[i];
+                //获取列数据
+                var colChn = dr.Cells["ColChn"].Value;
+                var colEng = dr.Cells["ColEng"].Value;
+                var colDataType = dr.Cells["ColDataType"].Value;
+                var colLength = dr.Cells["ColLength"].Value;
+                var colIsPrimaryKey = dr.Cells["CheckBox1"].Value;
+                var colIsNull = dr.Cells["CheckBox2"].Value;
+                //3.1表字段
+                string strIsNull = colIsNull != null && (bool)colIsNull ? "NOT NULL" : "";
+                string strSplit = i != rowCount - 1 ? "," : "";
+                if (colIsPrimaryKey != null && (bool)colIsPrimaryKey)
+                {
+                    if (string.IsNullOrEmpty(strIsNull))
+                    {
+                        this.rtbScript.Text = "不能在非空列上设置主键！";
+                        return;
+                    }
+                    primaryKeyFieldList.Add(colEng.ToString());
+                }
+                sbSql.AppendLine($"        {colEng} {colDataType}{colLength} {strIsNull} {strSplit}");
+                //3.2字段扩展说明
+                sbExtend.AppendLine($"EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'{colChn}' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'{tbEng}', @level2type=N'COLUMN',@level2name=N'{colEng}'");
+                sbExtend.AppendLine("GO");
+            }
+            sbSql.AppendLine($"        )");
+            sbSql.AppendLine("GO");
+            //4.添加主键
+            if (primaryKeyFieldList.Count > 0)
+            {
+                sbSql.AppendLine($"ALTER TABLE dbo.{tbEng} ADD CONSTRAINT");
+                sbSql.AppendLine($"        PK_{tbEng} PRIMARY KEY CLUSTERED");
+                sbSql.AppendLine("         (");
+                for (int i = 0; i < primaryKeyFieldList.Count; i++)
+                {
+                    string tempSplit = i != primaryKeyFieldList.Count - 1 ? "," : "";
+                    sbSql.AppendLine($"{primaryKeyFieldList[i]}{tempSplit}");
+                }
+                sbSql.AppendLine("         ) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]");
+                sbSql.AppendLine("GO");
+            }
+            //End.结束事务
+            sbSql.AppendLine("COMMIT");
+
+            this.rtbScript.Text = sbSql.ToString() + "\n\n" + sbExtend.ToString();
+        }
+        #endregion
+
+        #region SqliteBuild
+        private void Build_Sqlite()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            this.rtbScript.Text = sb.ToString();
+        }
         #endregion
     }
 }
