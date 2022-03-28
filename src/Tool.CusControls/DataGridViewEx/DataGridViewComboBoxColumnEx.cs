@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using static Tool.CusControls.DataGridViewEx.DataGridViewCommonEx;
 
 namespace Tool.CusControls.DataGridViewEx
 {
@@ -146,7 +147,11 @@ namespace Tool.CusControls.DataGridViewEx
             //执行用户绑定事件 
             try
             {
-                ((DataGridViewCommonEx)this.DataGridView).GetComboBoxDelegate(colName)?.Invoke(sender, e);
+                ComboBoxEventDelegate delegateInfo = ((DataGridViewCommonEx)this.DataGridView).GetComboBoxDelegate(colName);
+                if (delegateInfo != null)
+                {
+                    delegateInfo.Invoke(sender, e);
+                }
             }
             catch (Exception ex)
             {

@@ -92,9 +92,10 @@ namespace Tool.Main.Forms.DevForms
             this.dvEX.Dv.SetComboBoxDelegate("ColDataType", ColDateTypeSelectIndexChange);
             //添加列3-列长度
             this.dvEX.AddColumn(this.dvEX.CreateColumn<DataGridViewComboBoxColumn>("ColLength", "数据长度", new List<string>(), 180, true));
-            //添加列4-是否主键、是否费控
+            //添加列4-是否主键、是否非空、是否自增
             this.dvEX.AddChkCol(CheckBoxName.CheckBox1, -1, true, "是否主键");//IsPrimarikey
             this.dvEX.AddChkCol(CheckBoxName.CheckBox2, -1, true, "是否非空");//IsNotNull
+            this.dvEX.AddChkCol(CheckBoxName.CheckBox3, -1, true, "是否自增");//IsAutoIncrement
             //禁止排序
             this.dvEX.IsSort = false;
         }
@@ -147,8 +148,12 @@ namespace Tool.Main.Forms.DevForms
                 DataGridView dv = cb.EditingControlDataGridView;
                 int rowIndex = dv.CurrentCell.RowIndex;
                 int colIndex = dv.CurrentCell.ColumnIndex;
-                DataGridViewComboBoxCell lengthCell = (DataGridViewComboBoxCell)dv.Rows[rowIndex].Cells[colIndex + 1];
+                DataGridViewComboBoxCellEx lengthCell = (DataGridViewComboBoxCellEx)dv.Rows[rowIndex].Cells[colIndex + 1];
                 //绑定
+                if (!lengthList.Contains(lengthCell.Value))
+                {
+                    lengthCell.Value = "";
+                }
                 lengthCell.DataSource = lengthList;
             }
             catch (Exception ex)
@@ -178,6 +183,31 @@ namespace Tool.Main.Forms.DevForms
             }
 
             return lengthList;
+        }
+        #endregion
+
+        #region CheckTypeAutoIncrement
+        private bool CheckTypeAutoIncrement(string dataType)
+        {
+            List<string> typeList;
+            //获取长度定义
+            if (DataBaseType == "SqlServer")
+            {
+                typeList = DataTypeExtend.GetSqlServerAutoIncrementString();
+            }
+            else if (DataBaseType == "Sqlite")
+            {
+                typeList = DataTypeExtend.GetSqlliteAutoIncrementString();
+            }
+            else
+            {
+                //默认SqlServer
+                typeList = DataTypeExtend.GetSqlServerAutoIncrementString();
+            }
+            //判断是否存在
+            if (typeList.Contains(dataType)) return true;
+
+            return false;
         }
         #endregion
 
@@ -348,6 +378,12 @@ namespace Tool.Main.Forms.DevForms
         }
         #endregion
 
+        /*
+         * 1.自增列必须不为空;
+         * 2.自增列只能有一个;
+         * 3.Sqlite自增列默认主键,所以主键和自增列必须为同一个;
+         */
+
         #region SqlServerBuild
         private void Build_SqlServer()
         {
@@ -367,6 +403,8 @@ namespace Tool.Main.Forms.DevForms
             //3.循环字段
             int rowCount = dvEX.Dv.RowCount;
             List<string> primaryKeyFieldList = new List<string>();
+            List<string> autoKeyFieldList = new List<string>();
+            int autoIncrementCount = 0;
             for (int i = 0; i < rowCount; i++)
             {
                 //获取数据行
@@ -378,8 +416,11 @@ namespace Tool.Main.Forms.DevForms
                 var colLength = dr.Cells["ColLength"].Value;
                 var colIsPrimaryKey = dr.Cells["CheckBox1"].Value;
                 var colIsNull = dr.Cells["CheckBox2"].Value;
+                var colIsAutoIncrement = dr.Cells["CheckBox3"].Value;
                 //3.1表字段
+                //非空
                 string strIsNull = colIsNull != null && (bool)colIsNull ? "NOT NULL" : "";
+                //主键
                 if (colIsPrimaryKey != null && (bool)colIsPrimaryKey)
                 {
                     if (string.IsNullOrEmpty(strIsNull))
@@ -389,15 +430,38 @@ namespace Tool.Main.Forms.DevForms
                     }
                     primaryKeyFieldList.Add(colEng.ToString());
                 }
+                //自增
+                string strIsAutoIncrement = colIsAutoIncrement != null && (bool)colIsAutoIncrement ? "IDENTITY (1, 1)" : "";
+                if (!string.IsNullOrEmpty(strIsAutoIncrement))
+                {
+                    autoKeyFieldList.Add(colEng.ToString());
+                    autoIncrementCount++;
+                    if (string.IsNullOrEmpty(strIsNull))
+                    {
+                        this.rtbScript.Text = "不能在非空列上设置自增！";
+                        return;
+                    }
+                    if (!CheckTypeAutoIncrement(colDataType.ToString().Trim()))
+                    {
+                        this.rtbScript.Text = $"不能在数据类型【{colDataType}】上设置自增！";
+                        return;
+                    }
+                    if (autoIncrementCount > 1)
+                    {
+                        this.rtbScript.Text = "不能设置多个自增列！";
+                        return;
+                    }
+                }
+                //逗号分隔符判断
                 string strSplit = i != rowCount - 1 ? "," : "";
-                sbSql.AppendLine($"        {colEng} {colDataType}{colLength} {strIsNull} {strSplit}");
+                sbSql.AppendLine($"        {colEng} {colDataType}{colLength} {strIsNull} {strIsAutoIncrement} {strSplit}");
                 //3.2字段扩展说明
                 sbExtend.AppendLine($"EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'{colChn}' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'{tbEng}', @level2type=N'COLUMN',@level2name=N'{colEng}'");
                 sbExtend.AppendLine("GO");
             }
             sbSql.AppendLine($"        )");
             sbSql.AppendLine("GO");
-            //4.添加主键
+            //4.添加主键(
             if (primaryKeyFieldList.Count > 0)
             {
                 sbSql.AppendLine($"ALTER TABLE dbo.{tbEng} ADD CONSTRAINT");
@@ -432,6 +496,8 @@ namespace Tool.Main.Forms.DevForms
             //3.循环字段
             int rowCount = dvEX.Dv.RowCount;
             List<string> primaryKeyFieldList = new List<string>();
+            List<string> autoKeyFieldList = new List<string>();
+            int autoIncrementCount = 0;
             for (int i = 0; i < rowCount; i++)
             {
                 //获取数据行
@@ -443,8 +509,11 @@ namespace Tool.Main.Forms.DevForms
                 var colLength = dr.Cells["ColLength"].Value;
                 var colIsPrimaryKey = dr.Cells["CheckBox1"].Value;
                 var colIsNull = dr.Cells["CheckBox2"].Value;
+                var colIsAutoIncrement = dr.Cells["CheckBox3"].Value;
                 //3.1表字段
+                //非空
                 string strIsNull = colIsNull != null && (bool)colIsNull ? "NOT NULL" : "";
+                //主键
                 if (colIsPrimaryKey != null && (bool)colIsPrimaryKey)
                 {
                     if (string.IsNullOrEmpty(strIsNull))
@@ -454,15 +523,49 @@ namespace Tool.Main.Forms.DevForms
                     }
                     primaryKeyFieldList.Add(colEng.ToString());
                 }
-                string strSplit = i != rowCount - 1 ? "," : primaryKeyFieldList.Count > 0 ? "," : "";
-                sbSql.AppendLine($"        {colEng} {colDataType}{colLength} {strIsNull} {strSplit}");
+                //自增
+                string strIsAutoIncrement = colIsAutoIncrement != null && (bool)colIsAutoIncrement ? "PRIMARY KEY AUTOINCREMENT" : "";
+                if (!string.IsNullOrEmpty(strIsAutoIncrement))
+                {
+                    autoKeyFieldList.Add(colEng.ToString());
+                    autoIncrementCount++;
+                    if (string.IsNullOrEmpty(strIsNull))
+                    {
+                        this.rtbScript.Text = "不能在非空列上设置自增！";
+                        return;
+                    }
+                    if (!CheckTypeAutoIncrement(colDataType.ToString().Trim()))
+                    {
+                        this.rtbScript.Text = $"不能在数据类型【{colDataType}】上设置自增！";
+                        return;
+                    }
+                    if (autoIncrementCount > 1)
+                    {
+                        this.rtbScript.Text = "不能设置多个自增列！";
+                        return;
+                    }
+                }
+                //逗号分隔符判断
+                string strSplit = i != rowCount - 1 ? "," : primaryKeyFieldList.Count > 1 ? "," : "";
+                sbSql.AppendLine($"        {colEng} {colDataType}{colLength} {strIsNull} {strIsAutoIncrement} {strSplit}");
                 //3.2字段扩展说明
                 //sbExtend.AppendLine($"EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'{colChn}' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'{tbEng}', @level2type=N'COLUMN',@level2name=N'{colEng}'");
             }
-            //4.添加主键
-            if (primaryKeyFieldList.Count > 0)
+            //4.添加主键：如果存在主键，也存在自增列，且数量不是都为1而且是同一个字段，不允许
+            //判断
+            if (primaryKeyFieldList.Count > 0 && autoKeyFieldList.Count > 0)
             {
-                sbSql.AppendLine($"        CONSTRAINT Test_PK PRIMARY KEY");
+                if (!(primaryKeyFieldList.Count == 1 && autoKeyFieldList.Count == 1 && primaryKeyFieldList[0] == autoKeyFieldList[0]))
+                {
+                    this.rtbScript.Text = "如果存在主键，也存在自增列，且数量不是都为1而且是同一个字段，不允许！";
+                    return;
+                }
+            }
+            //5.添加主键：多个列为主键才拼接，单个列直接在字段中设置
+            if (primaryKeyFieldList.Count > 1)
+            {
+                //拼接
+                sbSql.AppendLine($"        CONSTRAINT {tbEng}_PK PRIMARY KEY");
                 sbSql.AppendLine("         (");
                 for (int i = 0; i < primaryKeyFieldList.Count; i++)
                 {

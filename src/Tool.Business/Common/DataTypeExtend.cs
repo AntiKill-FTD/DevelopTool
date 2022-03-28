@@ -9,83 +9,48 @@ namespace Tool.Business.Common
 {
     public static class DataTypeExtend
     {
+        #region 私有属性
         //SqlServer长度类型字典-私有
-        private static Dictionary<SqlServerDataType, List<string>> _sqlServerLengTypeDic;
+        private static Dictionary<SqlServerDataType, List<string>> _allSqlServerLengTypeDic;
 
         //Sqlite   长度类型字段-私有
-        private static Dictionary<SqliteDataType, List<string>> _sqliteLengthTypeDic;
+        private static Dictionary<SqliteDataType, List<string>> _allSqliteLengthTypeDic;
+        #endregion
 
+        #region 私有属性-包装
         //SqlServer长度类型字典-公有
-        public static Dictionary<SqlServerDataType, List<string>> SqlServerLengTypeDic
+        private static Dictionary<SqlServerDataType, List<string>> AllSqlServerLengTypeDic
         {
             get
             {
-                if (_sqlServerLengTypeDic == null)
+                if (_allSqlServerLengTypeDic == null)
                 {
-                    _sqlServerLengTypeDic = GetSqlServerDataTypeLengthInfo();
+                    _allSqlServerLengTypeDic = CreateSqlServerDataTypeLengthInfo();
                 }
-                return _sqlServerLengTypeDic;
+                return _allSqlServerLengTypeDic;
             }
         }
 
         //Sqlite长度类型字典-公有
-        public static Dictionary<SqliteDataType, List<string>> SqliteLengTypeDic
+        private static Dictionary<SqliteDataType, List<string>> AllSqliteLengTypeDic
         {
             get
             {
-                if (_sqliteLengthTypeDic == null)
+                if (_allSqliteLengthTypeDic == null)
                 {
-                    _sqliteLengthTypeDic = GetSqliteDataTypeLengthInfo();
+                    _allSqliteLengthTypeDic = CreateSqliteDataTypeLengthInfo();
                 }
-                return _sqliteLengthTypeDic;
+                return _allSqliteLengthTypeDic;
             }
         }
+        #endregion
 
-        //SqlServer长度类型具体集合
-        public static List<string> GetSqlServerLengthTypeList(string dataType)
-        {
-            //长度集合定义
-            List<string> lengthList = new List<string>();
-            //枚举
-            SqlServerDataType sqlDataType = (SqlServerDataType)Enum.Parse(typeof(SqlServerDataType), dataType, true);
-            //获取集合
-            if (SqlServerLengTypeDic.Keys.Contains(sqlDataType))
-            {
-                lengthList = SqlServerLengTypeDic[sqlDataType];
-            }
-            else
-            {
-                lengthList.Add("");
-            }
-            //返回
-            return lengthList;
-        }
-
-        //Sqlite长度类型具体集合
-        public static List<string> GetSqliteLengthTypeList(string dataType)
-        {
-            //长度集合定义
-            List<string> lengthList = new List<string>();
-            //枚举
-            SqliteDataType sqlDataType = (SqliteDataType)Enum.Parse(typeof(SqliteDataType), dataType, true);
-            //获取集合
-            if (SqliteLengTypeDic.Keys.Contains(sqlDataType))
-            {
-                lengthList = SqliteLengTypeDic[sqlDataType];
-            }
-            else
-            {
-                lengthList.Add("");
-            }
-            //返回
-            return lengthList;
-        }
-
+        #region 私有方法-定义数据类型对应长度信息
         /// <summary>
         /// 返回数据类型长度模板-SqlServer
         /// </summary>
         /// <returns></returns>
-        private static Dictionary<SqlServerDataType, List<string>> GetSqlServerDataTypeLengthInfo()
+        private static Dictionary<SqlServerDataType, List<string>> CreateSqlServerDataTypeLengthInfo()
         {
             Dictionary<SqlServerDataType, List<string>> dic = new Dictionary<SqlServerDataType, List<string>>();
             List<string> stringLengthType = new List<string> { "(10)", "(20)", "(50)", "(100)", "(200)", "(500)", "(1000)", "(MAX)" };
@@ -113,7 +78,7 @@ namespace Tool.Business.Common
         /// 返回数据类型长度模板-Sqlite
         /// </summary>
         /// <returns></returns>
-        private static Dictionary<SqliteDataType, List<string>> GetSqliteDataTypeLengthInfo()
+        private static Dictionary<SqliteDataType, List<string>> CreateSqliteDataTypeLengthInfo()
         {
             Dictionary<SqliteDataType, List<string>> dic = new Dictionary<SqliteDataType, List<string>>();
             List<string> stringLengthType = new List<string> { "(10)", "(20)", "(50)", "(100)", "(200)", "(500)", "(1000)" };
@@ -122,6 +87,88 @@ namespace Tool.Business.Common
 
             return dic;
         }
+        #endregion
+
+        #region 公共方法-根据指定数据类型获取长度信息
+        //SqlServer长度类型具体集合
+        public static List<string> GetSqlServerLengthTypeList(string dataType)
+        {
+            //长度集合定义
+            List<string> lengthList = new List<string>();
+            //枚举
+            SqlServerDataType sqlDataType = (SqlServerDataType)Enum.Parse(typeof(SqlServerDataType), dataType, true);
+            //获取集合
+            if (AllSqlServerLengTypeDic.Keys.Contains(sqlDataType))
+            {
+                lengthList = AllSqlServerLengTypeDic[sqlDataType];
+            }
+            else
+            {
+                lengthList.Add("");
+            }
+            //返回
+            return lengthList;
+        }
+
+        //Sqlite长度类型具体集合
+        public static List<string> GetSqliteLengthTypeList(string dataType)
+        {
+            //长度集合定义
+            List<string> lengthList = new List<string>();
+            //枚举
+            SqliteDataType sqlDataType = (SqliteDataType)Enum.Parse(typeof(SqliteDataType), dataType, true);
+            //获取集合
+            if (AllSqliteLengTypeDic.Keys.Contains(sqlDataType))
+            {
+                lengthList = AllSqliteLengTypeDic[sqlDataType];
+            }
+            else
+            {
+                lengthList.Add("");
+            }
+            //返回
+            return lengthList;
+        }
+        #endregion
+
+        #region 公有方法-获取能够自增的数据类型
+        //SqlServer可以自增的数据类型集合
+        public static List<SqlServerDataType> GetSqlServerAutoIncrementType()
+        {
+            List<SqlServerDataType> list = new List<SqlServerDataType>();
+            list.Add(SqlServerDataType._int);
+            list.Add(SqlServerDataType._tinyint);
+            list.Add(SqlServerDataType._smallint);
+            list.Add(SqlServerDataType._bigint);
+            return list;
+        }
+
+        public static List<string> GetSqlServerAutoIncrementString()
+        {
+            List<string> list = new List<string>();
+            list.Add(SqlServerDataType._int.ToString().Substring(1));
+            list.Add(SqlServerDataType._tinyint.ToString().Substring(1));
+            list.Add(SqlServerDataType._smallint.ToString().Substring(1));
+            list.Add(SqlServerDataType._bigint.ToString().Substring(1));
+            return list;
+        }
+
+        //Sqlite可以自增的数据类型集合
+        public static List<SqliteDataType> GetSqlliteAutoIncrementType()
+        {
+            List<SqliteDataType> list = new List<SqliteDataType>();
+            list.Add(SqliteDataType._INTEGER);
+            return list;
+        }
+
+        public static List<string> GetSqlliteAutoIncrementString()
+        {
+            List<string> list = new List<string>();
+            list.Add(SqliteDataType._INTEGER.ToString().Substring(1));
+            return list;
+        }
+        #endregion
+
 
         public static string ChangeSqlServerDataType(SqlServerDataType dataTypeEnum)
         {
