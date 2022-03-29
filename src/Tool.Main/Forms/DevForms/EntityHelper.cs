@@ -79,7 +79,9 @@ namespace Tool.Main.Forms.DevForms
         {
             BuildCode();
         }
+        #endregion
 
+        #region BuildCode
         /// <summary>
         /// 生成业务代码逻辑
         /// </summary>
@@ -105,25 +107,41 @@ namespace Tool.Main.Forms.DevForms
                     string colName = r.Cells["列名称"].Value.ToString();
                     string colNameChn = r.Cells["列中文"].Value.ToString();
                     string colType = r.Cells["类型"].Value.ToString();
-                    //SqlServerDataType colTypeEnum = (SqlServerDataType)Enum.Parse(typeof(SqlServerDataType), colType, true);
-                    //string realColType = DataTypeExtend.ChangeDataType(colTypeEnum);
+                    //属性：转换数据类型
+                    string realColType = String.Empty;
+                    if (this.dataViewDataTable.DataHelper.GetType() == typeof(MSSqlDataHelper))
+                    {
+                        SqlServerDataType colTypeEnum = (SqlServerDataType)Enum.Parse(typeof(SqlServerDataType), "_" + colType, true);
+                        realColType = DataTypeExtend.ChangeSqlServerDataType(colTypeEnum);
+                    }
+                    else if (this.dataViewDataTable.DataHelper.GetType() == typeof(SqliteDataHelper))
+                    {
+                        SqliteDataType colTypeEnum = (SqliteDataType)Enum.Parse(typeof(SqliteDataType), "_" + colType, true);
+                        realColType = DataTypeExtend.ChangeSqliteDataType(colTypeEnum);
+                    }
+                    else
+                    {
+                        SqlServerDataType colTypeEnum = (SqlServerDataType)Enum.Parse(typeof(SqlServerDataType), "_" + colType, true);
+                        realColType = DataTypeExtend.ChangeSqlServerDataType(colTypeEnum);
+                    }
+                    //属性：查询、编辑、查看 CheckBox
                     bool colQuery = r.Cells["CheckBox1"].Value == null ? false : (bool)r.Cells["CheckBox1"].Value;
                     bool colModify = r.Cells["CheckBox2"].Value == null ? false : (bool)r.Cells["CheckBox2"].Value;
                     bool colView = r.Cells["CheckBox3"].Value == null ? false : (bool)r.Cells["CheckBox3"].Value;
-
+                    //获取属性
                     int colLength = Convert.ToInt32(r.Cells["长度"].Value.ToString());
                     //拼接列1-private
                     fullCode += "    /// <summary>\r\n";
                     fullCode += "    /// " + colNameChn + "\r\n";
                     fullCode += "    /// </summary>\r\n";
-                    //fullCode += "    private " + realColType + " _" + colName + ";\r\n";
+                    fullCode += "    private " + realColType + " _" + colName + ";\r\n";
                     fullCode += "\r\n";
 
                     //拼接列2-Attribute
                     fullCode += GetAttributeCode(colQuery, colModify, colView);
 
                     //拼接列3-public
-                    //fullCode += "    public " + realColType + " " + colName.ToUpper() + "\r\n";
+                    fullCode += "    public " + realColType + " " + colName.ToUpper() + "\r\n";
                     fullCode += "    {" + "\r\n"
                              + "         get{ return _" + colName + ";}\r\n"
                              + "     }\r\n";
@@ -135,7 +153,9 @@ namespace Tool.Main.Forms.DevForms
             //赋值
             this.rtbEntity.Text = fullCode;
         }
+        #endregion
 
+        #region GetAttributeCode
         /// <summary>
         /// 根据勾选获取属性代码
         /// </summary>

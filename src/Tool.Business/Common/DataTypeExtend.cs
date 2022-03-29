@@ -169,7 +169,12 @@ namespace Tool.Business.Common
         }
         #endregion
 
-
+        #region 转换数据库类型到代码变量类型
+        /// <summary>
+        /// SqlServer
+        /// </summary>
+        /// <param name="dataTypeEnum"></param>
+        /// <returns></returns>
         public static string ChangeSqlServerDataType(SqlServerDataType dataTypeEnum)
         {
             switch (dataTypeEnum)
@@ -217,5 +222,27 @@ namespace Tool.Business.Common
             }
         }
 
+        /// <summary>
+        /// Sqlite
+        /// </summary>
+        /// <param name="dataTypeEnum"></param>
+        /// <returns></returns>
+        public static string ChangeSqliteDataType(SqliteDataType dataTypeEnum)
+        {
+            switch (dataTypeEnum)
+            {
+                case SqliteDataType._INTEGER:
+                    return "int";
+                case SqliteDataType._NUMERIC:
+                case SqliteDataType._REAL:
+                    return "float";
+                case SqliteDataType._TEXT:
+                case SqliteDataType._BLOB:
+                    return "string";
+                default:
+                    return "string";
+            }
+        }
+        #endregion
     }
 }
