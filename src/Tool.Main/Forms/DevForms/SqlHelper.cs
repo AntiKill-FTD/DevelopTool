@@ -154,7 +154,10 @@ namespace Tool.Main.Forms.DevForms
                 {
                     lengthCell.Value = "";
                 }
-                lengthCell.DataSource = lengthList;
+                lengthList.ForEach(item =>
+                {
+                    lengthCell.Items.Add(item);
+                });
             }
             catch (Exception ex)
             {
