@@ -207,3 +207,33 @@ INSERT INTO P_Menu ( MenuCode, MenuName, ParentCode, Assembly, NameSpace, Entity
 INSERT INTO P_Menu ( MenuCode, MenuName, ParentCode, Assembly, NameSpace, EntityName, Level, IfEnd) VALUES ( N'02.01', N'数据库解密', N'02', N'Tool.Main', N'Tool.Main.Forms.BusForms', N'CryptData', 2, 1);
 INSERT INTO P_Menu ( MenuCode, MenuName, ParentCode, Assembly, NameSpace, EntityName, Level, IfEnd) VALUES ( N'03', N'字符处理', N'', N'', N'', N'', 1, 0);
 INSERT INTO P_Menu ( MenuCode, MenuName, ParentCode, Assembly, NameSpace, EntityName, Level, IfEnd) VALUES ( N'03.01', N'字符串处理', N'03', N'Tool.Main', N'Tool.Main.Forms.ComForms', N'StringHelper', 2, 1);
+
+BEGIN TRANSACTION
+GO
+CREATE TABLE dbo.P_Config
+        (
+        Id int NOT NULL IDENTITY (1, 1) ,
+        ConfigType varchar(200) NOT NULL  ,
+        ConfigType2 varchar(200) NOT NULL  ,
+        ConfigValue varchar(MAX) NOT NULL  
+        )
+GO
+ALTER TABLE dbo.P_Config ADD CONSTRAINT
+        PK_P_Config PRIMARY KEY CLUSTERED
+         (
+Id
+         ) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+COMMIT
+
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'配置表' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'P_Config'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'主键' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'P_Config', @level2type=N'COLUMN',@level2name=N'Id'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'配置大类' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'P_Config', @level2type=N'COLUMN',@level2name=N'ConfigType'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'配置小类' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'P_Config', @level2type=N'COLUMN',@level2name=N'ConfigType2'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'配置项值' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'P_Config', @level2type=N'COLUMN',@level2name=N'ConfigValue'
+GO
