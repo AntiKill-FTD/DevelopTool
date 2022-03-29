@@ -125,6 +125,7 @@
             this.dvEX.DvSelectionMode = System.Windows.Forms.DataGridViewSelectionMode.RowHeaderSelect;
             this.dvEX.IsPage = true;
             this.dvEX.IsShowFirstCheckBox = false;
+            this.dvEX.IsSort = false;
             this.dvEX.Location = new System.Drawing.Point(0, 0);
             this.dvEX.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.dvEX.Name = "dvEX";
