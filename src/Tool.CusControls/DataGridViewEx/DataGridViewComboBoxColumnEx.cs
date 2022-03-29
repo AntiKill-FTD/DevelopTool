@@ -163,17 +163,18 @@ namespace Tool.CusControls.DataGridViewEx
 
         private void ComboBox_Event(object sender, EventArgs e, ComboBoxEventType eventType)
         {
-            //对象
-            DataGridViewComboBoxEditingControl cbo = (DataGridViewComboBoxEditingControl)sender;
-            DataGridView grid = cbo.EditingControlDataGridView;
-            DataGridViewComboBoxColumn cboCol = (DataGridViewComboBoxColumn)grid.Columns[grid.CurrentCell.ColumnIndex];
-            string colName = cboCol.Name;
-
-            //执行默认事件---None
-
-            //执行用户绑定事件 
             try
             {
+                //对象
+                DataGridViewComboBoxEditingControl cbo = (DataGridViewComboBoxEditingControl)sender;
+                DataGridView grid = cbo.EditingControlDataGridView;
+                DataGridViewComboBoxColumn cboCol = (DataGridViewComboBoxColumn)grid.Columns[grid.CurrentCell.ColumnIndex];
+                string colName = cboCol.Name;
+
+                //执行默认事件---None
+
+                //执行用户绑定事件 
+
                 ComboBoxEventDelegate delegateInfo = ((DataGridViewCommonEx)this.DataGridView).GetComboBoxDelegate(colName, eventType);
                 if (delegateInfo != null)
                 {
