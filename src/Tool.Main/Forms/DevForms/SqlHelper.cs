@@ -154,6 +154,7 @@ namespace Tool.Main.Forms.DevForms
                 {
                     lengthCell.Value = "";
                 }
+                lengthCell.Items.Clear();
                 lengthList.ForEach(item =>
                 {
                     lengthCell.Items.Add(item);
