@@ -46,15 +46,15 @@ CREATE TABLE P_Config (
         ConfigValue TEXT(10000) NOT NULL  
 );
 
-
 INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Config', '配置表', NULL, NULL, '表'); 
 INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Config', '配置表', 'Id', '主键', '字段'); 
 INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Config', '配置表', 'ConfigType', '配置大类', '字段'); 
 INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Config', '配置表', 'ConfigType2', '配置小类', '字段'); 
 INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Config', '配置表', 'ConfigValue', '配置项值', '字段'); 
 
---插入数据
 
+
+--插入数据
 INSERT INTO P_Menu (
     MenuCode
     ,MenuName
