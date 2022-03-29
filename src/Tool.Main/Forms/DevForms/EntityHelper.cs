@@ -235,7 +235,7 @@ namespace Tool.Main.Forms.DevForms
                     sqlDicColumn["Query"] = sqlDicColumn["Query"].Replace("1=1", sqlWhereColumn);
                 }
 
-                //dv绑定数据
+                //dv绑定数据-使用直接查询
                 DataTable dt = this.dataViewDataTable.DataHelper.GetDataTable(sqlDicColumn["Query"], sqlDicColumn["Order"]);
 
                 //如果为sqlite，需要处理列
@@ -253,6 +253,7 @@ namespace Tool.Main.Forms.DevForms
                 }
                 else if (this.dataViewColumn.SqlType == EnumSqlType.Sqlite)
                 {
+                    DataTable dtRemark = this.dataViewDataTable.DataHelper.GetDataTable("SELECT ID, TableEng, TableChn, ColumnEng, ColumnChn, DataType FROM SqliteChnRemark;", "");
                     DataTable newDt = new DataTable();
                     newDt.Columns.Add("列名称");
                     newDt.Columns.Add("列中文");
@@ -262,7 +263,8 @@ namespace Tool.Main.Forms.DevForms
                     {
                         DataRow nr = newDt.NewRow();
                         nr["列名称"] = dr["name"];
-                        nr["列中文"] = "Sqlite无中文备注";
+                        DataRow[] remarkRows = dtRemark.Select($"TableEng='{tabEngName}' AND DataType='字段' AND ColumnEng='{nr["列名称"]}'");
+                        nr["列中文"] = remarkRows.Length == 1 ? remarkRows[0]["ColumnChn"].ToString() : "";
                         string strType = dr["type"].ToString();
                         string length = "0";
                         int startIndex = strType.IndexOf("(");

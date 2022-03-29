@@ -492,7 +492,7 @@ namespace Tool.Main.Forms.DevForms
             string tbChn = tbTChn.Text.Trim();
             sbSql.AppendLine($"CREATE TABLE {tbEng} (");
             //2.表扩展说明
-            //sbExtend.AppendLine($"EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'{tbChn}' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'{tbEng}'");
+            sbExtend.AppendLine($"INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('{tbEng}', '{tbChn}', NULL, NULL, '表'); ");
             //3.循环字段
             int rowCount = dvEX.Dv.RowCount;
             List<string> primaryKeyFieldList = new List<string>();
@@ -549,7 +549,7 @@ namespace Tool.Main.Forms.DevForms
                 string strSplit = i != rowCount - 1 ? "," : primaryKeyFieldList.Count > 1 ? "," : "";
                 sbSql.AppendLine($"        {colEng} {colDataType}{colLength} {strIsNull} {strIsAutoIncrement} {strSplit}");
                 //3.2字段扩展说明
-                //sbExtend.AppendLine($"EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'{colChn}' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'{tbEng}', @level2type=N'COLUMN',@level2name=N'{colEng}'");
+                sbExtend.AppendLine($"INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('{tbEng}', '{tbChn}', '{colEng}', '{colChn}', '字段'); ");
             }
             //4.添加主键：如果存在主键，也存在自增列，且数量不是都为1而且是同一个字段，不允许
             //判断

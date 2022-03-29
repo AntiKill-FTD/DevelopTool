@@ -61,11 +61,12 @@
 			<Sqlite>
 				<Query>
 					SELECT * FROM (
-					SELECT name AS '表名称',
-					'Sqlite无中文备注' AS '表中文'
-					FROM sqlite_master
-					WHERE type='table'
-					) T 
+						SELECT ma.name AS '表名称',
+						IFNULL(remark.TableChn,'') AS '表中文'
+						FROM sqlite_master ma
+						LEFT JOIN SqliteChnRemark remark ON remark.DataType ='表' AND remark.TableEng = ma.name
+						WHERE ma.type='table'
+					) T
 					WHERE (1=1) AND (2=2)
 				</Query>
 				<Order>
