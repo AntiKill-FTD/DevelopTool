@@ -11,15 +11,17 @@ namespace Tool.CusControls.DataGridViewEx
         /// </summary>
         public int RowCountCurrent = -1;
         public bool IsEdit = false;
+        public bool IsValidate = false;
 
         /// <summary>
         /// 构造函数，包括：表头单元格、行单元格
         /// </summary>
         /// <param name="isChangeHeader">是否修改标题为CheckBox</param>
-        public DataGridViewComboBoxColumnEx(bool isEdit = false)
+        public DataGridViewComboBoxColumnEx(bool isEdit = false, bool isValidate = false)
             : base()
         {
             this.IsEdit = isEdit;
+            this.IsValidate = isValidate;
 
             //建立表头单元格
             this.HeaderCell = new DataGridViewComboBoxColumnHeaderCellEx();
@@ -61,7 +63,10 @@ namespace Tool.CusControls.DataGridViewEx
                 {
                     comboBox.DropDownStyle = ComboBoxStyle.DropDown;
                     comboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
-                    comboBox.Validating += new CancelEventHandler(comboBox_Validating);
+                    if (((DataGridViewComboBoxColumnEx)base.OwningColumn).IsValidate)
+                    {
+                        comboBox.Validating += new CancelEventHandler(comboBox_Validating);
+                    }
                 }
             }
 

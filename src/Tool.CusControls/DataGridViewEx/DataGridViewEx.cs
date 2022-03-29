@@ -225,13 +225,13 @@ namespace Tool.CusControls.DataGridViewEx
         /// <param name="colName">列字段名称</param>
         /// <param name="HeaderText">列标题</param>
         /// <returns></returns>
-        public T CreateColumn<T>(string colName, string HeaderText, List<string> items = null, int width = 150, bool isEdit = false) where T : DataGridViewColumn, new()
+        public T CreateColumn<T>(string colName, string HeaderText, List<string> items = null, int width = 150, bool isEdit = false, bool isValidate = false) where T : DataGridViewColumn, new()
         {
             if (typeof(T) == typeof(DataGridViewComboBoxColumn))
             {
                 if (items == null) return null;
 
-                DataGridViewComboBoxColumnEx colCombo = new DataGridViewComboBoxColumnEx(isEdit);
+                DataGridViewComboBoxColumnEx colCombo = new DataGridViewComboBoxColumnEx(isEdit, isValidate);
                 colCombo.Name = colName;
                 colCombo.HeaderText = HeaderText;
                 colCombo.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;

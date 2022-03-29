@@ -192,7 +192,7 @@ namespace Tool.Main.Forms.BusForms
                 List<string> constValue = new List<string>();
                 constValue.Add("");
                 constValue.Add("GetDate()");
-                this.dvInputSource.AddColumn(this.dvInputSource.CreateColumn<DataGridViewComboBoxColumn>("ConstValue", "固定值", constValue, 180, true));
+                this.dvInputSource.AddColumn(this.dvInputSource.CreateColumn<DataGridViewComboBoxColumn>("ConstValue", "固定值", constValue, 180, true, true));
                 //添加是否解密
                 this.dvInputSource.AddChkCol(CheckBoxName.CheckBox1, 4, true, "是否解密");
             }

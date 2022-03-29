@@ -91,7 +91,7 @@ namespace Tool.Main.Forms.DevForms
             //添加列2-添加事件
             this.dvEX.Dv.SetComboBoxDelegate("ColDataType", ColDateTypeSelectIndexChange);
             //添加列3-列长度
-            this.dvEX.AddColumn(this.dvEX.CreateColumn<DataGridViewComboBoxColumn>("ColLength", "数据长度", new List<string>(), 180, true));
+            this.dvEX.AddColumn(this.dvEX.CreateColumn<DataGridViewComboBoxColumn>("ColLength", "数据长度", new List<string>(), 180, true, false));
             //添加列4-是否主键、是否非空、是否自增
             this.dvEX.AddChkCol(CheckBoxName.CheckBox1, -1, true, "是否主键");//IsPrimarikey
             this.dvEX.AddChkCol(CheckBoxName.CheckBox2, -1, true, "是否非空");//IsNotNull
@@ -152,7 +152,7 @@ namespace Tool.Main.Forms.DevForms
                 //绑定
                 if (!lengthList.Contains(lengthCell.Value))
                 {
-                    lengthCell.Value = "";
+                    lengthCell.Value = null;
                 }
                 lengthCell.Items.Clear();
                 lengthList.ForEach(item =>
