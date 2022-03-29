@@ -4,6 +4,7 @@ using Tool.Business.Common;
 using Tool.CusControls.DataGridViewEx;
 using Tool.Data.DataHelper;
 using Tool.IService.Model.Common;
+using static Tool.CusControls.DataGridViewEx.DataGridViewCommonEx;
 
 namespace Tool.Main.Forms.DevForms
 {
@@ -85,13 +86,18 @@ namespace Tool.Main.Forms.DevForms
             }
             //移除枚举前面的下划线
             dataTypes = ChangeDataTypeName(dataTypes);
-            //添加列2-添加具体列
-            DataGridViewComboBoxColumn dataTypeCol = this.dvEX.CreateColumn<DataGridViewComboBoxColumn>("ColDataType", "数据类型", dataTypes, 180);
-            this.dvEX.AddColumn(dataTypeCol);
-            //添加列2-添加事件
-            this.dvEX.Dv.SetComboBoxDelegate("ColDataType", ColDateTypeSelectIndexChange);
-            //添加列3-列长度
+            //添加列2-数据类型-添加具体列
+            this.dvEX.AddColumn(this.dvEX.CreateColumn<DataGridViewComboBoxColumn>("ColDataType", "数据类型", dataTypes, 180));
+            //添加列2-数据类型-添加事件
+            Dictionary<ComboBoxEventType, ComboBoxEventDelegate> dataTypeDic = new Dictionary<ComboBoxEventType, ComboBoxEventDelegate>();
+            dataTypeDic.Add(ComboBoxEventType.SelectChange, ColDateTypeSelectIndexChange);
+            this.dvEX.Dv.SetComboBoxDelegate("ColDataType", dataTypeDic);
+            //添加列3-数据长度-添加具体列
             this.dvEX.AddColumn(this.dvEX.CreateColumn<DataGridViewComboBoxColumn>("ColLength", "数据长度", new List<string>(), 180, true, false));
+            //添加列3-数据长度-添加事件
+            Dictionary<ComboBoxEventType, ComboBoxEventDelegate> dataLengthDic = new Dictionary<ComboBoxEventType, ComboBoxEventDelegate>();
+            dataLengthDic.Add(ComboBoxEventType.LostFocus, ColDateLengthLostFocus);
+            this.dvEX.Dv.SetComboBoxDelegate("ColLength", dataLengthDic);
             //添加列4-是否主键、是否非空、是否自增
             this.dvEX.AddChkCol(CheckBoxName.CheckBox1, -1, true, "是否主键");//IsPrimarikey
             this.dvEX.AddChkCol(CheckBoxName.CheckBox2, -1, true, "是否非空");//IsNotNull
@@ -130,6 +136,11 @@ namespace Tool.Main.Forms.DevForms
         #endregion
 
         #region ComboBoxEvent
+        /// <summary>
+        /// 数据类型改变事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ColDateTypeSelectIndexChange(object? sender, EventArgs e)
         {
             try
@@ -159,6 +170,38 @@ namespace Tool.Main.Forms.DevForms
                 {
                     lengthCell.Items.Add(item);
                 });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "错误");
+            }
+        }
+
+        /// <summary>
+        /// 数据长度改变事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ColDateLengthLostFocus(object? sender, EventArgs e)
+        {
+            try
+            {
+                //获取数据长度单元格
+                DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
+                if (cb.Focused) return;
+                //获取Cell
+                DataGridView dv = cb.EditingControlDataGridView;
+                int rowIndex = dv.CurrentCell.RowIndex;
+                int colIndex = dv.CurrentCell.ColumnIndex;
+                DataGridViewComboBoxCellEx lengthCell = (DataGridViewComboBoxCellEx)dv.Rows[rowIndex].Cells[colIndex];
+                //绑定
+                string currentValue = cb.Text;
+                if (!string.IsNullOrEmpty(currentValue) && !lengthCell.Items.Contains(currentValue))
+                {
+                    lengthCell.Items.Add(currentValue);
+                    lengthCell.Value = currentValue;
+                    cb.Text = currentValue;
+                }
             }
             catch (Exception ex)
             {

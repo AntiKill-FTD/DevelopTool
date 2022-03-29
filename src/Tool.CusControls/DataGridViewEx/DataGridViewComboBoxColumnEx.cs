@@ -71,7 +71,14 @@ namespace Tool.CusControls.DataGridViewEx
             }
 
             //添加事件
+            comboBox.SelectedIndexChanged -= ComboBox_SelectedIndexChanged;
             comboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
+
+            comboBox.TextChanged -= ComboBox_TextChanged;
+            comboBox.TextChanged += ComboBox_TextChanged;
+
+            comboBox.LostFocus -= ComboBox_LostFocus;
+            comboBox.LostFocus += ComboBox_LostFocus;
         }
 
         private void comboBox_Validating(object sender, CancelEventArgs e)
@@ -141,6 +148,21 @@ namespace Tool.CusControls.DataGridViewEx
 
         private void ComboBox_SelectedIndexChanged(object? sender, EventArgs e)
         {
+            ComboBox_Event(sender, e, ComboBoxEventType.SelectChange);
+        }
+
+        private void ComboBox_TextChanged(object? sender, EventArgs e)
+        {
+            ComboBox_Event(sender, e, ComboBoxEventType.TextChange);
+        }
+
+        private void ComboBox_LostFocus(object? sender, EventArgs e)
+        {
+            ComboBox_Event(sender, e, ComboBoxEventType.LostFocus);
+        }
+
+        private void ComboBox_Event(object sender, EventArgs e, ComboBoxEventType eventType)
+        {
             //对象
             DataGridViewComboBoxEditingControl cbo = (DataGridViewComboBoxEditingControl)sender;
             DataGridView grid = cbo.EditingControlDataGridView;
@@ -152,7 +174,7 @@ namespace Tool.CusControls.DataGridViewEx
             //执行用户绑定事件 
             try
             {
-                ComboBoxEventDelegate delegateInfo = ((DataGridViewCommonEx)this.DataGridView).GetComboBoxDelegate(colName);
+                ComboBoxEventDelegate delegateInfo = ((DataGridViewCommonEx)this.DataGridView).GetComboBoxDelegate(colName, eventType);
                 if (delegateInfo != null)
                 {
                     delegateInfo.Invoke(sender, e);
