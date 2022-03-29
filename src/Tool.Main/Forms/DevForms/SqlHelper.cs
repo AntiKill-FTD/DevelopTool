@@ -311,6 +311,32 @@ namespace Tool.Main.Forms.DevForms
             }
         }
 
+        /// <summary>
+        /// 在当前数据库执行
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnExcute_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string strSql = this.rtbScript.Text;
+                Int64 result = this.dvEX.DataHelper.ExcuteNoQuery(strSql);
+                if (result < 0)
+                {
+                    MessageBox.Show("执行失败！", "提示");
+                }
+                else
+                {
+                    MessageBox.Show("执行成功", "提示");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("执行失败：\n" + ex.Message, "错误");
+            }
+        }
+
         #endregion
 
         #region Validate

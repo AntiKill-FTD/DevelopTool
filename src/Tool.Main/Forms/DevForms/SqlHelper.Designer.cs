@@ -50,6 +50,7 @@
             this.btnReset = new System.Windows.Forms.Button();
             this.btnBuild = new System.Windows.Forms.Button();
             this.btnDelRow = new System.Windows.Forms.Button();
+            this.btnExcute = new System.Windows.Forms.Button();
             this.panelMain.SuspendLayout();
             this.panelGridMain.SuspendLayout();
             this.panelScript.SuspendLayout();
@@ -274,17 +275,19 @@
             // tlpButton
             // 
             this.tlpButton.BackColor = System.Drawing.Color.Azure;
-            this.tlpButton.ColumnCount = 6;
+            this.tlpButton.ColumnCount = 7;
             this.tlpButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84F));
             this.tlpButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84F));
             this.tlpButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84F));
             this.tlpButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84F));
+            this.tlpButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
             this.tlpButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpButton.Controls.Add(this.btnAddRow, 1, 0);
             this.tlpButton.Controls.Add(this.btnReset, 3, 0);
             this.tlpButton.Controls.Add(this.btnBuild, 4, 0);
             this.tlpButton.Controls.Add(this.btnDelRow, 2, 0);
+            this.tlpButton.Controls.Add(this.btnExcute, 5, 0);
             this.tlpButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpButton.Location = new System.Drawing.Point(0, 0);
             this.tlpButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -297,7 +300,7 @@
             // btnAddRow
             // 
             this.btnAddRow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAddRow.Location = new System.Drawing.Point(506, 4);
+            this.btnAddRow.Location = new System.Drawing.Point(426, 4);
             this.btnAddRow.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAddRow.Name = "btnAddRow";
             this.btnAddRow.Size = new System.Drawing.Size(78, 37);
@@ -309,7 +312,7 @@
             // btnReset
             // 
             this.btnReset.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnReset.Location = new System.Drawing.Point(674, 4);
+            this.btnReset.Location = new System.Drawing.Point(594, 4);
             this.btnReset.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(78, 37);
@@ -321,7 +324,7 @@
             // btnBuild
             // 
             this.btnBuild.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnBuild.Location = new System.Drawing.Point(758, 4);
+            this.btnBuild.Location = new System.Drawing.Point(678, 4);
             this.btnBuild.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnBuild.Name = "btnBuild";
             this.btnBuild.Size = new System.Drawing.Size(78, 37);
@@ -333,7 +336,7 @@
             // btnDelRow
             // 
             this.btnDelRow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDelRow.Location = new System.Drawing.Point(590, 4);
+            this.btnDelRow.Location = new System.Drawing.Point(510, 4);
             this.btnDelRow.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnDelRow.Name = "btnDelRow";
             this.btnDelRow.Size = new System.Drawing.Size(78, 37);
@@ -341,6 +344,17 @@
             this.btnDelRow.Text = "删除行";
             this.btnDelRow.UseVisualStyleBackColor = true;
             this.btnDelRow.Click += new System.EventHandler(this.btnDelRow_Click);
+            // 
+            // btnExcute
+            // 
+            this.btnExcute.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnExcute.Location = new System.Drawing.Point(762, 3);
+            this.btnExcute.Name = "btnExcute";
+            this.btnExcute.Size = new System.Drawing.Size(154, 39);
+            this.btnExcute.TabIndex = 1;
+            this.btnExcute.Text = "在当前数据库执行";
+            this.btnExcute.UseVisualStyleBackColor = true;
+            this.btnExcute.Click += new System.EventHandler(this.btnExcute_Click);
             // 
             // SqlHelper
             // 
@@ -391,5 +405,6 @@
         private TableLayoutPanel tlp_DataBaseType;
         private RadioButton rb_DataBase_SqlServer;
         private RadioButton rb_DataBase_Sqlite;
+        private Button btnExcute;
     }
 }
