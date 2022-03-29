@@ -270,3 +270,12 @@ Values (
     1
     --IfEnd - tinyint    
     );
+
+CREATE TABLE SqliteChnRemark (
+        ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT ,
+        TableEng TEXT(100) NOT NULL  ,
+        TableChn TEXT(100) NOT NULL  ,
+        ColumnEng TEXT(100)   ,
+        ColumnChn TEXT(100)   ,
+        DataType TEXT(50) NOT NULL  
+);
