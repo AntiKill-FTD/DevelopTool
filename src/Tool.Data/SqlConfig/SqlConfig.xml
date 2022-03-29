@@ -93,7 +93,7 @@
 					WHERE (1=1) AND (2=2)
 				</Query>
 				<Order>
-					[列名称]
+					
 				</Order>
 			</MSSql>
 			<Sqlite>
