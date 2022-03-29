@@ -1,3 +1,4 @@
+--创建表与备注
 CREATE TABLE SqliteChnRemark (
         Id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT ,
         TableEng TEXT(100) NOT NULL  ,
@@ -37,6 +38,22 @@ INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType)
 INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Menu', '菜单表', 'EntityName', '实例名称', '字段'); 
 INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Menu', '菜单表', 'LEVEL', '层级', '字段'); 
 INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Menu', '菜单表', 'IfEnd', '是否末级', '字段'); 
+
+CREATE TABLE P_Config (
+        Id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT ,
+        ConfigType TEXT(200) NOT NULL  ,
+        ConfigType2 TEXT(200) NOT NULL  ,
+        ConfigValue TEXT(10000) NOT NULL  
+);
+
+
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Config', '配置表', NULL, NULL, '表'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Config', '配置表', 'Id', '主键', '字段'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Config', '配置表', 'ConfigType', '配置大类', '字段'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Config', '配置表', 'ConfigType2', '配置小类', '字段'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Config', '配置表', 'ConfigValue', '配置项值', '字段'); 
+
+--插入数据
 
 INSERT INTO P_Menu (
     MenuCode
