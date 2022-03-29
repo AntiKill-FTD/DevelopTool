@@ -76,7 +76,7 @@ namespace Tool.Main.Forms.MainForms
             DataGridViewRow[] rows = this.dataViewMain.GetAllRows();
             foreach (DataGridViewRow row in rows)
             {
-                int level = (int)row.Cells["层级"].Value;
+                int level = Convert.ToInt32(row.Cells["层级"].Value);
                 if (level < 1) level = 1;
                 string ifEnd = row.Cells["是否末级"].Value.ToString();
                 string strBegin = ifEnd == "是" ? "" : "-";
