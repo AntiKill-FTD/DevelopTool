@@ -1,6 +1,6 @@
-﻿namespace Tool.Main.Forms.MainForms.ChildForms
+﻿namespace Tool.Main.Forms.SysConfig.ChildForms
 {
-    partial class MenuSetChild
+    partial class SysConfigChild
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tableLayoutPanelEx1 = new Tool.CusControls.TableLayoutPanelEx.TableLayoutPanelEx();
             this.tb_MenuName = new System.Windows.Forms.TextBox();
             this.cbx_ParentName = new System.Windows.Forms.ComboBox();
             this.cbx_MenuProgram = new System.Windows.Forms.ComboBox();
@@ -47,76 +46,10 @@
             this.lbl_ID = new System.Windows.Forms.Label();
             this.lbl_IfEnd = new System.Windows.Forms.Label();
             this.cbx_IfEnd = new System.Windows.Forms.ComboBox();
-            this.tableLayoutPanelEx1.SuspendLayout();
+            this.tableLayoutPanelEx1 = new Tool.CusControls.TableLayoutPanelEx.TableLayoutPanelEx();
             this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanelEx1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // tableLayoutPanelEx1
-            // 
-            this.tableLayoutPanelEx1.BackColor = System.Drawing.Color.LightCyan;
-            this.tableLayoutPanelEx1.ColumnCount = 8;
-            this.tableLayoutPanelEx1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanelEx1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tableLayoutPanelEx1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 180F));
-            this.tableLayoutPanelEx1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tableLayoutPanelEx1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 180F));
-            this.tableLayoutPanelEx1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tableLayoutPanelEx1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 180F));
-            this.tableLayoutPanelEx1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanelEx1.Controls.Add(this.tb_MenuName, 4, 3);
-            this.tableLayoutPanelEx1.Controls.Add(this.cbx_ParentName, 4, 2);
-            this.tableLayoutPanelEx1.Controls.Add(this.cbx_MenuProgram, 6, 3);
-            this.tableLayoutPanelEx1.Controls.Add(this.lbl_MenuProgram, 5, 3);
-            this.tableLayoutPanelEx1.Controls.Add(this.lbl_MenuName, 3, 3);
-            this.tableLayoutPanelEx1.Controls.Add(this.lbl_MenuCode, 1, 3);
-            this.tableLayoutPanelEx1.Controls.Add(this.lbl_ParentName, 3, 2);
-            this.tableLayoutPanelEx1.Controls.Add(this.lbl_ParentLevel, 5, 2);
-            this.tableLayoutPanelEx1.Controls.Add(this.tb_ParentLevel, 6, 2);
-            this.tableLayoutPanelEx1.Controls.Add(this.tb_ParentCode, 2, 2);
-            this.tableLayoutPanelEx1.Controls.Add(this.tb_MenuCode, 2, 3);
-            this.tableLayoutPanelEx1.Controls.Add(this.lbl_ParentCode, 1, 2);
-            this.tableLayoutPanelEx1.Controls.Add(this.btn_Save, 3, 5);
-            this.tableLayoutPanelEx1.Controls.Add(this.tableLayoutPanel1, 4, 5);
-            this.tableLayoutPanelEx1.Controls.Add(this.lbl_ID, 1, 0);
-            this.tableLayoutPanelEx1.Controls.Add(this.lbl_IfEnd, 1, 4);
-            this.tableLayoutPanelEx1.Controls.Add(this.cbx_IfEnd, 2, 4);
-            this.tableLayoutPanelEx1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelEx1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanelEx1.MinimumSize = new System.Drawing.Size(920, 195);
-            this.tableLayoutPanelEx1.Name = "tableLayoutPanelEx1";
-            this.tableLayoutPanelEx1.NewColumnCount = 3;
-            this.tableLayoutPanelEx1.NewRowCount = 5;
-            this.tableLayoutPanelEx1.RowCount = 7;
-            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanelEx1.Size = new System.Drawing.Size(922, 195);
-            this.tableLayoutPanelEx1.TabIndex = 0;
             // 
             // tb_MenuName
             // 
@@ -135,7 +68,6 @@
             this.cbx_ParentName.Name = "cbx_ParentName";
             this.cbx_ParentName.Size = new System.Drawing.Size(174, 28);
             this.cbx_ParentName.TabIndex = 23;
-            this.cbx_ParentName.SelectedValueChanged += new System.EventHandler(this.cbx_ParentName_SelectedValueChanged);
             // 
             // cbx_MenuProgram
             // 
@@ -249,7 +181,6 @@
             this.btn_Save.TabIndex = 20;
             this.btn_Save.Text = "保存";
             this.btn_Save.UseVisualStyleBackColor = true;
-            this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -275,7 +206,6 @@
             this.btn_Exit.TabIndex = 28;
             this.btn_Exit.Text = "退出";
             this.btn_Exit.UseVisualStyleBackColor = true;
-            this.btn_Exit.Click += new System.EventHandler(this.btn_Exit_Click);
             // 
             // lbl_ID
             // 
@@ -305,32 +235,115 @@
             this.cbx_IfEnd.Name = "cbx_IfEnd";
             this.cbx_IfEnd.Size = new System.Drawing.Size(174, 28);
             this.cbx_IfEnd.TabIndex = 32;
-            this.cbx_IfEnd.SelectedValueChanged += new System.EventHandler(this.cbx_IfEnd_SelectedValueChanged);
             // 
-            // MenuSetChild
+            // tableLayoutPanelEx1
+            // 
+            this.tableLayoutPanelEx1.BackColor = System.Drawing.Color.LightCyan;
+            this.tableLayoutPanelEx1.ColumnCount = 8;
+            this.tableLayoutPanelEx1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelEx1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanelEx1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 180F));
+            this.tableLayoutPanelEx1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanelEx1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 180F));
+            this.tableLayoutPanelEx1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanelEx1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 180F));
+            this.tableLayoutPanelEx1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelEx1.Controls.Add(this.tb_MenuName, 4, 3);
+            this.tableLayoutPanelEx1.Controls.Add(this.cbx_ParentName, 4, 2);
+            this.tableLayoutPanelEx1.Controls.Add(this.cbx_MenuProgram, 6, 3);
+            this.tableLayoutPanelEx1.Controls.Add(this.lbl_MenuProgram, 5, 3);
+            this.tableLayoutPanelEx1.Controls.Add(this.lbl_MenuName, 3, 3);
+            this.tableLayoutPanelEx1.Controls.Add(this.lbl_MenuCode, 1, 3);
+            this.tableLayoutPanelEx1.Controls.Add(this.lbl_ParentName, 3, 2);
+            this.tableLayoutPanelEx1.Controls.Add(this.lbl_ParentLevel, 5, 2);
+            this.tableLayoutPanelEx1.Controls.Add(this.tb_ParentLevel, 6, 2);
+            this.tableLayoutPanelEx1.Controls.Add(this.tb_ParentCode, 2, 2);
+            this.tableLayoutPanelEx1.Controls.Add(this.tb_MenuCode, 2, 3);
+            this.tableLayoutPanelEx1.Controls.Add(this.lbl_ParentCode, 1, 2);
+            this.tableLayoutPanelEx1.Controls.Add(this.btn_Save, 3, 5);
+            this.tableLayoutPanelEx1.Controls.Add(this.tableLayoutPanel1, 4, 5);
+            this.tableLayoutPanelEx1.Controls.Add(this.lbl_ID, 1, 0);
+            this.tableLayoutPanelEx1.Controls.Add(this.lbl_IfEnd, 1, 4);
+            this.tableLayoutPanelEx1.Controls.Add(this.cbx_IfEnd, 2, 4);
+            this.tableLayoutPanelEx1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanelEx1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanelEx1.MinimumSize = new System.Drawing.Size(920, 195);
+            this.tableLayoutPanelEx1.Name = "tableLayoutPanelEx1";
+            this.tableLayoutPanelEx1.NewColumnCount = 3;
+            this.tableLayoutPanelEx1.NewRowCount = 5;
+            this.tableLayoutPanelEx1.RowCount = 7;
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanelEx1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelEx1.Size = new System.Drawing.Size(922, 195);
+            this.tableLayoutPanelEx1.TabIndex = 1;
+            // 
+            // SysConfigChild
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(922, 193);
-            this.ControlBox = false;
             this.Controls.Add(this.tableLayoutPanelEx1);
-            this.Name = "MenuSetChild";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MenuSetChild";
+            this.Name = "SysConfigChild";
+            this.Text = "SysConfigChild";
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanelEx1.ResumeLayout(false);
             this.tableLayoutPanelEx1.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private CusControls.TableLayoutPanelEx.TableLayoutPanelEx tableLayoutPanelEx1;
         private TextBox tb_MenuName;
         private ComboBox cbx_ParentName;
         private ComboBox cbx_MenuProgram;
-        private Button btn_Save;
         private Label lbl_MenuProgram;
         private Label lbl_MenuName;
         private Label lbl_MenuCode;
@@ -340,10 +353,12 @@
         private TextBox tb_ParentCode;
         private TextBox tb_MenuCode;
         private Label lbl_ParentCode;
-        private Button btn_Exit;
+        private Button btn_Save;
         private TableLayoutPanel tableLayoutPanel1;
+        private Button btn_Exit;
         private Label lbl_ID;
         private Label lbl_IfEnd;
         private ComboBox cbx_IfEnd;
+        private CusControls.TableLayoutPanelEx.TableLayoutPanelEx tableLayoutPanelEx1;
     }
 }

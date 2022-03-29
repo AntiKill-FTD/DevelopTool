@@ -353,6 +353,7 @@
             this.dataViewMain.DvSelectionMode = System.Windows.Forms.DataGridViewSelectionMode.RowHeaderSelect;
             this.dataViewMain.IsPage = true;
             this.dataViewMain.IsShowFirstCheckBox = true;
+            this.dataViewMain.IsSort = false;
             this.dataViewMain.Location = new System.Drawing.Point(0, 0);
             this.dataViewMain.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataViewMain.Name = "dataViewMain";

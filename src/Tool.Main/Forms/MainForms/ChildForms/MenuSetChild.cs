@@ -161,7 +161,7 @@ namespace Tool.Main.Forms.MainForms.ChildForms
                 if (ifEnd == "否")
                 {
                     //层级、是否有子集
-                    int level = (int)dr["层级"];
+                    int level = Convert.ToInt32(dr["层级"]);
                     DataRow[] childRows = dt.Select("父级编码 = '" + dr["菜单编码"].ToString() + "'");
                     //新拼装数据
                     DataRow newRow = newDt.NewRow();
