@@ -51,7 +51,7 @@
 					LEFT JOIN sys.extended_properties ex ON ex.major_id = so.id
 					AND ex.minor_id = 0
 					WHERE so.xtype IN ( 'U', 'V' )
-					) T 
+					) T
 					WHERE (1=1) AND (2=2)
 				</Query>
 				<Order>
@@ -61,13 +61,13 @@
 			<Sqlite>
 				<Query>
 					SELECT * FROM (
-						SELECT ma.name AS '表名称',
-						IFNULL(remark.TableChn,'') AS '表中文'
-						FROM sqlite_master ma
-						LEFT JOIN SqliteChnRemark remark ON remark.DataType ='表' AND remark.TableEng = ma.name
-						WHERE ma.type='table'
+					SELECT ma.name AS '表名称',
+					IFNULL(remark.TableChn,'') AS '表中文'
+					FROM sqlite_master ma
+					LEFT JOIN SqliteChnRemark remark ON remark.DataType ='表' AND remark.TableEng = ma.name
+					WHERE ma.type='table'
 					) T
-					WHERE (1=1) AND (2=2)
+					WHERE [表名称] <![CDATA[<]]> <![CDATA[>]]> 'sqlite_sequence' AND (1=1) AND (2=2)
 				</Query>
 				<Order>
 					[表名称]
@@ -101,7 +101,7 @@
 					PRAGMA table_info('1=1')
 				</Query>
 				<Order>
-					
+
 				</Order>
 			</Sqlite>
 		</ColumnnEng>

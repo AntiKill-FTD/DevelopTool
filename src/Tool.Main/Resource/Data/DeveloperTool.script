@@ -1,14 +1,42 @@
+CREATE TABLE SqliteChnRemark (
+        Id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT ,
+        TableEng TEXT(100) NOT NULL  ,
+        TableChn TEXT(100) NOT NULL  ,
+        ColumnEng TEXT(100)   ,
+        ColumnChn TEXT(100)   ,
+        DataType TEXT(50) NOT NULL  
+);
+
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('SqliteChnRemark', 'Sqlite中文备注表', NULL, NULL, '表'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('SqliteChnRemark', 'Sqlite中文备注表', 'Id', '主键', '字段'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('SqliteChnRemark', 'Sqlite中文备注表', 'TableEng', '表英文名称', '字段'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('SqliteChnRemark', 'Sqlite中文备注表', 'TableChn', '表中文名称', '字段'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('SqliteChnRemark', 'Sqlite中文备注表', 'ColumnEng', '字段英文名称', '字段'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('SqliteChnRemark', 'Sqlite中文备注表', 'ColumnChn', '字段中文名称', '字段'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('SqliteChnRemark', 'Sqlite中文备注表', 'DataType', '数据类型_表字段', '字段'); 
+
 CREATE TABLE P_Menu (
-	Id INTEGER PRIMARY KEY autoincrement
-	,MenuCode VARCHAR(100)
-	,MenuName VARCHAR(100)
-	,ParentCode VARCHAR(100)
-	,Assembly VARCHAR(100)
-	,NameSpace VARCHAR(100)
-	,EntityName VARCHAR(200)
-	,LEVEL INT
-	,IfEnd INT
+	Id INTEGER PRIMARY KEY AUTOINCREMENT
+	,MenuCode TEXT(100)
+	,MenuName TEXT(100)
+	,ParentCode TEXT(100)
+	,Assembly TEXT(100)
+	,NameSpace TEXT(100)
+	,EntityName TEXT(200)
+	,LEVEL INTEGER
+	,IfEnd INTEGER
 	);
+
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Menu', '菜单表', NULL, NULL, '表'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Menu', '菜单表', 'Id', '主键', '字段'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Menu', '菜单表', 'MenuCode', '菜单编号', '字段'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Menu', '菜单表', 'MenuName', '菜单名称', '字段'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Menu', '菜单表', 'ParentCode', '父级菜单编号', '字段'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Menu', '菜单表', 'Assembly', '程序集名称', '字段'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Menu', '菜单表', 'NameSpace', '命名空间名称', '字段'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Menu', '菜单表', 'EntityName', '实例名称', '字段'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Menu', '菜单表', 'LEVEL', '层级', '字段'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Menu', '菜单表', 'IfEnd', '是否末级', '字段'); 
 
 INSERT INTO P_Menu (
     MenuCode
@@ -270,12 +298,3 @@ Values (
     1
     --IfEnd - tinyint    
     );
-
-CREATE TABLE SqliteChnRemark (
-        ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT ,
-        TableEng TEXT(100) NOT NULL  ,
-        TableChn TEXT(100) NOT NULL  ,
-        ColumnEng TEXT(100)   ,
-        ColumnChn TEXT(100)   ,
-        DataType TEXT(50) NOT NULL  
-);
