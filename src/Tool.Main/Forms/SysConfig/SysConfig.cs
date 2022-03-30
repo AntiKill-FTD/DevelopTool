@@ -39,7 +39,7 @@ namespace Tool.Main.Forms.SysConfig
         private void btnSearch_Click(object sender, EventArgs e)
         {
             //获取主sql
-            Dictionary<string, string> sqlDic = SqlConfig.GetSql("SQLConfig/SysConfig/SysConfig/", this.dataViewMain.SqlType.ToString());
+            Dictionary<string, string> sqlDic = SqlConfig.GetSql("SQLConfig/SysConfigGroup/SysConfig/GridQuery/", this.dataViewMain.SqlType.ToString());
 
             //获取查询参数
             string code1 = cb_Level1Code.Text.Trim();

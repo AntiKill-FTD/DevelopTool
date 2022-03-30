@@ -23,6 +23,7 @@ namespace Tool.Main.Forms.SysConfig.ChildForms
             _sqlType = sqlType;
 
             //初始化控件绑定
+            BindControls();
 
             //更新菜单、修改数据绑定
             if (type == ChildMenuType.Add)
@@ -36,6 +37,13 @@ namespace Tool.Main.Forms.SysConfig.ChildForms
             }
         }
 
+        #endregion
+
+        #region 初始化控件绑定
+        private void BindControls()
+        {
+
+        }
         #endregion
 
         #region 绑定编辑数据

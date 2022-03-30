@@ -108,52 +108,67 @@
 			</ColumnnEng>
 		</EntityHelper>
 	</DevForm>
-	<SysConfig>
+	<SysConfigGroup>
 		<SysConfig>
-			<MSSql>
-				<Query>
-					SELECT Id AS '配置序号',
-					ConfigTypeCode1 AS '1级编码',
-					ConfigTypeName1 AS '1级名称',
-					ConfigTypeCode2 AS '2级编码',
-					ConfigTypeName2 AS '2级名称',
-					ConfigTypeCode3 AS '3级编码',
-					ConfigTypeName3 AS '3级名称',
-					ConfigTypeCode4 AS '4级编码',
-					ConfigTypeName4 AS '4级名称',
-					ConfigTypeCode5 AS '5级编码',
-					ConfigTypeName5 AS '5级名称',
-					ConfigValue AS '配置项值',
-					Remark AS '备注'
-					FROM dbo.P_Config
-					WHERE (1=1) AND (2=2);
-				</Query>
-				<Order>
-					[1级编码],[2级编码],[3级编码],[4级编码],[5级编码]
-				</Order>
-			</MSSql>
-			<Sqlite>
-				<Query>
-					SELECT Id AS '配置序号',
-					ConfigTypeCode1 AS '1级编码',
-					ConfigTypeName1 AS '1级名称',
-					ConfigTypeCode2 AS '2级编码',
-					ConfigTypeName2 AS '2级名称',
-					ConfigTypeCode3 AS '3级编码',
-					ConfigTypeName3 AS '3级名称',
-					ConfigTypeCode4 AS '4级编码',
-					ConfigTypeName4 AS '4级名称',
-					ConfigTypeCode5 AS '5级编码',
-					ConfigTypeName5 AS '5级名称',
-					ConfigValue AS '配置项值',
-					Remark AS '备注'
-					FROM dbo.P_Config
-					WHERE (1=1) AND (2=2);
-				</Query>
-				<Order>
-					[1级编码],[2级编码],[3级编码],[4级编码],[5级编码]
-				</Order>
-			</Sqlite>
+			<GridQuery>
+				<MSSql>
+					<Query>
+						SELECT Id AS '配置序号',
+						ConfigTypeCode1 AS '1级编码',
+						ConfigTypeName1 AS '1级名称',
+						ConfigTypeCode2 AS '2级编码',
+						ConfigTypeName2 AS '2级名称',
+						ConfigTypeCode3 AS '3级编码',
+						ConfigTypeName3 AS '3级名称',
+						ConfigTypeCode4 AS '4级编码',
+						ConfigTypeName4 AS '4级名称',
+						ConfigTypeCode5 AS '5级编码',
+						ConfigTypeName5 AS '5级名称',
+						ConfigValue AS '配置项值',
+						Remark AS '备注'
+						FROM dbo.P_Config
+						WHERE (1=1) AND (2=2);
+					</Query>
+					<Order>
+						[1级编码],[2级编码],[3级编码],[4级编码],[5级编码]
+					</Order>
+				</MSSql>
+				<Sqlite>
+					<Query>
+						SELECT Id AS '配置序号',
+						ConfigTypeCode1 AS '1级编码',
+						ConfigTypeName1 AS '1级名称',
+						ConfigTypeCode2 AS '2级编码',
+						ConfigTypeName2 AS '2级名称',
+						ConfigTypeCode3 AS '3级编码',
+						ConfigTypeName3 AS '3级名称',
+						ConfigTypeCode4 AS '4级编码',
+						ConfigTypeName4 AS '4级名称',
+						ConfigTypeCode5 AS '5级编码',
+						ConfigTypeName5 AS '5级名称',
+						ConfigValue AS '配置项值',
+						Remark AS '备注'
+						FROM dbo.P_Config
+						WHERE (1=1) AND (2=2);
+					</Query>
+					<Order>
+						[1级编码],[2级编码],[3级编码],[4级编码],[5级编码]
+					</Order>
+				</Sqlite>
+			</GridQuery>
+			<LevelDistinct>
+				<MSSql>
+					<Query>
+						
+					</Query>
+					<Order>
+						
+					</Order>
+				</MSSql>
+				<Sqlite>
+					
+				</Sqlite>
+			</LevelDistinct>
 		</SysConfig>
-	</SysConfig>
+	</SysConfigGroup>
 </SQLConfig>
