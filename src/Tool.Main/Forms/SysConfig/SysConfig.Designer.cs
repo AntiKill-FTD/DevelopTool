@@ -60,7 +60,7 @@
             this.labMenuCode.Name = "labMenuCode";
             this.labMenuCode.Size = new System.Drawing.Size(151, 49);
             this.labMenuCode.TabIndex = 0;
-            this.labMenuCode.Text = "菜单编码：";
+            this.labMenuCode.Text = "配置大类：";
             this.labMenuCode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // labMenuName
@@ -71,7 +71,7 @@
             this.labMenuName.Name = "labMenuName";
             this.labMenuName.Size = new System.Drawing.Size(151, 49);
             this.labMenuName.TabIndex = 1;
-            this.labMenuName.Text = "菜单名称：";
+            this.labMenuName.Text = "配置小类：";
             this.labMenuName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtMenuCode

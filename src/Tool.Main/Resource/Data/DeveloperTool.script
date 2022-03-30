@@ -41,16 +41,34 @@ INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType)
 
 CREATE TABLE P_Config (
         Id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT ,
-        ConfigType TEXT(200) NOT NULL  ,
-        ConfigType2 TEXT(200) NOT NULL  ,
-        ConfigValue TEXT(10000) NOT NULL  
+        ConfigTypeCode1 TEXT(200) NOT NULL  ,
+        ConfigTypeName1 TEXT(200) NOT NULL  ,
+        ConfigTypeCode2 TEXT(200)   ,
+        ConfigTypeName2 TEXT(200)   ,
+        ConfigTypeCode3 TEXT(200)   ,
+        ConfigTypeName3 TEXT(200)   ,
+        ConfigTypeCode4 TEXT(200)   ,
+        ConfigTypeName4 TEXT(200)   ,
+        ConfigTypeCode5 TEXT(200)   ,
+        ConfigTypeName5 TEXT(200)   ,
+        ConfigValue TEXT(10000) NOT NULL  ,
+        Remark TEXT(10000)   
 );
 
 INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Config', '配置表', NULL, NULL, '表'); 
 INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Config', '配置表', 'Id', '主键', '字段'); 
-INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Config', '配置表', 'ConfigType', '配置大类', '字段'); 
-INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Config', '配置表', 'ConfigType2', '配置小类', '字段'); 
-INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Config', '配置表', 'ConfigValue', '配置项值', '字段'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Config', '配置表', 'ConfigTypeCode1', '配置1级编码', '字段'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Config', '配置表', 'ConfigTypeName1', '配置1级名称', '字段'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Config', '配置表', 'ConfigTypeCode2', '配置2级编码', '字段'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Config', '配置表', 'ConfigTypeName2', '配置2级名称', '字段'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Config', '配置表', 'ConfigTypeCode3', '配置3级编码', '字段'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Config', '配置表', 'ConfigTypeName3', '配置3级名称', '字段'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Config', '配置表', 'ConfigTypeCode4', '配置4级编码', '字段'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Config', '配置表', 'ConfigTypeName4', '配置4级名称', '字段'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Config', '配置表', 'ConfigTypeCode5', '配置5级编码', '字段'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Config', '配置表', 'ConfigTypeName5', '配置5级名称', '字段'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Config', '配置表', 'ConfigValue', '配置值', '字段'); 
+INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('P_Config', '配置表', 'Remark', '备注', '字段'); 
 
 
 

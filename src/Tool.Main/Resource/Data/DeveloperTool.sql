@@ -213,9 +213,18 @@ GO
 CREATE TABLE dbo.P_Config
         (
         Id int NOT NULL IDENTITY (1, 1) ,
-        ConfigType varchar(200) NOT NULL  ,
-        ConfigType2 varchar(200) NOT NULL  ,
-        ConfigValue varchar(MAX) NOT NULL  
+        ConfigTypeCode1 nvarchar(200) NOT NULL  ,
+        ConfigTypeName1 nvarchar(200) NOT NULL  ,
+        ConfigTypeCode2 nvarchar(200)   ,
+        ConfigTypeName2 nvarchar(200)   ,
+        ConfigTypeCode3 nvarchar(200)   ,
+        ConfigTypeName3 nvarchar(200)   ,
+        ConfigTypeCode4 nvarchar(200)   ,
+        ConfigTypeName4 varchar(200)   ,
+        ConfigTypeCode5 nvarchar(500)   ,
+        ConfigTypeName5 nvarchar(100)   ,
+        ConfigValue nvarchar(MAX) NOT NULL  ,
+        Remark nvarchar(MAX)   
         )
 GO
 ALTER TABLE dbo.P_Config ADD CONSTRAINT
@@ -226,14 +235,31 @@ Id
 GO
 COMMIT
 
-
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'≈‰÷√±Ì' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'P_Config'
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'÷˜º¸' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'P_Config', @level2type=N'COLUMN',@level2name=N'Id'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'≈‰÷√¥Û¿‡' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'P_Config', @level2type=N'COLUMN',@level2name=N'ConfigType'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'≈‰÷√1º∂±‡¬Î' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'P_Config', @level2type=N'COLUMN',@level2name=N'ConfigTypeCode1'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'≈‰÷√–°¿‡' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'P_Config', @level2type=N'COLUMN',@level2name=N'ConfigType2'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'≈‰÷√1º∂√˚≥∆' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'P_Config', @level2type=N'COLUMN',@level2name=N'ConfigTypeName1'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'≈‰÷√œÓ÷µ' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'P_Config', @level2type=N'COLUMN',@level2name=N'ConfigValue'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'≈‰÷√2º∂±‡¬Î' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'P_Config', @level2type=N'COLUMN',@level2name=N'ConfigTypeCode2'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'≈‰÷√2º∂√˚≥∆' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'P_Config', @level2type=N'COLUMN',@level2name=N'ConfigTypeName2'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'≈‰÷√3º∂±‡¬Î' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'P_Config', @level2type=N'COLUMN',@level2name=N'ConfigTypeCode3'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'≈‰÷√3º∂√˚≥∆' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'P_Config', @level2type=N'COLUMN',@level2name=N'ConfigTypeName3'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'≈‰÷√4º∂±‡¬Î' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'P_Config', @level2type=N'COLUMN',@level2name=N'ConfigTypeCode4'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'≈‰÷√4º∂√˚≥∆' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'P_Config', @level2type=N'COLUMN',@level2name=N'ConfigTypeName4'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'≈‰÷√5º∂±‡¬Î' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'P_Config', @level2type=N'COLUMN',@level2name=N'ConfigTypeCode5'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'≈‰÷√5º∂√˚≥∆' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'P_Config', @level2type=N'COLUMN',@level2name=N'ConfigTypeName5'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'≈‰÷√÷µ' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'P_Config', @level2type=N'COLUMN',@level2name=N'ConfigValue'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'±∏◊¢' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'P_Config', @level2type=N'COLUMN',@level2name=N'Remark'
 GO
