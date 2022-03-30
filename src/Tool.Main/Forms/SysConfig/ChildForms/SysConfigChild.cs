@@ -27,11 +27,11 @@ namespace Tool.Main.Forms.SysConfig.ChildForms
             //更新菜单、修改数据绑定
             if (type == ChildMenuType.Add)
             {
-                this.Text = "新增菜单";
+                this.Text = "新增配置项";
             }
             else if (type == ChildMenuType.Edit)
             {
-                this.Text = "编辑菜单";
+                this.Text = "编辑配置项";
                 BindModifyData(pConfig);
             }
         }
