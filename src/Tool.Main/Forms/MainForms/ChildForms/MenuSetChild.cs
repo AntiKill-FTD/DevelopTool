@@ -17,7 +17,7 @@ namespace Tool.Main.Forms.MainForms.ChildForms
 
         #region Ctor
 
-        public MenuSetChild(ChildMenuType type, EnumSqlType sqlType, Menu menu = null)
+        public MenuSetChild(ChildMenuType type, EnumSqlType sqlType, PMenu menu = null)
         {
             InitializeComponent();
             //注入
@@ -62,7 +62,7 @@ namespace Tool.Main.Forms.MainForms.ChildForms
                 }
 
                 //提取实例
-                Menu menu = new Menu();
+                PMenu menu = new PMenu();
                 //1.ID
                 if (_childMenuType == ChildMenuType.Edit)
                 {
@@ -227,7 +227,7 @@ namespace Tool.Main.Forms.MainForms.ChildForms
         #endregion
 
         #region 绑定编辑数据
-        private void BindModifyData(Menu menu)
+        private void BindModifyData(PMenu menu)
         {
             this.lbl_ID.Text = menu.Id.ToString();
 

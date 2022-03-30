@@ -3,7 +3,7 @@
 namespace Tool.IService.Model.Sys
 {
     [Table("P_Menu")]
-    public class Menu
+    public class PMenu
     {
         public int Id { get; set; }
 
@@ -26,7 +26,7 @@ namespace Tool.IService.Model.Sys
 
     public class FullMenuEntity
     {
-        public Menu currentMenu;
+        public PMenu currentMenu;
 
         public List<FullMenuEntity> childMenu;
     }

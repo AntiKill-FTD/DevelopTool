@@ -5,7 +5,7 @@ namespace Tool.Data
 {
     public class DeveloperToolContext : ToolDbContext<DeveloperToolContext>
     {
-        public DbSet<Menu> Menus { get; set; }
+        public DbSet<PMenu> Menus { get; set; }
 
         public DeveloperToolContext(DbContextOptions<DeveloperToolContext> options) : base(options)
         {

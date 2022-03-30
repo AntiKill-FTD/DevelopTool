@@ -109,7 +109,7 @@ namespace Tool.Main.Forms.MainForms
             DataGridViewRow[] rows = this.dataViewMain.GetCheckRows();
             if (rows.Length == 1)
             {
-                Menu menu = new Menu();
+                PMenu menu = new PMenu();
                 menu.Id = Convert.ToInt32(rows[0].Cells["菜单序号"].Value);
                 menu.MenuCode = rows[0].Cells["菜单编码"].Value.ToString().TrimStart(new char[] { ' ', '-' });
                 menu.MenuName = rows[0].Cells["菜单名称"].Value.ToString().TrimStart(new char[] { ' ', '-' });
@@ -183,10 +183,10 @@ namespace Tool.Main.Forms.MainForms
             DataGridViewRow[] rows = this.dataViewMain.GetCheckRows();
             if (rows.Length > 0)
             {
-                List<Menu> menus = new List<Menu>();
+                List<PMenu> menus = new List<PMenu>();
                 foreach (DataGridViewRow row in rows)
                 {
-                    Menu menu = new Menu();
+                    PMenu menu = new PMenu();
                     menu.Id = Convert.ToInt32(row.Cells["菜单序号"].Value);
                     menu.MenuCode = row.Cells["菜单编码"].Value.ToString().TrimStart(new char[] { ' ', '-' });
                     menu.MenuName = row.Cells["菜单名称"].Value.ToString().TrimStart(new char[] { ' ', '-' });
@@ -201,7 +201,7 @@ namespace Tool.Main.Forms.MainForms
                 //拼接
                 StringBuilder sbMysql = new StringBuilder();
                 StringBuilder sbMSSql = new StringBuilder();
-                foreach (Menu menu in menus)
+                foreach (PMenu menu in menus)
                 {
                     sbMysql.Append($"INSERT INTO P_Menu (\n    MenuCode\n    ,MenuName\n    ,ParentCode\n    ,Assembly\n    ,NameSpace\n    ,EntityName\n    ,Level\n    ,IfEnd\n    )\nValues (\n    '{menu.MenuCode}'\n    ,-- MenuCode - varchar(100)\n    '{menu.MenuName}'\n    ,-- MenuName - varchar(100)\n    '{menu.ParentCode}'\n    ,-- ParentCode - varchar(100)\n    '{menu.Assembly}'\n    ,-- Assembly - varchar(200)\n    '{menu.NameSpace}'    \n    ,-- NameSpace - varchar(200)\n    '{menu.EntityName}'\n    ,--EntityName - varchar(200)\n    {menu.Level}\n    ,-- Level - int\n    {menu.IfEnd}\n    --IfEnd - tinyint    \n    );\n\n");
                     sbMSSql.Append($"INSERT INTO P_Menu ( MenuCode, MenuName, ParentCode, Assembly, NameSpace, EntityName, Level, IfEnd) VALUES ( N'{menu.MenuCode}', N'{menu.MenuName}', N'{menu.ParentCode}', N'{menu.Assembly}', N'{menu.NameSpace}', N'{menu.EntityName}', {menu.Level}, {menu.IfEnd});\n");

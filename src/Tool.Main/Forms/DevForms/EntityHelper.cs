@@ -187,7 +187,7 @@ namespace Tool.Main.Forms.DevForms
         private void BindDataViewTable()
         {
             //获取主sql
-            Dictionary<string, string> sqlDicTable = SqlConfig.GetSql("SQLConfig/EntityHelper/TableEng/", this.dataViewDataTable.SqlType.ToString());
+            Dictionary<string, string> sqlDicTable = SqlConfig.GetSql("SQLConfig/DevForm/EntityHelper/TableEng/", this.dataViewDataTable.SqlType.ToString());
             //获取查询参数
             string tableEngName = txtTableEngName.Text.ToString().Trim();
             //拼接参数
@@ -213,7 +213,7 @@ namespace Tool.Main.Forms.DevForms
         private void BindDataViewColumn()
         {
             //获取主sql
-            Dictionary<string, string> sqlDicColumn = SqlConfig.GetSql("SQLConfig/EntityHelper/ColumnnEng/", this.dataViewColumn.SqlType.ToString());
+            Dictionary<string, string> sqlDicColumn = SqlConfig.GetSql("SQLConfig/DevForm/EntityHelper/ColumnnEng/", this.dataViewColumn.SqlType.ToString());
             //获取查询参数
             string columnEngName = txtColumnEngName.Text.ToString().Trim();
             //拼接参数

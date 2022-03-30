@@ -40,70 +40,120 @@
 			</Sqlite>
 		</MenuSet>
 	</BaseForm>
-	<EntityHelper>
-		<TableEng>
-			<MSSql>
-				<Query>
-					SELECT * FROM (
-					SELECT  so.name AS '表名称' ,
-					ex.value AS '表中文'
-					FROM sys.sysobjects so
-					LEFT JOIN sys.extended_properties ex ON ex.major_id = so.id
-					AND ex.minor_id = 0
-					WHERE so.xtype IN ( 'U', 'V' )
-					) T
-					WHERE (1=1) AND (2=2)
-				</Query>
-				<Order>
-					[表名称]
-				</Order>
-			</MSSql>
-			<Sqlite>
-				<Query>
-					SELECT * FROM (
-					SELECT ma.name AS '表名称',
-					IFNULL(remark.TableChn,'') AS '表中文'
-					FROM sqlite_master ma
-					LEFT JOIN SqliteChnRemark remark ON remark.DataType ='表' AND remark.TableEng = ma.name
-					WHERE ma.type='table'
-					) T
-					WHERE [表名称] <![CDATA[<]]> <![CDATA[>]]> 'sqlite_sequence' AND (1=1) AND (2=2)
-				</Query>
-				<Order>
-					[表名称]
-				</Order>
-			</Sqlite>
-		</TableEng>
-		<ColumnnEng>
-			<MSSql>
-				<Query>
-					SELECT * FROM (
-					SELECT  so.name AS '表名称',
-					sc.name AS '列名称' ,
-					ex.value AS '列中文' ,
-					st.name AS '类型' ,
-					sc.length AS '长度'
-					FROM    sys.sysobjects so
-					INNER JOIN sys.syscolumns sc ON sc.id = so.id
-					INNER JOIN sys.systypes st ON st.xtype = sc.xtype
-					LEFT JOIN sys.extended_properties ex ON ex.major_id = so.id
-					AND  ex.minor_id = sc.colid
-					WHERE so.xtype IN ( 'U', 'V' )
-					) T
-					WHERE (1=1) AND (2=2)
-				</Query>
-				<Order>
-					
-				</Order>
-			</MSSql>
-			<Sqlite>
-				<Query>
-					PRAGMA table_info('1=1')
-				</Query>
-				<Order>
+	<DevForm>
+		<EntityHelper>
+			<TableEng>
+				<MSSql>
+					<Query>
+						SELECT * FROM (
+						SELECT  so.name AS '表名称' ,
+						ex.value AS '表中文'
+						FROM sys.sysobjects so
+						LEFT JOIN sys.extended_properties ex ON ex.major_id = so.id
+						AND ex.minor_id = 0
+						WHERE so.xtype IN ( 'U', 'V' )
+						) T
+						WHERE (1=1) AND (2=2)
+					</Query>
+					<Order>
+						[表名称]
+					</Order>
+				</MSSql>
+				<Sqlite>
+					<Query>
+						SELECT * FROM (
+						SELECT ma.name AS '表名称',
+						IFNULL(remark.TableChn,'') AS '表中文'
+						FROM sqlite_master ma
+						LEFT JOIN SqliteChnRemark remark ON remark.DataType ='表' AND remark.TableEng = ma.name
+						WHERE ma.type='table'
+						) T
+						WHERE [表名称] <![CDATA[<]]> <![CDATA[>]]> 'sqlite_sequence' AND (1=1) AND (2=2)
+					</Query>
+					<Order>
+						[表名称]
+					</Order>
+				</Sqlite>
+			</TableEng>
+			<ColumnnEng>
+				<MSSql>
+					<Query>
+						SELECT * FROM (
+						SELECT  so.name AS '表名称',
+						sc.name AS '列名称' ,
+						ex.value AS '列中文' ,
+						st.name AS '类型' ,
+						sc.length AS '长度'
+						FROM    sys.sysobjects so
+						INNER JOIN sys.syscolumns sc ON sc.id = so.id
+						INNER JOIN sys.systypes st ON st.xtype = sc.xtype
+						LEFT JOIN sys.extended_properties ex ON ex.major_id = so.id
+						AND  ex.minor_id = sc.colid
+						WHERE so.xtype IN ( 'U', 'V' )
+						) T
+						WHERE (1=1) AND (2=2)
+					</Query>
+					<Order>
 
+					</Order>
+				</MSSql>
+				<Sqlite>
+					<Query>
+						PRAGMA table_info('1=1')
+					</Query>
+					<Order>
+
+					</Order>
+				</Sqlite>
+			</ColumnnEng>
+		</EntityHelper>
+	</DevForm>
+	<SysConfig>
+		<SysConfig>
+			<MSSql>
+				<Query>
+					SELECT Id AS '配置序号',
+					ConfigTypeCode1 AS '1级编码',
+					ConfigTypeName1 AS '1级名称',
+					ConfigTypeCode2 AS '2级编码',
+					ConfigTypeName2 AS '2级名称',
+					ConfigTypeCode3 AS '3级编码',
+					ConfigTypeName3 AS '3级名称',
+					ConfigTypeCode4 AS '4级编码',
+					ConfigTypeName4 AS '4级名称',
+					ConfigTypeCode5 AS '5级编码',
+					ConfigTypeName5 AS '5级名称',
+					ConfigValue AS '配置项值',
+					Remark AS '备注'
+					FROM dbo.P_Config
+					WHERE (1=1) AND (2=2);
+				</Query>
+				<Order>
+					[1级编码],[2级编码],[3级编码],[4级编码],[5级编码]
+				</Order>
+			</MSSql>
+			<Sqlite>
+				<Query>
+					SELECT Id AS '配置序号',
+					ConfigTypeCode1 AS '1级编码',
+					ConfigTypeName1 AS '1级名称',
+					ConfigTypeCode2 AS '2级编码',
+					ConfigTypeName2 AS '2级名称',
+					ConfigTypeCode3 AS '3级编码',
+					ConfigTypeName3 AS '3级名称',
+					ConfigTypeCode4 AS '4级编码',
+					ConfigTypeName4 AS '4级名称',
+					ConfigTypeCode5 AS '5级编码',
+					ConfigTypeName5 AS '5级名称',
+					ConfigValue AS '配置项值',
+					Remark AS '备注'
+					FROM dbo.P_Config
+					WHERE (1=1) AND (2=2);
+				</Query>
+				<Order>
+					[1级编码],[2级编码],[3级编码],[4级编码],[5级编码]
 				</Order>
 			</Sqlite>
-		</ColumnnEng>
-	</EntityHelper>
+		</SysConfig>
+	</SysConfig>
 </SQLConfig>

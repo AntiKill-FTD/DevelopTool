@@ -16,7 +16,7 @@ namespace Tool.Service.SysMenu
         public List<ToolStripMenuItem> toolStripMenuItems { get; set; }
 
         //MenuObject
-        private List<Menu> menus;
+        private List<PMenu> menus;
         private List<FullMenuEntity> fullMenuList;
 
         //DbContext
@@ -76,11 +76,11 @@ namespace Tool.Service.SysMenu
         private void CreateFirstMenu()
         {
             //获取所有一级菜单
-            List<Menu> menuLF = menus.Where(item => item.Level == 1).OrderBy(item => item.MenuCode).ToList();
+            List<PMenu> menuLF = menus.Where(item => item.Level == 1).OrderBy(item => item.MenuCode).ToList();
             //定义一级菜单集合
             fullMenuList = new List<FullMenuEntity>();
             //循环创建一级实例
-            foreach (Menu item in menuLF)
+            foreach (PMenu item in menuLF)
             {
                 FullMenuEntity fullMenuEntity = new FullMenuEntity { currentMenu = item, childMenu = new List<FullMenuEntity>() };
                 fullMenuList.Add(fullMenuEntity);
@@ -103,10 +103,10 @@ namespace Tool.Service.SysMenu
         private void RecursionEntity(FullMenuEntity fullMenuEntity)
         {
             //获取所有子集
-            List<Menu> childMenus = menus.Where(item => item.ParentCode == fullMenuEntity.currentMenu.MenuCode).ToList();
+            List<PMenu> childMenus = menus.Where(item => item.ParentCode == fullMenuEntity.currentMenu.MenuCode).ToList();
 
             //循环创建子集实例
-            foreach (Menu item in childMenus)
+            foreach (PMenu item in childMenus)
             {
                 //转换对象
                 FullMenuEntity childMenu = new FullMenuEntity { currentMenu = item, childMenu = new List<FullMenuEntity>() };
