@@ -126,8 +126,8 @@
 						ConfigTypeName5 AS '5级名称',
 						ConfigValue AS '配置项值',
 						Remark AS '备注'
-						FROM dbo.P_Config
-						WHERE (1=1) AND (2=2);
+						FROM P_Config
+						WHERE (1=1) AND (2=2)
 					</Query>
 					<Order>
 						[1级编码],[2级编码],[3级编码],[4级编码],[5级编码]
@@ -148,27 +148,54 @@
 						ConfigTypeName5 AS '5级名称',
 						ConfigValue AS '配置项值',
 						Remark AS '备注'
-						FROM dbo.P_Config
-						WHERE (1=1) AND (2=2);
+						FROM P_Config
+						WHERE (1=1) AND (2=2)
 					</Query>
 					<Order>
 						[1级编码],[2级编码],[3级编码],[4级编码],[5级编码]
 					</Order>
 				</Sqlite>
 			</GridQuery>
-			<LevelDistinct>
+			<ComboBind>
 				<MSSql>
 					<Query>
-						
+						SELECT
+						ConfigTypeCode1 AS C1,
+						ConfigTypeName1 AS N1,
+						ConfigTypeCode2 AS C2,
+						ConfigTypeName2 AS N2,
+						ConfigTypeCode3 AS C3,
+						ConfigTypeName3 AS N3,
+						ConfigTypeCode4 AS C4,
+						ConfigTypeName4 AS N4,
+						ConfigTypeCode5 AS C5,
+						ConfigTypeName5 AS N5
+						FROM P_Config
 					</Query>
 					<Order>
-						
+						[ConfigTypeCode1],[ConfigTypeCode2],[ConfigTypeCode3],[ConfigTypeCode4],[ConfigTypeCode5]
 					</Order>
 				</MSSql>
 				<Sqlite>
-					
+					<Query>
+						SELECT
+						ConfigTypeCode1 AS C1,
+						ConfigTypeName1 AS N1,
+						ConfigTypeCode2 AS C2,
+						ConfigTypeName2 AS N2,
+						ConfigTypeCode3 AS C3,
+						ConfigTypeName3 AS N3,
+						ConfigTypeCode4 AS C4,
+						ConfigTypeName4 AS N4,
+						ConfigTypeCode5 AS C5,
+						ConfigTypeName5 AS N5
+						FROM P_Config
+					</Query>
+					<Order>
+						[ConfigTypeCode1],[ConfigTypeCode2],[ConfigTypeCode3],[ConfigTypeCode4],[ConfigTypeCode5]
+					</Order>
 				</Sqlite>
-			</LevelDistinct>
+			</ComboBind>
 		</SysConfig>
 	</SysConfigGroup>
 </SQLConfig>

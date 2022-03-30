@@ -56,6 +56,7 @@
             this.tb_Level3Name = new System.Windows.Forms.TextBox();
             this.tb_Level4Name = new System.Windows.Forms.TextBox();
             this.tb_Level5Name = new System.Windows.Forms.TextBox();
+            this.lbl_ID = new System.Windows.Forms.Label();
             this.tlp_Remark = new System.Windows.Forms.TableLayoutPanel();
             this.rtb_Remark = new System.Windows.Forms.RichTextBox();
             this.lbl_Remark = new System.Windows.Forms.Label();
@@ -133,6 +134,7 @@
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "保存";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnExit
             // 
@@ -143,6 +145,7 @@
             this.btnExit.TabIndex = 1;
             this.btnExit.Text = "退出";
             this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // tlp_Config
             // 
@@ -176,6 +179,7 @@
             this.tlp_Config.Controls.Add(this.tb_Level3Name, 5, 2);
             this.tlp_Config.Controls.Add(this.tb_Level4Name, 5, 3);
             this.tlp_Config.Controls.Add(this.tb_Level5Name, 5, 4);
+            this.tlp_Config.Controls.Add(this.lbl_ID, 0, 0);
             this.tlp_Config.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlp_Config.Location = new System.Drawing.Point(3, 3);
             this.tlp_Config.Name = "tlp_Config";
@@ -312,48 +316,63 @@
             // 
             // cb_Level1Code
             // 
+            this.cb_Level1Code.DisplayMember = "Text";
             this.cb_Level1Code.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cb_Level1Code.FormattingEnabled = true;
             this.cb_Level1Code.Location = new System.Drawing.Point(164, 3);
             this.cb_Level1Code.Name = "cb_Level1Code";
             this.cb_Level1Code.Size = new System.Drawing.Size(206, 28);
             this.cb_Level1Code.TabIndex = 3;
+            this.cb_Level1Code.ValueMember = "Value";
+            this.cb_Level1Code.TextChanged += new System.EventHandler(this.cb_Level1Code_TextChanged);
             // 
             // cb_Level2Code
             // 
+            this.cb_Level2Code.DisplayMember = "Text";
             this.cb_Level2Code.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cb_Level2Code.FormattingEnabled = true;
             this.cb_Level2Code.Location = new System.Drawing.Point(164, 40);
             this.cb_Level2Code.Name = "cb_Level2Code";
             this.cb_Level2Code.Size = new System.Drawing.Size(206, 28);
             this.cb_Level2Code.TabIndex = 3;
+            this.cb_Level2Code.ValueMember = "Value";
+            this.cb_Level2Code.TextChanged += new System.EventHandler(this.cb_Level2Code_TextChanged);
             // 
             // cb_Level3Code
             // 
+            this.cb_Level3Code.DisplayMember = "Text";
             this.cb_Level3Code.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cb_Level3Code.FormattingEnabled = true;
             this.cb_Level3Code.Location = new System.Drawing.Point(164, 77);
             this.cb_Level3Code.Name = "cb_Level3Code";
             this.cb_Level3Code.Size = new System.Drawing.Size(206, 28);
             this.cb_Level3Code.TabIndex = 3;
+            this.cb_Level3Code.ValueMember = "Value";
+            this.cb_Level3Code.TextChanged += new System.EventHandler(this.cb_Level3Code_TextChanged);
             // 
             // cb_Level4Code
             // 
+            this.cb_Level4Code.DisplayMember = "Text";
             this.cb_Level4Code.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cb_Level4Code.FormattingEnabled = true;
             this.cb_Level4Code.Location = new System.Drawing.Point(164, 114);
             this.cb_Level4Code.Name = "cb_Level4Code";
             this.cb_Level4Code.Size = new System.Drawing.Size(206, 28);
             this.cb_Level4Code.TabIndex = 3;
+            this.cb_Level4Code.ValueMember = "Value";
+            this.cb_Level4Code.TextChanged += new System.EventHandler(this.cb_Level4Code_TextChanged);
             // 
             // cb_Level5Code
             // 
+            this.cb_Level5Code.DisplayMember = "Text";
             this.cb_Level5Code.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cb_Level5Code.FormattingEnabled = true;
             this.cb_Level5Code.Location = new System.Drawing.Point(164, 151);
             this.cb_Level5Code.Name = "cb_Level5Code";
             this.cb_Level5Code.Size = new System.Drawing.Size(206, 28);
             this.cb_Level5Code.TabIndex = 3;
+            this.cb_Level5Code.ValueMember = "Value";
+            this.cb_Level5Code.TextChanged += new System.EventHandler(this.cb_Level5Code_TextChanged);
             // 
             // tb_Level1Name
             // 
@@ -394,6 +413,15 @@
             this.tb_Level5Name.Name = "tb_Level5Name";
             this.tb_Level5Name.Size = new System.Drawing.Size(206, 27);
             this.tb_Level5Name.TabIndex = 4;
+            // 
+            // lbl_ID
+            // 
+            this.lbl_ID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_ID.Location = new System.Drawing.Point(3, 0);
+            this.lbl_ID.Name = "lbl_ID";
+            this.lbl_ID.Size = new System.Drawing.Size(14, 37);
+            this.lbl_ID.TabIndex = 5;
+            this.lbl_ID.Visible = false;
             // 
             // tlp_Remark
             // 
@@ -560,5 +588,6 @@
         private TextBox tb_Level4Name;
         private TextBox tb_Level5Name;
         private Label lbl_ConfigValue_Require;
+        private Label lbl_ID;
     }
 }

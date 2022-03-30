@@ -835,7 +835,7 @@ namespace Tool.CusControls.DataGridViewEx
                     long iDataCount = 0;
                     DataTable dt = iDataHelper.GetDataTableByPage(_dataSourceSql["Query"], _dataSourceSql["Order"], ref iDataCount, (int)CurrentPageIndex, (int)PerPageCount);
                     //绑定数据
-                    if (dt != null && dt.Rows.Count != 0)
+                    if (dt != null)
                     {
                         if (dt.Columns.Contains("RowNum"))
                         {

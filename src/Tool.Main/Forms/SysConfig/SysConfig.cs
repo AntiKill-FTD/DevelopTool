@@ -1,6 +1,8 @@
-﻿using Tool.CusControls.DataGridViewEx;
+﻿using System.Data;
+using Tool.CusControls.DataGridViewEx;
 using Tool.Data.DataHelper;
 using Tool.Data.SqlConfig;
+using Tool.IService.Model.Common;
 using Tool.IService.Model.Sys;
 using Tool.Main.Forms.SysConfig.ChildForms;
 using Tool.Service.Common;
@@ -12,6 +14,7 @@ namespace Tool.Main.Forms.SysConfig
         #region 私有变量
 
         private ICommonDataHelper _dataHelper;
+        private Dictionary<string, Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>> dicFull = new Dictionary<string, Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>>();
 
         #endregion
 
@@ -29,6 +32,13 @@ namespace Tool.Main.Forms.SysConfig
 
         private void SysConfig_Load(object sender, EventArgs e)
         {
+            //获取下拉框字典
+            GetComboDic();
+
+            //初始化控件绑定
+            BindCombo(0);
+
+            //查询
             btnSearch_Click(null, null);
         }
         #endregion
@@ -36,7 +46,7 @@ namespace Tool.Main.Forms.SysConfig
         #region 按钮事件
 
         #region 查询
-        private void btnSearch_Click(object sender, EventArgs e)
+        public void btnSearch_Click(object sender, EventArgs e)
         {
             //获取主sql
             Dictionary<string, string> sqlDic = SqlConfig.GetSql("SQLConfig/SysConfigGroup/SysConfig/GridQuery/", this.dataViewMain.SqlType.ToString());
@@ -211,6 +221,246 @@ namespace Tool.Main.Forms.SysConfig
             }
         }
         #endregion
+
+        #endregion
+
+        #region 获取下拉控件字典
+        private void GetComboDic()
+        {
+            //获取主sql
+            Dictionary<string, string> sqlDic = SqlConfig.GetSql("SQLConfig/SysConfigGroup/SysConfig/ComboBind/", dataViewMain.SqlType.ToString());
+            DataTable dt = _dataHelper.GetDataTable(sqlDic["Query"].ToString(), sqlDic["Order"].ToString());
+            //循环添加到字典
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                DataRow dr = dt.Rows[i];
+                string level1CodeName = $"{dr["C1"]}.{dr["N1"]}";
+                string level2CodeName = $"{dr["C2"]}.{dr["N2"]}";
+                string level3CodeName = $"{dr["C3"]}.{dr["N3"]}";
+                string level4CodeName = $"{dr["C4"]}.{dr["N4"]}";
+                string level5CodeName = $"{dr["C5"]}.{dr["N5"]}";
+                if (dicFull.Keys.Contains(level1CodeName))
+                {
+                    if (dicFull[level1CodeName].Keys.Contains(level2CodeName))
+                    {
+                        if (dicFull[level1CodeName][level2CodeName].Keys.Contains(level3CodeName))
+                        {
+                            if (dicFull[level1CodeName][level2CodeName][level3CodeName].Keys.Contains(level4CodeName))
+                            {
+                                if (dicFull[level1CodeName][level2CodeName][level3CodeName][level4CodeName].Contains(level5CodeName))
+                                {
+                                    continue;
+                                }
+                                else
+                                {
+                                    dicFull[level1CodeName][level2CodeName][level3CodeName][level4CodeName].Add(level5CodeName);
+                                }
+                            }
+                            else
+                            {
+                                List<string> dic5 = new List<string>() { level5CodeName };
+                                dicFull[level1CodeName][level2CodeName][level3CodeName].Add(level4CodeName, dic5);
+                            }
+                        }
+                        else
+                        {
+                            List<string> dic5 = new List<string>() { level5CodeName };
+                            Dictionary<string, List<string>> dic4 = new Dictionary<string, List<string>>() { { level4CodeName, dic5 } };
+                            dicFull[level1CodeName][level2CodeName].Add(level3CodeName, dic4);
+                        }
+                    }
+                    else
+                    {
+                        List<string> dic5 = new List<string>() { level5CodeName };
+                        Dictionary<string, List<string>> dic4 = new Dictionary<string, List<string>>() { { level4CodeName, dic5 } };
+                        Dictionary<string, Dictionary<string, List<string>>> dic3 = new Dictionary<string, Dictionary<string, List<string>>>() { { level3CodeName, dic4 } };
+                        dicFull[level1CodeName].Add(level2CodeName, dic3);
+                    }
+                }
+                else
+                {
+                    List<string> dic5 = new List<string>() { level5CodeName };
+                    Dictionary<string, List<string>> dic4 = new Dictionary<string, List<string>>() { { level4CodeName, dic5 } };
+                    Dictionary<string, Dictionary<string, List<string>>> dic3 = new Dictionary<string, Dictionary<string, List<string>>>() { { level3CodeName, dic4 } };
+                    Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>> dic2 = new Dictionary<string, Dictionary<string, Dictionary<string, List<string>>>>() { { level2CodeName, dic3 } };
+                    dicFull.Add(level1CodeName, dic2);
+                }
+            }
+        }
+        #endregion
+
+        #region 初始化控件绑定
+        private void BindCombo(int level)
+        {
+            string level1CodeName = $"{cb_Level1Code.Text}.{cb_Level1Code.SelectedValue}";
+            string level2CodeName = $"{cb_Level2Code.Text}.{cb_Level2Code.SelectedValue}";
+            string level3CodeName = $"{cb_Level3Code.Text}.{cb_Level3Code.SelectedValue}";
+            string level4CodeName = $"{cb_Level4Code.Text}.{cb_Level4Code.SelectedValue}";
+            string level5CodeName = $"{cb_Level5Code.Text}.{cb_Level5Code.SelectedValue}";
+            switch (level)
+            {
+                case 0:
+                    //获取字典
+                    if (dicFull.Keys == null) return;
+                    List<string> dics1 = dicFull.Keys.ToList();
+                    List<ComboBoxObject> items1 = new List<ComboBoxObject>();
+                    items1.Add(new ComboBoxObject { Text = "", Value = "" });
+                    dics1.ForEach(item =>
+                    {
+                        items1.Add(new ComboBoxObject { Text = item.Split(".")[0], Value = item.Split(".")[1] });
+                    });
+                    //绑定下级控件集合
+                    cb_Level1Code.DataSource = items1;
+                    cb_Level1Code.DisplayMember = "Text";
+                    cb_Level1Code.ValueMember = "Value";
+                    break;
+                case 1:
+                    //清除下级控件绑定集合
+                    cb_Level5Code.DataSource = null;
+                    cb_Level4Code.DataSource = null;
+                    cb_Level3Code.DataSource = null;
+                    cb_Level2Code.DataSource = null;
+                    //清空Name
+                    tb_Level5Name.Text = String.Empty;
+                    tb_Level4Name.Text = String.Empty;
+                    tb_Level3Name.Text = String.Empty;
+                    tb_Level2Name.Text = String.Empty;
+                    tb_Level1Name.Text = String.Empty;
+                    //判断是否为空
+                    if (level1CodeName.EndsWith(".")) return;
+                    //赋值Name
+                    tb_Level1Name.Text = cb_Level1Code.SelectedValue.ToString();
+                    //获取字典
+                    if (!dicFull.Keys.Contains(level1CodeName)) return;
+                    List<string> dics2 = dicFull[level1CodeName].Keys.ToList();
+                    List<ComboBoxObject> items2 = new List<ComboBoxObject>();
+                    items2.Add(new ComboBoxObject { Text = "", Value = "" });
+                    dics2.ForEach(item =>
+                    {
+                        items2.Add(new ComboBoxObject { Text = item.Split(".")[0], Value = item.Split(".")[1] });
+                    });
+                    //绑定下级控件集合
+                    cb_Level2Code.DataSource = items2;
+                    cb_Level2Code.DisplayMember = "Text";
+                    cb_Level2Code.ValueMember = "Value";
+                    break;
+                case 2:
+                    //清除下级控件绑定集合
+                    cb_Level5Code.DataSource = null;
+                    cb_Level4Code.DataSource = null;
+                    cb_Level3Code.DataSource = null;
+                    //清空Name
+                    tb_Level5Name.Text = String.Empty;
+                    tb_Level4Name.Text = String.Empty;
+                    tb_Level3Name.Text = String.Empty;
+                    tb_Level2Name.Text = String.Empty;
+                    //判断是否为空
+                    if (level2CodeName.EndsWith(".")) return;
+                    //赋值Name
+                    tb_Level2Name.Text = cb_Level2Code.SelectedValue.ToString();
+                    //获取字典
+                    if (!dicFull[level1CodeName].Keys.Contains(level2CodeName)) return;
+                    List<string> dics3 = dicFull[level1CodeName][level2CodeName].Keys.ToList();
+                    List<ComboBoxObject> items3 = new List<ComboBoxObject>();
+                    items3.Add(new ComboBoxObject { Text = "", Value = "" });
+                    dics3.ForEach(item =>
+                    {
+                        items3.Add(new ComboBoxObject { Text = item.Split(".")[0], Value = item.Split(".")[1] });
+                    });
+                    //绑定下级控件集合
+                    cb_Level3Code.DataSource = items3;
+                    cb_Level3Code.DisplayMember = "Text";
+                    cb_Level3Code.ValueMember = "Value";
+                    break;
+                case 3:
+                    //清除下级控件绑定集合
+                    cb_Level5Code.DataSource = null;
+                    cb_Level4Code.DataSource = null;
+                    //清空Name
+                    tb_Level5Name.Text = String.Empty;
+                    tb_Level4Name.Text = String.Empty;
+                    tb_Level3Name.Text = String.Empty;
+                    //判断是否为空
+                    if (level3CodeName.EndsWith(".")) return;
+                    //赋值Name
+                    tb_Level3Name.Text = cb_Level3Code.SelectedValue.ToString();
+                    //获取字典
+                    if (!dicFull[level1CodeName][level2CodeName].Keys.Contains(level3CodeName)) return;
+                    List<string> dics4 = dicFull[level1CodeName][level2CodeName][level3CodeName].Keys.ToList();
+                    List<ComboBoxObject> items4 = new List<ComboBoxObject>();
+                    items4.Add(new ComboBoxObject { Text = "", Value = "" });
+                    dics4.ForEach(item =>
+                    {
+                        items4.Add(new ComboBoxObject { Text = item.Split(".")[0], Value = item.Split(".")[1] });
+                    });
+                    //绑定下级控件集合
+                    cb_Level4Code.DataSource = items4;
+                    cb_Level4Code.DisplayMember = "Text";
+                    cb_Level4Code.ValueMember = "Value";
+                    break;
+                case 4:
+                    //清除下级控件绑定集合
+                    cb_Level5Code.DataSource = null;
+                    //清空Name
+                    tb_Level5Name.Text = String.Empty;
+                    tb_Level4Name.Text = String.Empty;
+                    //判断是否为空
+                    if (level4CodeName.EndsWith(".")) return;
+                    //赋值Name
+                    tb_Level4Name.Text = cb_Level4Code.SelectedValue.ToString();
+                    //获取字典
+                    if (!dicFull[level1CodeName][level2CodeName][level3CodeName].Keys.Contains(level4CodeName)) return;
+                    List<string> dics5 = dicFull[level1CodeName][level2CodeName][level3CodeName][level4CodeName];
+                    List<ComboBoxObject> items5 = new List<ComboBoxObject>();
+                    items5.Add(new ComboBoxObject { Text = "", Value = "" });
+                    dics5.ForEach(item =>
+                    {
+                        items5.Add(new ComboBoxObject { Text = item.Split(".")[0], Value = item.Split(".")[1] });
+                    });
+                    //绑定下级控件集合
+                    cb_Level5Code.DataSource = items5;
+                    cb_Level5Code.DisplayMember = "Text";
+                    cb_Level5Code.ValueMember = "Value";
+                    break;
+                case 5:
+                    //清空Name
+                    tb_Level5Name.Text = String.Empty;
+                    //判断是否为空
+                    if (level5CodeName.EndsWith(".")) return;
+                    //赋值Name
+                    tb_Level5Name.Text = cb_Level5Code.SelectedValue.ToString();
+                    break;
+                default:
+                    break;
+            }
+        }
+        #endregion
+
+        #region SelectIndexChange
+        private void cb_Level1Code_TextChanged(object sender, EventArgs e)
+        {
+            BindCombo(1);
+        }
+
+        private void cb_Level2Code_TextChanged(object sender, EventArgs e)
+        {
+            BindCombo(2);
+        }
+
+        private void cb_Level3Code_TextChanged(object sender, EventArgs e)
+        {
+            BindCombo(3);
+        }
+
+        private void cb_Level4Code_TextChanged(object sender, EventArgs e)
+        {
+            BindCombo(4);
+        }
+
+        private void cb_Level5Code_TextChanged(object sender, EventArgs e)
+        {
+            BindCombo(5);
+        }
 
         #endregion
     }
