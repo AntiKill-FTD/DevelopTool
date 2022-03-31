@@ -12,6 +12,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Tool.Data\Tool.Data.csproj" />
 		<ProjectReference Include="..\Tool.IService\Tool.IService.csproj" />
 	</ItemGroup>
 
