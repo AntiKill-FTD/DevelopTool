@@ -15,19 +15,19 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_40E193D7111A4C05B2A50A7381A36343"
+        "MsmKey" = "8:_0879ABA49E8B4445A0056E6030EB2407"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_9B116EAD2CFC445BAF7B9C9C7C2F19A0"
+        "MsmKey" = "8:_17534930B5D04EC78F954AEF720DDCC6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_D1BD3A58736243B2BA297D3C787A4CA1"
+        "MsmKey" = "8:_D710DC0E1E294591949BE63A6DA84E0D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -49,6 +49,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -65,6 +73,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -96,7 +112,7 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_40E193D7111A4C05B2A50A7381A36343"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0879ABA49E8B4445A0056E6030EB2407"
             {
             "SourcePath" = "8:..\\Tool.Main\\Resource\\Data\\DeveloperTool.db"
             "TargetName" = "8:DeveloperTool.db"
@@ -116,7 +132,7 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D1BD3A58736243B2BA297D3C787A4CA1"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_17534930B5D04EC78F954AEF720DDCC6"
             {
             "SourcePath" = "8:..\\Tool.Main\\Resource\\BitMap\\pt64.ico"
             "TargetName" = "8:pt64.ico"
@@ -335,7 +351,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C489B550558141BD9A4C2E4EBCF1D5AD"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_30AB0F8EEF674CCC8A0CB66D6FF9F123"
             {
             "Name" = "8:DeveloperTool"
             "Arguments" = "8:"
@@ -343,10 +359,10 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:"
+            "Target" = "8:_D710DC0E1E294591949BE63A6DA84E0D"
             "Folder" = "8:_07C70CDE52F54CFAAFE8FBB1DF745EF6"
             "WorkingFolder" = "8:_E02AD894836B47F2BF9113F3D4CAD014"
-            "Icon" = "8:_D1BD3A58736243B2BA297D3C787A4CA1"
+            "Icon" = "8:_17534930B5D04EC78F954AEF720DDCC6"
             "Feature" = "8:"
             }
         }
@@ -748,7 +764,7 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_9B116EAD2CFC445BAF7B9C9C7C2F19A0"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_D710DC0E1E294591949BE63A6DA84E0D"
             {
             "SourcePath" = "8:..\\Tool.Main\\obj\\Debug\\net6.0-windows\\apphost.exe"
             "TargetName" = "8:"
