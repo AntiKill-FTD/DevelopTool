@@ -340,7 +340,14 @@ namespace Tool.Main.Forms.SysConfig.ChildForms
         #region 绑定编辑数据
         private void BindModifyData(PConfig pConfig)
         {
-
+            lbl_ID.Text = pConfig.Id.ToString();
+            cb_Level1Code.SelectedValue = $"{pConfig.ConfigTypeCode1}.{pConfig.ConfigTypeName1}";
+            cb_Level2Code.SelectedValue = $"{pConfig.ConfigTypeCode2}.{pConfig.ConfigTypeName2}";
+            cb_Level3Code.SelectedValue = $"{pConfig.ConfigTypeCode3}.{pConfig.ConfigTypeName3}";
+            cb_Level4Code.SelectedValue = $"{pConfig.ConfigTypeCode4}.{pConfig.ConfigTypeName4}";
+            cb_Level5Code.SelectedValue = $"{pConfig.ConfigTypeCode5}.{pConfig.ConfigTypeName5}";
+            rtb_ConfigValue.Text = pConfig.ConfigValue;
+            rtb_Remark.Text = pConfig.Remark;
         }
         #endregion
 
@@ -407,7 +414,7 @@ namespace Tool.Main.Forms.SysConfig.ChildForms
                 }
                 else
                 {
-                    sql = $"Update P_Config set ConfigTypeCode1='{pConfig.ConfigTypeCode1}',ConfigTypeName1='{pConfig.ConfigTypeName1}',ConfigTypeCode2='{pConfig.ConfigTypeCode2}',ConfigTypeName2='{pConfig.ConfigTypeName2}',ConfigTypeCode3='{pConfig.ConfigTypeCode3}',ConfigTypeName3='{pConfig.ConfigTypeName3}',ConfigTypeCode4={pConfig.ConfigTypeCode4},ConfigTypeName4={pConfig.ConfigTypeName4},ConfigTypeCode5={pConfig.ConfigTypeCode5},ConfigTypeName5={pConfig.ConfigTypeName5},ConfigValue={pConfig.ConfigValue},Remark={pConfig.Remark} WHERE ID={pConfig.Id};";
+                    sql = $"Update P_Config set ConfigTypeCode1='{pConfig.ConfigTypeCode1}',ConfigTypeName1='{pConfig.ConfigTypeName1}',ConfigTypeCode2='{pConfig.ConfigTypeCode2}',ConfigTypeName2='{pConfig.ConfigTypeName2}',ConfigTypeCode3='{pConfig.ConfigTypeCode3}',ConfigTypeName3='{pConfig.ConfigTypeName3}',ConfigTypeCode4='{pConfig.ConfigTypeCode4}',ConfigTypeName4='{pConfig.ConfigTypeName4}',ConfigTypeCode5='{pConfig.ConfigTypeCode5}',ConfigTypeName5='{pConfig.ConfigTypeName5}',ConfigValue='{pConfig.ConfigValue}',Remark='{pConfig.Remark}' WHERE ID={pConfig.Id};";
                 }
                 //执行
                 long result = _dataHelper.ExcuteNoQuery(sql);
