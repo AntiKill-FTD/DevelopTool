@@ -396,8 +396,8 @@ namespace Tool.Main.Forms.DevForms
                     return "第" + (i + 1).ToString() + "行，数据长度 不能为空;";
                 }
                 //3.2校验列数据-规范
-                result = RegexCheck(colChn.ToString().Trim(), regExprNameChn);
-                if (!result) return "列中文只能是【字母、数字、下划线、汉字】";
+                //result = RegexCheck(colChn.ToString().Trim(), regExprNameChn);
+                //if (!result) return "列中文只能是【字母、数字、下划线、汉字】";
                 result = RegexCheck(colEng.ToString().Trim(), regExprNameEng);
                 if (!result) return "列英文只能是【字母、数字、下划线】";
                 //3.3列英文不能重复
