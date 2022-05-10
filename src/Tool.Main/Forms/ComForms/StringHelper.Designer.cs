@@ -78,13 +78,58 @@
             this.btn_Dichotomy_DownHalf = new System.Windows.Forms.Button();
             this.btn_Dichotomy_WriteBack = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tlp_CodeEnCryptJSDecrypt = new System.Windows.Forms.TableLayoutPanel();
-            this.lbl_DE_PassWord = new System.Windows.Forms.Label();
-            this.lbl_DE_Encrypt = new System.Windows.Forms.Label();
-            this.lbl_DE_Decrypt = new System.Windows.Forms.Label();
-            this.tb_DE_PassWord = new System.Windows.Forms.TextBox();
-            this.tb_DE_Decrypt = new System.Windows.Forms.TextBox();
-            this.tb_DE_Encrypt = new System.Windows.Forms.TextBox();
+            this.lbl_DE_Decrypt_NumberJS = new System.Windows.Forms.Label();
+            this.tb_DE_Encrypt_NumberJS = new System.Windows.Forms.TextBox();
+            this.lbl_DE_Encrypt_NumberJS = new System.Windows.Forms.Label();
+            this.tb_DE_Decrypt_NumberJS = new System.Windows.Forms.TextBox();
+            this.tb_DE_PassWord_NumberJS = new System.Windows.Forms.TextBox();
+            this.lbl_DE_PassWord_NumberJS = new System.Windows.Forms.Label();
+            this.lbl_DE_Remark_NumberJS = new System.Windows.Forms.Label();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.tlp_AES = new System.Windows.Forms.TableLayoutPanel();
+            this.tb_DE_PassWord_AES = new System.Windows.Forms.TextBox();
+            this.lbl_DE_Decrypt_AES = new System.Windows.Forms.Label();
+            this.tb_DE_Encrypt_AES = new System.Windows.Forms.TextBox();
+            this.lbl_DE_Encrypt_AES = new System.Windows.Forms.Label();
+            this.tb_DE_Decrypt_AES = new System.Windows.Forms.TextBox();
+            this.lbl_DE_PassWord_AES = new System.Windows.Forms.Label();
+            this.lbl_DE_Remark_AES = new System.Windows.Forms.Label();
+            this.tlp_DES = new System.Windows.Forms.TableLayoutPanel();
+            this.lbl_DE_Decrypt_DES = new System.Windows.Forms.Label();
+            this.tb_DE_Encrypt_DES = new System.Windows.Forms.TextBox();
+            this.lbl_DE_Encrypt_DES = new System.Windows.Forms.Label();
+            this.tb_DE_Decrypt_DES = new System.Windows.Forms.TextBox();
+            this.lbl_DE_PassWord_DES = new System.Windows.Forms.Label();
+            this.lbl_DE_Remark_DES = new System.Windows.Forms.Label();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.tb_DE_PassWord_DES_Key = new System.Windows.Forms.TextBox();
+            this.tb_DE_PassWord_DES_Iv = new System.Windows.Forms.TextBox();
+            this.tlp_MD5 = new System.Windows.Forms.TableLayoutPanel();
+            this.lbl_DE_Decrypt_MD5 = new System.Windows.Forms.Label();
+            this.tb_DE_Encrypt_MD5 = new System.Windows.Forms.TextBox();
+            this.lbl_DE_Encrypt_MD5 = new System.Windows.Forms.Label();
+            this.tb_DE_Decrypt_MD5 = new System.Windows.Forms.TextBox();
+            this.lbl_DE_Remark_MD5 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.label14 = new System.Windows.Forms.Label();
+            this.textBox14 = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.textBox15 = new System.Windows.Forms.TextBox();
+            this.textBox16 = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBox7 = new System.Windows.Forms.TextBox();
             this.mainPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tlp_StringList.SuspendLayout();
@@ -102,7 +147,15 @@
             this.tlp_Dichotomy.SuspendLayout();
             this.tlp_Dichotomy_Operate.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.tlp_CodeEnCryptJSDecrypt.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.tlp_AES.SuspendLayout();
+            this.tlp_DES.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.tlp_MD5.SuspendLayout();
+            this.tableLayoutPanel7.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -726,97 +779,604 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.LightYellow;
-            this.panel4.Controls.Add(this.tlp_CodeEnCryptJSDecrypt);
+            this.panel4.Controls.Add(this.tableLayoutPanel1);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(643, 403);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(634, 395);
             this.panel4.TabIndex = 3;
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.tlp_CodeEnCryptJSDecrypt, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tlp_AES, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tlp_DES, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tlp_MD5, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel7, 1, 2);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(634, 395);
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
             // tlp_CodeEnCryptJSDecrypt
             // 
             this.tlp_CodeEnCryptJSDecrypt.ColumnCount = 2;
             this.tlp_CodeEnCryptJSDecrypt.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tlp_CodeEnCryptJSDecrypt.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tlp_CodeEnCryptJSDecrypt.Controls.Add(this.lbl_DE_PassWord, 0, 0);
-            this.tlp_CodeEnCryptJSDecrypt.Controls.Add(this.lbl_DE_Encrypt, 0, 1);
-            this.tlp_CodeEnCryptJSDecrypt.Controls.Add(this.lbl_DE_Decrypt, 0, 2);
-            this.tlp_CodeEnCryptJSDecrypt.Controls.Add(this.tb_DE_PassWord, 1, 0);
-            this.tlp_CodeEnCryptJSDecrypt.Controls.Add(this.tb_DE_Decrypt, 1, 1);
-            this.tlp_CodeEnCryptJSDecrypt.Controls.Add(this.tb_DE_Encrypt, 1, 2);
+            this.tlp_CodeEnCryptJSDecrypt.Controls.Add(this.lbl_DE_Decrypt_NumberJS, 0, 3);
+            this.tlp_CodeEnCryptJSDecrypt.Controls.Add(this.tb_DE_Encrypt_NumberJS, 1, 3);
+            this.tlp_CodeEnCryptJSDecrypt.Controls.Add(this.lbl_DE_Encrypt_NumberJS, 0, 2);
+            this.tlp_CodeEnCryptJSDecrypt.Controls.Add(this.tb_DE_Decrypt_NumberJS, 1, 2);
+            this.tlp_CodeEnCryptJSDecrypt.Controls.Add(this.tb_DE_PassWord_NumberJS, 1, 1);
+            this.tlp_CodeEnCryptJSDecrypt.Controls.Add(this.lbl_DE_PassWord_NumberJS, 0, 1);
+            this.tlp_CodeEnCryptJSDecrypt.Controls.Add(this.lbl_DE_Remark_NumberJS, 1, 0);
             this.tlp_CodeEnCryptJSDecrypt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_CodeEnCryptJSDecrypt.Location = new System.Drawing.Point(0, 0);
+            this.tlp_CodeEnCryptJSDecrypt.Location = new System.Drawing.Point(3, 3);
             this.tlp_CodeEnCryptJSDecrypt.Name = "tlp_CodeEnCryptJSDecrypt";
-            this.tlp_CodeEnCryptJSDecrypt.RowCount = 10;
-            this.tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_CodeEnCryptJSDecrypt.Size = new System.Drawing.Size(634, 395);
-            this.tlp_CodeEnCryptJSDecrypt.TabIndex = 0;
+            this.tlp_CodeEnCryptJSDecrypt.RowCount = 4;
+            this.tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlp_CodeEnCryptJSDecrypt.Size = new System.Drawing.Size(311, 125);
+            this.tlp_CodeEnCryptJSDecrypt.TabIndex = 1;
             // 
-            // lbl_DE_PassWord
+            // lbl_DE_Decrypt_NumberJS
             // 
-            this.lbl_DE_PassWord.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_DE_PassWord.Location = new System.Drawing.Point(3, 0);
-            this.lbl_DE_PassWord.Name = "lbl_DE_PassWord";
-            this.lbl_DE_PassWord.Size = new System.Drawing.Size(120, 39);
-            this.lbl_DE_PassWord.TabIndex = 0;
-            this.lbl_DE_PassWord.Text = "秘钥：";
-            this.lbl_DE_PassWord.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_DE_Decrypt_NumberJS.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_DE_Decrypt_NumberJS.Location = new System.Drawing.Point(3, 93);
+            this.lbl_DE_Decrypt_NumberJS.Name = "lbl_DE_Decrypt_NumberJS";
+            this.lbl_DE_Decrypt_NumberJS.Size = new System.Drawing.Size(56, 32);
+            this.lbl_DE_Decrypt_NumberJS.TabIndex = 2;
+            this.lbl_DE_Decrypt_NumberJS.Text = "密文：";
+            this.lbl_DE_Decrypt_NumberJS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lbl_DE_Encrypt
+            // tb_DE_Encrypt_NumberJS
             // 
-            this.lbl_DE_Encrypt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_DE_Encrypt.Location = new System.Drawing.Point(3, 39);
-            this.lbl_DE_Encrypt.Name = "lbl_DE_Encrypt";
-            this.lbl_DE_Encrypt.Size = new System.Drawing.Size(120, 39);
-            this.lbl_DE_Encrypt.TabIndex = 1;
-            this.lbl_DE_Encrypt.Text = "明文：";
-            this.lbl_DE_Encrypt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tb_DE_Encrypt_NumberJS.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_DE_Encrypt_NumberJS.Location = new System.Drawing.Point(65, 96);
+            this.tb_DE_Encrypt_NumberJS.Name = "tb_DE_Encrypt_NumberJS";
+            this.tb_DE_Encrypt_NumberJS.ReadOnly = true;
+            this.tb_DE_Encrypt_NumberJS.Size = new System.Drawing.Size(243, 27);
+            this.tb_DE_Encrypt_NumberJS.TabIndex = 3;
             // 
-            // lbl_DE_Decrypt
+            // lbl_DE_Encrypt_NumberJS
             // 
-            this.lbl_DE_Decrypt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_DE_Decrypt.Location = new System.Drawing.Point(3, 78);
-            this.lbl_DE_Decrypt.Name = "lbl_DE_Decrypt";
-            this.lbl_DE_Decrypt.Size = new System.Drawing.Size(120, 39);
-            this.lbl_DE_Decrypt.TabIndex = 2;
-            this.lbl_DE_Decrypt.Text = "密文：";
-            this.lbl_DE_Decrypt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_DE_Encrypt_NumberJS.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_DE_Encrypt_NumberJS.Location = new System.Drawing.Point(3, 62);
+            this.lbl_DE_Encrypt_NumberJS.Name = "lbl_DE_Encrypt_NumberJS";
+            this.lbl_DE_Encrypt_NumberJS.Size = new System.Drawing.Size(56, 31);
+            this.lbl_DE_Encrypt_NumberJS.TabIndex = 1;
+            this.lbl_DE_Encrypt_NumberJS.Text = "明文：";
+            this.lbl_DE_Encrypt_NumberJS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // tb_DE_PassWord
+            // tb_DE_Decrypt_NumberJS
             // 
-            this.tb_DE_PassWord.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_DE_PassWord.Location = new System.Drawing.Point(129, 3);
-            this.tb_DE_PassWord.Name = "tb_DE_PassWord";
-            this.tb_DE_PassWord.Size = new System.Drawing.Size(502, 27);
-            this.tb_DE_PassWord.TabIndex = 3;
-            this.tb_DE_PassWord.Text = "isoftstone";
+            this.tb_DE_Decrypt_NumberJS.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_DE_Decrypt_NumberJS.Location = new System.Drawing.Point(65, 65);
+            this.tb_DE_Decrypt_NumberJS.Name = "tb_DE_Decrypt_NumberJS";
+            this.tb_DE_Decrypt_NumberJS.Size = new System.Drawing.Size(243, 27);
+            this.tb_DE_Decrypt_NumberJS.TabIndex = 3;
+            this.tb_DE_Decrypt_NumberJS.TextChanged += new System.EventHandler(this.tb_DE_Decrypt_NumberJS_TextChanged);
             // 
-            // tb_DE_Decrypt
+            // tb_DE_PassWord_NumberJS
             // 
-            this.tb_DE_Decrypt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_DE_Decrypt.Location = new System.Drawing.Point(129, 42);
-            this.tb_DE_Decrypt.Name = "tb_DE_Decrypt";
-            this.tb_DE_Decrypt.Size = new System.Drawing.Size(502, 27);
-            this.tb_DE_Decrypt.TabIndex = 3;
-            this.tb_DE_Decrypt.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tb_DE_Decrypt_KeyUp);
+            this.tb_DE_PassWord_NumberJS.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_DE_PassWord_NumberJS.Location = new System.Drawing.Point(65, 34);
+            this.tb_DE_PassWord_NumberJS.Name = "tb_DE_PassWord_NumberJS";
+            this.tb_DE_PassWord_NumberJS.Size = new System.Drawing.Size(243, 27);
+            this.tb_DE_PassWord_NumberJS.TabIndex = 3;
+            this.tb_DE_PassWord_NumberJS.Text = "isoftstone";
             // 
-            // tb_DE_Encrypt
+            // lbl_DE_PassWord_NumberJS
             // 
-            this.tb_DE_Encrypt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_DE_Encrypt.Location = new System.Drawing.Point(129, 81);
-            this.tb_DE_Encrypt.Name = "tb_DE_Encrypt";
-            this.tb_DE_Encrypt.ReadOnly = true;
-            this.tb_DE_Encrypt.Size = new System.Drawing.Size(502, 27);
-            this.tb_DE_Encrypt.TabIndex = 3;
+            this.lbl_DE_PassWord_NumberJS.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_DE_PassWord_NumberJS.Location = new System.Drawing.Point(3, 31);
+            this.lbl_DE_PassWord_NumberJS.Name = "lbl_DE_PassWord_NumberJS";
+            this.lbl_DE_PassWord_NumberJS.Size = new System.Drawing.Size(56, 31);
+            this.lbl_DE_PassWord_NumberJS.TabIndex = 0;
+            this.lbl_DE_PassWord_NumberJS.Text = "秘钥：";
+            this.lbl_DE_PassWord_NumberJS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_DE_Remark_NumberJS
+            // 
+            this.lbl_DE_Remark_NumberJS.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_DE_Remark_NumberJS.Location = new System.Drawing.Point(65, 0);
+            this.lbl_DE_Remark_NumberJS.Name = "lbl_DE_Remark_NumberJS";
+            this.lbl_DE_Remark_NumberJS.Size = new System.Drawing.Size(243, 31);
+            this.lbl_DE_Remark_NumberJS.TabIndex = 4;
+            this.lbl_DE_Remark_NumberJS.Text = "加密成数字JS解密";
+            this.lbl_DE_Remark_NumberJS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.textBox1, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.label2, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.textBox2, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.textBox3, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label3, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label18, 1, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(320, 3);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 4;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(311, 125);
+            this.tableLayoutPanel2.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Location = new System.Drawing.Point(3, 93);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 32);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "密文：";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox1.Location = new System.Drawing.Point(65, 96);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(243, 27);
+            this.textBox1.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label2.Location = new System.Drawing.Point(3, 62);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(56, 31);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "明文：";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox2.Location = new System.Drawing.Point(65, 65);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(243, 27);
+            this.textBox2.TabIndex = 3;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox3.Location = new System.Drawing.Point(65, 34);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(243, 27);
+            this.textBox3.TabIndex = 3;
+            // 
+            // label3
+            // 
+            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label3.Location = new System.Drawing.Point(3, 31);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(56, 31);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "秘钥：";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label18
+            // 
+            this.label18.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label18.Location = new System.Drawing.Point(65, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(243, 31);
+            this.label18.TabIndex = 4;
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tlp_AES
+            // 
+            this.tlp_AES.ColumnCount = 2;
+            this.tlp_AES.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tlp_AES.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            this.tlp_AES.Controls.Add(this.tb_DE_PassWord_AES, 1, 1);
+            this.tlp_AES.Controls.Add(this.lbl_DE_Decrypt_AES, 0, 3);
+            this.tlp_AES.Controls.Add(this.tb_DE_Encrypt_AES, 1, 3);
+            this.tlp_AES.Controls.Add(this.lbl_DE_Encrypt_AES, 0, 2);
+            this.tlp_AES.Controls.Add(this.tb_DE_Decrypt_AES, 1, 2);
+            this.tlp_AES.Controls.Add(this.lbl_DE_PassWord_AES, 0, 1);
+            this.tlp_AES.Controls.Add(this.lbl_DE_Remark_AES, 1, 0);
+            this.tlp_AES.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlp_AES.Location = new System.Drawing.Point(3, 134);
+            this.tlp_AES.Name = "tlp_AES";
+            this.tlp_AES.RowCount = 4;
+            this.tlp_AES.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlp_AES.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlp_AES.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlp_AES.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlp_AES.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_AES.Size = new System.Drawing.Size(311, 125);
+            this.tlp_AES.TabIndex = 1;
+            // 
+            // tb_DE_PassWord_AES
+            // 
+            this.tb_DE_PassWord_AES.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_DE_PassWord_AES.Font = new System.Drawing.Font("Microsoft YaHei UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tb_DE_PassWord_AES.Location = new System.Drawing.Point(65, 34);
+            this.tb_DE_PassWord_AES.Name = "tb_DE_PassWord_AES";
+            this.tb_DE_PassWord_AES.Size = new System.Drawing.Size(243, 22);
+            this.tb_DE_PassWord_AES.TabIndex = 6;
+            this.tb_DE_PassWord_AES.Text = "F45637A003E44C05BB498FF0CFA0BF48";
+            // 
+            // lbl_DE_Decrypt_AES
+            // 
+            this.lbl_DE_Decrypt_AES.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_DE_Decrypt_AES.Location = new System.Drawing.Point(3, 93);
+            this.lbl_DE_Decrypt_AES.Name = "lbl_DE_Decrypt_AES";
+            this.lbl_DE_Decrypt_AES.Size = new System.Drawing.Size(56, 32);
+            this.lbl_DE_Decrypt_AES.TabIndex = 2;
+            this.lbl_DE_Decrypt_AES.Text = "密文：";
+            this.lbl_DE_Decrypt_AES.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_DE_Encrypt_AES
+            // 
+            this.tb_DE_Encrypt_AES.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_DE_Encrypt_AES.Location = new System.Drawing.Point(65, 96);
+            this.tb_DE_Encrypt_AES.Name = "tb_DE_Encrypt_AES";
+            this.tb_DE_Encrypt_AES.ReadOnly = true;
+            this.tb_DE_Encrypt_AES.Size = new System.Drawing.Size(243, 27);
+            this.tb_DE_Encrypt_AES.TabIndex = 3;
+            // 
+            // lbl_DE_Encrypt_AES
+            // 
+            this.lbl_DE_Encrypt_AES.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_DE_Encrypt_AES.Location = new System.Drawing.Point(3, 62);
+            this.lbl_DE_Encrypt_AES.Name = "lbl_DE_Encrypt_AES";
+            this.lbl_DE_Encrypt_AES.Size = new System.Drawing.Size(56, 31);
+            this.lbl_DE_Encrypt_AES.TabIndex = 1;
+            this.lbl_DE_Encrypt_AES.Text = "明文：";
+            this.lbl_DE_Encrypt_AES.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_DE_Decrypt_AES
+            // 
+            this.tb_DE_Decrypt_AES.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_DE_Decrypt_AES.Location = new System.Drawing.Point(65, 65);
+            this.tb_DE_Decrypt_AES.Name = "tb_DE_Decrypt_AES";
+            this.tb_DE_Decrypt_AES.Size = new System.Drawing.Size(243, 27);
+            this.tb_DE_Decrypt_AES.TabIndex = 3;
+            this.tb_DE_Decrypt_AES.TextChanged += new System.EventHandler(this.tb_DE_Decrypt_AES_TextChanged);
+            // 
+            // lbl_DE_PassWord_AES
+            // 
+            this.lbl_DE_PassWord_AES.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_DE_PassWord_AES.Location = new System.Drawing.Point(3, 31);
+            this.lbl_DE_PassWord_AES.Name = "lbl_DE_PassWord_AES";
+            this.lbl_DE_PassWord_AES.Size = new System.Drawing.Size(56, 31);
+            this.lbl_DE_PassWord_AES.TabIndex = 0;
+            this.lbl_DE_PassWord_AES.Text = "秘钥：";
+            this.lbl_DE_PassWord_AES.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_DE_Remark_AES
+            // 
+            this.lbl_DE_Remark_AES.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_DE_Remark_AES.Location = new System.Drawing.Point(65, 0);
+            this.lbl_DE_Remark_AES.Name = "lbl_DE_Remark_AES";
+            this.lbl_DE_Remark_AES.Size = new System.Drawing.Size(243, 31);
+            this.lbl_DE_Remark_AES.TabIndex = 4;
+            this.lbl_DE_Remark_AES.Text = "AES";
+            this.lbl_DE_Remark_AES.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tlp_DES
+            // 
+            this.tlp_DES.ColumnCount = 2;
+            this.tlp_DES.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tlp_DES.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            this.tlp_DES.Controls.Add(this.lbl_DE_Decrypt_DES, 0, 3);
+            this.tlp_DES.Controls.Add(this.tb_DE_Encrypt_DES, 1, 3);
+            this.tlp_DES.Controls.Add(this.lbl_DE_Encrypt_DES, 0, 2);
+            this.tlp_DES.Controls.Add(this.tb_DE_Decrypt_DES, 1, 2);
+            this.tlp_DES.Controls.Add(this.lbl_DE_PassWord_DES, 0, 1);
+            this.tlp_DES.Controls.Add(this.lbl_DE_Remark_DES, 1, 0);
+            this.tlp_DES.Controls.Add(this.tableLayoutPanel3, 1, 1);
+            this.tlp_DES.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlp_DES.Location = new System.Drawing.Point(320, 134);
+            this.tlp_DES.Name = "tlp_DES";
+            this.tlp_DES.RowCount = 4;
+            this.tlp_DES.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlp_DES.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlp_DES.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlp_DES.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlp_DES.Size = new System.Drawing.Size(311, 125);
+            this.tlp_DES.TabIndex = 1;
+            // 
+            // lbl_DE_Decrypt_DES
+            // 
+            this.lbl_DE_Decrypt_DES.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_DE_Decrypt_DES.Location = new System.Drawing.Point(3, 93);
+            this.lbl_DE_Decrypt_DES.Name = "lbl_DE_Decrypt_DES";
+            this.lbl_DE_Decrypt_DES.Size = new System.Drawing.Size(56, 32);
+            this.lbl_DE_Decrypt_DES.TabIndex = 2;
+            this.lbl_DE_Decrypt_DES.Text = "密文：";
+            this.lbl_DE_Decrypt_DES.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_DE_Encrypt_DES
+            // 
+            this.tb_DE_Encrypt_DES.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_DE_Encrypt_DES.Location = new System.Drawing.Point(65, 96);
+            this.tb_DE_Encrypt_DES.Name = "tb_DE_Encrypt_DES";
+            this.tb_DE_Encrypt_DES.ReadOnly = true;
+            this.tb_DE_Encrypt_DES.Size = new System.Drawing.Size(243, 27);
+            this.tb_DE_Encrypt_DES.TabIndex = 3;
+            // 
+            // lbl_DE_Encrypt_DES
+            // 
+            this.lbl_DE_Encrypt_DES.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_DE_Encrypt_DES.Location = new System.Drawing.Point(3, 62);
+            this.lbl_DE_Encrypt_DES.Name = "lbl_DE_Encrypt_DES";
+            this.lbl_DE_Encrypt_DES.Size = new System.Drawing.Size(56, 31);
+            this.lbl_DE_Encrypt_DES.TabIndex = 1;
+            this.lbl_DE_Encrypt_DES.Text = "明文：";
+            this.lbl_DE_Encrypt_DES.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_DE_Decrypt_DES
+            // 
+            this.tb_DE_Decrypt_DES.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_DE_Decrypt_DES.Location = new System.Drawing.Point(65, 65);
+            this.tb_DE_Decrypt_DES.Name = "tb_DE_Decrypt_DES";
+            this.tb_DE_Decrypt_DES.Size = new System.Drawing.Size(243, 27);
+            this.tb_DE_Decrypt_DES.TabIndex = 3;
+            this.tb_DE_Decrypt_DES.TextChanged += new System.EventHandler(this.tb_DE_Decrypt_DES_TextChanged);
+            // 
+            // lbl_DE_PassWord_DES
+            // 
+            this.lbl_DE_PassWord_DES.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_DE_PassWord_DES.Location = new System.Drawing.Point(3, 31);
+            this.lbl_DE_PassWord_DES.Name = "lbl_DE_PassWord_DES";
+            this.lbl_DE_PassWord_DES.Size = new System.Drawing.Size(56, 31);
+            this.lbl_DE_PassWord_DES.TabIndex = 0;
+            this.lbl_DE_PassWord_DES.Text = "秘钥：";
+            this.lbl_DE_PassWord_DES.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_DE_Remark_DES
+            // 
+            this.lbl_DE_Remark_DES.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_DE_Remark_DES.Location = new System.Drawing.Point(65, 0);
+            this.lbl_DE_Remark_DES.Name = "lbl_DE_Remark_DES";
+            this.lbl_DE_Remark_DES.Size = new System.Drawing.Size(243, 31);
+            this.lbl_DE_Remark_DES.TabIndex = 4;
+            this.lbl_DE_Remark_DES.Text = "DES";
+            this.lbl_DE_Remark_DES.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Controls.Add(this.tb_DE_PassWord_DES_Key, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.tb_DE_PassWord_DES_Iv, 1, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(62, 31);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(249, 31);
+            this.tableLayoutPanel3.TabIndex = 5;
+            // 
+            // tb_DE_PassWord_DES_Key
+            // 
+            this.tb_DE_PassWord_DES_Key.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_DE_PassWord_DES_Key.Location = new System.Drawing.Point(3, 3);
+            this.tb_DE_PassWord_DES_Key.Name = "tb_DE_PassWord_DES_Key";
+            this.tb_DE_PassWord_DES_Key.Size = new System.Drawing.Size(118, 27);
+            this.tb_DE_PassWord_DES_Key.TabIndex = 4;
+            this.tb_DE_PassWord_DES_Key.Text = "omc4good";
+            // 
+            // tb_DE_PassWord_DES_Iv
+            // 
+            this.tb_DE_PassWord_DES_Iv.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_DE_PassWord_DES_Iv.Location = new System.Drawing.Point(127, 3);
+            this.tb_DE_PassWord_DES_Iv.Name = "tb_DE_PassWord_DES_Iv";
+            this.tb_DE_PassWord_DES_Iv.Size = new System.Drawing.Size(119, 27);
+            this.tb_DE_PassWord_DES_Iv.TabIndex = 5;
+            this.tb_DE_PassWord_DES_Iv.Text = "1s2o4f5t";
+            // 
+            // tlp_MD5
+            // 
+            this.tlp_MD5.ColumnCount = 2;
+            this.tlp_MD5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tlp_MD5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            this.tlp_MD5.Controls.Add(this.lbl_DE_Decrypt_MD5, 0, 2);
+            this.tlp_MD5.Controls.Add(this.tb_DE_Encrypt_MD5, 1, 2);
+            this.tlp_MD5.Controls.Add(this.lbl_DE_Encrypt_MD5, 0, 1);
+            this.tlp_MD5.Controls.Add(this.tb_DE_Decrypt_MD5, 1, 1);
+            this.tlp_MD5.Controls.Add(this.lbl_DE_Remark_MD5, 1, 0);
+            this.tlp_MD5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlp_MD5.Location = new System.Drawing.Point(3, 265);
+            this.tlp_MD5.Name = "tlp_MD5";
+            this.tlp_MD5.RowCount = 3;
+            this.tlp_MD5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_MD5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlp_MD5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlp_MD5.Size = new System.Drawing.Size(311, 127);
+            this.tlp_MD5.TabIndex = 1;
+            // 
+            // lbl_DE_Decrypt_MD5
+            // 
+            this.lbl_DE_Decrypt_MD5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_DE_Decrypt_MD5.Location = new System.Drawing.Point(3, 94);
+            this.lbl_DE_Decrypt_MD5.Name = "lbl_DE_Decrypt_MD5";
+            this.lbl_DE_Decrypt_MD5.Size = new System.Drawing.Size(56, 33);
+            this.lbl_DE_Decrypt_MD5.TabIndex = 2;
+            this.lbl_DE_Decrypt_MD5.Text = "密文：";
+            this.lbl_DE_Decrypt_MD5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_DE_Encrypt_MD5
+            // 
+            this.tb_DE_Encrypt_MD5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_DE_Encrypt_MD5.Location = new System.Drawing.Point(65, 97);
+            this.tb_DE_Encrypt_MD5.Name = "tb_DE_Encrypt_MD5";
+            this.tb_DE_Encrypt_MD5.ReadOnly = true;
+            this.tb_DE_Encrypt_MD5.Size = new System.Drawing.Size(243, 27);
+            this.tb_DE_Encrypt_MD5.TabIndex = 3;
+            // 
+            // lbl_DE_Encrypt_MD5
+            // 
+            this.lbl_DE_Encrypt_MD5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_DE_Encrypt_MD5.Location = new System.Drawing.Point(3, 63);
+            this.lbl_DE_Encrypt_MD5.Name = "lbl_DE_Encrypt_MD5";
+            this.lbl_DE_Encrypt_MD5.Size = new System.Drawing.Size(56, 31);
+            this.lbl_DE_Encrypt_MD5.TabIndex = 1;
+            this.lbl_DE_Encrypt_MD5.Text = "明文：";
+            this.lbl_DE_Encrypt_MD5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tb_DE_Decrypt_MD5
+            // 
+            this.tb_DE_Decrypt_MD5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_DE_Decrypt_MD5.Location = new System.Drawing.Point(65, 66);
+            this.tb_DE_Decrypt_MD5.Name = "tb_DE_Decrypt_MD5";
+            this.tb_DE_Decrypt_MD5.Size = new System.Drawing.Size(243, 27);
+            this.tb_DE_Decrypt_MD5.TabIndex = 3;
+            this.tb_DE_Decrypt_MD5.TextChanged += new System.EventHandler(this.tb_DE_Decrypt_MD5_TextChanged);
+            // 
+            // lbl_DE_Remark_MD5
+            // 
+            this.lbl_DE_Remark_MD5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_DE_Remark_MD5.Location = new System.Drawing.Point(65, 0);
+            this.lbl_DE_Remark_MD5.Name = "lbl_DE_Remark_MD5";
+            this.lbl_DE_Remark_MD5.Size = new System.Drawing.Size(243, 63);
+            this.lbl_DE_Remark_MD5.TabIndex = 4;
+            this.lbl_DE_Remark_MD5.Text = "MD5";
+            this.lbl_DE_Remark_MD5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tableLayoutPanel7
+            // 
+            this.tableLayoutPanel7.ColumnCount = 2;
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            this.tableLayoutPanel7.Controls.Add(this.label14, 0, 3);
+            this.tableLayoutPanel7.Controls.Add(this.textBox14, 1, 3);
+            this.tableLayoutPanel7.Controls.Add(this.label15, 0, 2);
+            this.tableLayoutPanel7.Controls.Add(this.textBox15, 1, 2);
+            this.tableLayoutPanel7.Controls.Add(this.textBox16, 1, 1);
+            this.tableLayoutPanel7.Controls.Add(this.label16, 0, 1);
+            this.tableLayoutPanel7.Controls.Add(this.label22, 1, 0);
+            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(320, 265);
+            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
+            this.tableLayoutPanel7.RowCount = 4;
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(311, 127);
+            this.tableLayoutPanel7.TabIndex = 1;
+            // 
+            // label14
+            // 
+            this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label14.Location = new System.Drawing.Point(3, 93);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(56, 34);
+            this.label14.TabIndex = 2;
+            this.label14.Text = "密文：";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBox14
+            // 
+            this.textBox14.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox14.Location = new System.Drawing.Point(65, 96);
+            this.textBox14.Name = "textBox14";
+            this.textBox14.ReadOnly = true;
+            this.textBox14.Size = new System.Drawing.Size(243, 27);
+            this.textBox14.TabIndex = 3;
+            // 
+            // label15
+            // 
+            this.label15.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label15.Location = new System.Drawing.Point(3, 62);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(56, 31);
+            this.label15.TabIndex = 1;
+            this.label15.Text = "明文：";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBox15
+            // 
+            this.textBox15.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox15.Location = new System.Drawing.Point(65, 65);
+            this.textBox15.Name = "textBox15";
+            this.textBox15.Size = new System.Drawing.Size(243, 27);
+            this.textBox15.TabIndex = 3;
+            // 
+            // textBox16
+            // 
+            this.textBox16.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox16.Location = new System.Drawing.Point(65, 34);
+            this.textBox16.Name = "textBox16";
+            this.textBox16.Size = new System.Drawing.Size(243, 27);
+            this.textBox16.TabIndex = 3;
+            // 
+            // label16
+            // 
+            this.label16.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label16.Location = new System.Drawing.Point(3, 31);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(56, 31);
+            this.label16.TabIndex = 0;
+            this.label16.Text = "秘钥：";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label22
+            // 
+            this.label22.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label22.Location = new System.Drawing.Point(65, 0);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(243, 31);
+            this.label22.TabIndex = 4;
+            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            this.tableLayoutPanel4.Controls.Add(this.label7, 0, 3);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 4;
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(200, 100);
+            this.tableLayoutPanel4.TabIndex = 0;
+            // 
+            // label7
+            // 
+            this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label7.Location = new System.Drawing.Point(3, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(34, 100);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "密文：";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBox7
+            // 
+            this.textBox7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox7.Location = new System.Drawing.Point(43, 3);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.ReadOnly = true;
+            this.textBox7.Size = new System.Drawing.Size(154, 27);
+            this.textBox7.TabIndex = 3;
             // 
             // StringHelper
             // 
@@ -850,8 +1410,22 @@
             this.tlp_Dichotomy.ResumeLayout(false);
             this.tlp_Dichotomy_Operate.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.tlp_CodeEnCryptJSDecrypt.ResumeLayout(false);
             this.tlp_CodeEnCryptJSDecrypt.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            this.tlp_AES.ResumeLayout(false);
+            this.tlp_AES.PerformLayout();
+            this.tlp_DES.ResumeLayout(false);
+            this.tlp_DES.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
+            this.tlp_MD5.ResumeLayout(false);
+            this.tlp_MD5.PerformLayout();
+            this.tableLayoutPanel7.ResumeLayout(false);
+            this.tableLayoutPanel7.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -908,12 +1482,57 @@
         private Button btn_Dichotomy_UpHalf;
         private Button btn_Dichotomy_DownHalf;
         private Button btn_Dichotomy_WriteBack;
+        private TableLayoutPanel tableLayoutPanel1;
         private TableLayoutPanel tlp_CodeEnCryptJSDecrypt;
-        private Label lbl_DE_PassWord;
-        private Label lbl_DE_Encrypt;
-        private Label lbl_DE_Decrypt;
-        private TextBox tb_DE_PassWord;
-        private TextBox tb_DE_Decrypt;
-        private TextBox tb_DE_Encrypt;
+        private Label lbl_DE_Decrypt_NumberJS;
+        private TextBox tb_DE_Encrypt_NumberJS;
+        private Label lbl_DE_Encrypt_NumberJS;
+        private TextBox tb_DE_Decrypt_NumberJS;
+        private TextBox tb_DE_PassWord_NumberJS;
+        private Label lbl_DE_PassWord_NumberJS;
+        private TableLayoutPanel tableLayoutPanel4;
+        private Label label7;
+        private TextBox textBox7;
+        private TableLayoutPanel tableLayoutPanel2;
+        private Label label1;
+        private TextBox textBox1;
+        private Label label2;
+        private TextBox textBox2;
+        private TextBox textBox3;
+        private Label label3;
+        private TableLayoutPanel tlp_AES;
+        private Label lbl_DE_Decrypt_AES;
+        private TextBox tb_DE_Encrypt_AES;
+        private Label lbl_DE_Encrypt_AES;
+        private TextBox tb_DE_Decrypt_AES;
+        private Label lbl_DE_PassWord_AES;
+        private TableLayoutPanel tlp_DES;
+        private Label lbl_DE_Decrypt_DES;
+        private TextBox tb_DE_Encrypt_DES;
+        private Label lbl_DE_Encrypt_DES;
+        private TextBox tb_DE_Decrypt_DES;
+        private Label lbl_DE_PassWord_DES;
+        private TableLayoutPanel tlp_MD5;
+        private Label lbl_DE_Decrypt_MD5;
+        private TextBox tb_DE_Encrypt_MD5;
+        private Label lbl_DE_Encrypt_MD5;
+        private TextBox tb_DE_Decrypt_MD5;
+        private TableLayoutPanel tableLayoutPanel7;
+        private Label label14;
+        private TextBox textBox14;
+        private Label label15;
+        private TextBox textBox15;
+        private TextBox textBox16;
+        private Label label16;
+        private Label lbl_DE_Remark_NumberJS;
+        private Label label18;
+        private Label lbl_DE_Remark_AES;
+        private Label lbl_DE_Remark_DES;
+        private Label lbl_DE_Remark_MD5;
+        private Label label22;
+        private TableLayoutPanel tableLayoutPanel3;
+        private TextBox tb_DE_PassWord_DES_Key;
+        private TextBox tb_DE_PassWord_DES_Iv;
+        private TextBox tb_DE_PassWord_AES;
     }
 }

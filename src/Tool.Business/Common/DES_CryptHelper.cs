@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Tool.Business.Common
 {
-    public class CryptHelper
+    public class DES_CryptHelper
     {
         private string _key;
 

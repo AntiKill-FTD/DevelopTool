@@ -14,7 +14,7 @@ namespace Tool.Main.Forms.ComForms
 {
     public partial class StringHelper : Form
     {
-        private CryptHelper cryptHelper = new CryptHelper();
+        private DES_CryptHelper cryptHelper = new DES_CryptHelper();
 
         public StringHelper()
         {
@@ -247,16 +247,22 @@ namespace Tool.Main.Forms.ComForms
 
         #endregion
 
+        #region 加解密 AES DES RSA 等
+
         #region C#代码加密 JS解密
 
         #region 明文改变事件
-        private void tb_DE_Decrypt_KeyUp(object sender, KeyEventArgs e)
+        private void tb_DE_Decrypt_NumberJS_TextChanged(object sender, EventArgs e)
         {
             //秘钥为空直接返回
-            if (string.IsNullOrEmpty(this.tb_DE_PassWord.Text.Trim())) this.tb_DE_Encrypt.Text = string.Empty;
+            if (string.IsNullOrEmpty(this.tb_DE_PassWord_NumberJS.Text.Trim()))
+            {
+                this.tb_DE_Encrypt_NumberJS.Text = string.Empty;
+                return;
+            }
             //获取秘钥和明文
-            string strPassWord = this.tb_DE_PassWord.Text;
-            string strDecrypt = this.tb_DE_Decrypt.Text;
+            string strPassWord = this.tb_DE_PassWord_NumberJS.Text;
+            string strDecrypt = this.tb_DE_Decrypt_NumberJS.Text;
             //加密
             //1.秘钥Decimal
             string binaryPassWord = BinaryHelper.StringToBinary(strPassWord);
@@ -267,7 +273,7 @@ namespace Tool.Main.Forms.ComForms
             //3.相加输出
             string addBigInteger = BigInteger.Add(BigInteger.Parse(decimalPassWord), BigInteger.Parse(decimalOrigin)).ToString();
             //输出密文
-            this.tb_DE_Encrypt.Text = addBigInteger;
+            this.tb_DE_Encrypt_NumberJS.Text = addBigInteger;
         }
         #endregion
 
@@ -345,6 +351,75 @@ namespace Tool.Main.Forms.ComForms
         #endregion
 
         #endregion
+
+        #region AES
+        private void tb_DE_Decrypt_AES_TextChanged(object sender, EventArgs e)
+        {
+            //秘钥为空直接返回
+            string key = this.tb_DE_PassWord_AES.Text.Trim();
+            if (string.IsNullOrEmpty(key))
+            {
+                this.tb_DE_Encrypt_AES.Text = string.Empty;
+                return;
+            }
+            //获取明文
+            string strDecrypt = this.tb_DE_Decrypt_AES.Text;
+            //加密
+            try
+            {
+                AES_CryptHelper crypt = new AES_CryptHelper(key);
+                string strEncode = crypt.AESEncrypt(strDecrypt);
+                //输出密文
+                this.tb_DE_Encrypt_AES.Text = strEncode;
+            }
+            catch (Exception ex)
+            {
+                this.tb_DE_Encrypt_AES.Text = ex.Message;
+            }
+        }
+        #endregion
+
+        #region DES
+        private void tb_DE_Decrypt_DES_TextChanged(object sender, EventArgs e)
+        {
+            //秘钥为空直接返回
+            string key = this.tb_DE_PassWord_DES_Key.Text.Trim();
+            string iv = this.tb_DE_PassWord_DES_Iv.Text.Trim();
+            if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(iv))
+            {
+                this.tb_DE_Encrypt_DES.Text = string.Empty;
+                return;
+            }
+            //获取明文
+            string strDecrypt = this.tb_DE_Decrypt_DES.Text;
+            //加密
+            DES_CryptHelper crypt = new DES_CryptHelper();
+            crypt.Key = key;
+            crypt.IV = iv;
+            string strEncode = crypt.EncryptString(strDecrypt);
+            //输出密文
+            this.tb_DE_Encrypt_DES.Text = strEncode;
+        }
+        #endregion
+
+        #region MD5
+        private void tb_DE_Decrypt_MD5_TextChanged(object sender, EventArgs e)
+        {
+            //获取明文
+            string strDecrypt = this.tb_DE_Decrypt_MD5.Text;
+            //加密
+            string strEncode = MD5_CryptHelper.GenerateMD5(strDecrypt);
+            //输出密文
+            this.tb_DE_Encrypt_MD5.Text = strEncode;
+        }
+        #endregion
+
+        #endregion
+
+
+
+
+
 
     }
 }

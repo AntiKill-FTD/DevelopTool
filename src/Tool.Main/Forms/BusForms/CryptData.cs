@@ -14,7 +14,7 @@ namespace Tool.Main.Forms.BusForms
     {
         #region 全局变量
 
-        CryptHelper cryptHelper = new CryptHelper(); //解密类
+        DES_CryptHelper cryptHelper = new DES_CryptHelper(); //解密类
 
         private ICommonDataHelper dataHelper;   //数据库操作类
         private bool isConnect = false;         //判断是否连接成功
