@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.rtbScript = new System.Windows.Forms.RichTextBox();
-            this.dv_AddColumn = new Tool.CusControls.DataGridViewEx.DataGridViewEx();
             this.tlp_Query = new System.Windows.Forms.TableLayoutPanel();
             this.lbTChn = new System.Windows.Forms.Label();
             this.lbTEng = new System.Windows.Forms.Label();
@@ -40,11 +39,11 @@
             this.rb_DataBase_SqlServer = new System.Windows.Forms.RadioButton();
             this.rb_DataBase_Sqlite = new System.Windows.Forms.RadioButton();
             this.tlp_Button = new System.Windows.Forms.TableLayoutPanel();
-            this.btnAddRow = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnBuild = new System.Windows.Forms.Button();
-            this.btnDelRow = new System.Windows.Forms.Button();
             this.btnExcute = new System.Windows.Forms.Button();
+            this.btnAddRow = new System.Windows.Forms.Button();
+            this.btnDelRow = new System.Windows.Forms.Button();
             this.tlp_Main = new System.Windows.Forms.TableLayoutPanel();
             this.tlp_Index = new System.Windows.Forms.TableLayoutPanel();
             this.dv_AddIndex = new Tool.CusControls.DataGridViewEx.DataGridViewEx();
@@ -54,6 +53,9 @@
             this.tlp_Index_Button_IndexType = new System.Windows.Forms.TableLayoutPanel();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.tlp_Column = new System.Windows.Forms.TableLayoutPanel();
+            this.dv_AddColumn = new Tool.CusControls.DataGridViewEx.DataGridViewEx();
+            this.tlp_Column_Button = new System.Windows.Forms.TableLayoutPanel();
             this.tlp_Query.SuspendLayout();
             this.tlp_Query_DataBaseType.SuspendLayout();
             this.tlp_Button.SuspendLayout();
@@ -61,6 +63,8 @@
             this.tlp_Index.SuspendLayout();
             this.tlp_Index_Button.SuspendLayout();
             this.tlp_Index_Button_IndexType.SuspendLayout();
+            this.tlp_Column.SuspendLayout();
+            this.tlp_Column_Button.SuspendLayout();
             this.SuspendLayout();
             // 
             // rtbScript
@@ -74,23 +78,6 @@
             this.rtbScript.Size = new System.Drawing.Size(1343, 228);
             this.rtbScript.TabIndex = 0;
             this.rtbScript.Text = "";
-            // 
-            // dv_AddColumn
-            // 
-            this.dv_AddColumn.DataHelper = null;
-            this.dv_AddColumn.DataSourceSql = null;
-            this.dv_AddColumn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dv_AddColumn.DvDataTable = null;
-            this.dv_AddColumn.DvSelectionMode = System.Windows.Forms.DataGridViewSelectionMode.RowHeaderSelect;
-            this.dv_AddColumn.IsPage = true;
-            this.dv_AddColumn.IsShowFirstCheckBox = false;
-            this.dv_AddColumn.IsSort = false;
-            this.dv_AddColumn.Location = new System.Drawing.Point(0, 50);
-            this.dv_AddColumn.Margin = new System.Windows.Forms.Padding(0);
-            this.dv_AddColumn.Name = "dv_AddColumn";
-            this.dv_AddColumn.RowEdit = false;
-            this.dv_AddColumn.Size = new System.Drawing.Size(1343, 304);
-            this.dv_AddColumn.TabIndex = 0;
             // 
             // tlp_Query
             // 
@@ -187,9 +174,10 @@
             this.rb_DataBase_SqlServer.AutoSize = true;
             this.rb_DataBase_SqlServer.Checked = true;
             this.rb_DataBase_SqlServer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rb_DataBase_SqlServer.Location = new System.Drawing.Point(3, 3);
+            this.rb_DataBase_SqlServer.Location = new System.Drawing.Point(3, 4);
+            this.rb_DataBase_SqlServer.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rb_DataBase_SqlServer.Name = "rb_DataBase_SqlServer";
-            this.rb_DataBase_SqlServer.Size = new System.Drawing.Size(116, 38);
+            this.rb_DataBase_SqlServer.Size = new System.Drawing.Size(116, 36);
             this.rb_DataBase_SqlServer.TabIndex = 0;
             this.rb_DataBase_SqlServer.TabStop = true;
             this.rb_DataBase_SqlServer.Text = "SqlServer";
@@ -201,9 +189,10 @@
             // 
             this.rb_DataBase_Sqlite.AutoSize = true;
             this.rb_DataBase_Sqlite.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rb_DataBase_Sqlite.Location = new System.Drawing.Point(125, 3);
+            this.rb_DataBase_Sqlite.Location = new System.Drawing.Point(125, 4);
+            this.rb_DataBase_Sqlite.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rb_DataBase_Sqlite.Name = "rb_DataBase_Sqlite";
-            this.rb_DataBase_Sqlite.Size = new System.Drawing.Size(116, 38);
+            this.rb_DataBase_Sqlite.Size = new System.Drawing.Size(116, 36);
             this.rb_DataBase_Sqlite.TabIndex = 1;
             this.rb_DataBase_Sqlite.TabStop = true;
             this.rb_DataBase_Sqlite.Text = "Sqlite";
@@ -213,19 +202,17 @@
             // tlp_Button
             // 
             this.tlp_Button.BackColor = System.Drawing.Color.Azure;
-            this.tlp_Button.ColumnCount = 7;
+            this.tlp_Button.ColumnCount = 5;
             this.tlp_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlp_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84F));
-            this.tlp_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84F));
             this.tlp_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84F));
             this.tlp_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84F));
             this.tlp_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
             this.tlp_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlp_Button.Controls.Add(this.btnAddRow, 1, 0);
-            this.tlp_Button.Controls.Add(this.btnReset, 3, 0);
-            this.tlp_Button.Controls.Add(this.btnBuild, 4, 0);
-            this.tlp_Button.Controls.Add(this.btnDelRow, 2, 0);
-            this.tlp_Button.Controls.Add(this.btnExcute, 5, 0);
+            this.tlp_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_Button.Controls.Add(this.btnReset, 1, 0);
+            this.tlp_Button.Controls.Add(this.btnBuild, 2, 0);
+            this.tlp_Button.Controls.Add(this.btnExcute, 3, 0);
             this.tlp_Button.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlp_Button.Location = new System.Drawing.Point(0, 810);
             this.tlp_Button.Margin = new System.Windows.Forms.Padding(0);
@@ -235,22 +222,10 @@
             this.tlp_Button.Size = new System.Drawing.Size(1343, 51);
             this.tlp_Button.TabIndex = 0;
             // 
-            // btnAddRow
-            // 
-            this.btnAddRow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAddRow.Location = new System.Drawing.Point(426, 4);
-            this.btnAddRow.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnAddRow.Name = "btnAddRow";
-            this.btnAddRow.Size = new System.Drawing.Size(78, 43);
-            this.btnAddRow.TabIndex = 0;
-            this.btnAddRow.Text = "插入行";
-            this.btnAddRow.UseVisualStyleBackColor = true;
-            this.btnAddRow.Click += new System.EventHandler(this.btnAddRow_Click);
-            // 
             // btnReset
             // 
             this.btnReset.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnReset.Location = new System.Drawing.Point(594, 4);
+            this.btnReset.Location = new System.Drawing.Point(510, 4);
             this.btnReset.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(78, 43);
@@ -262,7 +237,7 @@
             // btnBuild
             // 
             this.btnBuild.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnBuild.Location = new System.Drawing.Point(678, 4);
+            this.btnBuild.Location = new System.Drawing.Point(594, 4);
             this.btnBuild.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnBuild.Name = "btnBuild";
             this.btnBuild.Size = new System.Drawing.Size(78, 43);
@@ -271,28 +246,41 @@
             this.btnBuild.UseVisualStyleBackColor = true;
             this.btnBuild.Click += new System.EventHandler(this.btnBuild_Click);
             // 
-            // btnDelRow
-            // 
-            this.btnDelRow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDelRow.Location = new System.Drawing.Point(510, 4);
-            this.btnDelRow.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnDelRow.Name = "btnDelRow";
-            this.btnDelRow.Size = new System.Drawing.Size(78, 43);
-            this.btnDelRow.TabIndex = 0;
-            this.btnDelRow.Text = "删除行";
-            this.btnDelRow.UseVisualStyleBackColor = true;
-            this.btnDelRow.Click += new System.EventHandler(this.btnDelRow_Click);
-            // 
             // btnExcute
             // 
             this.btnExcute.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnExcute.Location = new System.Drawing.Point(762, 3);
+            this.btnExcute.Location = new System.Drawing.Point(678, 4);
+            this.btnExcute.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnExcute.Name = "btnExcute";
-            this.btnExcute.Size = new System.Drawing.Size(154, 45);
+            this.btnExcute.Size = new System.Drawing.Size(154, 43);
             this.btnExcute.TabIndex = 1;
             this.btnExcute.Text = "在当前数据库执行";
             this.btnExcute.UseVisualStyleBackColor = true;
             this.btnExcute.Click += new System.EventHandler(this.btnExcute_Click);
+            // 
+            // btnAddRow
+            // 
+            this.btnAddRow.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnAddRow.Location = new System.Drawing.Point(574, 4);
+            this.btnAddRow.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnAddRow.Name = "btnAddRow";
+            this.btnAddRow.Size = new System.Drawing.Size(94, 42);
+            this.btnAddRow.TabIndex = 0;
+            this.btnAddRow.Text = "插入行";
+            this.btnAddRow.UseVisualStyleBackColor = true;
+            this.btnAddRow.Click += new System.EventHandler(this.btnAddRow_Click);
+            // 
+            // btnDelRow
+            // 
+            this.btnDelRow.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnDelRow.Location = new System.Drawing.Point(674, 4);
+            this.btnDelRow.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnDelRow.Name = "btnDelRow";
+            this.btnDelRow.Size = new System.Drawing.Size(94, 42);
+            this.btnDelRow.TabIndex = 0;
+            this.btnDelRow.Text = "删除行";
+            this.btnDelRow.UseVisualStyleBackColor = true;
+            this.btnDelRow.Click += new System.EventHandler(this.btnDelRow_Click);
             // 
             // tlp_Main
             // 
@@ -300,9 +288,9 @@
             this.tlp_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlp_Main.Controls.Add(this.tlp_Query, 0, 0);
             this.tlp_Main.Controls.Add(this.tlp_Button, 0, 4);
-            this.tlp_Main.Controls.Add(this.dv_AddColumn, 0, 1);
             this.tlp_Main.Controls.Add(this.rtbScript, 0, 3);
             this.tlp_Main.Controls.Add(this.tlp_Index, 0, 2);
+            this.tlp_Main.Controls.Add(this.tlp_Column, 0, 1);
             this.tlp_Main.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlp_Main.Location = new System.Drawing.Point(0, 0);
             this.tlp_Main.Name = "tlp_Main";
@@ -372,9 +360,10 @@
             // btn_AddIndex
             // 
             this.btn_AddIndex.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_AddIndex.Location = new System.Drawing.Point(1126, 3);
+            this.btn_AddIndex.Location = new System.Drawing.Point(1126, 4);
+            this.btn_AddIndex.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btn_AddIndex.Name = "btn_AddIndex";
-            this.btn_AddIndex.Size = new System.Drawing.Size(104, 44);
+            this.btn_AddIndex.Size = new System.Drawing.Size(104, 42);
             this.btn_AddIndex.TabIndex = 0;
             this.btn_AddIndex.Text = "添加索引";
             this.btn_AddIndex.UseVisualStyleBackColor = true;
@@ -383,9 +372,10 @@
             // btn_DelIndex
             // 
             this.btn_DelIndex.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_DelIndex.Location = new System.Drawing.Point(1236, 3);
+            this.btn_DelIndex.Location = new System.Drawing.Point(1236, 4);
+            this.btn_DelIndex.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btn_DelIndex.Name = "btn_DelIndex";
-            this.btn_DelIndex.Size = new System.Drawing.Size(104, 44);
+            this.btn_DelIndex.Size = new System.Drawing.Size(104, 42);
             this.btn_DelIndex.TabIndex = 1;
             this.btn_DelIndex.Text = "删除索引";
             this.btn_DelIndex.UseVisualStyleBackColor = true;
@@ -411,9 +401,10 @@
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton1.Location = new System.Drawing.Point(3, 3);
+            this.radioButton1.Location = new System.Drawing.Point(3, 4);
+            this.radioButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(84, 44);
+            this.radioButton1.Size = new System.Drawing.Size(84, 42);
             this.radioButton1.TabIndex = 0;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "聚合";
@@ -425,14 +416,67 @@
             this.radioButton2.AutoSize = true;
             this.radioButton2.Checked = true;
             this.radioButton2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton2.Location = new System.Drawing.Point(93, 3);
+            this.radioButton2.Location = new System.Drawing.Point(93, 4);
+            this.radioButton2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(84, 44);
+            this.radioButton2.Size = new System.Drawing.Size(84, 42);
             this.radioButton2.TabIndex = 1;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "非聚合";
             this.radioButton2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // tlp_Column
+            // 
+            this.tlp_Column.ColumnCount = 1;
+            this.tlp_Column.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlp_Column.Controls.Add(this.dv_AddColumn, 0, 0);
+            this.tlp_Column.Controls.Add(this.tlp_Column_Button, 0, 1);
+            this.tlp_Column.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlp_Column.Location = new System.Drawing.Point(0, 50);
+            this.tlp_Column.Margin = new System.Windows.Forms.Padding(0);
+            this.tlp_Column.Name = "tlp_Column";
+            this.tlp_Column.RowCount = 2;
+            this.tlp_Column.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlp_Column.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tlp_Column.Size = new System.Drawing.Size(1343, 304);
+            this.tlp_Column.TabIndex = 2;
+            // 
+            // dv_AddColumn
+            // 
+            this.dv_AddColumn.DataHelper = null;
+            this.dv_AddColumn.DataSourceSql = null;
+            this.dv_AddColumn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dv_AddColumn.DvDataTable = null;
+            this.dv_AddColumn.DvSelectionMode = System.Windows.Forms.DataGridViewSelectionMode.RowHeaderSelect;
+            this.dv_AddColumn.IsPage = true;
+            this.dv_AddColumn.IsShowFirstCheckBox = false;
+            this.dv_AddColumn.IsSort = false;
+            this.dv_AddColumn.Location = new System.Drawing.Point(0, 0);
+            this.dv_AddColumn.Margin = new System.Windows.Forms.Padding(0);
+            this.dv_AddColumn.Name = "dv_AddColumn";
+            this.dv_AddColumn.RowEdit = false;
+            this.dv_AddColumn.Size = new System.Drawing.Size(1343, 254);
+            this.dv_AddColumn.TabIndex = 1;
+            // 
+            // tlp_Column_Button
+            // 
+            this.tlp_Column_Button.BackColor = System.Drawing.Color.Azure;
+            this.tlp_Column_Button.ColumnCount = 4;
+            this.tlp_Column_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_Column_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tlp_Column_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tlp_Column_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_Column_Button.Controls.Add(this.btnAddRow, 1, 0);
+            this.tlp_Column_Button.Controls.Add(this.btnDelRow, 2, 0);
+            this.tlp_Column_Button.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlp_Column_Button.Location = new System.Drawing.Point(0, 254);
+            this.tlp_Column_Button.Margin = new System.Windows.Forms.Padding(0);
+            this.tlp_Column_Button.Name = "tlp_Column_Button";
+            this.tlp_Column_Button.RowCount = 1;
+            this.tlp_Column_Button.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlp_Column_Button.Size = new System.Drawing.Size(1343, 50);
+            this.tlp_Column_Button.TabIndex = 2;
             // 
             // SqlHelper
             // 
@@ -454,6 +498,8 @@
             this.tlp_Index_Button.ResumeLayout(false);
             this.tlp_Index_Button_IndexType.ResumeLayout(false);
             this.tlp_Index_Button_IndexType.PerformLayout();
+            this.tlp_Column.ResumeLayout(false);
+            this.tlp_Column_Button.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -465,7 +511,6 @@
         private System.Windows.Forms.Button btnBuild;
         private System.Windows.Forms.Button btnDelRow;
         private System.Windows.Forms.RichTextBox rtbScript;
-        private CusControls.DataGridViewEx.DataGridViewEx dv_AddColumn;
         private System.Windows.Forms.TableLayoutPanel tlp_Query;
         private System.Windows.Forms.Label lbTChn;
         private System.Windows.Forms.Label lbTEng;
@@ -485,5 +530,8 @@
         private TableLayoutPanel tlp_Index_Button_IndexType;
         private RadioButton radioButton1;
         private RadioButton radioButton2;
+        private TableLayoutPanel tlp_Column;
+        private CusControls.DataGridViewEx.DataGridViewEx dv_AddColumn;
+        private TableLayoutPanel tlp_Column_Button;
     }
 }
