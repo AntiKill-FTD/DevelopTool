@@ -56,6 +56,17 @@ namespace Tool.Main.Forms.DevForms
         #region SetDVProb
         private void SetDVProb()
         {
+            //添加列网格属性
+            SetColumnDvProb();
+            //添加索引网格属性
+            SetIdexDvProb();
+        }
+
+        /// <summary>
+        /// 添加列网格属性
+        /// </summary>
+        private void SetColumnDvProb()
+        {
             //不分页
             this.dv_AddColumn.IsPage = false;
             //不显示checkbox
@@ -102,8 +113,42 @@ namespace Tool.Main.Forms.DevForms
             this.dv_AddColumn.AddChkCol(CheckBoxName.CheckBox1, -1, true, "是否主键");//IsPrimarikey
             this.dv_AddColumn.AddChkCol(CheckBoxName.CheckBox2, -1, true, "是否非空");//IsNotNull
             this.dv_AddColumn.AddChkCol(CheckBoxName.CheckBox3, -1, true, "是否自增");//IsAutoIncrement
+            //禁止用户修改列宽
+            this.dv_AddColumn.Dv.AllowUserToResizeColumns = false;
             //禁止排序
             this.dv_AddColumn.IsSort = false;
+        }
+
+        /// <summary>
+        /// 添加索引网格属性
+        /// </summary>
+        private void SetIdexDvProb()
+        {
+            //不分页
+            this.dv_AddIndex.IsPage = false;
+            //显示checkbox
+            this.dv_AddIndex.IsShowFirstCheckBox = true;
+            //Grid数据不可编辑
+            this.dv_AddIndex.RowEdit = false;
+            //移除所有列
+            this.dv_AddIndex.ClearColumns();
+            //添加列1-列中文、列英文
+            Dictionary<string, ColumnFieldWidth> colDic = new Dictionary<string, ColumnFieldWidth>();
+            colDic.Add("IndexName", new ColumnFieldWidth { ColumnField = "索引名称", FieldType = FieldType.Percent, ColumnWidth = 10 });
+            colDic.Add("IndexField", new ColumnFieldWidth { ColumnField = "索引字段", FieldType = FieldType.Percent, ColumnWidth = 40 });
+            colDic.Add("IndexQueryField", new ColumnFieldWidth { ColumnField = "索引查询字段", FieldType = FieldType.Percent, ColumnWidth = 50 });
+            this.dv_AddIndex.AddColumns(colDic);
+            //禁止用户修改列宽
+            this.dv_AddIndex.Dv.AllowUserToResizeColumns = false;
+            //禁止排序
+            this.dv_AddIndex.IsSort = false;
+        }
+        #endregion
+
+        #region DataTypeCheckChanged
+        private void rb_DataBase_SqlServer_CheckedChanged(object sender, EventArgs e)
+        {
+            SetDVProb();
         }
         #endregion
 
@@ -126,13 +171,6 @@ namespace Tool.Main.Forms.DevForms
             return vs;
         }
 
-        #endregion
-
-        #region DataTypeCheckChanged
-        private void rb_DataBase_SqlServer_CheckedChanged(object sender, EventArgs e)
-        {
-            SetDVProb();
-        }
         #endregion
 
         #region ComboBoxEvent
@@ -258,7 +296,7 @@ namespace Tool.Main.Forms.DevForms
         }
         #endregion
 
-        #region 按钮事件
+        #region 列按钮事件
 
         /// <summary>
         /// 插入行
@@ -337,6 +375,29 @@ namespace Tool.Main.Forms.DevForms
             }
         }
 
+        #endregion
+
+        #region 索引按钮事件
+
+        /// <summary>
+        /// 添加索引
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_AddIndex_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// 删除索引
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_DelIndex_Click(object sender, EventArgs e)
+        {
+
+        }
         #endregion
 
         #region Validate

@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using Tool.CusControls.Common;
 using Tool.Data.DataHelper;
+using Tool.IService.Model.Common;
 
 namespace Tool.CusControls.DataGridViewEx
 {
@@ -310,6 +311,33 @@ namespace Tool.CusControls.DataGridViewEx
                 if (!this.dataGridView1.Columns.Contains(col))
                 {
                     this.dataGridView1.Columns.Add(col, dic[col]);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 添加多列
+        /// </summary>
+        /// <param name="dic">列字典[<ColName,HeaderText>]</param>
+        public void AddColumns(Dictionary<string, ColumnFieldWidth> dic)
+        {
+            foreach (string col in dic.Keys)
+            {
+                if (!this.dataGridView1.Columns.Contains(col))
+                {
+                    this.dataGridView1.Columns.Add(col, dic[col].ColumnField);
+                }
+            }
+            int fullSize = this.dataGridView1.Width;
+            foreach (string col in dic.Keys)
+            {
+                if (dic[col].FieldType == FieldType.Absolute)
+                {
+                    this.dataGridView1.Columns[col].Width = dic[col].ColumnWidth;
+                }
+                else if (dic[col].FieldType == FieldType.Percent)
+                {
+                    this.dataGridView1.Columns[col].Width = dic[col].ColumnWidth * fullSize / 100;
                 }
             }
         }

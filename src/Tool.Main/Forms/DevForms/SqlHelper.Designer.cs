@@ -46,11 +46,17 @@
             this.btnDelRow = new System.Windows.Forms.Button();
             this.btnExcute = new System.Windows.Forms.Button();
             this.tlp_Main = new System.Windows.Forms.TableLayoutPanel();
+            this.tlp_Index = new System.Windows.Forms.TableLayoutPanel();
             this.dv_AddIndex = new Tool.CusControls.DataGridViewEx.DataGridViewEx();
+            this.tlp_Index_Button = new System.Windows.Forms.TableLayoutPanel();
+            this.btn_AddIndex = new System.Windows.Forms.Button();
+            this.btn_DelIndex = new System.Windows.Forms.Button();
             this.tlp_Query.SuspendLayout();
             this.tlp_Query_DataBaseType.SuspendLayout();
             this.tlp_Button.SuspendLayout();
             this.tlp_Main.SuspendLayout();
+            this.tlp_Index.SuspendLayout();
+            this.tlp_Index_Button.SuspendLayout();
             this.SuspendLayout();
             // 
             // rtbScript
@@ -292,7 +298,7 @@
             this.tlp_Main.Controls.Add(this.tlp_Button, 0, 4);
             this.tlp_Main.Controls.Add(this.dv_AddColumn, 0, 1);
             this.tlp_Main.Controls.Add(this.rtbScript, 0, 3);
-            this.tlp_Main.Controls.Add(this.dv_AddIndex, 0, 2);
+            this.tlp_Main.Controls.Add(this.tlp_Index, 0, 2);
             this.tlp_Main.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlp_Main.Location = new System.Drawing.Point(0, 0);
             this.tlp_Main.Name = "tlp_Main";
@@ -305,6 +311,22 @@
             this.tlp_Main.Size = new System.Drawing.Size(1343, 861);
             this.tlp_Main.TabIndex = 1;
             // 
+            // tlp_Index
+            // 
+            this.tlp_Index.ColumnCount = 1;
+            this.tlp_Index.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlp_Index.Controls.Add(this.dv_AddIndex, 0, 0);
+            this.tlp_Index.Controls.Add(this.tlp_Index_Button, 0, 1);
+            this.tlp_Index.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlp_Index.Location = new System.Drawing.Point(0, 354);
+            this.tlp_Index.Margin = new System.Windows.Forms.Padding(0);
+            this.tlp_Index.Name = "tlp_Index";
+            this.tlp_Index.RowCount = 2;
+            this.tlp_Index.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlp_Index.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tlp_Index.Size = new System.Drawing.Size(1343, 228);
+            this.tlp_Index.TabIndex = 1;
+            // 
             // dv_AddIndex
             // 
             this.dv_AddIndex.DataHelper = null;
@@ -315,12 +337,53 @@
             this.dv_AddIndex.IsPage = false;
             this.dv_AddIndex.IsShowFirstCheckBox = false;
             this.dv_AddIndex.IsSort = false;
-            this.dv_AddIndex.Location = new System.Drawing.Point(0, 354);
+            this.dv_AddIndex.Location = new System.Drawing.Point(0, 0);
             this.dv_AddIndex.Margin = new System.Windows.Forms.Padding(0);
             this.dv_AddIndex.Name = "dv_AddIndex";
             this.dv_AddIndex.RowEdit = false;
-            this.dv_AddIndex.Size = new System.Drawing.Size(1343, 228);
-            this.dv_AddIndex.TabIndex = 1;
+            this.dv_AddIndex.Size = new System.Drawing.Size(1343, 178);
+            this.dv_AddIndex.TabIndex = 2;
+            // 
+            // tlp_Index_Button
+            // 
+            this.tlp_Index_Button.BackColor = System.Drawing.Color.Azure;
+            this.tlp_Index_Button.ColumnCount = 4;
+            this.tlp_Index_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_Index_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
+            this.tlp_Index_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
+            this.tlp_Index_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_Index_Button.Controls.Add(this.btn_AddIndex, 1, 0);
+            this.tlp_Index_Button.Controls.Add(this.btn_DelIndex, 2, 0);
+            this.tlp_Index_Button.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlp_Index_Button.Location = new System.Drawing.Point(0, 178);
+            this.tlp_Index_Button.Margin = new System.Windows.Forms.Padding(0);
+            this.tlp_Index_Button.Name = "tlp_Index_Button";
+            this.tlp_Index_Button.RowCount = 1;
+            this.tlp_Index_Button.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlp_Index_Button.Size = new System.Drawing.Size(1343, 50);
+            this.tlp_Index_Button.TabIndex = 3;
+            // 
+            // btn_AddIndex
+            // 
+            this.btn_AddIndex.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_AddIndex.Location = new System.Drawing.Point(564, 3);
+            this.btn_AddIndex.Name = "btn_AddIndex";
+            this.btn_AddIndex.Size = new System.Drawing.Size(104, 44);
+            this.btn_AddIndex.TabIndex = 0;
+            this.btn_AddIndex.Text = "添加索引";
+            this.btn_AddIndex.UseVisualStyleBackColor = true;
+            this.btn_AddIndex.Click += new System.EventHandler(this.btn_AddIndex_Click);
+            // 
+            // btn_DelIndex
+            // 
+            this.btn_DelIndex.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_DelIndex.Location = new System.Drawing.Point(674, 3);
+            this.btn_DelIndex.Name = "btn_DelIndex";
+            this.btn_DelIndex.Size = new System.Drawing.Size(104, 44);
+            this.btn_DelIndex.TabIndex = 1;
+            this.btn_DelIndex.Text = "删除索引";
+            this.btn_DelIndex.UseVisualStyleBackColor = true;
+            this.btn_DelIndex.Click += new System.EventHandler(this.btn_DelIndex_Click);
             // 
             // SqlHelper
             // 
@@ -338,6 +401,8 @@
             this.tlp_Query_DataBaseType.PerformLayout();
             this.tlp_Button.ResumeLayout(false);
             this.tlp_Main.ResumeLayout(false);
+            this.tlp_Index.ResumeLayout(false);
+            this.tlp_Index_Button.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -361,6 +426,10 @@
         private RadioButton rb_DataBase_Sqlite;
         private Button btnExcute;
         private TableLayoutPanel tlp_Main;
+        private TableLayoutPanel tlp_Index;
         private CusControls.DataGridViewEx.DataGridViewEx dv_AddIndex;
+        private TableLayoutPanel tlp_Index_Button;
+        private Button btn_AddIndex;
+        private Button btn_DelIndex;
     }
 }
