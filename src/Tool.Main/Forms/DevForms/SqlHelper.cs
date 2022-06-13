@@ -39,7 +39,7 @@ namespace Tool.Main.Forms.DevForms
             InitializeComponent();
             //注入
             ICommonDataHelper dataHelper = Program.ServiceProvider.GetService(typeof(ICommonDataHelper)) as ICommonDataHelper;
-            this.dvEX.DataHelper = dataHelper;
+            this.dv_AddColumn.DataHelper = dataHelper;
 
             //设置网格属性
             SetDVProb();
@@ -57,18 +57,18 @@ namespace Tool.Main.Forms.DevForms
         private void SetDVProb()
         {
             //不分页
-            this.dvEX.IsPage = false;
+            this.dv_AddColumn.IsPage = false;
             //不显示checkbox
-            this.dvEX.IsShowFirstCheckBox = false;
+            this.dv_AddColumn.IsShowFirstCheckBox = false;
             //Grid数据可编辑
-            this.dvEX.RowEdit = true;
+            this.dv_AddColumn.RowEdit = true;
             //移除所有列
-            this.dvEX.ClearColumns();
+            this.dv_AddColumn.ClearColumns();
             //添加列1-列中文、列英文
             Dictionary<string, string> colDic = new Dictionary<string, string>();
             colDic.Add("ColEng", "列英文");
             colDic.Add("ColChn", "列中文");
-            this.dvEX.AddColumns(colDic);
+            this.dv_AddColumn.AddColumns(colDic);
             //添加列2-获取列类型
             List<string> dataTypes;
             if (DataBaseType == "SqlServer")
@@ -87,23 +87,23 @@ namespace Tool.Main.Forms.DevForms
             //移除枚举前面的下划线
             dataTypes = ChangeDataTypeName(dataTypes);
             //添加列2-数据类型-添加具体列
-            this.dvEX.AddColumn(this.dvEX.CreateColumn<DataGridViewComboBoxColumn>("ColDataType", "数据类型", dataTypes, 180));
+            this.dv_AddColumn.AddColumn(this.dv_AddColumn.CreateColumn<DataGridViewComboBoxColumn>("ColDataType", "数据类型", dataTypes, 180));
             //添加列2-数据类型-添加事件
             Dictionary<ComboBoxEventType, ComboBoxEventDelegate> dataTypeDic = new Dictionary<ComboBoxEventType, ComboBoxEventDelegate>();
             dataTypeDic.Add(ComboBoxEventType.SelectChange, ColDateTypeSelectIndexChange);
-            this.dvEX.Dv.SetComboBoxDelegate("ColDataType", dataTypeDic);
+            this.dv_AddColumn.Dv.SetComboBoxDelegate("ColDataType", dataTypeDic);
             //添加列3-数据长度-添加具体列
-            this.dvEX.AddColumn(this.dvEX.CreateColumn<DataGridViewComboBoxColumn>("ColLength", "数据长度", new List<string>(), 180, true, false));
+            this.dv_AddColumn.AddColumn(this.dv_AddColumn.CreateColumn<DataGridViewComboBoxColumn>("ColLength", "数据长度", new List<string>(), 180, true, false));
             //添加列3-数据长度-添加事件
             Dictionary<ComboBoxEventType, ComboBoxEventDelegate> dataLengthDic = new Dictionary<ComboBoxEventType, ComboBoxEventDelegate>();
             dataLengthDic.Add(ComboBoxEventType.LostFocus, ColDateLengthLostFocus);
-            this.dvEX.Dv.SetComboBoxDelegate("ColLength", dataLengthDic);
+            this.dv_AddColumn.Dv.SetComboBoxDelegate("ColLength", dataLengthDic);
             //添加列4-是否主键、是否非空、是否自增
-            this.dvEX.AddChkCol(CheckBoxName.CheckBox1, -1, true, "是否主键");//IsPrimarikey
-            this.dvEX.AddChkCol(CheckBoxName.CheckBox2, -1, true, "是否非空");//IsNotNull
-            this.dvEX.AddChkCol(CheckBoxName.CheckBox3, -1, true, "是否自增");//IsAutoIncrement
+            this.dv_AddColumn.AddChkCol(CheckBoxName.CheckBox1, -1, true, "是否主键");//IsPrimarikey
+            this.dv_AddColumn.AddChkCol(CheckBoxName.CheckBox2, -1, true, "是否非空");//IsNotNull
+            this.dv_AddColumn.AddChkCol(CheckBoxName.CheckBox3, -1, true, "是否自增");//IsAutoIncrement
             //禁止排序
-            this.dvEX.IsSort = false;
+            this.dv_AddColumn.IsSort = false;
         }
         #endregion
 
@@ -267,7 +267,7 @@ namespace Tool.Main.Forms.DevForms
         /// <param name="e"></param>
         private void btnAddRow_Click(object sender, EventArgs e)
         {
-            this.dvEX.AddEmptyRow();
+            this.dv_AddColumn.AddEmptyRow();
         }
 
         /// <summary>
@@ -277,7 +277,7 @@ namespace Tool.Main.Forms.DevForms
         /// <param name="e"></param>
         private void btnDelRow_Click(object sender, EventArgs e)
         {
-            this.dvEX.DeleteRow();
+            this.dv_AddColumn.DeleteRow();
         }
 
         /// <summary>
@@ -289,7 +289,7 @@ namespace Tool.Main.Forms.DevForms
         {
             this.tbTChn.Text = string.Empty;
             this.tbTEng.Text = string.Empty;
-            this.dvEX.ClearRow();
+            this.dv_AddColumn.ClearRow();
         }
 
         /// <summary>
@@ -321,7 +321,7 @@ namespace Tool.Main.Forms.DevForms
             try
             {
                 string strSql = this.rtbScript.Text;
-                Int64 result = this.dvEX.DataHelper.ExcuteNoQuery(strSql);
+                Int64 result = this.dv_AddColumn.DataHelper.ExcuteNoQuery(strSql);
                 if (result < 0)
                 {
                     MessageBox.Show("执行失败！", "提示");
@@ -365,16 +365,16 @@ namespace Tool.Main.Forms.DevForms
             result = RegexCheck(this.tbTEng.Text.Trim(), regExprNameEng);
             if (!result) return "表英文只能是【字母、数字、下划线】";
             //校验2:校验字段个数
-            if (dvEX.Dv.RowCount < 1)
+            if (dv_AddColumn.Dv.RowCount < 1)
             {
                 return "表包含列数不能为空";
             }
             //校验3:循环行数据
             List<string> colNameList = new List<string>();
-            for (int i = 0; i < dvEX.Dv.RowCount; i++)
+            for (int i = 0; i < dv_AddColumn.Dv.RowCount; i++)
             {
                 //获取数据行
-                DataGridViewRow dr = dvEX.Dv.Rows[i];
+                DataGridViewRow dr = dv_AddColumn.Dv.Rows[i];
                 //获取列数据
                 var colChn = dr.Cells["ColChn"].Value;
                 var colEng = dr.Cells["ColEng"].Value;
@@ -474,14 +474,14 @@ namespace Tool.Main.Forms.DevForms
             sbExtend.AppendLine($"EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'{tbChn}' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'{tbEng}'");
             sbExtend.AppendLine("GO");
             //3.循环字段
-            int rowCount = dvEX.Dv.RowCount;
+            int rowCount = dv_AddColumn.Dv.RowCount;
             List<string> primaryKeyFieldList = new List<string>();
             List<string> autoKeyFieldList = new List<string>();
             int autoIncrementCount = 0;
             for (int i = 0; i < rowCount; i++)
             {
                 //获取数据行
-                DataGridViewRow dr = dvEX.Dv.Rows[i];
+                DataGridViewRow dr = dv_AddColumn.Dv.Rows[i];
                 //获取列数据
                 var colChn = dr.Cells["ColChn"].Value;
                 var colEng = dr.Cells["ColEng"].Value;
@@ -567,14 +567,14 @@ namespace Tool.Main.Forms.DevForms
             //2.表扩展说明
             sbExtend.AppendLine($"INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('{tbEng}', '{tbChn}', NULL, NULL, '表'); ");
             //3.循环字段
-            int rowCount = dvEX.Dv.RowCount;
+            int rowCount = dv_AddColumn.Dv.RowCount;
             List<string> primaryKeyFieldList = new List<string>();
             List<string> autoKeyFieldList = new List<string>();
             int autoIncrementCount = 0;
             for (int i = 0; i < rowCount; i++)
             {
                 //获取数据行
-                DataGridViewRow dr = dvEX.Dv.Rows[i];
+                DataGridViewRow dr = dv_AddColumn.Dv.Rows[i];
                 //获取列数据
                 var colChn = dr.Cells["ColChn"].Value;
                 var colEng = dr.Cells["ColEng"].Value;
