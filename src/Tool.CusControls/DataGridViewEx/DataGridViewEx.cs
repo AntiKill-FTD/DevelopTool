@@ -398,6 +398,15 @@ namespace Tool.CusControls.DataGridViewEx
         }
 
         /// <summary>
+        /// 添加行
+        /// </summary>
+        /// <param name="values"></param>
+        public void AddRow(params object[] values)
+        {
+            this.dataGridView1.Rows.Add(values);
+        }
+
+        /// <summary>
         /// 插入空行
         /// </summary>
         /// <param name="index"></param>

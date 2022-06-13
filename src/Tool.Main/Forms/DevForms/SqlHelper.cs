@@ -4,6 +4,7 @@ using Tool.Business.Common;
 using Tool.CusControls.DataGridViewEx;
 using Tool.Data.DataHelper;
 using Tool.IService.Model.Common;
+using Tool.IService.Model.Dev;
 using static Tool.CusControls.DataGridViewEx.DataGridViewCommonEx;
 
 namespace Tool.Main.Forms.DevForms
@@ -69,12 +70,15 @@ namespace Tool.Main.Forms.DevForms
         {
             //不分页
             this.dv_AddColumn.IsPage = false;
+            //移除所有列
+            this.dv_AddColumn.ClearColumns();
             //不显示checkbox
             this.dv_AddColumn.IsShowFirstCheckBox = false;
             //Grid数据可编辑
             this.dv_AddColumn.RowEdit = true;
-            //移除所有列
-            this.dv_AddColumn.ClearColumns();
+            //添加列0-索隐列、索引查询列
+            this.dv_AddColumn.AddChkCol(CheckBoxName.CheckBox1, -1, true, "索引列");//IsPrimarikey
+            this.dv_AddColumn.AddChkCol(CheckBoxName.CheckBox2, -1, true, "索引查询列");//IsPrimarikey
             //添加列1-列中文、列英文
             Dictionary<string, string> colDic = new Dictionary<string, string>();
             colDic.Add("ColEng", "列英文");
@@ -110,9 +114,9 @@ namespace Tool.Main.Forms.DevForms
             dataLengthDic.Add(ComboBoxEventType.LostFocus, ColDateLengthLostFocus);
             this.dv_AddColumn.Dv.SetComboBoxDelegate("ColLength", dataLengthDic);
             //添加列4-是否主键、是否非空、是否自增
-            this.dv_AddColumn.AddChkCol(CheckBoxName.CheckBox1, -1, true, "是否主键");//IsPrimarikey
-            this.dv_AddColumn.AddChkCol(CheckBoxName.CheckBox2, -1, true, "是否非空");//IsNotNull
-            this.dv_AddColumn.AddChkCol(CheckBoxName.CheckBox3, -1, true, "是否自增");//IsAutoIncrement
+            this.dv_AddColumn.AddChkCol(CheckBoxName.CheckBox3, -1, true, "是否主键");//IsPrimarikey
+            this.dv_AddColumn.AddChkCol(CheckBoxName.CheckBox4, -1, true, "是否非空");//IsNotNull
+            this.dv_AddColumn.AddChkCol(CheckBoxName.CheckBox5, -1, true, "是否自增");//IsAutoIncrement
             //禁止用户修改列宽
             this.dv_AddColumn.Dv.AllowUserToResizeColumns = false;
             //禁止排序
@@ -126,12 +130,12 @@ namespace Tool.Main.Forms.DevForms
         {
             //不分页
             this.dv_AddIndex.IsPage = false;
-            //显示checkbox
-            this.dv_AddIndex.IsShowFirstCheckBox = true;
-            //Grid数据不可编辑
-            this.dv_AddIndex.RowEdit = false;
             //移除所有列
             this.dv_AddIndex.ClearColumns();
+            //显示checkbox
+            this.dv_AddIndex.IsShowFirstCheckBox = true;
+            //Grid数据可编辑
+            this.dv_AddIndex.RowEdit = true;
             //添加列1-列中文、列英文
             Dictionary<string, ColumnFieldWidth> colDic = new Dictionary<string, ColumnFieldWidth>();
             colDic.Add("IndexName", new ColumnFieldWidth { ColumnField = "索引名称", FieldType = FieldType.Percent, ColumnWidth = 10 });
@@ -386,7 +390,21 @@ namespace Tool.Main.Forms.DevForms
         /// <param name="e"></param>
         private void btn_AddIndex_Click(object sender, EventArgs e)
         {
-
+            //校验索引
+            string message = string.Empty;
+            IndexCheckResult result = ValidateIndex(ref message);
+            if (!string.IsNullOrEmpty(message))
+            {
+                this.rtbScript.Text = message;
+                return;
+            }
+            else
+            {
+                string strIndex = $"({ string.Join(",", result.IndexList)})";
+                string strQueryIndex = $"({ string.Join(",", result.IndexQueryList)})";
+                object[] values = new object[4] { false, "", strIndex, strQueryIndex };
+                this.dv_AddIndex.AddRow(values);
+            }
         }
 
         /// <summary>
@@ -403,7 +421,7 @@ namespace Tool.Main.Forms.DevForms
         #region Validate
 
         /// <summary>
-        /// 校验
+        /// 校验列属性
         /// </summary>
         /// <returns></returns>
         private string Validate()
@@ -473,6 +491,40 @@ namespace Tool.Main.Forms.DevForms
             }
 
             return string.Empty;
+        }
+
+        /// <summary>
+        /// 校验索引列设置
+        /// </summary>
+        /// <returns></returns>
+        private IndexCheckResult ValidateIndex(ref string message)
+        {
+            //返回结果
+            IndexCheckResult icResult = new IndexCheckResult();
+
+            //校验1:循环行数据
+            List<string> colNameList = new List<string>();
+            for (int i = 0; i < dv_AddColumn.Dv.RowCount; i++)
+            {
+                //获取数据行
+                DataGridViewRow dr = dv_AddColumn.Dv.Rows[i];
+                //获取列数据
+                var colIndex = dr.Cells["CheckBox1"].Value;
+                var colIndexQuery = dr.Cells["CheckBox2"].Value;
+                var colEng = dr.Cells["ColEng"].Value;
+                if (colIndex != null && (bool)colIndex && colIndexQuery != null && (bool)colIndexQuery)
+                {
+                    message = "第" + (i + 1).ToString() + "行，列不能即作为索引列又作为索引查询列;";
+                }
+                if (colIndex != null) icResult.IndexList.Add($"[{colEng}]");
+                if (colIndexQuery != null) icResult.IndexQueryList.Add($"[{colEng}]");
+            }
+            if (icResult.IndexList.Count <= 0)
+            {
+                message = "未设置索引字段！";
+            }
+
+            return icResult;
         }
 
         private bool RegexCheck(string content, string expr)
@@ -548,9 +600,9 @@ namespace Tool.Main.Forms.DevForms
                 var colEng = dr.Cells["ColEng"].Value;
                 var colDataType = dr.Cells["ColDataType"].Value;
                 var colLength = dr.Cells["ColLength"].Value;
-                var colIsPrimaryKey = dr.Cells["CheckBox1"].Value;
-                var colIsNull = dr.Cells["CheckBox2"].Value;
-                var colIsAutoIncrement = dr.Cells["CheckBox3"].Value;
+                var colIsPrimaryKey = dr.Cells["CheckBox3"].Value;
+                var colIsNull = dr.Cells["CheckBox4"].Value;
+                var colIsAutoIncrement = dr.Cells["CheckBox5"].Value;
                 //3.1表字段
                 //非空
                 string strIsNull = colIsNull != null && (bool)colIsNull ? "NOT NULL" : "";
@@ -641,9 +693,9 @@ namespace Tool.Main.Forms.DevForms
                 var colEng = dr.Cells["ColEng"].Value;
                 var colDataType = dr.Cells["ColDataType"].Value;
                 var colLength = dr.Cells["ColLength"].Value;
-                var colIsPrimaryKey = dr.Cells["CheckBox1"].Value;
-                var colIsNull = dr.Cells["CheckBox2"].Value;
-                var colIsAutoIncrement = dr.Cells["CheckBox3"].Value;
+                var colIsPrimaryKey = dr.Cells["CheckBox3"].Value;
+                var colIsNull = dr.Cells["CheckBox4"].Value;
+                var colIsAutoIncrement = dr.Cells["CheckBox5"].Value;
                 //3.1表字段
                 //非空
                 string strIsNull = colIsNull != null && (bool)colIsNull ? "NOT NULL" : "";

@@ -51,12 +51,16 @@
             this.tlp_Index_Button = new System.Windows.Forms.TableLayoutPanel();
             this.btn_AddIndex = new System.Windows.Forms.Button();
             this.btn_DelIndex = new System.Windows.Forms.Button();
+            this.tlp_Index_Button_IndexType = new System.Windows.Forms.TableLayoutPanel();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.tlp_Query.SuspendLayout();
             this.tlp_Query_DataBaseType.SuspendLayout();
             this.tlp_Button.SuspendLayout();
             this.tlp_Main.SuspendLayout();
             this.tlp_Index.SuspendLayout();
             this.tlp_Index_Button.SuspendLayout();
+            this.tlp_Index_Button_IndexType.SuspendLayout();
             this.SuspendLayout();
             // 
             // rtbScript
@@ -348,12 +352,14 @@
             // 
             this.tlp_Index_Button.BackColor = System.Drawing.Color.Azure;
             this.tlp_Index_Button.ColumnCount = 4;
-            this.tlp_Index_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_Index_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 180F));
+            this.tlp_Index_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlp_Index_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
             this.tlp_Index_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
-            this.tlp_Index_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlp_Index_Button.Controls.Add(this.btn_AddIndex, 1, 0);
-            this.tlp_Index_Button.Controls.Add(this.btn_DelIndex, 2, 0);
+            this.tlp_Index_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_Index_Button.Controls.Add(this.btn_AddIndex, 2, 0);
+            this.tlp_Index_Button.Controls.Add(this.btn_DelIndex, 3, 0);
+            this.tlp_Index_Button.Controls.Add(this.tlp_Index_Button_IndexType, 0, 0);
             this.tlp_Index_Button.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlp_Index_Button.Location = new System.Drawing.Point(0, 178);
             this.tlp_Index_Button.Margin = new System.Windows.Forms.Padding(0);
@@ -366,7 +372,7 @@
             // btn_AddIndex
             // 
             this.btn_AddIndex.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_AddIndex.Location = new System.Drawing.Point(564, 3);
+            this.btn_AddIndex.Location = new System.Drawing.Point(1126, 3);
             this.btn_AddIndex.Name = "btn_AddIndex";
             this.btn_AddIndex.Size = new System.Drawing.Size(104, 44);
             this.btn_AddIndex.TabIndex = 0;
@@ -377,13 +383,56 @@
             // btn_DelIndex
             // 
             this.btn_DelIndex.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_DelIndex.Location = new System.Drawing.Point(674, 3);
+            this.btn_DelIndex.Location = new System.Drawing.Point(1236, 3);
             this.btn_DelIndex.Name = "btn_DelIndex";
             this.btn_DelIndex.Size = new System.Drawing.Size(104, 44);
             this.btn_DelIndex.TabIndex = 1;
             this.btn_DelIndex.Text = "删除索引";
             this.btn_DelIndex.UseVisualStyleBackColor = true;
             this.btn_DelIndex.Click += new System.EventHandler(this.btn_DelIndex_Click);
+            // 
+            // tlp_Index_Button_IndexType
+            // 
+            this.tlp_Index_Button_IndexType.ColumnCount = 2;
+            this.tlp_Index_Button_IndexType.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_Index_Button_IndexType.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_Index_Button_IndexType.Controls.Add(this.radioButton1, 0, 0);
+            this.tlp_Index_Button_IndexType.Controls.Add(this.radioButton2, 1, 0);
+            this.tlp_Index_Button_IndexType.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlp_Index_Button_IndexType.Location = new System.Drawing.Point(0, 0);
+            this.tlp_Index_Button_IndexType.Margin = new System.Windows.Forms.Padding(0);
+            this.tlp_Index_Button_IndexType.Name = "tlp_Index_Button_IndexType";
+            this.tlp_Index_Button_IndexType.RowCount = 1;
+            this.tlp_Index_Button_IndexType.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_Index_Button_IndexType.Size = new System.Drawing.Size(180, 50);
+            this.tlp_Index_Button_IndexType.TabIndex = 2;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButton1.Location = new System.Drawing.Point(3, 3);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(84, 44);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "聚合";
+            this.radioButton1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Checked = true;
+            this.radioButton2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButton2.Location = new System.Drawing.Point(93, 3);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(84, 44);
+            this.radioButton2.TabIndex = 1;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "非聚合";
+            this.radioButton2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // SqlHelper
             // 
@@ -403,6 +452,8 @@
             this.tlp_Main.ResumeLayout(false);
             this.tlp_Index.ResumeLayout(false);
             this.tlp_Index_Button.ResumeLayout(false);
+            this.tlp_Index_Button_IndexType.ResumeLayout(false);
+            this.tlp_Index_Button_IndexType.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -431,5 +482,8 @@
         private TableLayoutPanel tlp_Index_Button;
         private Button btn_AddIndex;
         private Button btn_DelIndex;
+        private TableLayoutPanel tlp_Index_Button_IndexType;
+        private RadioButton radioButton1;
+        private RadioButton radioButton2;
     }
 }
