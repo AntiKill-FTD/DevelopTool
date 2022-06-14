@@ -575,18 +575,29 @@ namespace Tool.Main.Forms.DevForms
         /// </summary>
         private void Build()
         {
+            string strTable = string.Empty;
+            string strIndex = string.Empty;
+
             if (DataBaseType == "SqlServer")
             {
-                Build_SqlServer();
+                strTable = Build_SqlServer_Table();
+                strIndex = Build_SqlServer_Index();
             }
             else if (DataBaseType == "Sqlite")
             {
-                Build_Sqlite();
+                strTable = Build_Sqlite_Table();
+                strIndex = Build_Sqlite_Index();
             }
             else
             {
-                Build_SqlServer();
+                strTable = Build_SqlServer_Table();
+                strIndex = Build_SqlServer_Index();
             }
+
+            this.rtbScript.Clear();
+            this.rtbScript.AppendText(strTable);
+            this.rtbScript.AppendText("\r\n");
+            this.rtbScript.AppendText(strIndex);
         }
         #endregion
 
@@ -596,8 +607,8 @@ namespace Tool.Main.Forms.DevForms
          * 3.Sqlite自增列默认主键,所以主键和自增列必须为同一个;
          */
 
-        #region SqlServerBuild
-        private void Build_SqlServer()
+        #region SqlServerBuild_Table
+        private string Build_SqlServer_Table()
         {
             StringBuilder sbSql = new StringBuilder();
             StringBuilder sbExtend = new StringBuilder();
@@ -637,8 +648,7 @@ namespace Tool.Main.Forms.DevForms
                 {
                     if (string.IsNullOrEmpty(strIsNull))
                     {
-                        this.rtbScript.Text = "不能在非空列上设置主键！";
-                        return;
+                        return "不能在非空列上设置主键！";
                     }
                     primaryKeyFieldList.Add(colEng.ToString());
                 }
@@ -650,18 +660,15 @@ namespace Tool.Main.Forms.DevForms
                     autoIncrementCount++;
                     if (string.IsNullOrEmpty(strIsNull))
                     {
-                        this.rtbScript.Text = "不能在非空列上设置自增！";
-                        return;
+                        return "不能在非空列上设置自增！";
                     }
                     if (!CheckTypeAutoIncrement(colDataType.ToString().Trim()))
                     {
-                        this.rtbScript.Text = $"不能在数据类型【{colDataType}】上设置自增！";
-                        return;
+                        return $"不能在数据类型【{colDataType}】上设置自增！";
                     }
                     if (autoIncrementCount > 1)
                     {
-                        this.rtbScript.Text = "不能设置多个自增列！";
-                        return;
+                        return "不能设置多个自增列！";
                     }
                 }
                 //逗号分隔符判断
@@ -690,12 +697,19 @@ namespace Tool.Main.Forms.DevForms
             //End.结束事务
             sbSql.AppendLine("COMMIT");
 
-            this.rtbScript.Text = sbSql.ToString() + "\n\n" + sbExtend.ToString();
+            return sbSql.ToString() + "\n\n" + sbExtend.ToString();
         }
         #endregion
 
-        #region SqliteBuild
-        private void Build_Sqlite()
+        #region SqlServerBuild_Index
+        private string Build_SqlServer_Index()
+        {
+            return string.Empty;
+        }
+        #endregion
+
+        #region SqliteBuild_Table
+        private string Build_Sqlite_Table()
         {
             StringBuilder sbSql = new StringBuilder();
             StringBuilder sbExtend = new StringBuilder();
@@ -730,8 +744,7 @@ namespace Tool.Main.Forms.DevForms
                 {
                     if (string.IsNullOrEmpty(strIsNull))
                     {
-                        this.rtbScript.Text = "不能在非空列上设置主键！";
-                        return;
+                        return "不能在非空列上设置主键！";
                     }
                     primaryKeyFieldList.Add(colEng.ToString());
                 }
@@ -743,18 +756,15 @@ namespace Tool.Main.Forms.DevForms
                     autoIncrementCount++;
                     if (string.IsNullOrEmpty(strIsNull))
                     {
-                        this.rtbScript.Text = "不能在非空列上设置自增！";
-                        return;
+                        return "不能在非空列上设置自增！";
                     }
                     if (!CheckTypeAutoIncrement(colDataType.ToString().Trim()))
                     {
-                        this.rtbScript.Text = $"不能在数据类型【{colDataType}】上设置自增！";
-                        return;
+                        return $"不能在数据类型【{colDataType}】上设置自增！";
                     }
                     if (autoIncrementCount > 1)
                     {
-                        this.rtbScript.Text = "不能设置多个自增列！";
-                        return;
+                        return "不能设置多个自增列！";
                     }
                 }
                 //逗号分隔符判断
@@ -769,8 +779,7 @@ namespace Tool.Main.Forms.DevForms
             {
                 if (!(primaryKeyFieldList.Count == 1 && autoKeyFieldList.Count == 1 && primaryKeyFieldList[0] == autoKeyFieldList[0]))
                 {
-                    this.rtbScript.Text = "如果存在主键，也存在自增列，且数量不是都为1而且是同一个字段，不允许！";
-                    return;
+                    return "如果存在主键，也存在自增列，且数量不是都为1而且是同一个字段，不允许！";
                 }
             }
             //5.添加主键：多个列为主键才拼接，单个列直接在字段中设置
@@ -788,7 +797,14 @@ namespace Tool.Main.Forms.DevForms
             }
             sbSql.AppendLine($");");
 
-            this.rtbScript.Text = sbSql.ToString() + "\n\n" + sbExtend.ToString();
+            return sbSql.ToString() + "\n\n" + sbExtend.ToString();
+        }
+        #endregion
+
+        #region SqliteBuild_Index
+        private string Build_Sqlite_Index()
+        {
+            return string.Empty;
         }
         #endregion
     }
