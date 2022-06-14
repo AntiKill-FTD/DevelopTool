@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tool.IService.Model.Dev
 {
-    public class IndexCheckResult
+    public class IndexFieldListResult
     {
         private List<string> _indexList;
 
@@ -49,6 +49,45 @@ namespace Tool.IService.Model.Dev
             set
             {
                 _indexQueryList = value;
+            }
+        }
+    }
+
+    public class IndexStrResult
+    {
+        private string _indexStr = string.Empty;
+
+        private string _indexQueryStr = string.Empty;
+
+        /// <summary>
+        /// 索引列
+        /// </summary>
+        public string IndexList
+        {
+            get
+            {
+                return _indexStr;
+            }
+
+            set
+            {
+                _indexStr = value;
+            }
+        }
+
+        /// <summary>
+        /// 索引查询列
+        /// </summary>
+        public string IndexQueryList
+        {
+            get
+            {
+                return _indexQueryStr;
+            }
+
+            set
+            {
+                _indexQueryStr = value;
             }
         }
     }

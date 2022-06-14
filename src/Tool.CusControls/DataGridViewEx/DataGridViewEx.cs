@@ -432,6 +432,27 @@ namespace Tool.CusControls.DataGridViewEx
         }
 
         /// <summary>
+        /// 删除行
+        /// </summary>
+        /// <param name="delIndex"></param>
+        public void DeleteRow(int delIndex)
+        {
+            //定义行并删除
+            DataGridViewRow row = this.dataGridView1.Rows[delIndex];
+            this.dataGridView1.Rows.Remove(row);
+        }
+
+        /// <summary>
+        /// 删除行
+        /// </summary>
+        /// <param name="delIndex"></param>
+        public void DeleteRow(DataGridViewRow row)
+        {
+            //定义行并删除
+            this.dataGridView1.Rows.Remove(row);
+        }
+
+        /// <summary>
         /// 清除网格
         /// </summary>
         public void ClearRow()

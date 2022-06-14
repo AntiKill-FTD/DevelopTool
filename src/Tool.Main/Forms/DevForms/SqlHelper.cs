@@ -332,6 +332,7 @@ namespace Tool.Main.Forms.DevForms
             this.tbTChn.Text = string.Empty;
             this.tbTEng.Text = string.Empty;
             this.dv_AddColumn.ClearRow();
+            this.dv_AddIndex.ClearRow();
         }
 
         /// <summary>
@@ -392,7 +393,7 @@ namespace Tool.Main.Forms.DevForms
         {
             //校验索引
             string message = string.Empty;
-            IndexCheckResult result = ValidateIndex(ref message);
+            IndexStrResult result = ValidateIndex(ref message);
             if (!string.IsNullOrEmpty(message))
             {
                 this.rtbScript.Text = message;
@@ -400,9 +401,8 @@ namespace Tool.Main.Forms.DevForms
             }
             else
             {
-                string strIndex = $"({ string.Join(",", result.IndexList)})";
-                string strQueryIndex = $"({ string.Join(",", result.IndexQueryList)})";
-                object[] values = new object[4] { false, "", strIndex, strQueryIndex };
+
+                object[] values = new object[4] { false, "", result.IndexList, result.IndexQueryList };
                 this.dv_AddIndex.AddRow(values);
             }
         }
@@ -414,7 +414,12 @@ namespace Tool.Main.Forms.DevForms
         /// <param name="e"></param>
         private void btn_DelIndex_Click(object sender, EventArgs e)
         {
-
+            List<int> countList = new List<int>();
+            DataGridViewRow[] rows = this.dv_AddIndex.GetCheckRows();
+            foreach (DataGridViewRow row in rows)
+            {
+                this.dv_AddIndex.DeleteRow(row);
+            }
         }
         #endregion
 
@@ -497,13 +502,13 @@ namespace Tool.Main.Forms.DevForms
         /// 校验索引列设置
         /// </summary>
         /// <returns></returns>
-        private IndexCheckResult ValidateIndex(ref string message)
+        private IndexStrResult ValidateIndex(ref string message)
         {
             //返回结果
-            IndexCheckResult icResult = new IndexCheckResult();
+            IndexFieldListResult icResult = new IndexFieldListResult();
+            IndexStrResult isResult = new IndexStrResult();
 
             //校验1:循环行数据
-            List<string> colNameList = new List<string>();
             for (int i = 0; i < dv_AddColumn.Dv.RowCount; i++)
             {
                 //获取数据行
@@ -514,19 +519,40 @@ namespace Tool.Main.Forms.DevForms
                 var colEng = dr.Cells["ColEng"].Value;
                 if (colIndex != null && (bool)colIndex && colIndexQuery != null && (bool)colIndexQuery)
                 {
-                    message = "第" + (i + 1).ToString() + "行，列不能即作为索引列又作为索引查询列;";
+                    message += "第" + (i + 1).ToString() + "行，列不能即作为索引列又作为索引查询列\r\n;";
                 }
-                if (colIndex != null) icResult.IndexList.Add($"[{colEng}]");
-                if (colIndexQuery != null) icResult.IndexQueryList.Add($"[{colEng}]");
+                if (colIndex != null && (bool)colIndex == true) icResult.IndexList.Add($"[{colEng}]");
+                if (colIndexQuery != null && (bool)colIndexQuery == true) icResult.IndexQueryList.Add($"[{colEng}]");
             }
+            if (!string.IsNullOrEmpty(message)) return isResult;
+            //校验2:索引主字段不为空校验
             if (icResult.IndexList.Count <= 0)
             {
                 message = "未设置索引字段！";
+                return isResult;
+            }
+            //校验3:拼接并判断重复
+            isResult.IndexList = icResult.IndexList.Count > 0 ? $"({ string.Join(",", icResult.IndexList)})" : "";
+            isResult.IndexQueryList = icResult.IndexQueryList.Count > 0 ? $"({ string.Join(",", icResult.IndexQueryList)})" : "";
+            foreach (DataGridViewRow row in this.dv_AddIndex.GetAllRows())
+            {
+                string tIndexList = row.Cells["IndexField"].Value != null ? row.Cells["IndexField"].Value.ToString() : "";
+                string tIndexQueryList = row.Cells["IndexQueryField"].Value != null ? row.Cells["IndexQueryField"].Value.ToString() : "";
+                if (tIndexList.Equals(isResult.IndexList))
+                {
+                    message += $"当前索引列与第{row.Index + 1}行索引重复！";
+                }
             }
 
-            return icResult;
+            return isResult;
         }
 
+        /// <summary>
+        /// 正则校验
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="expr"></param>
+        /// <returns></returns>
         private bool RegexCheck(string content, string expr)
         {
             try
