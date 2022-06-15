@@ -508,8 +508,9 @@ namespace Tool.Main.Forms.DevForms
             //返回结果
             IndexFieldListResult icResult = new IndexFieldListResult();
             IndexStrResult isResult = new IndexStrResult();
+            bool isClustered = this.rb_IndexType_JH.Checked;
 
-            //校验1:循环行数据
+            //校验1:循环字段行数据
             for (int i = 0; i < dv_AddColumn.Dv.RowCount; i++)
             {
                 //获取数据行
@@ -532,16 +533,30 @@ namespace Tool.Main.Forms.DevForms
                 message = "未设置索引字段！";
                 return isResult;
             }
-            //校验3:拼接并判断重复
+            //校验3:聚集索引不能有包含字段
+            if (icResult.IndexQueryList.Count > 0 && isClustered)
+            {
+                message += $"聚集索引不能有包含字段！";
+                return isResult;
+            }
+            //校验4:拼接并判断重复
             isResult.IndexList = icResult.IndexList.Count > 0 ? $"({ string.Join(",", icResult.IndexList)})" : "";
             isResult.IndexQueryList = icResult.IndexQueryList.Count > 0 ? $"({ string.Join(",", icResult.IndexQueryList)})" : "";
             foreach (DataGridViewRow row in this.dv_AddIndex.GetAllRows())
             {
+                //索引字段重复
                 string tIndexList = row.Cells["IndexField"].Value != null ? row.Cells["IndexField"].Value.ToString() : "";
                 string tIndexQueryList = row.Cells["IndexQueryField"].Value != null ? row.Cells["IndexQueryField"].Value.ToString() : "";
                 if (tIndexList.Equals(isResult.IndexList))
                 {
                     message += $"当前索引列与第{row.Index + 1}行索引重复！";
+                    return isResult;
+                }
+                //聚集索引重复
+                if (row.Cells["IndexType"].Value.ToString() == "CLUSTERED" && isClustered)
+                {
+                    message += $"第{row.Index + 1}已存在聚集索引,聚集索引只能设置一个！";
+                    return isResult;
                 }
             }
 
@@ -576,29 +591,46 @@ namespace Tool.Main.Forms.DevForms
         /// </summary>
         private void Build()
         {
+            bool bTable = true;
+            bool bIndex = true;
             string strTable = string.Empty;
             string strIndex = string.Empty;
 
             if (DataBaseType == "SqlServer")
             {
-                strTable = Build_SqlServer_Table();
-                strIndex = Build_SqlServer_Index();
+                strTable = Build_SqlServer_Table(ref bTable);
+                strIndex = Build_SqlServer_Index(ref bIndex);
             }
             else if (DataBaseType == "Sqlite")
             {
-                strTable = Build_Sqlite_Table();
-                strIndex = Build_Sqlite_Index();
+                strTable = Build_Sqlite_Table(ref bTable);
+                strIndex = Build_Sqlite_Index(ref bIndex);
             }
             else
             {
-                strTable = Build_SqlServer_Table();
-                strIndex = Build_SqlServer_Index();
+                strTable = Build_SqlServer_Table(ref bTable);
+                strIndex = Build_SqlServer_Index(ref bIndex);
             }
 
             this.rtbScript.Clear();
-            this.rtbScript.AppendText(strTable);
-            this.rtbScript.AppendText("\r\n");
-            this.rtbScript.AppendText(strIndex);
+            if (!bTable && bIndex)
+            {
+                //如果table有错误，index没有错误，不拼接index
+                this.rtbScript.AppendText(strTable);
+                return;
+            }
+            else if (bTable && !bIndex)
+            {
+                //如果index有错误，table没有错误，不拼接table
+                this.rtbScript.AppendText(strIndex);
+                return;
+            }
+            else
+            {
+                this.rtbScript.AppendText(strTable);
+                this.rtbScript.AppendText("\r\n");
+                this.rtbScript.AppendText(strIndex);
+            }
         }
         #endregion
 
@@ -609,13 +641,12 @@ namespace Tool.Main.Forms.DevForms
          */
 
         #region SqlServerBuild_Table
-        private string Build_SqlServer_Table()
+        private string Build_SqlServer_Table(ref bool success)
         {
             StringBuilder sbSql = new StringBuilder();
             StringBuilder sbExtend = new StringBuilder();
             //Begin.开始事务
             sbSql.AppendLine("BEGIN TRANSACTION");
-            sbSql.AppendLine("GO");
             //1.表外层
             string tbEng = tbTEng.Text.Trim();
             string tbChn = tbTChn.Text.Trim();
@@ -649,6 +680,7 @@ namespace Tool.Main.Forms.DevForms
                 {
                     if (string.IsNullOrEmpty(strIsNull))
                     {
+                        success = false;
                         return "不能在非空列上设置主键！";
                     }
                     primaryKeyFieldList.Add(colEng.ToString());
@@ -661,14 +693,17 @@ namespace Tool.Main.Forms.DevForms
                     autoIncrementCount++;
                     if (string.IsNullOrEmpty(strIsNull))
                     {
+                        success = false;
                         return "不能在非空列上设置自增！";
                     }
                     if (!CheckTypeAutoIncrement(colDataType.ToString().Trim()))
                     {
+                        success = false;
                         return $"不能在数据类型【{colDataType}】上设置自增！";
                     }
                     if (autoIncrementCount > 1)
                     {
+                        success = false;
                         return "不能设置多个自增列！";
                     }
                 }
@@ -693,7 +728,6 @@ namespace Tool.Main.Forms.DevForms
                     sbSql.AppendLine($"{primaryKeyFieldList[i]}{tempSplit}");
                 }
                 sbSql.AppendLine("         ) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]");
-                sbSql.AppendLine("GO");
             }
             //End.结束事务
             sbSql.AppendLine("COMMIT");
@@ -703,14 +737,39 @@ namespace Tool.Main.Forms.DevForms
         #endregion
 
         #region SqlServerBuild_Index
-        private string Build_SqlServer_Index()
+        private string Build_SqlServer_Index(ref bool success)
         {
-            return string.Empty;
+            StringBuilder sbSql = new StringBuilder();
+            //1.循环字段
+            string tbEng = tbTEng.Text.Trim();
+            int rowCount = dv_AddIndex.Dv.RowCount;
+            for (int i = 0; i < rowCount; i++)
+            {
+                //获取数据行
+                DataGridViewRow dr = dv_AddIndex.Dv.Rows[i];
+                //获取列数据
+                var colIndexName = dr.Cells["IndexName"].Value;
+                var colIndexType = dr.Cells["IndexType"].Value;
+                var colIndexField = dr.Cells["IndexField"].Value;
+                var colIndexQueryField = dr.Cells["IndexQueryField"].Value == null ? string.Empty : dr.Cells["IndexQueryField"].Value.ToString();
+                var strInclude = string.IsNullOrEmpty(colIndexQueryField) ? string.Empty : "INCLUDE";
+                //判断索引名称是否为空
+                if (string.IsNullOrEmpty(colIndexName.ToString()))
+                {
+                    success = false;
+                    return $"第{i + 1}行索引名称不能为空";
+                }
+                //逗号分隔符判断
+                sbSql.AppendLine($"CREATE {colIndexType} INDEX [{colIndexName}] ON {tbEng} {colIndexField} {strInclude} {colIndexQueryField} ON [PRIMARY];");
+            }
+            sbSql.AppendLine("GO");
+
+            return sbSql.ToString();
         }
         #endregion
 
         #region SqliteBuild_Table
-        private string Build_Sqlite_Table()
+        private string Build_Sqlite_Table(ref bool success)
         {
             StringBuilder sbSql = new StringBuilder();
             StringBuilder sbExtend = new StringBuilder();
@@ -745,6 +804,7 @@ namespace Tool.Main.Forms.DevForms
                 {
                     if (string.IsNullOrEmpty(strIsNull))
                     {
+                        success = false;
                         return "不能在非空列上设置主键！";
                     }
                     primaryKeyFieldList.Add(colEng.ToString());
@@ -757,14 +817,17 @@ namespace Tool.Main.Forms.DevForms
                     autoIncrementCount++;
                     if (string.IsNullOrEmpty(strIsNull))
                     {
+                        success = false;
                         return "不能在非空列上设置自增！";
                     }
                     if (!CheckTypeAutoIncrement(colDataType.ToString().Trim()))
                     {
+                        success = false;
                         return $"不能在数据类型【{colDataType}】上设置自增！";
                     }
                     if (autoIncrementCount > 1)
                     {
+                        success = false;
                         return "不能设置多个自增列！";
                     }
                 }
@@ -780,6 +843,7 @@ namespace Tool.Main.Forms.DevForms
             {
                 if (!(primaryKeyFieldList.Count == 1 && autoKeyFieldList.Count == 1 && primaryKeyFieldList[0] == autoKeyFieldList[0]))
                 {
+                    success = false;
                     return "如果存在主键，也存在自增列，且数量不是都为1而且是同一个字段，不允许！";
                 }
             }
@@ -803,7 +867,7 @@ namespace Tool.Main.Forms.DevForms
         #endregion
 
         #region SqliteBuild_Index
-        private string Build_Sqlite_Index()
+        private string Build_Sqlite_Index(ref bool success)
         {
             return string.Empty;
         }
