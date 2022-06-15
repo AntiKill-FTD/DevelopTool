@@ -139,8 +139,9 @@ namespace Tool.Main.Forms.DevForms
             //添加列1-列中文、列英文
             Dictionary<string, ColumnFieldWidth> colDic = new Dictionary<string, ColumnFieldWidth>();
             colDic.Add("IndexName", new ColumnFieldWidth { ColumnField = "索引名称", FieldType = FieldType.Percent, ColumnWidth = 10 });
-            colDic.Add("IndexField", new ColumnFieldWidth { ColumnField = "索引字段", FieldType = FieldType.Percent, ColumnWidth = 40 });
-            colDic.Add("IndexQueryField", new ColumnFieldWidth { ColumnField = "索引查询字段", FieldType = FieldType.Percent, ColumnWidth = 50 });
+            colDic.Add("IndexType", new ColumnFieldWidth { ColumnField = "索引类型", FieldType = FieldType.Percent, ColumnWidth = 20 });
+            colDic.Add("IndexField", new ColumnFieldWidth { ColumnField = "索引字段", FieldType = FieldType.Percent, ColumnWidth = 30 });
+            colDic.Add("IndexQueryField", new ColumnFieldWidth { ColumnField = "索引查询字段", FieldType = FieldType.Percent, ColumnWidth = 40 });
             this.dv_AddIndex.AddColumns(colDic);
             //禁止用户修改列宽
             this.dv_AddIndex.Dv.AllowUserToResizeColumns = false;
@@ -401,8 +402,8 @@ namespace Tool.Main.Forms.DevForms
             }
             else
             {
-
-                object[] values = new object[4] { false, "", result.IndexList, result.IndexQueryList };
+                string strIndexType = this.rb_IndexType_JH.Checked ? "CLUSTERED" : "NONCLUSTERED";
+                object[] values = new object[5] { false, "", strIndexType, result.IndexList, result.IndexQueryList };
                 this.dv_AddIndex.AddRow(values);
             }
         }

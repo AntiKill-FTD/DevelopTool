@@ -51,8 +51,8 @@
             this.btn_AddIndex = new System.Windows.Forms.Button();
             this.btn_DelIndex = new System.Windows.Forms.Button();
             this.tlp_Index_Button_IndexType = new System.Windows.Forms.TableLayoutPanel();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.rb_IndexType_JH = new System.Windows.Forms.RadioButton();
+            this.rb_IndexType_FJH = new System.Windows.Forms.RadioButton();
             this.tlp_Column = new System.Windows.Forms.TableLayoutPanel();
             this.dv_AddColumn = new Tool.CusControls.DataGridViewEx.DataGridViewEx();
             this.tlp_Column_Button = new System.Windows.Forms.TableLayoutPanel();
@@ -386,8 +386,8 @@
             this.tlp_Index_Button_IndexType.ColumnCount = 2;
             this.tlp_Index_Button_IndexType.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlp_Index_Button_IndexType.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlp_Index_Button_IndexType.Controls.Add(this.radioButton1, 0, 0);
-            this.tlp_Index_Button_IndexType.Controls.Add(this.radioButton2, 1, 0);
+            this.tlp_Index_Button_IndexType.Controls.Add(this.rb_IndexType_JH, 0, 0);
+            this.tlp_Index_Button_IndexType.Controls.Add(this.rb_IndexType_FJH, 1, 0);
             this.tlp_Index_Button_IndexType.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlp_Index_Button_IndexType.Location = new System.Drawing.Point(0, 0);
             this.tlp_Index_Button_IndexType.Margin = new System.Windows.Forms.Padding(0);
@@ -397,34 +397,34 @@
             this.tlp_Index_Button_IndexType.Size = new System.Drawing.Size(180, 50);
             this.tlp_Index_Button_IndexType.TabIndex = 2;
             // 
-            // radioButton1
+            // rb_IndexType_JH
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton1.Location = new System.Drawing.Point(3, 4);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(84, 42);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "聚合";
-            this.radioButton1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.rb_IndexType_JH.AutoSize = true;
+            this.rb_IndexType_JH.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rb_IndexType_JH.Location = new System.Drawing.Point(3, 4);
+            this.rb_IndexType_JH.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.rb_IndexType_JH.Name = "rb_IndexType_JH";
+            this.rb_IndexType_JH.Size = new System.Drawing.Size(84, 42);
+            this.rb_IndexType_JH.TabIndex = 0;
+            this.rb_IndexType_JH.TabStop = true;
+            this.rb_IndexType_JH.Text = "聚合";
+            this.rb_IndexType_JH.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rb_IndexType_JH.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // rb_IndexType_FJH
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Checked = true;
-            this.radioButton2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton2.Location = new System.Drawing.Point(93, 4);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(84, 42);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "非聚合";
-            this.radioButton2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.rb_IndexType_FJH.AutoSize = true;
+            this.rb_IndexType_FJH.Checked = true;
+            this.rb_IndexType_FJH.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rb_IndexType_FJH.Location = new System.Drawing.Point(93, 4);
+            this.rb_IndexType_FJH.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.rb_IndexType_FJH.Name = "rb_IndexType_FJH";
+            this.rb_IndexType_FJH.Size = new System.Drawing.Size(84, 42);
+            this.rb_IndexType_FJH.TabIndex = 1;
+            this.rb_IndexType_FJH.TabStop = true;
+            this.rb_IndexType_FJH.Text = "非聚合";
+            this.rb_IndexType_FJH.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rb_IndexType_FJH.UseVisualStyleBackColor = true;
             // 
             // tlp_Column
             // 
@@ -528,8 +528,8 @@
         private Button btn_AddIndex;
         private Button btn_DelIndex;
         private TableLayoutPanel tlp_Index_Button_IndexType;
-        private RadioButton radioButton1;
-        private RadioButton radioButton2;
+        private RadioButton rb_IndexType_JH;
+        private RadioButton rb_IndexType_FJH;
         private TableLayoutPanel tlp_Column;
         private CusControls.DataGridViewEx.DataGridViewEx dv_AddColumn;
         private TableLayoutPanel tlp_Column_Button;
