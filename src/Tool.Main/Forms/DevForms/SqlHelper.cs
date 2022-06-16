@@ -334,6 +334,7 @@ namespace Tool.Main.Forms.DevForms
             this.tbTEng.Text = string.Empty;
             this.dv_AddColumn.ClearRow();
             this.dv_AddIndex.ClearRow();
+            this.rtbScript.Clear();
         }
 
         /// <summary>
@@ -402,7 +403,19 @@ namespace Tool.Main.Forms.DevForms
             }
             else
             {
-                string strIndexType = this.rb_IndexType_JH.Checked ? "CLUSTERED" : "NONCLUSTERED";
+                string strIndexType = String.Empty;
+                if (rb_DataBase_SqlServer.Checked)
+                {
+                    strIndexType = this.rb_IndexType_JH.Checked ? "CLUSTERED" : "NONCLUSTERED";
+                }
+                else if (rb_DataBase_Sqlite.Checked)
+                {
+                    strIndexType = this.rb_IndexType_JH.Checked ? "UNIQUE" : "";
+                }
+                else
+                {
+                    strIndexType = this.rb_IndexType_JH.Checked ? "CLUSTERED" : "NONCLUSTERED";
+                }
                 object[] values = new object[5] { false, "", strIndexType, result.IndexList, result.IndexQueryList };
                 this.dv_AddIndex.AddRow(values);
             }
@@ -519,9 +532,15 @@ namespace Tool.Main.Forms.DevForms
                 var colIndex = dr.Cells["CheckBox1"].Value;
                 var colIndexQuery = dr.Cells["CheckBox2"].Value;
                 var colEng = dr.Cells["ColEng"].Value;
+                //sqlite没有include列
+                if (rb_DataBase_Sqlite.Checked && colIndexQuery != null && (bool)colIndexQuery)
+                {
+                    message += "第" + (i + 1).ToString() + "行，sqlite不能有包含索引;\r\n";
+                }
+                //列不能即作为查询索引又作为包含字段索引
                 if (colIndex != null && (bool)colIndex && colIndexQuery != null && (bool)colIndexQuery)
                 {
-                    message += "第" + (i + 1).ToString() + "行，列不能即作为索引列又作为索引查询列\r\n;";
+                    message += "第" + (i + 1).ToString() + "行，列不能即作为索引列又作为索引查询列;\r\n";
                 }
                 if (colIndex != null && (bool)colIndex == true) icResult.IndexList.Add($"[{colEng}]");
                 if (colIndexQuery != null && (bool)colIndexQuery == true) icResult.IndexQueryList.Add($"[{colEng}]");
@@ -553,7 +572,8 @@ namespace Tool.Main.Forms.DevForms
                     return isResult;
                 }
                 //聚集索引重复
-                if (row.Cells["IndexType"].Value.ToString() == "CLUSTERED" && isClustered)
+                string strUniqueTag = rb_DataBase_SqlServer.Checked ? "CLUSTERED" : "UNIQUE";
+                if (row.Cells["IndexType"].Value.ToString() == strUniqueTag && isClustered)
                 {
                     message += $"第{row.Index + 1}已存在聚集索引,聚集索引只能设置一个！";
                     return isResult;
@@ -650,7 +670,7 @@ namespace Tool.Main.Forms.DevForms
             //1.表外层
             string tbEng = tbTEng.Text.Trim();
             string tbChn = tbTChn.Text.Trim();
-            sbSql.AppendLine($"CREATE TABLE dbo.{tbEng}");
+            sbSql.AppendLine($"CREATE TABLE dbo.[{tbEng}]");
             sbSql.AppendLine($"        (");
             //2.表扩展说明
             sbExtend.AppendLine($"EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'{tbChn}' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'{tbEng}'");
@@ -709,7 +729,7 @@ namespace Tool.Main.Forms.DevForms
                 }
                 //逗号分隔符判断
                 string strSplit = i != rowCount - 1 ? "," : "";
-                sbSql.AppendLine($"        {colEng} {colDataType}{colLength} {strIsNull} {strIsAutoIncrement} {strSplit}");
+                sbSql.AppendLine($"        [{colEng}] {colDataType}{colLength} {strIsNull} {strIsAutoIncrement} {strSplit}");
                 //3.2字段扩展说明
                 sbExtend.AppendLine($"EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'{colChn}' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'{tbEng}', @level2type=N'COLUMN',@level2name=N'{colEng}'");
                 sbExtend.AppendLine("GO");
@@ -719,7 +739,7 @@ namespace Tool.Main.Forms.DevForms
             //4.添加主键(
             if (primaryKeyFieldList.Count > 0)
             {
-                sbSql.AppendLine($"ALTER TABLE dbo.{tbEng} ADD CONSTRAINT");
+                sbSql.AppendLine($"ALTER TABLE dbo.[{tbEng}] ADD CONSTRAINT");
                 sbSql.AppendLine($"        PK_{tbEng} PRIMARY KEY CLUSTERED");
                 sbSql.AppendLine("         (");
                 for (int i = 0; i < primaryKeyFieldList.Count; i++)
@@ -743,6 +763,8 @@ namespace Tool.Main.Forms.DevForms
             //1.循环字段
             string tbEng = tbTEng.Text.Trim();
             int rowCount = dv_AddIndex.Dv.RowCount;
+            //索引名称集合，防止重复
+            List<string> indexNameList = new List<string>();
             for (int i = 0; i < rowCount; i++)
             {
                 //获取数据行
@@ -757,10 +779,20 @@ namespace Tool.Main.Forms.DevForms
                 if (string.IsNullOrEmpty(colIndexName.ToString()))
                 {
                     success = false;
-                    return $"第{i + 1}行索引名称不能为空";
+                    return $"第{i + 1}行索引名称不能为空！";
+                }
+                //判断索引名称重复
+                if (indexNameList.Contains(colIndexName))
+                {
+                    success = false;
+                    return $"第{i + 1}行索引名称已存在！";
+                }
+                else
+                {
+                    indexNameList.Add(colIndexName.ToString());
                 }
                 //逗号分隔符判断
-                sbSql.AppendLine($"CREATE {colIndexType} INDEX [{colIndexName}] ON {tbEng} {colIndexField} {strInclude} {colIndexQueryField} ON [PRIMARY];");
+                sbSql.AppendLine($"CREATE {colIndexType} INDEX [{colIndexName}] ON [{tbEng}] {colIndexField} {strInclude} {colIndexQueryField} ON [PRIMARY];");
             }
             sbSql.AppendLine("GO");
 
@@ -776,7 +808,7 @@ namespace Tool.Main.Forms.DevForms
             //1.表外层
             string tbEng = tbTEng.Text.Trim();
             string tbChn = tbTChn.Text.Trim();
-            sbSql.AppendLine($"CREATE TABLE {tbEng} (");
+            sbSql.AppendLine($"CREATE TABLE [{tbEng}] (");
             //2.表扩展说明
             sbExtend.AppendLine($"INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('{tbEng}', '{tbChn}', NULL, NULL, '表'); ");
             //3.循环字段
@@ -833,7 +865,7 @@ namespace Tool.Main.Forms.DevForms
                 }
                 //逗号分隔符判断
                 string strSplit = i != rowCount - 1 ? "," : primaryKeyFieldList.Count > 1 ? "," : "";
-                sbSql.AppendLine($"        {colEng} {colDataType}{colLength} {strIsNull} {strIsAutoIncrement} {strSplit}");
+                sbSql.AppendLine($"        [{colEng}] {colDataType}{colLength} {strIsNull} {strIsAutoIncrement} {strSplit}");
                 //3.2字段扩展说明
                 sbExtend.AppendLine($"INSERT INTO SqliteChnRemark (TableEng, TableChn, ColumnEng, ColumnChn, DataType) VALUES('{tbEng}', '{tbChn}', '{colEng}', '{colChn}', '字段'); ");
             }
@@ -869,7 +901,41 @@ namespace Tool.Main.Forms.DevForms
         #region SqliteBuild_Index
         private string Build_Sqlite_Index(ref bool success)
         {
-            return string.Empty;
+            StringBuilder sbSql = new StringBuilder();
+            //1.循环字段
+            string tbEng = tbTEng.Text.Trim();
+            int rowCount = dv_AddIndex.Dv.RowCount;
+            //索引名称集合，防止重复
+            List<string> indexNameList = new List<string>();
+            for (int i = 0; i < rowCount; i++)
+            {
+                //获取数据行
+                DataGridViewRow dr = dv_AddIndex.Dv.Rows[i];
+                //获取列数据
+                var colIndexName = dr.Cells["IndexName"].Value;
+                var colIndexType = dr.Cells["IndexType"].Value;
+                var colIndexField = dr.Cells["IndexField"].Value;
+                //判断索引名称是否为空
+                if (string.IsNullOrEmpty(colIndexName.ToString()))
+                {
+                    success = false;
+                    return $"第{i + 1}行索引名称不能为空！";
+                }
+                //判断索引名称重复
+                if (indexNameList.Contains(colIndexName))
+                {
+                    success = false;
+                    return $"第{i + 1}行索引名称已存在！";
+                }
+                else
+                {
+                    indexNameList.Add(colIndexName.ToString());
+                }
+                //逗号分隔符判断
+                sbSql.AppendLine($"CREATE {colIndexType} INDEX [{colIndexName}] ON [{tbEng}] {colIndexField};");
+            }
+
+            return sbSql.ToString();
         }
         #endregion
     }
