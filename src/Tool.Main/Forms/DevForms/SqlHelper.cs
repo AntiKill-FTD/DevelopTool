@@ -958,7 +958,21 @@ namespace Tool.Main.Forms.DevForms
         #region 模板下载
         private void ll_DownTemplate_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            //创建下载对象
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Title = "模板下载";
+            saveFileDialog.Filter = "Excel ⼯作簿(*.xlsx)|*.xlsx";
+            saveFileDialog.FileName = "SqlHelper导入模板";
+            //判断下载结果
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                //E:\\01GitRepository\\GitHub\\FTD\\GitHubMine\\DevelopTool\\src\\Tool.Main\\bin\\Debug\\net6.0-windows
+                string tempFilePath = $"{ System.Environment.CurrentDirectory}{Path.DirectorySeparatorChar}Template{Path.DirectorySeparatorChar}SqlHelper导入模板.xlsx";
+                //C:\Users\lschanga\Desktop\SqlHelper导入模板.xlsx
+                string localFilePath = saveFileDialog.FileName;
+                //拷贝
+                File.Copy(tempFilePath, localFilePath);
+            }
         }
         #endregion
 
