@@ -38,6 +38,9 @@
             this.tlp_Query_DataBaseType = new System.Windows.Forms.TableLayoutPanel();
             this.rb_DataBase_SqlServer = new System.Windows.Forms.RadioButton();
             this.rb_DataBase_Sqlite = new System.Windows.Forms.RadioButton();
+            this.btn_Export = new System.Windows.Forms.Button();
+            this.btn_Import = new System.Windows.Forms.Button();
+            this.ll_DownTemplate = new System.Windows.Forms.LinkLabel();
             this.tlp_Button = new System.Windows.Forms.TableLayoutPanel();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnBuild = new System.Windows.Forms.Button();
@@ -82,7 +85,7 @@
             // tlp_Query
             // 
             this.tlp_Query.BackColor = System.Drawing.Color.Azure;
-            this.tlp_Query.ColumnCount = 8;
+            this.tlp_Query.ColumnCount = 11;
             this.tlp_Query.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlp_Query.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
             this.tlp_Query.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
@@ -90,6 +93,9 @@
             this.tlp_Query.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 225F));
             this.tlp_Query.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
             this.tlp_Query.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 225F));
+            this.tlp_Query.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tlp_Query.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tlp_Query.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
             this.tlp_Query.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlp_Query.Controls.Add(this.lbTChn, 3, 0);
             this.tlp_Query.Controls.Add(this.lbTEng, 5, 0);
@@ -97,6 +103,9 @@
             this.tlp_Query.Controls.Add(this.tbTEng, 6, 0);
             this.tlp_Query.Controls.Add(this.lbDataBaseType, 1, 0);
             this.tlp_Query.Controls.Add(this.tlp_Query_DataBaseType, 2, 0);
+            this.tlp_Query.Controls.Add(this.btn_Export, 7, 0);
+            this.tlp_Query.Controls.Add(this.btn_Import, 8, 0);
+            this.tlp_Query.Controls.Add(this.ll_DownTemplate, 9, 0);
             this.tlp_Query.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlp_Query.Location = new System.Drawing.Point(0, 0);
             this.tlp_Query.Margin = new System.Windows.Forms.Padding(0);
@@ -109,7 +118,7 @@
             // lbTChn
             // 
             this.lbTChn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbTChn.Location = new System.Drawing.Point(529, 0);
+            this.lbTChn.Location = new System.Drawing.Point(394, 0);
             this.lbTChn.Name = "lbTChn";
             this.lbTChn.Size = new System.Drawing.Size(84, 50);
             this.lbTChn.TabIndex = 0;
@@ -119,7 +128,7 @@
             // lbTEng
             // 
             this.lbTEng.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbTEng.Location = new System.Drawing.Point(844, 0);
+            this.lbTEng.Location = new System.Drawing.Point(709, 0);
             this.lbTEng.Name = "lbTEng";
             this.lbTEng.Size = new System.Drawing.Size(84, 50);
             this.lbTEng.TabIndex = 1;
@@ -129,7 +138,7 @@
             // tbTChn
             // 
             this.tbTChn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbTChn.Location = new System.Drawing.Point(619, 4);
+            this.tbTChn.Location = new System.Drawing.Point(484, 4);
             this.tbTChn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbTChn.Name = "tbTChn";
             this.tbTChn.Size = new System.Drawing.Size(219, 27);
@@ -138,7 +147,7 @@
             // tbTEng
             // 
             this.tbTEng.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbTEng.Location = new System.Drawing.Point(934, 4);
+            this.tbTEng.Location = new System.Drawing.Point(799, 4);
             this.tbTEng.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbTEng.Name = "tbTEng";
             this.tbTEng.Size = new System.Drawing.Size(219, 27);
@@ -147,7 +156,7 @@
             // lbDataBaseType
             // 
             this.lbDataBaseType.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbDataBaseType.Location = new System.Drawing.Point(189, 0);
+            this.lbDataBaseType.Location = new System.Drawing.Point(54, 0);
             this.lbDataBaseType.Name = "lbDataBaseType";
             this.lbDataBaseType.Size = new System.Drawing.Size(84, 50);
             this.lbDataBaseType.TabIndex = 4;
@@ -162,7 +171,7 @@
             this.tlp_Query_DataBaseType.Controls.Add(this.rb_DataBase_SqlServer, 0, 0);
             this.tlp_Query_DataBaseType.Controls.Add(this.rb_DataBase_Sqlite, 1, 0);
             this.tlp_Query_DataBaseType.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_Query_DataBaseType.Location = new System.Drawing.Point(279, 3);
+            this.tlp_Query_DataBaseType.Location = new System.Drawing.Point(144, 3);
             this.tlp_Query_DataBaseType.Name = "tlp_Query_DataBaseType";
             this.tlp_Query_DataBaseType.RowCount = 1;
             this.tlp_Query_DataBaseType.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -198,6 +207,41 @@
             this.rb_DataBase_Sqlite.Text = "Sqlite";
             this.rb_DataBase_Sqlite.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.rb_DataBase_Sqlite.UseVisualStyleBackColor = true;
+            // 
+            // btn_Export
+            // 
+            this.btn_Export.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_Export.Location = new System.Drawing.Point(1024, 3);
+            this.btn_Export.Name = "btn_Export";
+            this.btn_Export.Size = new System.Drawing.Size(84, 44);
+            this.btn_Export.TabIndex = 6;
+            this.btn_Export.Text = "导出";
+            this.btn_Export.UseVisualStyleBackColor = true;
+            this.btn_Export.Click += new System.EventHandler(this.btn_Export_Click);
+            // 
+            // btn_Import
+            // 
+            this.btn_Import.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_Import.Location = new System.Drawing.Point(1114, 3);
+            this.btn_Import.Name = "btn_Import";
+            this.btn_Import.Size = new System.Drawing.Size(84, 44);
+            this.btn_Import.TabIndex = 7;
+            this.btn_Import.Text = "导入";
+            this.btn_Import.UseVisualStyleBackColor = true;
+            this.btn_Import.Click += new System.EventHandler(this.btn_Import_Click);
+            // 
+            // ll_DownTemplate
+            // 
+            this.ll_DownTemplate.AutoSize = true;
+            this.ll_DownTemplate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ll_DownTemplate.Location = new System.Drawing.Point(1204, 0);
+            this.ll_DownTemplate.Name = "ll_DownTemplate";
+            this.ll_DownTemplate.Size = new System.Drawing.Size(84, 50);
+            this.ll_DownTemplate.TabIndex = 8;
+            this.ll_DownTemplate.TabStop = true;
+            this.ll_DownTemplate.Text = "下载模板";
+            this.ll_DownTemplate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ll_DownTemplate.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ll_DownTemplate_LinkClicked);
             // 
             // tlp_Button
             // 
@@ -533,5 +577,8 @@
         private TableLayoutPanel tlp_Column;
         private CusControls.DataGridViewEx.DataGridViewEx dv_AddColumn;
         private TableLayoutPanel tlp_Column_Button;
+        private Button btn_Export;
+        private Button btn_Import;
+        private LinkLabel ll_DownTemplate;
     }
 }

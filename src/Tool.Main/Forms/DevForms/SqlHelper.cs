@@ -938,5 +938,30 @@ namespace Tool.Main.Forms.DevForms
             return sbSql.ToString();
         }
         #endregion
+
+        #region 导出 导入 模板下载
+
+        #region 导出
+        private void btn_Export_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region 导入
+        private void btn_Import_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region 模板下载
+        private void ll_DownTemplate_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
+        #endregion
+
+        #endregion
     }
 }
