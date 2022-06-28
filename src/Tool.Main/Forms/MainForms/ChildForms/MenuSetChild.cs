@@ -14,6 +14,8 @@ namespace Tool.Main.Forms.MainForms.ChildForms
         private EnumSqlType _sqlType;
         private ICommonDataHelper _dataHelper;
         private ChildMenuType _childMenuType;
+        //保存更新前的父级菜单编号
+        private string _oldMenuCode;
 
         #region Ctor
 
@@ -106,7 +108,13 @@ namespace Tool.Main.Forms.MainForms.ChildForms
                 }
                 else
                 {
+                    //更新当前菜单信息
                     sql = $"Update P_Menu set MenuCode='{menu.MenuCode}',MenuName='{menu.MenuName}',ParentCode='{menu.ParentCode}',Assembly='{menu.Assembly}',NameSpace='{menu.NameSpace}',EntityName='{menu.EntityName}',Level={menu.Level},IfEnd={menu.IfEnd} WHERE ID={menu.Id};";
+                    //更新直属子菜单父级编号
+                    if (!menu.MenuCode.Equals(this._oldMenuCode))
+                    {
+                        sql += $"Update P_menu set ParentCode='{menu.MenuCode}' WHERE ParentCode='{this._oldMenuCode}';";
+                    }
                 }
                 //执行
                 long result = _dataHelper.ExcuteNoQuery(sql);
@@ -148,10 +156,16 @@ namespace Tool.Main.Forms.MainForms.ChildForms
             //获取主sql
             Dictionary<string, string> sqlDic = SqlConfig.GetSql("SQLConfig/BaseForm/MenuSet/", _sqlType.ToString());
             DataTable dt = _dataHelper.GetDataTable(sqlDic["Query"].ToString(), sqlDic["Order"].ToString());
-            //处理菜单
+            //处理父级菜单
             DataTable newDt = new DataTable();
             newDt.Columns.Add("菜单编码");
             newDt.Columns.Add("菜单名称");
+            //先加入空行
+            DataRow newEmptyRow = newDt.NewRow();
+            newEmptyRow["菜单编码"] = "///0";
+            newEmptyRow["菜单名称"] = "";
+            newDt.Rows.Add(newEmptyRow);
+            //在加入数据库父级菜单
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 //原有数据
@@ -233,6 +247,7 @@ namespace Tool.Main.Forms.MainForms.ChildForms
 
             int level = menu.Level - 1;
             this.tb_ParentCode.Text = menu.ParentCode;
+            this._oldMenuCode = menu.MenuCode;
             this.cbx_ParentName.SelectedValue = menu.ParentCode + "///" + level.ToString();
             this.tb_ParentLevel.Text = level.ToString();
 

@@ -5,6 +5,7 @@
 			<MSSql>
 				<Query>
 					SELECT   Id AS '菜单序号',
+					CASE ParentCode WHEN '' THEN MenuCode ELSE ParentCode + "." + MenuCode END AS '排序',
 					MenuCode AS '菜单编码',
 					MenuName AS '菜单名称',
 					ParentCode AS '父级编码',
@@ -17,12 +18,13 @@
 					WHERE (1=1) AND (2=2);
 				</Query>
 				<Order>
-					[菜单编码],[菜单名称]
+					[排序]
 				</Order>
 			</MSSql>
 			<Sqlite>
 				<Query>
 					SELECT Id AS '菜单序号',
+					CASE ParentCode WHEN '' THEN MenuCode ELSE ParentCode || "." || MenuCode END AS '排序',
 					MenuCode AS '菜单编码',
 					MenuName AS '菜单名称',
 					ParentCode AS '父级编码',
@@ -35,7 +37,7 @@
 					WHERE (1=1) AND (2=2);
 				</Query>
 				<Order>
-					[菜单编码],[菜单名称]
+					[排序]
 				</Order>
 			</Sqlite>
 		</MenuSet>

@@ -343,6 +343,15 @@ namespace Tool.CusControls.DataGridViewEx
         }
 
         /// <summary>
+        /// 删除列
+        /// </summary>
+        /// <param name="index"></param>
+        public void RemoveColumns(int index)
+        {
+            this.dataGridView1.Columns.RemoveAt(index);
+        }
+
+        /// <summary>
         /// 插多列
         /// </summary>
         /// <param name="collection"></param>

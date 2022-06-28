@@ -71,6 +71,8 @@ namespace Tool.Main.Forms.MainForms
             //dv绑定数据
             this.dataViewMain.DataSourceSql = sqlDic;
             this.dataViewMain.ViewDataBind(DataGridViewBindType.DicSql);
+            //隐藏排序列
+            this.dataViewMain.RemoveColumns(2);
 
             //根据层级控制菜单名称编码缩进显示
             DataGridViewRow[] rows = this.dataViewMain.GetAllRows();
