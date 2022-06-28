@@ -34,7 +34,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 633);
+            this.ClientSize = new System.Drawing.Size(1209, 733);
             this.Name = "PDUImport";
             this.Text = "PDUImport";
             this.ResumeLayout(false);

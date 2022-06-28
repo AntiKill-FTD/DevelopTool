@@ -300,6 +300,7 @@
             this.dvDataSource.DvSelectionMode = System.Windows.Forms.DataGridViewSelectionMode.RowHeaderSelect;
             this.dvDataSource.IsPage = false;
             this.dvDataSource.IsShowFirstCheckBox = false;
+            this.dvDataSource.IsSort = false;
             this.dvDataSource.Location = new System.Drawing.Point(709, 5);
             this.dvDataSource.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dvDataSource.Name = "dvDataSource";
@@ -405,6 +406,7 @@
             this.dvInputSource.DvSelectionMode = System.Windows.Forms.DataGridViewSelectionMode.RowHeaderSelect;
             this.dvInputSource.IsPage = false;
             this.dvInputSource.IsShowFirstCheckBox = false;
+            this.dvInputSource.IsSort = false;
             this.dvInputSource.Location = new System.Drawing.Point(3, 48);
             this.dvInputSource.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dvInputSource.Name = "dvInputSource";
