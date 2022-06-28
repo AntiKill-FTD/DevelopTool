@@ -37,7 +37,43 @@ namespace Tool.Main.Forms.BusForms
         #region PageLoad
         private void PDUImport_Load(object sender, EventArgs e)
         {
+            //行点击事件
+            this.dv_Org.Dv.CellClick += Org_Dv_CellClick;
+            this.dv_Emp.Dv.CellClick += Emp_Dv_CellClick;
+        }
+        #endregion
 
+        #region 网格行选中事件
+        private void Org_Dv_CellClick(object? sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1)
+            {
+                if (this.dv_Org.GetRow(e.RowIndex).Cells["Remark"] != null)
+                {
+                    this.rtb_Org_RowError.Text = this.dv_Org.GetRow(e.RowIndex).Cells["Remark"].Value.ToString();
+                    this.rtb_Org_RowError.ForeColor = Color.Red;
+                }
+                else
+                {
+                    this.rtb_Org_RowError.Clear();
+                }
+            }
+        }
+
+        private void Emp_Dv_CellClick(object? sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1)
+            {
+                if (this.dv_Emp.GetRow(e.RowIndex).Cells["Remark"] != null)
+                {
+                    this.rtb_Emp_RowError.Text = this.dv_Emp.GetRow(e.RowIndex).Cells["Remark"].Value.ToString();
+                    this.rtb_Emp_RowError.ForeColor = Color.Red;
+                }
+                else
+                {
+                    this.rtb_Emp_RowError.Clear();
+                }
+            }
         }
         #endregion
 
@@ -111,6 +147,8 @@ namespace Tool.Main.Forms.BusForms
                 //绑定网格，展示数据校验明细
                 this.dv_Org.DvDataTable = dt;
                 this.dv_Org.ViewDataBind(CusControls.DataGridViewEx.DataGridViewBindType.DataTable, false, false);
+                //禁止排序
+                this.dv_Org.IsSort = false;
                 //显示错误信息
                 if (!string.IsNullOrEmpty(sbError.ToString()))
                 {
@@ -162,6 +200,8 @@ namespace Tool.Main.Forms.BusForms
                 //绑定网格，展示数据校验明细
                 this.dv_Emp.DvDataTable = dt;
                 this.dv_Emp.ViewDataBind(CusControls.DataGridViewEx.DataGridViewBindType.DataTable, false, false);
+                //禁止排序
+                this.dv_Emp.IsSort = false;
                 //显示错误信息
                 if (!string.IsNullOrEmpty(sbError.ToString()))
                 {

@@ -252,7 +252,7 @@
             this.dv_Org.DataSourceSql = null;
             this.dv_Org.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dv_Org.DvDataTable = null;
-            this.dv_Org.DvSelectionMode = System.Windows.Forms.DataGridViewSelectionMode.RowHeaderSelect;
+            this.dv_Org.DvSelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dv_Org.IsPage = false;
             this.dv_Org.IsShowFirstCheckBox = false;
             this.dv_Org.IsSort = false;
@@ -382,7 +382,7 @@
             this.dv_Emp.DataSourceSql = null;
             this.dv_Emp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dv_Emp.DvDataTable = null;
-            this.dv_Emp.DvSelectionMode = System.Windows.Forms.DataGridViewSelectionMode.RowHeaderSelect;
+            this.dv_Emp.DvSelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dv_Emp.IsPage = false;
             this.dv_Emp.IsShowFirstCheckBox = false;
             this.dv_Emp.IsSort = false;

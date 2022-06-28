@@ -149,6 +149,11 @@ namespace Tool.CusControls.DataGridViewEx
             }
         }
 
+        public DataGridViewRow GetRow(int index)
+        {
+            return this.dataGridView1.Rows[index];
+        }
+
         public DataGridViewRow[] GetSelectRows()
         {
             List<DataGridViewRow> rows = new List<DataGridViewRow>();
