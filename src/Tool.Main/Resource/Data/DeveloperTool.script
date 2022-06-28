@@ -287,6 +287,35 @@ INSERT INTO P_Menu (
     ,IfEnd
     )
 Values (
+    '02.02'
+    ,-- MenuCode - varchar(100)
+    'PDU数据导入'
+    ,-- MenuName - varchar(100)
+    '02'
+    ,-- ParentCode - varchar(100)
+    'Tool.Main'
+    ,-- Assembly - varchar(200)
+    'Tool.Main.Forms.BusForms'    
+    ,-- NameSpace - varchar(200)
+    'PDUImport'
+    ,--EntityName - varchar(200)
+    2
+    ,-- Level - int
+    1
+    --IfEnd - tinyint    
+    );
+
+INSERT INTO P_Menu (
+    MenuCode
+    ,MenuName
+    ,ParentCode
+    ,Assembly
+    ,NameSpace
+    ,EntityName
+    ,Level
+    ,IfEnd
+    )
+Values (
     '03'
     ,-- MenuCode - varchar(100)
     '字符处理'
