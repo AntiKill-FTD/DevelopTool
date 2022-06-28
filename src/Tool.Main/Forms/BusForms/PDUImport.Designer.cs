@@ -47,8 +47,7 @@
             this.rtb_Org_RowError = new System.Windows.Forms.RichTextBox();
             this.rtb_Org_SqlScript = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_Org_Import = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.tlp_Main_Emp = new System.Windows.Forms.TableLayoutPanel();
             this.dv_Emp = new Tool.CusControls.DataGridViewEx.DataGridViewEx();
@@ -57,8 +56,7 @@
             this.rtb_Emp_RowError = new System.Windows.Forms.RichTextBox();
             this.rtb_Emp_SqlScript = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btn_Emp_Import = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.tlp_Main.SuspendLayout();
             this.tlp_Connect.SuspendLayout();
@@ -286,6 +284,7 @@
             // rtb_Org_FullError
             // 
             this.rtb_Org_FullError.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtb_Org_FullError.ForeColor = System.Drawing.SystemColors.WindowText;
             this.rtb_Org_FullError.Location = new System.Drawing.Point(0, 0);
             this.rtb_Org_FullError.Margin = new System.Windows.Forms.Padding(0);
             this.rtb_Org_FullError.Name = "rtb_Org_FullError";
@@ -296,6 +295,7 @@
             // rtb_Org_RowError
             // 
             this.rtb_Org_RowError.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtb_Org_RowError.ForeColor = System.Drawing.SystemColors.WindowText;
             this.rtb_Org_RowError.Location = new System.Drawing.Point(451, 0);
             this.rtb_Org_RowError.Margin = new System.Windows.Forms.Padding(0);
             this.rtb_Org_RowError.Name = "rtb_Org_RowError";
@@ -315,17 +315,15 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 6;
+            this.tableLayoutPanel1.ColumnCount = 5;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 129F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 158F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 157F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 199F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Controls.Add(this.label4, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button1, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button3, 4, 0);
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.btn_Org_Import, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.button3, 3, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.ForeColor = System.Drawing.Color.Black;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -336,36 +334,25 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1355, 50);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
-            // label4
+            // btn_Org_Import
             // 
-            this.label4.AutoSize = true;
-            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(356, 0);
-            this.label4.Margin = new System.Windows.Forms.Padding(0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(129, 50);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "选择文件：";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // button1
-            // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.Location = new System.Drawing.Point(643, 0);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(157, 50);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "导入";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btn_Org_Import.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_Org_Import.Location = new System.Drawing.Point(587, 0);
+            this.btn_Org_Import.Margin = new System.Windows.Forms.Padding(0);
+            this.btn_Org_Import.Name = "btn_Org_Import";
+            this.btn_Org_Import.Size = new System.Drawing.Size(80, 50);
+            this.btn_Org_Import.TabIndex = 1;
+            this.btn_Org_Import.Text = "导入";
+            this.btn_Org_Import.UseVisualStyleBackColor = true;
+            this.btn_Org_Import.Click += new System.EventHandler(this.btn_Org_Import_Click);
             // 
             // button3
             // 
             this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button3.Location = new System.Drawing.Point(800, 0);
+            this.button3.Location = new System.Drawing.Point(687, 0);
             this.button3.Margin = new System.Windows.Forms.Padding(0);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(356, 50);
+            this.button3.Size = new System.Drawing.Size(80, 50);
             this.button3.TabIndex = 2;
             this.button3.Text = "生成";
             this.button3.UseVisualStyleBackColor = true;
@@ -427,6 +414,7 @@
             // rtb_Emp_FullError
             // 
             this.rtb_Emp_FullError.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtb_Emp_FullError.ForeColor = System.Drawing.SystemColors.WindowText;
             this.rtb_Emp_FullError.Location = new System.Drawing.Point(0, 0);
             this.rtb_Emp_FullError.Margin = new System.Windows.Forms.Padding(0);
             this.rtb_Emp_FullError.Name = "rtb_Emp_FullError";
@@ -437,6 +425,7 @@
             // rtb_Emp_RowError
             // 
             this.rtb_Emp_RowError.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtb_Emp_RowError.ForeColor = System.Drawing.SystemColors.WindowText;
             this.rtb_Emp_RowError.Location = new System.Drawing.Point(451, 0);
             this.rtb_Emp_RowError.Margin = new System.Windows.Forms.Padding(0);
             this.rtb_Emp_RowError.Name = "rtb_Emp_RowError";
@@ -456,17 +445,15 @@
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 6;
+            this.tableLayoutPanel2.ColumnCount = 5;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 147F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 201F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 169F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Controls.Add(this.label5, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.button2, 3, 0);
-            this.tableLayoutPanel2.Controls.Add(this.button4, 4, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btn_Emp_Import, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.button4, 3, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.ForeColor = System.Drawing.Color.Black;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
@@ -477,36 +464,25 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(1355, 62);
             this.tableLayoutPanel2.TabIndex = 2;
             // 
-            // label5
+            // btn_Emp_Import
             // 
-            this.label5.AutoSize = true;
-            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Location = new System.Drawing.Point(409, 0);
-            this.label5.Margin = new System.Windows.Forms.Padding(0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(147, 62);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "选择文件：";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // button2
-            // 
-            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button2.Location = new System.Drawing.Point(757, 0);
-            this.button2.Margin = new System.Windows.Forms.Padding(0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(169, 62);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "导入";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btn_Emp_Import.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_Emp_Import.Location = new System.Drawing.Point(587, 0);
+            this.btn_Emp_Import.Margin = new System.Windows.Forms.Padding(0);
+            this.btn_Emp_Import.Name = "btn_Emp_Import";
+            this.btn_Emp_Import.Size = new System.Drawing.Size(80, 62);
+            this.btn_Emp_Import.TabIndex = 1;
+            this.btn_Emp_Import.Text = "导入";
+            this.btn_Emp_Import.UseVisualStyleBackColor = true;
+            this.btn_Emp_Import.Click += new System.EventHandler(this.btn_Emp_Import_Click);
             // 
             // button4
             // 
             this.button4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button4.Location = new System.Drawing.Point(926, 0);
+            this.button4.Location = new System.Drawing.Point(687, 0);
             this.button4.Margin = new System.Windows.Forms.Padding(0);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(409, 62);
+            this.button4.Size = new System.Drawing.Size(80, 62);
             this.button4.TabIndex = 2;
             this.button4.Text = "生成";
             this.button4.UseVisualStyleBackColor = true;
@@ -528,11 +504,9 @@
             this.tlp_Main_Org.ResumeLayout(false);
             this.tlp_Org_Script.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
             this.tlp_Main_Emp.ResumeLayout(false);
             this.tlp_Emp_Script.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -565,10 +539,8 @@
         private RichTextBox rtb_Emp_SqlScript;
         private TableLayoutPanel tableLayoutPanel1;
         private TableLayoutPanel tableLayoutPanel2;
-        private Label label4;
-        private Button button1;
-        private Label label5;
-        private Button button2;
+        private Button btn_Org_Import;
+        private Button btn_Emp_Import;
         private Button button3;
         private Button button4;
     }
