@@ -297,7 +297,7 @@ Values (
     ,-- Assembly - varchar(200)
     'Tool.Main.Forms.BusForms'    
     ,-- NameSpace - varchar(200)
-    'PDUImport'
+    'PduImport'
     ,--EntityName - varchar(200)
     2
     ,-- Level - int

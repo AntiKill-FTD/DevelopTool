@@ -205,7 +205,7 @@ INSERT INTO P_Menu ( MenuCode, MenuName, ParentCode, Assembly, NameSpace, Entity
 INSERT INTO P_Menu ( MenuCode, MenuName, ParentCode, Assembly, NameSpace, EntityName, Level, IfEnd) VALUES ( N'01.02', N'实体生成', N'01', N'Tool.Main', N'Tool.Main.Forms.DevForms', N'EntityHelper', 2, 1);
 INSERT INTO P_Menu ( MenuCode, MenuName, ParentCode, Assembly, NameSpace, EntityName, Level, IfEnd) VALUES ( N'02', N'软通动力', N'', N'', N'', N'', 1, 0);
 INSERT INTO P_Menu ( MenuCode, MenuName, ParentCode, Assembly, NameSpace, EntityName, Level, IfEnd) VALUES ( N'02.01', N'数据库解密', N'02', N'Tool.Main', N'Tool.Main.Forms.BusForms', N'CryptData', 2, 1);
-INSERT INTO P_Menu ( MenuCode, MenuName, ParentCode, Assembly, NameSpace, EntityName, Level, IfEnd) VALUES ( N'02.02', N'PDU数据导入', N'02', N'Tool.Main', N'Tool.Main.Forms.BusForms', N'PDUImport', 2, 1);
+INSERT INTO P_Menu ( MenuCode, MenuName, ParentCode, Assembly, NameSpace, EntityName, Level, IfEnd) VALUES ( N'02.02', N'PDU数据导入', N'02', N'Tool.Main', N'Tool.Main.Forms.BusForms', N'PduImport', 2, 1);
 INSERT INTO P_Menu ( MenuCode, MenuName, ParentCode, Assembly, NameSpace, EntityName, Level, IfEnd) VALUES ( N'03', N'字符处理', N'', N'', N'', N'', 1, 0);
 INSERT INTO P_Menu ( MenuCode, MenuName, ParentCode, Assembly, NameSpace, EntityName, Level, IfEnd) VALUES ( N'03.01', N'字符串处理', N'03', N'Tool.Main', N'Tool.Main.Forms.ComForms', N'StringHelper', 2, 1);
 
