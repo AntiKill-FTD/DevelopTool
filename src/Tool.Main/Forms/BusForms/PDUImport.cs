@@ -182,7 +182,7 @@ namespace Tool.Main.Forms.BusForms
 
         #region 校验
 
-        #region 校验文档字段
+        #region 校验并读取数据
         private bool GetExcelData(string[] columns, ref DataTable dt, ref string message)
         {
             //文件流
