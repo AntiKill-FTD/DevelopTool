@@ -10,8 +10,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tool.Business.Business;
 using Tool.Data;
 using Tool.Data.DataHelper;
+using Tool.IService.Model.Bus;
 
 namespace Tool.Main.Forms.BusForms
 {
@@ -30,7 +32,6 @@ namespace Tool.Main.Forms.BusForms
         {
             InitializeComponent();
         }
-
         #endregion
 
         #region PageLoad
@@ -84,6 +85,12 @@ namespace Tool.Main.Forms.BusForms
         {
             try
             {
+                //判断数据库连接
+                if (!isConnect)
+                {
+                    MessageBox.Show("请先测试数据库连接", "提示");
+                    return;
+                }
                 //获取文档数据
                 string errorMessage = string.Empty;
                 DataTable dt = CreateOrgTable();
@@ -99,7 +106,17 @@ namespace Tool.Main.Forms.BusForms
                     this.rtb_Org_FullError.Clear();
                 }
                 //校验数据
-
+                StringBuilder sbError = new StringBuilder();
+                ValidateData(ref dt, ref sbError);
+                //绑定网格，展示数据校验明细
+                this.dv_Org.DvDataTable = dt;
+                this.dv_Org.ViewDataBind(CusControls.DataGridViewEx.DataGridViewBindType.DataTable, false, false);
+                //显示错误信息
+                if (!string.IsNullOrEmpty(sbError.ToString()))
+                {
+                    this.rtb_Org_FullError.Text = sbError.ToString();
+                    this.rtb_Org_FullError.ForeColor = Color.Red;
+                }
             }
             catch (Exception ex)
             {
@@ -119,6 +136,12 @@ namespace Tool.Main.Forms.BusForms
         {
             try
             {
+                //判断数据库连接
+                if (!isConnect)
+                {
+                    MessageBox.Show("请先测试数据库连接", "提示");
+                    return;
+                }
                 //获取文档数据
                 string errorMessage = string.Empty;
                 DataTable dt = CreateEmpTable();
@@ -134,7 +157,17 @@ namespace Tool.Main.Forms.BusForms
                     this.rtb_Emp_FullError.Clear();
                 }
                 //校验数据
-
+                StringBuilder sbError = new StringBuilder();
+                ValidateData(ref dt, ref sbError);
+                //绑定网格，展示数据校验明细
+                this.dv_Emp.DvDataTable = dt;
+                this.dv_Emp.ViewDataBind(CusControls.DataGridViewEx.DataGridViewBindType.DataTable, false, false);
+                //显示错误信息
+                if (!string.IsNullOrEmpty(sbError.ToString()))
+                {
+                    this.rtb_Emp_FullError.Text = sbError.ToString();
+                    this.rtb_Emp_FullError.ForeColor = Color.Red;
+                }
             }
             catch (Exception ex)
             {
@@ -225,9 +258,12 @@ namespace Tool.Main.Forms.BusForms
                             {
                                 IRow dataRow = sheet.GetRow(j);
                                 DataRow dr = dt.NewRow();
+                                //添加序号列
+                                dr[0] = j - 1;
+                                //添加字段列
                                 for (int k = 0; k < columns.Length; k++)
                                 {
-                                    dr[k] = dataRow.Cells[k].ToString();
+                                    dr[k + 1] = dataRow.Cells[k].ToString();
                                 }
                                 dt.Rows.Add(dr);
                             }
@@ -262,17 +298,53 @@ namespace Tool.Main.Forms.BusForms
         }
         #endregion
 
-        #region 校验组织架构数据
-        private void ValidateOrgData()
+        #region 校验数据和数据库是否匹配
+        private void ValidateData(ref DataTable dt, ref StringBuilder sbError)
         {
-
+            //dt添加备注列
+            dt.Columns.Add("Remark", typeof(string));
+            //获取业务数据
+            PduValidateResult pduValidateResult = GetBusinessData();
+            //循环
+            int index = 0;
+            foreach (DataRow dr in dt.Rows)
+            {
+                //获取部门信息和员工信息
+                string strBuNo = dr["BuNo"].ToString();
+                string strBuName = dr["BuName"].ToString();
+                string strEmpNo = dr["EmpNo"].ToString();
+                string strEmpName = dr["EmpName"].ToString();
+                //判断BU编号+BU名称是否存在
+                int orgCount = pduValidateResult.orgResults.Where(item => item.OrgNo == strBuNo && item.OrgName == strBuName).ToList().Count;
+                if (orgCount <= 0)
+                {
+                    string errOrg = $"第{index + 3}行数据，组织信息和数据库不匹配！\r\n";
+                    dr["Remark"] = errOrg;
+                    sbError.Append(errOrg);
+                }
+                //判断负责人工号+负责人姓名是否存在
+                int empCount = pduValidateResult.empResults.Where(item => item.EmpNo == strEmpNo && item.EmpName == strEmpName).ToList().Count;
+                if (empCount <= 0)
+                {
+                    string errEmp = $"第{index + 3}行数据，负责人信息和数据库不匹配！\r\n";
+                    dr["Remark"] = errEmp;
+                    sbError.Append(errEmp);
+                }
+                //自增序号
+                index++;
+            }
         }
         #endregion
 
-        #region 校验人员数据
-        private void ValidateEmpData()
+        #region 获取业务数据
+        private PduValidateResult GetBusinessData()
         {
-
+            //获取业务数据
+            PduValidateResult pduValidateResult = new PduValidateResult();
+            PduImportBusiness piBusi = new PduImportBusiness();
+            pduValidateResult.orgResults = piBusi.GetLevelFourOrg(dataHelper);
+            pduValidateResult.empResults = piBusi.GetEmpInfo(dataHelper);
+            return pduValidateResult;
         }
         #endregion
 
@@ -285,6 +357,9 @@ namespace Tool.Main.Forms.BusForms
             string[] columns = GetOrgColumns()[0];
             //创建表
             DataTable dt = new DataTable();
+            //添加序号列
+            dt.Columns.Add("序号", typeof(Int64));
+            //添加字段列
             foreach (string col in columns)
             {
                 dt.Columns.Add(col);
@@ -299,6 +374,9 @@ namespace Tool.Main.Forms.BusForms
             string[] columns = GetEmpColumns()[0];
             //创建表
             DataTable dt = new DataTable();
+            //添加序号列
+            dt.Columns.Add("序号", typeof(Int64));
+            //添加字段列
             foreach (string col in columns)
             {
                 dt.Columns.Add(col);
@@ -311,15 +389,15 @@ namespace Tool.Main.Forms.BusForms
         #region 获取字段清单
         private string[][] GetOrgColumns()
         {
-            string[] engColumns = new string[7] { "OrgName", "ParentName", "BuName", "BuCode", "EmpName", "EmpNo", "BeginDate" };
+            string[] engColumns = new string[7] { "OrgName", "ParentName", "BuName", "BuNo", "EmpName", "EmpNo", "BeginDate" };
             string[] chnColumns = new string[7] { "* 业务组织名称", "直接上层业务组织", "* 所属BU", "* 所属BU编码", "* 部门负责人姓名", "* 部门负责人工号", "生效月" };
             return new string[2][] { engColumns, chnColumns };
         }
 
         private string[][] GetEmpColumns()
         {
-            string[] engColumns = new string[6] { "EmpNo", "EmpName", "OrgName", "BuCode", "BuName", "BeginDate" };
-            string[] chnColumns = new string[6] { "* 员工工号", "* 员工姓名", "* 所属业务组织名称（末级组织）", "* 所属BU", "* 所属BU编码", "生效月" };
+            string[] engColumns = new string[6] { "EmpNo", "EmpName", "OrgName", "BuNo", "BuName", "BeginDate" };
+            string[] chnColumns = new string[6] { "* 员工工号", "* 员工姓名", "* 所属业务组织名称（末级组织）", "* 所属BU编码", "* 所属BU", "生效月" };
             return new string[2][] { engColumns, chnColumns };
         }
         #endregion
