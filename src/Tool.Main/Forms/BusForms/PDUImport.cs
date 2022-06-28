@@ -107,7 +107,7 @@ namespace Tool.Main.Forms.BusForms
                 }
                 //校验数据
                 StringBuilder sbError = new StringBuilder();
-                ValidateData(ref dt, ref sbError);
+                ValidateData("ORG", ref dt, ref sbError);
                 //绑定网格，展示数据校验明细
                 this.dv_Org.DvDataTable = dt;
                 this.dv_Org.ViewDataBind(CusControls.DataGridViewEx.DataGridViewBindType.DataTable, false, false);
@@ -158,7 +158,7 @@ namespace Tool.Main.Forms.BusForms
                 }
                 //校验数据
                 StringBuilder sbError = new StringBuilder();
-                ValidateData(ref dt, ref sbError);
+                ValidateData("EMP", ref dt, ref sbError);
                 //绑定网格，展示数据校验明细
                 this.dv_Emp.DvDataTable = dt;
                 this.dv_Emp.ViewDataBind(CusControls.DataGridViewEx.DataGridViewBindType.DataTable, false, false);
@@ -299,12 +299,19 @@ namespace Tool.Main.Forms.BusForms
         #endregion
 
         #region 校验数据和数据库是否匹配
-        private void ValidateData(ref DataTable dt, ref StringBuilder sbError)
+        private void ValidateData(string type, ref DataTable dt, ref StringBuilder sbError)
         {
             //dt添加备注列
             dt.Columns.Add("Remark", typeof(string));
             //获取业务数据
             PduValidateResult pduValidateResult = GetBusinessData();
+            //获取PDU部门数据
+            List<PduResult> pduResults = null;
+            if (type == "EMP")
+            {
+                PduImportBusiness piBusi = new PduImportBusiness();
+                pduResults = piBusi.GetPduDepartment(dataHelper);
+            }
             //循环
             int index = 0;
             foreach (DataRow dr in dt.Rows)
@@ -327,8 +334,20 @@ namespace Tool.Main.Forms.BusForms
                 if (empCount <= 0)
                 {
                     string errEmp = $"第{index + 3}行数据，负责人信息和数据库不匹配！\r\n";
-                    dr["Remark"] = errEmp;
+                    dr["Remark"] += errEmp;
                     sbError.Append(errEmp);
+                }
+                //如果导入的是人员清单，还需要校验PDU业务组织是否存在
+                if (type == "EMP")
+                {
+                    string strPduName = dr["OrgName"].ToString();
+                    int pduCount = pduResults.Where(item => item.OrgNo == strPduName).ToList().Count;
+                    if (pduCount <= 0)
+                    {
+                        string errPdu = $"第{index + 3}行数据，PDU组织和数据库不匹配！\r\n";
+                        dr["Remark"] += errPdu;
+                        sbError.Append(errPdu);
+                    }
                 }
                 //自增序号
                 index++;

@@ -36,5 +36,17 @@ namespace Tool.Business.Business
             DataTable dt = dataHelper.GetDataTable(sql, string.Empty);
             return DtToModel.GetModelFromDB<EmpResult>(dt);
         }
+
+        /// <summary>
+        /// 获取PDU组织信息
+        /// </summary>
+        /// <param name="dataHelper"></param>
+        /// <returns></returns>
+        public List<PduResult> GetPduDepartment(ICommonDataHelper dataHelper)
+        {
+            string sql = "SELECT Dep_Id AS OrgId, Dep_DeptNo AS OrgNo, Dep_DeptName AS OrgName FROM PSAData..mng_PduDepartment;";
+            DataTable dt = dataHelper.GetDataTable(sql, string.Empty);
+            return DtToModel.GetModelFromDB<PduResult>(dt);
+        }
     }
 }
