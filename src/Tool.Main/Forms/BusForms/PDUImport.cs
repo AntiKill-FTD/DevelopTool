@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -121,6 +122,8 @@ namespace Tool.Main.Forms.BusForms
         #region 导入
         private void btn_Org_Import_Click(object sender, EventArgs e)
         {
+            //记录处理时间
+            Stopwatch timeWatch = Stopwatch.StartNew();
             try
             {
                 //判断数据库连接
@@ -136,7 +139,8 @@ namespace Tool.Main.Forms.BusForms
                 bool validateSheetResult = GetExcelData("ORG", GetOrgColumns()[1], ref dt, ref errorMessage);
                 if (!validateSheetResult)
                 {
-                    this.rtb_Org_FullError.Text = errorMessage;
+                    this.rtb_Org_FullError.Text = $"{timeWatch.Elapsed.ToString()}\r\n";
+                    this.rtb_Org_FullError.Text += errorMessage;
                     this.rtb_Org_FullError.ForeColor = Color.Red;
                     return;
                 }
@@ -156,13 +160,15 @@ namespace Tool.Main.Forms.BusForms
                 //显示错误信息
                 if (!string.IsNullOrEmpty(sbError.ToString()))
                 {
-                    this.rtb_Org_FullError.Text = sbError.ToString();
+                    this.rtb_Org_FullError.Text = $"{timeWatch.Elapsed.ToString()}\r\n";
+                    this.rtb_Org_FullError.Text += sbError.ToString();
                     this.rtb_Org_FullError.ForeColor = Color.Red;
                 }
             }
             catch (Exception ex)
             {
-                this.rtb_Org_FullError.Text = $"错误\r{ex.Message}";
+                this.rtb_Org_FullError.Text = $"{timeWatch.Elapsed.ToString()}\r\n";
+                this.rtb_Org_FullError.Text += $"错误\r{ex.Message}";
                 this.rtb_Org_FullError.ForeColor = Color.Red;
                 return;
             }
@@ -176,6 +182,8 @@ namespace Tool.Main.Forms.BusForms
         #region 导入
         private void btn_Emp_Import_Click(object sender, EventArgs e)
         {
+            //记录处理时间
+            Stopwatch timeWatch = Stopwatch.StartNew();
             try
             {
                 //判断数据库连接
@@ -191,7 +199,8 @@ namespace Tool.Main.Forms.BusForms
                 bool validateSheetResult = GetExcelData("EMP", GetEmpColumns()[1], ref dt, ref errorMessage);
                 if (!validateSheetResult)
                 {
-                    this.rtb_Emp_FullError.Text = errorMessage;
+                    this.rtb_Emp_FullError.Text = $"{timeWatch.Elapsed.ToString()}\r\n";
+                    this.rtb_Emp_FullError.Text += errorMessage;
                     this.rtb_Emp_FullError.ForeColor = Color.Red;
                     return;
                 }
@@ -211,13 +220,15 @@ namespace Tool.Main.Forms.BusForms
                 //显示错误信息
                 if (!string.IsNullOrEmpty(sbError.ToString()))
                 {
-                    this.rtb_Emp_FullError.Text = sbError.ToString();
+                    this.rtb_Emp_FullError.Text = $"{timeWatch.Elapsed.ToString()}\r\n";
+                    this.rtb_Emp_FullError.Text += sbError.ToString();
                     this.rtb_Emp_FullError.ForeColor = Color.Red;
                 }
             }
             catch (Exception ex)
             {
-                this.rtb_Emp_FullError.Text = $"错误\r{ex.Message}";
+                this.rtb_Emp_FullError.Text = $"{timeWatch.Elapsed.ToString()}\r\n";
+                this.rtb_Emp_FullError.Text += $"错误\r{ex.Message}";
                 this.rtb_Emp_FullError.ForeColor = Color.Red;
                 return;
             }
