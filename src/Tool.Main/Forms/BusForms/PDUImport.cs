@@ -699,7 +699,19 @@ namespace Tool.Main.Forms.BusForms
         #region 生成人员脚本
         private void btn_Emp_Script_Click(object sender, EventArgs e)
         {
-
+            StringBuilder sb = new StringBuilder();
+            DataTable dt = this.dv_Org.DvDataTable;
+            foreach (DataRow row in dt.Rows)
+            {
+                string deptNo = $"{ row["OrgNo"]}";
+                string empNo = $"{ row["EmpNo"]}";
+                string remark = $"{row["Remark"]}";
+                if (string.IsNullOrEmpty(remark))
+                {
+                    sb.AppendLine($@"INSERT INTO PSAData..mng_Pdu_Employee ( Dep_No, EmployeeNo, Dep_BeginDate, Dep_EndDate, Creator, CreateDate, Modifier, ModifyDate ) VALUES ('{deptNo}', '{empNo}', GETDATE(), GETDATE(), 'changls', GETDATE(), 'changls', GETDATE());");
+                }
+            }
+            this.rtb_Emp_SqlScript.Text = sb.ToString();
         }
         #endregion
 
