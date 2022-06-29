@@ -675,7 +675,24 @@ namespace Tool.Main.Forms.BusForms
         #region 生成组织脚本
         private void btn_Org_Script_Click(object sender, EventArgs e)
         {
-
+            StringBuilder sb = new StringBuilder();
+            DataTable dt = this.dv_Org.DvDataTable;
+            foreach (DataRow row in dt.Rows)
+            {
+                string deptNo = $"{ row["OrgNo"]}";
+                string deptName = $"{ row["OrgName"]}";
+                string parentNo = $"{ row["ParentNo"]}";
+                string buNo = $"{ row["BuNo"]}";
+                Int64? leaderId = row["LeaderId"] != System.DBNull.Value ? Convert.ToInt64($"{ row["LeaderId"]}") : null;
+                string empNo = $"{ row["EmpNo"]}";
+                string empName = $"{ row["EmpName"]}";
+                string remark = $"{row["Remark"]}";
+                if (string.IsNullOrEmpty(remark))
+                {
+                    sb.AppendLine($@"INSERT INTO PSAData..mng_PduDepartment ( Dep_DeptNo, Dep_DeptName, Dep_DeptShortName, Dep_ParDeptNo, Dep_Level4DeptNo, Dep_Level, Dep_DeptEnglishName, Dep_DeptEnglishShortName, Dep_LeaderId, Dep_EmpNo, Dep_EmpName, Dep_BeginDate, Dep_EndDate, Creator, CreateDate, Modifier, ModifyDate, Dep_Status, Dep_Description ) VALUES('{deptNo}', '{deptName}', '', '{parentNo}', '{buNo}', 0, '', '', { leaderId}, '{empNo}', '{empName}', GETDATE(), GETDATE(), 'changls', GETDATE(), 'changls', GETDATE(), 0, '' );");
+                }
+            }
+            this.rtb_Org_SqlScript.Text = sb.ToString();
         }
         #endregion
 
