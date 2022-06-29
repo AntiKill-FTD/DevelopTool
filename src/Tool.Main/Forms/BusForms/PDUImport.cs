@@ -473,7 +473,7 @@ namespace Tool.Main.Forms.BusForms
                         dr["Remark"] += errOrgName;
                         sbError.Append(errOrgName);
                     }
-                    //2.判断【BU编号+BU名称】是否存在
+                    //2.判断【BU编号+BU名称】是否存在，且为BU
                     List<OrgResult> searchOrg = pduValidateResult.orgResults.Where(item => item.OrgNo == strBuNo && item.OrgName == strBuName).ToList();
                     if (searchOrg.Count <= 0)
                     {
@@ -511,12 +511,18 @@ namespace Tool.Main.Forms.BusForms
                         dr["Remark"] += errOrgName;
                         sbError.Append(errOrgName);
                     }
-                    //2.【PDU业务组织】是否存在
+                    //2.【PDU业务组织】是否存在，且为末级组织
                     string strPduName = $"{dr["OrgName"]}";
-                    int pduCount = pduResults.Where(item => item.OrgNo == strPduName).ToList().Count;
-                    if (pduCount <= 0)
+                    List<PduResult> searchPdu = pduResults.Where(item => item.OrgNo == strPduName).ToList();
+                    if (searchPdu.Count <= 0)
                     {
                         string errPdu = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），PDU组织在数据库不存在！\r\n";
+                        dr["Remark"] += errPdu;
+                        sbError.Append(errPdu);
+                    }
+                    else if (searchPdu[0].IsLeaf == 0)
+                    {
+                        string errPdu = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），PDU组织不是末级节点！\r\n";
                         dr["Remark"] += errPdu;
                         sbError.Append(errPdu);
                     }
