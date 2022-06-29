@@ -40,6 +40,9 @@
             this.tb_DataBase = new System.Windows.Forms.TextBox();
             this.btnConnect = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.tlp_CheckSplit = new System.Windows.Forms.TableLayoutPanel();
+            this.cb_IsProb = new System.Windows.Forms.CheckBox();
+            this.cb_IsFilterEmp = new System.Windows.Forms.CheckBox();
             this.tlp_Main_Org = new System.Windows.Forms.TableLayoutPanel();
             this.dv_Org = new Tool.CusControls.DataGridViewEx.DataGridViewEx();
             this.tlp_Org_Script = new System.Windows.Forms.TableLayoutPanel();
@@ -61,6 +64,7 @@
             this.tlp_Main.SuspendLayout();
             this.tlp_Connect.SuspendLayout();
             this.tlp_Info.SuspendLayout();
+            this.tlp_CheckSplit.SuspendLayout();
             this.tlp_Main_Org.SuspendLayout();
             this.tlp_Org_Script.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -102,6 +106,7 @@
             this.tlp_Connect.Controls.Add(this.tlp_Info, 2, 1);
             this.tlp_Connect.Controls.Add(this.btnConnect, 3, 1);
             this.tlp_Connect.Controls.Add(this.label1, 1, 1);
+            this.tlp_Connect.Controls.Add(this.tlp_CheckSplit, 3, 0);
             this.tlp_Connect.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlp_Connect.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tlp_Connect.Location = new System.Drawing.Point(0, 0);
@@ -226,6 +231,47 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "登陆账号：";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tlp_CheckSplit
+            // 
+            this.tlp_CheckSplit.ColumnCount = 2;
+            this.tlp_CheckSplit.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.56897F));
+            this.tlp_CheckSplit.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.43103F));
+            this.tlp_CheckSplit.Controls.Add(this.cb_IsProb, 0, 0);
+            this.tlp_CheckSplit.Controls.Add(this.cb_IsFilterEmp, 1, 0);
+            this.tlp_CheckSplit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlp_CheckSplit.Location = new System.Drawing.Point(1102, 0);
+            this.tlp_CheckSplit.Margin = new System.Windows.Forms.Padding(0);
+            this.tlp_CheckSplit.Name = "tlp_CheckSplit";
+            this.tlp_CheckSplit.RowCount = 1;
+            this.tlp_CheckSplit.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_CheckSplit.Size = new System.Drawing.Size(232, 33);
+            this.tlp_CheckSplit.TabIndex = 6;
+            // 
+            // cb_IsProb
+            // 
+            this.cb_IsProb.AutoSize = true;
+            this.cb_IsProb.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cb_IsProb.Location = new System.Drawing.Point(3, 3);
+            this.cb_IsProb.Name = "cb_IsProb";
+            this.cb_IsProb.Size = new System.Drawing.Size(109, 27);
+            this.cb_IsProb.TabIndex = 0;
+            this.cb_IsProb.Text = "是否生产";
+            this.cb_IsProb.UseVisualStyleBackColor = true;
+            this.cb_IsProb.CheckedChanged += new System.EventHandler(this.cb_IsProb_CheckedChanged);
+            // 
+            // cb_IsFilterEmp
+            // 
+            this.cb_IsFilterEmp.AutoSize = true;
+            this.cb_IsFilterEmp.Checked = true;
+            this.cb_IsFilterEmp.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_IsFilterEmp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cb_IsFilterEmp.Location = new System.Drawing.Point(118, 3);
+            this.cb_IsFilterEmp.Name = "cb_IsFilterEmp";
+            this.cb_IsFilterEmp.Size = new System.Drawing.Size(111, 27);
+            this.cb_IsFilterEmp.TabIndex = 1;
+            this.cb_IsFilterEmp.Text = "是否校验员工";
+            this.cb_IsFilterEmp.UseVisualStyleBackColor = true;
             // 
             // tlp_Main_Org
             // 
@@ -501,6 +547,8 @@
             this.tlp_Connect.PerformLayout();
             this.tlp_Info.ResumeLayout(false);
             this.tlp_Info.PerformLayout();
+            this.tlp_CheckSplit.ResumeLayout(false);
+            this.tlp_CheckSplit.PerformLayout();
             this.tlp_Main_Org.ResumeLayout(false);
             this.tlp_Org_Script.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -543,5 +591,8 @@
         private Button btn_Emp_Import;
         private Button button3;
         private Button button4;
+        private TableLayoutPanel tlp_CheckSplit;
+        private CheckBox cb_IsProb;
+        private CheckBox cb_IsFilterEmp;
     }
 }

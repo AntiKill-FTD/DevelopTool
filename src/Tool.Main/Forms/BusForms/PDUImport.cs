@@ -27,6 +27,7 @@ namespace Tool.Main.Forms.BusForms
         private string lastChoosePath = string.Empty; //上次打开的文件夹路径
         private Dictionary<string, OrgCompare> dicOrgName = new Dictionary<string, OrgCompare>(); //存储PDU业务名称，用来校验重复
         private Dictionary<string, EmpCompare> dicEmpNo = new Dictionary<string, EmpCompare>(); //存储EmpNo，用来校验重复
+        private Dictionary<string, int> dicBuNo = new Dictionary<string, int>(); //存储BuNo，用来生成序号
 
         #endregion
 
@@ -136,7 +137,7 @@ namespace Tool.Main.Forms.BusForms
                 string errorMessage = string.Empty;
                 //DT 序号+原始数据
                 DataTable dt = CreateOrgTable();
-                bool validateSheetResult = GetExcelData("ORG", GetOrgColumns()[1], ref dt, ref errorMessage);
+                bool validateSheetResult = GetExcelData(ImportType.Org, GetOrgColumns()[1], ref dt, ref errorMessage);
                 if (!validateSheetResult)
                 {
                     this.rtb_Org_FullError.Text = $"{timeWatch.Elapsed.ToString()}\r\n";
@@ -200,7 +201,7 @@ namespace Tool.Main.Forms.BusForms
                 string errorMessage = string.Empty;
                 //DT 序号+原始数据
                 DataTable dt = CreateEmpTable();
-                bool validateSheetResult = GetExcelData("EMP", GetEmpColumns()[1], ref dt, ref errorMessage);
+                bool validateSheetResult = GetExcelData(ImportType.Emp, GetEmpColumns()[1], ref dt, ref errorMessage);
                 if (!validateSheetResult)
                 {
                     this.rtb_Emp_FullError.Text = $"{timeWatch.Elapsed.ToString()}\r\n";
@@ -248,7 +249,7 @@ namespace Tool.Main.Forms.BusForms
         #region 校验
 
         #region 校验Excel并读取数据
-        private bool GetExcelData(string type, string[] columns, ref DataTable dt, ref string message)
+        private bool GetExcelData(ImportType type, string[] columns, ref DataTable dt, ref string message)
         {
             //文件流
             FileStream fs = null;
@@ -326,23 +327,37 @@ namespace Tool.Main.Forms.BusForms
                             {
                                 IRow dataRow = sheet.GetRow(j);
                                 DataRow dr = dt.NewRow();
-                                //添加序号列
+                                //写入序号列
                                 dr[0] = $"{sheetName}:{j - 1}";
                                 //添加字段列
                                 for (int k = 0; k < columns.Length; k++)
                                 {
                                     dr[k + 1] = dataRow.Cells[k].ToString();
                                 }
+                                //插入行
                                 dt.Rows.Add(dr);
                                 //如果是【ORG】导入，记录OrgName：
                                 //Key：BuNo&&&OrgName
                                 //Value：OrgCompare { Count, IndexList, BuNo }
-                                if (type == "ORG")
+                                if (type == ImportType.Org)
                                 {
+                                    //临时变量
                                     string tempBuNo = $"{dr["BuNo"]}";
                                     string tempOrgName = $"{dr["OrgName"]}";
                                     string tempKey = $"{tempBuNo}&&&{tempOrgName}";
-
+                                    //数量存值，生成OrgNo
+                                    //Org导入的时候，写入OrgNo列，写入规则：：{BuNo}_PDU_序号
+                                    //Org.ParentNO列比对的时候才写入；Emp.OrgNo列比对的时候才写入；
+                                    if (dicBuNo.Keys.Contains(tempBuNo))
+                                    {
+                                        dicBuNo[tempBuNo]++;
+                                    }
+                                    else
+                                    {
+                                        dicBuNo.Add(tempBuNo, 1);
+                                    }
+                                    dr["OrgNo"] = $"{tempBuNo}_PDU_{dicBuNo[tempBuNo]}";
+                                    //重复存值
                                     if (dicOrgName.Keys.Contains(tempKey))
                                     {
                                         OrgCompare oc = dicOrgName[tempKey];
@@ -352,16 +367,18 @@ namespace Tool.Main.Forms.BusForms
                                     }
                                     else
                                     {
-                                        OrgCompare oc = new OrgCompare { Count = 1, IndexList = $"【{dr["序号"]}】", BuNo = $"{ dr["BuNo"]}" };
+                                        OrgCompare oc = new OrgCompare { Count = 1, IndexList = $"【{dr["序号"]}】", BuNo = $"{ dr["BuNo"]}", OrgNo = $"{dr["OrgNo"]}" };
                                         dicOrgName.Add(tempKey, oc);
                                     }
                                 }
                                 //如果是【EMP】导入，记录EmpNo：
                                 //Key：EmpNo
                                 //Value：EmpCompare { Count, IndexList }
-                                if (type == "EMP")
+                                if (type == ImportType.Emp)
                                 {
+                                    //临时变量
                                     string tempKey = $"{dr["EmpNo"]}";
+                                    //重复存值
                                     if (dicEmpNo.Keys.Contains(tempKey))
                                     {
                                         EmpCompare ec = dicEmpNo[tempKey];
@@ -446,19 +463,22 @@ namespace Tool.Main.Forms.BusForms
                 string strEmpNo = $"{dr["EmpNo"]}";
                 string strEmpName = $"{dr["EmpName"]}";
 
-                //0.判断【负责人工号+负责人姓名】是否存在-组织、人员 都需要判断
-                List<EmpResult> searchEmp = pduValidateResult.empResults.Where(item => item.EmpNo == strEmpNo && item.EmpName == strEmpName).ToList();
-                if (searchEmp.Count <= 0)
+                if (cb_IsFilterEmp.Checked)
                 {
-                    string errEmp = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），负责人信息在数据库不存在！\r\n";
-                    dr["Remark"] += errEmp;
-                    sbError.Append(errEmp);
-                }
-                else if (searchEmp[0].EmpStatus != "1")
-                {
-                    string errEmp = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），负责人已离职！\r\n";
-                    dr["Remark"] += errEmp;
-                    sbError.Append(errEmp);
+                    //0.判断【负责人工号+负责人姓名】是否存在-组织、人员 都需要判断
+                    List<EmpResult> searchEmp = pduValidateResult.empResults.Where(item => item.EmpNo == strEmpNo && item.EmpName == strEmpName).ToList();
+                    if (searchEmp.Count <= 0)
+                    {
+                        string errEmp = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），负责人信息在数据库不存在！\r\n";
+                        dr["Remark"] += errEmp;
+                        sbError.Append(errEmp);
+                    }
+                    else if (searchEmp[0].EmpStatus != "1")
+                    {
+                        string errEmp = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），负责人已离职！\r\n";
+                        dr["Remark"] += errEmp;
+                        sbError.Append(errEmp);
+                    }
                 }
 
                 //如果导入的是组织清单，还需要校验如下几点
@@ -491,11 +511,18 @@ namespace Tool.Main.Forms.BusForms
                     string strParentName = $"{dr["ParentName"]}";
                     if (!string.IsNullOrEmpty(strParentName))
                     {
-                        if (!dicOrgName.Keys.Contains(tempKey))
+                        string tempParentKey = $"{strBuNo}&&&{strParentName}";
+                        if (!dicOrgName.Keys.Contains(tempParentKey))
                         {
-                            string errParentName = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），直接上层业务组织【{tempKey}】在导入文档中不存在！\r\n";
+                            string errParentName = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），直接上层业务组织【{tempParentKey}】在导入文档中不存在！\r\n";
                             dr["Remark"] += errParentName;
                             sbError.Append(errParentName);
+                        }
+                        else
+                        {
+                            //Org导入的时候，写入OrgNo列，写入规则：：{BuNo}_PDU_序号
+                            //Org.ParentNO列比对的时候才写入；Emp.OrgNo列比对的时候才写入；
+                            dr["ParentNo"] = dicOrgName[tempParentKey].OrgNo;
                         }
                     }
                 }
@@ -525,6 +552,12 @@ namespace Tool.Main.Forms.BusForms
                         string errPdu = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），PDU组织不是末级节点！\r\n";
                         dr["Remark"] += errPdu;
                         sbError.Append(errPdu);
+                    }
+                    else
+                    {
+                        //Org导入的时候，写入OrgNo列，写入规则：：{BuNo}_PDU_序号
+                        //Org.ParentNO列比对的时候才写入；Emp.OrgNo列比对的时候才写入；
+                        dr["OrgNo"] = searchPdu[0].OrgNo;
                     }
                 }
             }
@@ -560,6 +593,9 @@ namespace Tool.Main.Forms.BusForms
             {
                 dt.Columns.Add(col);
             }
+            //添加OrgNo，ParentNO列
+            dt.Columns.Add("OrgNo", typeof(string));
+            dt.Columns.Add("ParentNO", typeof(string));
             //返回表
             return dt;
         }
@@ -577,6 +613,8 @@ namespace Tool.Main.Forms.BusForms
             {
                 dt.Columns.Add(col);
             }
+            //添加OrgNo
+            dt.Columns.Add("OrgNo", typeof(string));
             //返回表
             return dt;
         }
@@ -595,6 +633,24 @@ namespace Tool.Main.Forms.BusForms
             string[] engColumns = new string[4] { "EmpNo", "EmpName", "OrgName", "BeginDate" };
             string[] chnColumns = new string[4] { "* 员工工号", "* 员工姓名", "* 所属业务组织名称（末级组织）", "生效月" };
             return new string[2][] { engColumns, chnColumns };
+        }
+        #endregion
+
+        #region 切换生产库
+        private void cb_IsProb_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_IsProb.Checked)
+            {
+                this.cmb_IP.Text = "127.0.0.1,7002";
+                this.tb_LoginAccount.Text = "recruit_w";
+                this.tb_LoginPassword.Text = "wL1z26E5";
+            }
+            else
+            {
+                this.cmb_IP.Text = "10.136.0.114";
+                this.tb_LoginAccount.Text = "hruser";
+                this.tb_LoginPassword.Text = "rmohr123@abc";
+            }
         }
         #endregion
     }

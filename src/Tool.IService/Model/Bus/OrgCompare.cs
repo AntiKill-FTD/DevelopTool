@@ -22,5 +22,8 @@ namespace Tool.IService.Model.Bus
         /// Bu编号
         /// </summary>
         public string BuNo { get; set; }
+
+        //组织编号
+        public string OrgNo { get; set; }
     }
 }
