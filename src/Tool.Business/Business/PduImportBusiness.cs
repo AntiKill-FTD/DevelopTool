@@ -20,7 +20,7 @@ namespace Tool.Business.Business
         /// <returns></returns>
         public List<OrgResult> GetLevelFourOrg(ICommonDataHelper dataHelper)
         {
-            string sql = "SELECT OrgId, OrgName, OrgNo FROM dbo.mng_OrgFive WHERE Level = 4;";
+            string sql = "SELECT OrgId, OrgName, OrgNo FROM dbo.mng_OrgFive WITH (NOLOCK) WHERE Level = 4;";
             DataTable dt = dataHelper.GetDataTable(sql, string.Empty);
             return DtToModel.GetModelFromDB<OrgResult>(dt);
         }
@@ -32,7 +32,7 @@ namespace Tool.Business.Business
         /// <returns></returns>
         public List<EmpResult> GetEmpInfo(ICommonDataHelper dataHelper)
         {
-            string sql = "SELECT emp_Id AS EmpId, emp_EmployeeNo AS EmpNo, REPLACE(emp_EmployeeName,'test','') AS EmpName FROM PSAData..mng_Employee WHERE emp_Status = 1;";
+            string sql = "SELECT emp_Id AS EmpId, emp_EmployeeNo AS EmpNo, REPLACE(emp_EmployeeName,'test','') AS EmpName FROM PSAData..mng_Employee WITH (NOLOCK) WHERE emp_Status = 1;";
             DataTable dt = dataHelper.GetDataTable(sql, string.Empty);
             return DtToModel.GetModelFromDB<EmpResult>(dt);
         }
@@ -44,7 +44,7 @@ namespace Tool.Business.Business
         /// <returns></returns>
         public List<PduResult> GetPduDepartment(ICommonDataHelper dataHelper)
         {
-            string sql = "SELECT Dep_Id AS OrgId, Dep_DeptNo AS OrgNo, Dep_DeptName AS OrgName FROM PSAData..mng_PduDepartment;";
+            string sql = "SELECT Dep_Id AS OrgId, Dep_DeptNo AS OrgNo, Dep_DeptName AS OrgName FROM PSAData..mng_PduDepartment WITH (NOLOCK);";
             DataTable dt = dataHelper.GetDataTable(sql, string.Empty);
             return DtToModel.GetModelFromDB<PduResult>(dt);
         }
