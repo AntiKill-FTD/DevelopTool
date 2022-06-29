@@ -489,6 +489,10 @@ namespace Tool.Main.Forms.BusForms
                         dr["Remark"] += errEmp;
                         sbError.Append(errEmp);
                     }
+                    else
+                    {
+                        dr["LeaderId"] = searchEmp[0].EmpId;
+                    }
                 }
 
                 //如果导入的是组织清单，还需要校验如下几点
@@ -603,9 +607,10 @@ namespace Tool.Main.Forms.BusForms
             {
                 dt.Columns.Add(col);
             }
-            //添加OrgNo，ParentNO列
+            //添加OrgNo，ParentNO，LeaderId列
             dt.Columns.Add("OrgNo", typeof(string));
             dt.Columns.Add("ParentNO", typeof(string));
+            dt.Columns.Add("LeaderId", typeof(Int64));
             //返回表
             return dt;
         }
@@ -623,8 +628,9 @@ namespace Tool.Main.Forms.BusForms
             {
                 dt.Columns.Add(col);
             }
-            //添加OrgNo
+            //添加OrgNo，LeaderId
             dt.Columns.Add("OrgNo", typeof(string));
+            dt.Columns.Add("LeaderId", typeof(Int64));
             //返回表
             return dt;
         }
@@ -663,5 +669,24 @@ namespace Tool.Main.Forms.BusForms
             }
         }
         #endregion
+
+        #region 生成脚本
+
+        #region 生成组织脚本
+        private void btn_Org_Script_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region 生成人员脚本
+        private void btn_Emp_Script_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #endregion
+
     }
 }

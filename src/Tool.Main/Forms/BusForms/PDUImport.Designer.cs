@@ -51,7 +51,7 @@
             this.rtb_Org_SqlScript = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btn_Org_Import = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btn_Org_Script = new System.Windows.Forms.Button();
             this.tlp_Main_Emp = new System.Windows.Forms.TableLayoutPanel();
             this.dv_Emp = new Tool.CusControls.DataGridViewEx.DataGridViewEx();
             this.tlp_Emp_Script = new System.Windows.Forms.TableLayoutPanel();
@@ -60,7 +60,7 @@
             this.rtb_Emp_SqlScript = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.btn_Emp_Import = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btn_Emp_Script = new System.Windows.Forms.Button();
             this.tlp_Main.SuspendLayout();
             this.tlp_Connect.SuspendLayout();
             this.tlp_Info.SuspendLayout();
@@ -312,9 +312,9 @@
             // tlp_Org_Script
             // 
             this.tlp_Org_Script.ColumnCount = 3;
-            this.tlp_Org_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlp_Org_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlp_Org_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlp_Org_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tlp_Org_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tlp_Org_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlp_Org_Script.Controls.Add(this.rtb_Org_FullError, 0, 0);
             this.tlp_Org_Script.Controls.Add(this.rtb_Org_RowError, 1, 0);
             this.tlp_Org_Script.Controls.Add(this.rtb_Org_SqlScript, 2, 0);
@@ -334,7 +334,7 @@
             this.rtb_Org_FullError.Location = new System.Drawing.Point(0, 0);
             this.rtb_Org_FullError.Margin = new System.Windows.Forms.Padding(0);
             this.rtb_Org_FullError.Name = "rtb_Org_FullError";
-            this.rtb_Org_FullError.Size = new System.Drawing.Size(677, 115);
+            this.rtb_Org_FullError.Size = new System.Drawing.Size(451, 115);
             this.rtb_Org_FullError.TabIndex = 0;
             this.rtb_Org_FullError.Text = "";
             // 
@@ -342,20 +342,20 @@
             // 
             this.rtb_Org_RowError.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtb_Org_RowError.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.rtb_Org_RowError.Location = new System.Drawing.Point(677, 0);
+            this.rtb_Org_RowError.Location = new System.Drawing.Point(451, 0);
             this.rtb_Org_RowError.Margin = new System.Windows.Forms.Padding(0);
             this.rtb_Org_RowError.Name = "rtb_Org_RowError";
-            this.rtb_Org_RowError.Size = new System.Drawing.Size(338, 115);
+            this.rtb_Org_RowError.Size = new System.Drawing.Size(451, 115);
             this.rtb_Org_RowError.TabIndex = 1;
             this.rtb_Org_RowError.Text = "";
             // 
             // rtb_Org_SqlScript
             // 
             this.rtb_Org_SqlScript.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_Org_SqlScript.Location = new System.Drawing.Point(1015, 0);
+            this.rtb_Org_SqlScript.Location = new System.Drawing.Point(902, 0);
             this.rtb_Org_SqlScript.Margin = new System.Windows.Forms.Padding(0);
             this.rtb_Org_SqlScript.Name = "rtb_Org_SqlScript";
-            this.rtb_Org_SqlScript.Size = new System.Drawing.Size(340, 115);
+            this.rtb_Org_SqlScript.Size = new System.Drawing.Size(453, 115);
             this.rtb_Org_SqlScript.TabIndex = 2;
             this.rtb_Org_SqlScript.Text = "";
             // 
@@ -369,7 +369,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Controls.Add(this.btn_Org_Import, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button3, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btn_Org_Script, 3, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.ForeColor = System.Drawing.Color.Black;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -392,16 +392,17 @@
             this.btn_Org_Import.UseVisualStyleBackColor = true;
             this.btn_Org_Import.Click += new System.EventHandler(this.btn_Org_Import_Click);
             // 
-            // button3
+            // btn_Org_Script
             // 
-            this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button3.Location = new System.Drawing.Point(687, 0);
-            this.button3.Margin = new System.Windows.Forms.Padding(0);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(80, 50);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "生成";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btn_Org_Script.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_Org_Script.Location = new System.Drawing.Point(687, 0);
+            this.btn_Org_Script.Margin = new System.Windows.Forms.Padding(0);
+            this.btn_Org_Script.Name = "btn_Org_Script";
+            this.btn_Org_Script.Size = new System.Drawing.Size(80, 50);
+            this.btn_Org_Script.TabIndex = 2;
+            this.btn_Org_Script.Text = "生成";
+            this.btn_Org_Script.UseVisualStyleBackColor = true;
+            this.btn_Org_Script.Click += new System.EventHandler(this.btn_Org_Script_Click);
             // 
             // tlp_Main_Emp
             // 
@@ -442,9 +443,9 @@
             // tlp_Emp_Script
             // 
             this.tlp_Emp_Script.ColumnCount = 3;
-            this.tlp_Emp_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlp_Emp_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlp_Emp_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlp_Emp_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tlp_Emp_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tlp_Emp_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlp_Emp_Script.Controls.Add(this.rtb_Emp_FullError, 0, 0);
             this.tlp_Emp_Script.Controls.Add(this.rtb_Emp_RowError, 1, 0);
             this.tlp_Emp_Script.Controls.Add(this.rtb_Emp_SqlScript, 2, 0);
@@ -464,7 +465,7 @@
             this.rtb_Emp_FullError.Location = new System.Drawing.Point(0, 0);
             this.rtb_Emp_FullError.Margin = new System.Windows.Forms.Padding(0);
             this.rtb_Emp_FullError.Name = "rtb_Emp_FullError";
-            this.rtb_Emp_FullError.Size = new System.Drawing.Size(677, 112);
+            this.rtb_Emp_FullError.Size = new System.Drawing.Size(451, 112);
             this.rtb_Emp_FullError.TabIndex = 0;
             this.rtb_Emp_FullError.Text = "";
             // 
@@ -472,20 +473,20 @@
             // 
             this.rtb_Emp_RowError.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtb_Emp_RowError.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.rtb_Emp_RowError.Location = new System.Drawing.Point(677, 0);
+            this.rtb_Emp_RowError.Location = new System.Drawing.Point(451, 0);
             this.rtb_Emp_RowError.Margin = new System.Windows.Forms.Padding(0);
             this.rtb_Emp_RowError.Name = "rtb_Emp_RowError";
-            this.rtb_Emp_RowError.Size = new System.Drawing.Size(338, 112);
+            this.rtb_Emp_RowError.Size = new System.Drawing.Size(451, 112);
             this.rtb_Emp_RowError.TabIndex = 1;
             this.rtb_Emp_RowError.Text = "";
             // 
             // rtb_Emp_SqlScript
             // 
             this.rtb_Emp_SqlScript.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_Emp_SqlScript.Location = new System.Drawing.Point(1015, 0);
+            this.rtb_Emp_SqlScript.Location = new System.Drawing.Point(902, 0);
             this.rtb_Emp_SqlScript.Margin = new System.Windows.Forms.Padding(0);
             this.rtb_Emp_SqlScript.Name = "rtb_Emp_SqlScript";
-            this.rtb_Emp_SqlScript.Size = new System.Drawing.Size(340, 112);
+            this.rtb_Emp_SqlScript.Size = new System.Drawing.Size(453, 112);
             this.rtb_Emp_SqlScript.TabIndex = 2;
             this.rtb_Emp_SqlScript.Text = "";
             // 
@@ -499,7 +500,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Controls.Add(this.btn_Emp_Import, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.button4, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btn_Emp_Script, 3, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.ForeColor = System.Drawing.Color.Black;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
@@ -522,16 +523,17 @@
             this.btn_Emp_Import.UseVisualStyleBackColor = true;
             this.btn_Emp_Import.Click += new System.EventHandler(this.btn_Emp_Import_Click);
             // 
-            // button4
+            // btn_Emp_Script
             // 
-            this.button4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button4.Location = new System.Drawing.Point(687, 0);
-            this.button4.Margin = new System.Windows.Forms.Padding(0);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(80, 62);
-            this.button4.TabIndex = 2;
-            this.button4.Text = "生成";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btn_Emp_Script.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_Emp_Script.Location = new System.Drawing.Point(687, 0);
+            this.btn_Emp_Script.Margin = new System.Windows.Forms.Padding(0);
+            this.btn_Emp_Script.Name = "btn_Emp_Script";
+            this.btn_Emp_Script.Size = new System.Drawing.Size(80, 62);
+            this.btn_Emp_Script.TabIndex = 2;
+            this.btn_Emp_Script.Text = "生成";
+            this.btn_Emp_Script.UseVisualStyleBackColor = true;
+            this.btn_Emp_Script.Click += new System.EventHandler(this.btn_Emp_Script_Click);
             // 
             // PduImport
             // 
@@ -589,8 +591,8 @@
         private TableLayoutPanel tableLayoutPanel2;
         private Button btn_Org_Import;
         private Button btn_Emp_Import;
-        private Button button3;
-        private Button button4;
+        private Button btn_Org_Script;
+        private Button btn_Emp_Script;
         private TableLayoutPanel tlp_CheckSplit;
         private CheckBox cb_IsProb;
         private CheckBox cb_IsFilterEmp;
