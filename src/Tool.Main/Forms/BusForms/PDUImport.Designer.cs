@@ -266,9 +266,9 @@
             // tlp_Org_Script
             // 
             this.tlp_Org_Script.ColumnCount = 3;
-            this.tlp_Org_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlp_Org_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlp_Org_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tlp_Org_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_Org_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlp_Org_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tlp_Org_Script.Controls.Add(this.rtb_Org_FullError, 0, 0);
             this.tlp_Org_Script.Controls.Add(this.rtb_Org_RowError, 1, 0);
             this.tlp_Org_Script.Controls.Add(this.rtb_Org_SqlScript, 2, 0);
@@ -288,7 +288,7 @@
             this.rtb_Org_FullError.Location = new System.Drawing.Point(0, 0);
             this.rtb_Org_FullError.Margin = new System.Windows.Forms.Padding(0);
             this.rtb_Org_FullError.Name = "rtb_Org_FullError";
-            this.rtb_Org_FullError.Size = new System.Drawing.Size(451, 115);
+            this.rtb_Org_FullError.Size = new System.Drawing.Size(677, 115);
             this.rtb_Org_FullError.TabIndex = 0;
             this.rtb_Org_FullError.Text = "";
             // 
@@ -296,20 +296,20 @@
             // 
             this.rtb_Org_RowError.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtb_Org_RowError.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.rtb_Org_RowError.Location = new System.Drawing.Point(451, 0);
+            this.rtb_Org_RowError.Location = new System.Drawing.Point(677, 0);
             this.rtb_Org_RowError.Margin = new System.Windows.Forms.Padding(0);
             this.rtb_Org_RowError.Name = "rtb_Org_RowError";
-            this.rtb_Org_RowError.Size = new System.Drawing.Size(451, 115);
+            this.rtb_Org_RowError.Size = new System.Drawing.Size(338, 115);
             this.rtb_Org_RowError.TabIndex = 1;
             this.rtb_Org_RowError.Text = "";
             // 
             // rtb_Org_SqlScript
             // 
             this.rtb_Org_SqlScript.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_Org_SqlScript.Location = new System.Drawing.Point(902, 0);
+            this.rtb_Org_SqlScript.Location = new System.Drawing.Point(1015, 0);
             this.rtb_Org_SqlScript.Margin = new System.Windows.Forms.Padding(0);
             this.rtb_Org_SqlScript.Name = "rtb_Org_SqlScript";
-            this.rtb_Org_SqlScript.Size = new System.Drawing.Size(453, 115);
+            this.rtb_Org_SqlScript.Size = new System.Drawing.Size(340, 115);
             this.rtb_Org_SqlScript.TabIndex = 2;
             this.rtb_Org_SqlScript.Text = "";
             // 
@@ -396,9 +396,9 @@
             // tlp_Emp_Script
             // 
             this.tlp_Emp_Script.ColumnCount = 3;
-            this.tlp_Emp_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlp_Emp_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlp_Emp_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tlp_Emp_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_Emp_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlp_Emp_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tlp_Emp_Script.Controls.Add(this.rtb_Emp_FullError, 0, 0);
             this.tlp_Emp_Script.Controls.Add(this.rtb_Emp_RowError, 1, 0);
             this.tlp_Emp_Script.Controls.Add(this.rtb_Emp_SqlScript, 2, 0);
@@ -418,7 +418,7 @@
             this.rtb_Emp_FullError.Location = new System.Drawing.Point(0, 0);
             this.rtb_Emp_FullError.Margin = new System.Windows.Forms.Padding(0);
             this.rtb_Emp_FullError.Name = "rtb_Emp_FullError";
-            this.rtb_Emp_FullError.Size = new System.Drawing.Size(451, 112);
+            this.rtb_Emp_FullError.Size = new System.Drawing.Size(677, 112);
             this.rtb_Emp_FullError.TabIndex = 0;
             this.rtb_Emp_FullError.Text = "";
             // 
@@ -426,20 +426,20 @@
             // 
             this.rtb_Emp_RowError.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtb_Emp_RowError.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.rtb_Emp_RowError.Location = new System.Drawing.Point(451, 0);
+            this.rtb_Emp_RowError.Location = new System.Drawing.Point(677, 0);
             this.rtb_Emp_RowError.Margin = new System.Windows.Forms.Padding(0);
             this.rtb_Emp_RowError.Name = "rtb_Emp_RowError";
-            this.rtb_Emp_RowError.Size = new System.Drawing.Size(451, 112);
+            this.rtb_Emp_RowError.Size = new System.Drawing.Size(338, 112);
             this.rtb_Emp_RowError.TabIndex = 1;
             this.rtb_Emp_RowError.Text = "";
             // 
             // rtb_Emp_SqlScript
             // 
             this.rtb_Emp_SqlScript.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_Emp_SqlScript.Location = new System.Drawing.Point(902, 0);
+            this.rtb_Emp_SqlScript.Location = new System.Drawing.Point(1015, 0);
             this.rtb_Emp_SqlScript.Margin = new System.Windows.Forms.Padding(0);
             this.rtb_Emp_SqlScript.Name = "rtb_Emp_SqlScript";
-            this.rtb_Emp_SqlScript.Size = new System.Drawing.Size(453, 112);
+            this.rtb_Emp_SqlScript.Size = new System.Drawing.Size(340, 112);
             this.rtb_Emp_SqlScript.TabIndex = 2;
             this.rtb_Emp_SqlScript.Text = "";
             // 
