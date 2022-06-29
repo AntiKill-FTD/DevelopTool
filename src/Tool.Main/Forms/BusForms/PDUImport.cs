@@ -25,8 +25,8 @@ namespace Tool.Main.Forms.BusForms
         private ICommonDataHelper dataHelper;   //数据库操作类
         private bool isConnect = false;         //判断是否连接成功
         private string lastChoosePath = string.Empty; //上次打开的文件夹路径
-        private Dictionary<string, string> dicOrgName = new Dictionary<string, string>(); //存储PDU业务名称，用来校验重复
-        private Dictionary<string, string> dicEmpNo = new Dictionary<string, string>(); //存储EmpNo，用来校验重复
+        private Dictionary<string, OrgCompare> dicOrgName = new Dictionary<string, OrgCompare>(); //存储PDU业务名称，用来校验重复
+        private Dictionary<string, EmpCompare> dicEmpNo = new Dictionary<string, EmpCompare>(); //存储EmpNo，用来校验重复
 
         #endregion
 
@@ -172,6 +172,10 @@ namespace Tool.Main.Forms.BusForms
                 this.rtb_Org_FullError.ForeColor = Color.Red;
                 return;
             }
+            finally
+            {
+                dicOrgName.Clear();
+            }
         }
         #endregion
 
@@ -231,6 +235,10 @@ namespace Tool.Main.Forms.BusForms
                 this.rtb_Emp_FullError.Text += $"错误\r{ex.Message}";
                 this.rtb_Emp_FullError.ForeColor = Color.Red;
                 return;
+            }
+            finally
+            {
+                dicEmpNo.Clear();
             }
         }
         #endregion
@@ -326,36 +334,45 @@ namespace Tool.Main.Forms.BusForms
                                     dr[k + 1] = dataRow.Cells[k].ToString();
                                 }
                                 dt.Rows.Add(dr);
-                                //如果是【ORG】导入，记录OrgName：Num___序号(逗号分割)___BuNo
+                                //如果是【ORG】导入，记录OrgName：
+                                //Key：BuNo&&&OrgName
+                                //Value：OrgCompare { Count, IndexList, BuNo }
                                 if (type == "ORG")
                                 {
-                                    string tempOrgName = dr["OrgName"].ToString();
-                                    if (dicOrgName.Keys.Contains(tempOrgName))
+                                    string tempBuNo = $"{dr["BuNo"]}";
+                                    string tempOrgName = $"{dr["OrgName"]}";
+                                    string tempKey = $"{tempBuNo}&&&{tempOrgName}";
+
+                                    if (dicOrgName.Keys.Contains(tempKey))
                                     {
-                                        string[] dicValue = dicOrgName[tempOrgName].Split("___");
-                                        int newCount = Convert.ToInt32(dicValue[0]) + 1;
-                                        string newIndexs = $"{dicValue[1]},【{dr["序号"]}】";
-                                        dicOrgName[tempOrgName] = $"{newCount}___{newIndexs}___{dicValue[2]}";
+                                        OrgCompare oc = dicOrgName[tempKey];
+                                        oc.Count++;
+                                        oc.IndexList += $",【{dr["序号"]}】";
+                                        dicOrgName[tempKey] = oc;
                                     }
                                     else
                                     {
-                                        dicOrgName.Add(dr["OrgName"].ToString(), $"1___【{dr["序号"].ToString()}】___{dr["BuNo"].ToString()}");
+                                        OrgCompare oc = new OrgCompare { Count = 1, IndexList = $"【{dr["序号"]}】", BuNo = $"{ dr["BuNo"]}" };
+                                        dicOrgName.Add(tempKey, oc);
                                     }
                                 }
-                                //如果是【EMP】导入，记录EmpNo：Num___序号(逗号分割)
+                                //如果是【EMP】导入，记录EmpNo：
+                                //Key：EmpNo
+                                //Value：EmpCompare { Count, IndexList }
                                 if (type == "EMP")
                                 {
-                                    string tempEmpNo = dr["EmpNo"].ToString();
-                                    if (dicEmpNo.Keys.Contains(tempEmpNo))
+                                    string tempKey = $"{dr["EmpNo"]}";
+                                    if (dicEmpNo.Keys.Contains(tempKey))
                                     {
-                                        string[] dicValue = dicEmpNo[tempEmpNo].Split("___");
-                                        int newCount = Convert.ToInt32(dicValue[0]) + 1;
-                                        string newIndexs = $"{dicValue[1]},{dr["序号"]}";
-                                        dicEmpNo[tempEmpNo] = $"{newCount}___{newIndexs}";
+                                        EmpCompare ec = dicEmpNo[tempKey];
+                                        ec.Count++;
+                                        ec.IndexList += $",【{dr["序号"]}】";
+                                        dicEmpNo[tempKey] = ec;
                                     }
                                     else
                                     {
-                                        dicEmpNo.Add(dr["EmpNo"].ToString(), $"1___{dr["序号"].ToString()}");
+                                        EmpCompare ec = new EmpCompare { Count = 1, IndexList = $"【{dr["序号"]}】" };
+                                        dicEmpNo.Add(tempKey, ec);
                                     }
                                 }
                             }
@@ -395,7 +412,7 @@ namespace Tool.Main.Forms.BusForms
         /// 校验数据和数据库是否匹配
         /// 如果导入的是组织清单，还需要校验： ---- 后期还需要和数据库对比脚本（本次不做）
         /// 1.【业务组织名称】是否存在重复
-        /// 2.【直接上层业务组织】是否在【业务组织名称】存在，上层组织的【所属BU】和本层的【所属BU】是否一致
+        /// 2.【直接上层业务组织】是否在【业务组织名称】存在 （BuNo一致的才认为是上层组织）
         /// 如果导入的是人员清单，还需要校验
         /// 1.【员工工号】是否存在重复
         /// 2.【PDU业务组织】是否存在
@@ -420,13 +437,13 @@ namespace Tool.Main.Forms.BusForms
             foreach (DataRow dr in dt.Rows)
             {
                 //获取序号信息
-                string strNum = dr["序号"].ToString();
+                string strNum = $"{dr["序号"]}";
                 //获取部门信息和员工信息
-                string strOrgName = dr["OrgName"].ToString();
-                string strBuNo = dr["BuNo"].ToString();
-                string strBuName = dr["BuName"].ToString();
-                string strEmpNo = dr["EmpNo"].ToString();
-                string strEmpName = dr["EmpName"].ToString();
+                string strOrgName = $"{dr["OrgName"]}";
+                string strBuNo = $"{dr["BuNo"]}";
+                string strBuName = $"{dr["BuName"]}";
+                string strEmpNo = $"{dr["EmpNo"]}";
+                string strEmpName = $"{dr["EmpName"]}";
 
                 #region 测试环境数据不是最新，无法通过
                 //判断BU编号+BU名称是否存在
@@ -451,34 +468,23 @@ namespace Tool.Main.Forms.BusForms
                 if (type == "ORG")
                 {
                     //1.【业务组织名称】是否存在重复
-                    //Dic：Num___序号(逗号分割)___BuNo
-                    string[] dicValue = dicOrgName[strOrgName].Split("___");
-                    if (Convert.ToInt32(dicValue[0]) > 1)
+                    string tempKey = $"{strBuNo}&&&{strOrgName}";
+                    OrgCompare oc = dicOrgName[tempKey];
+                    if (oc.Count > 1)
                     {
-                        string errOrgName = $"第【{strNum}】行数据，业务组织名称重复：{dicValue[1]} 行！\r\n";
+                        string errOrgName = $"第【{strNum}】行数据，业务组织名称重复：{oc.IndexList} 行！\r\n";
                         dr["Remark"] += errOrgName;
                         sbError.Append(errOrgName);
                     }
-                    //2.【直接上层业务组织】是否在【业务组织名称】存在，上层组织的【所属BU】和本层的【所属BU】是否一致
-                    string strParentName = dr["ParentName"].ToString();
+                    //2.【直接上层业务组织】是否在【业务组织名称】存在 （BuNo一致的才认为是上层组织）
+                    string strParentName = $"{dr["ParentName"]}";
                     if (!string.IsNullOrEmpty(strParentName))
                     {
-                        if (!dicOrgName.Keys.Contains(strParentName))
+                        if (!dicOrgName.Keys.Contains(tempKey))
                         {
-                            string errParentName = $"第【{strNum}】行数据，直接上层业务组织【{strParentName}】不存在！\r\n";
+                            string errParentName = $"第【{strNum}】行数据，直接上层业务组织【{tempKey}】不存在！\r\n";
                             dr["Remark"] += errParentName;
                             sbError.Append(errParentName);
-                        }
-                        else
-                        {
-                            //如果上层业务组织存在，再判断上层业务组织的BuNo和当前的BuNo是否一致
-                            string[] parentDicValue = dicOrgName[strParentName].Split("___");
-                            if (parentDicValue[2] != strBuNo)
-                            {
-                                string errParentName = $"第【{strNum}】行数据，BuNo【{strBuNo}】和父级的BuNo【{parentDicValue[2]}】不一致！\r\n";
-                                dr["Remark"] += errParentName;
-                                sbError.Append(errParentName);
-                            }
                         }
                     }
                 }
@@ -487,20 +493,19 @@ namespace Tool.Main.Forms.BusForms
                 if (type == "EMP")
                 {
                     //1.【员工工号】是否存在重复
-                    //Dic：Num___序号(逗号分割)
-                    string[] dicValue = dicEmpNo[strEmpNo].Split("___");
-                    if (Convert.ToInt32(dicValue[0]) > 1)
+                    EmpCompare ec = dicEmpNo[strEmpNo];
+                    if (ec.Count > 1)
                     {
-                        string errOrgName = $"第【{strNum}】行数据，员工编号重复：{dicValue[1]} 行！\r\n";
+                        string errOrgName = $"第【{strNum}】行数据，员工编号重复：{ec.IndexList} 行！\r\n";
                         dr["Remark"] += errOrgName;
                         sbError.Append(errOrgName);
                     }
                     //2.【PDU业务组织】是否存在
-                    string strPduName = dr["OrgName"].ToString();
+                    string strPduName = $"{dr["OrgName"]}";
                     int pduCount = pduResults.Where(item => item.OrgNo == strPduName).ToList().Count;
                     if (pduCount <= 0)
                     {
-                        string errPdu = $"第【{strNum}】行数据，PDU组织和数据库不匹配！\r\n";
+                        string errPdu = $"第【{strNum}】行数据，PDU组织在数据库不存在！\r\n";
                         dr["Remark"] += errPdu;
                         sbError.Append(errPdu);
                     }
