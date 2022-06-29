@@ -151,7 +151,7 @@ namespace Tool.Main.Forms.BusForms
                 //校验数据
                 StringBuilder sbError = new StringBuilder();
                 //DT 序号+原始数据+Remark
-                ValidateData("ORG", ref dt, ref sbError);
+                ValidateData(ImportType.Org, ref dt, ref sbError);
                 //绑定网格，展示数据校验明细
                 this.dv_Org.DvDataTable = dt;
                 this.dv_Org.ViewDataBind(CusControls.DataGridViewEx.DataGridViewBindType.DataTable, false, false);
@@ -215,7 +215,7 @@ namespace Tool.Main.Forms.BusForms
                 //校验数据
                 StringBuilder sbError = new StringBuilder();
                 //DT 序号+原始数据+Remark
-                ValidateData("EMP", ref dt, ref sbError);
+                ValidateData(ImportType.Emp, ref dt, ref sbError);
                 //绑定网格，展示数据校验明细
                 this.dv_Emp.DvDataTable = dt;
                 this.dv_Emp.ViewDataBind(CusControls.DataGridViewEx.DataGridViewBindType.DataTable, false, false);
@@ -420,7 +420,7 @@ namespace Tool.Main.Forms.BusForms
         /// <param name="type"></param>
         /// <param name="dt"></param>
         /// <param name="sbError"></param>
-        private void ValidateData(string type, ref DataTable dt, ref StringBuilder sbError)
+        private void ValidateData(ImportType type, ref DataTable dt, ref StringBuilder sbError)
         {
             //dt添加备注列
             dt.Columns.Add("Remark", typeof(string));
@@ -428,7 +428,7 @@ namespace Tool.Main.Forms.BusForms
             PduValidateResult pduValidateResult = GetBusinessData();
             //获取PDU部门数据
             List<PduResult> pduResults = null;
-            if (type == "EMP")
+            if (type == ImportType.Emp)
             {
                 PduImportBusiness piBusi = new PduImportBusiness();
                 pduResults = piBusi.GetPduDepartment(dataHelper);
@@ -438,51 +438,62 @@ namespace Tool.Main.Forms.BusForms
             {
                 //获取序号信息
                 string strNum = $"{dr["序号"]}";
+                int iNum = Convert.ToInt32(strNum.Split(':')[1]) + 2;
                 //获取部门信息和员工信息
                 string strOrgName = $"{dr["OrgName"]}";
-                string strBuNo = $"{dr["BuNo"]}";
-                string strBuName = $"{dr["BuName"]}";
+                string strBuNo = type == ImportType.Org ? $"{dr["BuNo"]}" : "";
+                string strBuName = type == ImportType.Org ? $"{dr["BuName"]}" : "";
                 string strEmpNo = $"{dr["EmpNo"]}";
                 string strEmpName = $"{dr["EmpName"]}";
 
-                #region 测试环境数据不是最新，无法通过
-                //判断BU编号+BU名称是否存在
-                int orgCount = pduValidateResult.orgResults.Where(item => item.OrgNo == strBuNo && item.OrgName == strBuName).ToList().Count;
-                if (orgCount <= 0)
+                //0.判断【负责人工号+负责人姓名】是否存在-组织、人员 都需要判断
+                List<EmpResult> searchEmp = pduValidateResult.empResults.Where(item => item.EmpNo == strEmpNo && item.EmpName == strEmpName).ToList();
+                if (searchEmp.Count <= 0)
                 {
-                    string errOrg = $"第【{strNum}】行数据，组织信息和数据库不匹配！\r\n";
-                    dr["Remark"] = errOrg;
-                    sbError.Append(errOrg);
-                }
-                //判断负责人工号+负责人姓名是否存在
-                int empCount = pduValidateResult.empResults.Where(item => item.EmpNo == strEmpNo && item.EmpName == strEmpName).ToList().Count;
-                if (empCount <= 0)
-                {
-                    string errEmp = $"第【{strNum}】行数据，负责人信息和数据库不匹配！\r\n";
+                    string errEmp = $"第【{strNum}】行数据（Excel第{iNum + 2}行数据），负责人信息在数据库不存在！\r\n";
                     dr["Remark"] += errEmp;
                     sbError.Append(errEmp);
                 }
-                #endregion
+                else if (searchEmp[0].EmpStatus != "1")
+                {
+                    string errEmp = $"第【{strNum}】行数据（Excel第{iNum + 2}行数据），负责人已离职！\r\n";
+                    dr["Remark"] += errEmp;
+                    sbError.Append(errEmp);
+                }
 
                 //如果导入的是组织清单，还需要校验如下几点
-                if (type == "ORG")
+                if (type == ImportType.Org)
                 {
                     //1.【业务组织名称】是否存在重复
                     string tempKey = $"{strBuNo}&&&{strOrgName}";
                     OrgCompare oc = dicOrgName[tempKey];
                     if (oc.Count > 1)
                     {
-                        string errOrgName = $"第【{strNum}】行数据，业务组织名称重复：{oc.IndexList} 行！\r\n";
+                        string errOrgName = $"第【{strNum}】行数据（Excel第{iNum + 2}行数据），业务组织名称重复：{oc.IndexList} 行！\r\n";
                         dr["Remark"] += errOrgName;
                         sbError.Append(errOrgName);
                     }
-                    //2.【直接上层业务组织】是否在【业务组织名称】存在 （BuNo一致的才认为是上层组织）
+                    //2.判断【BU编号+BU名称】是否存在
+                    List<OrgResult> searchOrg = pduValidateResult.orgResults.Where(item => item.OrgNo == strBuNo && item.OrgName == strBuName).ToList();
+                    if (searchOrg.Count <= 0)
+                    {
+                        string errOrg = $"第【{strNum}】行数据（Excel第{iNum + 2}行数据），组织信息在数据库不存在！\r\n";
+                        dr["Remark"] = errOrg;
+                        sbError.Append(errOrg);
+                    }
+                    else if (searchOrg[0].OrgLevel != 4)
+                    {
+                        string errOrg = $"第【{strNum}】行数据（Excel第{iNum + 2}行数据），组织信息不是BU，层级为{searchOrg[0].OrgLevel}！\r\n";
+                        dr["Remark"] = errOrg;
+                        sbError.Append(errOrg);
+                    }
+                    //3.【直接上层业务组织】是否在【业务组织名称】存在 （BuNo一致的才认为是上层组织）
                     string strParentName = $"{dr["ParentName"]}";
                     if (!string.IsNullOrEmpty(strParentName))
                     {
                         if (!dicOrgName.Keys.Contains(tempKey))
                         {
-                            string errParentName = $"第【{strNum}】行数据，直接上层业务组织【{tempKey}】不存在！\r\n";
+                            string errParentName = $"第【{strNum}】行数据（Excel第{iNum + 2}行数据），直接上层业务组织【{tempKey}】在导入文档中不存在！\r\n";
                             dr["Remark"] += errParentName;
                             sbError.Append(errParentName);
                         }
@@ -490,13 +501,13 @@ namespace Tool.Main.Forms.BusForms
                 }
 
                 //如果导入的是人员清单，还需要校验如下几点
-                if (type == "EMP")
+                if (type == ImportType.Emp)
                 {
                     //1.【员工工号】是否存在重复
                     EmpCompare ec = dicEmpNo[strEmpNo];
                     if (ec.Count > 1)
                     {
-                        string errOrgName = $"第【{strNum}】行数据，员工编号重复：{ec.IndexList} 行！\r\n";
+                        string errOrgName = $"第【{strNum}】行数据（Excel第{iNum + 2}行数据），员工编号重复：{ec.IndexList} 行！\r\n";
                         dr["Remark"] += errOrgName;
                         sbError.Append(errOrgName);
                     }
@@ -505,7 +516,7 @@ namespace Tool.Main.Forms.BusForms
                     int pduCount = pduResults.Where(item => item.OrgNo == strPduName).ToList().Count;
                     if (pduCount <= 0)
                     {
-                        string errPdu = $"第【{strNum}】行数据，PDU组织在数据库不存在！\r\n";
+                        string errPdu = $"第【{strNum}】行数据（Excel第{iNum + 2}行数据），PDU组织在数据库不存在！\r\n";
                         dr["Remark"] += errPdu;
                         sbError.Append(errPdu);
                     }
@@ -575,8 +586,8 @@ namespace Tool.Main.Forms.BusForms
 
         private string[][] GetEmpColumns()
         {
-            string[] engColumns = new string[6] { "EmpNo", "EmpName", "OrgName", "BuNo", "BuName", "BeginDate" };
-            string[] chnColumns = new string[6] { "* 员工工号", "* 员工姓名", "* 所属业务组织名称（末级组织）", "* 所属BU编码", "* 所属BU", "生效月" };
+            string[] engColumns = new string[4] { "EmpNo", "EmpName", "OrgName", "BeginDate" };
+            string[] chnColumns = new string[4] { "* 员工工号", "* 员工姓名", "* 所属业务组织名称（末级组织）", "生效月" };
             return new string[2][] { engColumns, chnColumns };
         }
         #endregion

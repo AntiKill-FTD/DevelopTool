@@ -22,5 +22,10 @@ namespace Tool.IService.Model.Bus
         /// 员工姓名
         /// </summary>
         public string EmpName { get; set; }
+
+        /// <summary>
+        /// 员工状态
+        /// </summary>
+        public string EmpStatus { get; set; }
     }
 }

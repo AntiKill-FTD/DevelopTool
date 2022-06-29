@@ -22,5 +22,10 @@ namespace Tool.IService.Model.Bus
         /// 组织名称
         /// </summary>
         public string OrgName { get; set; }
+
+        /// <summary>
+        /// 组织层级
+        /// </summary>
+        public Int64 OrgLevel { get; set; }
     }
 }
