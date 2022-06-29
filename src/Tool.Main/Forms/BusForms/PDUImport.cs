@@ -438,7 +438,7 @@ namespace Tool.Main.Forms.BusForms
             {
                 //获取序号信息
                 string strNum = $"{dr["序号"]}";
-                int iNum = Convert.ToInt32(strNum.Split(':')[1]) + 2;
+                int iExcelNum = Convert.ToInt32(strNum.Split(':')[1]) + 2;
                 //获取部门信息和员工信息
                 string strOrgName = $"{dr["OrgName"]}";
                 string strBuNo = type == ImportType.Org ? $"{dr["BuNo"]}" : "";
@@ -450,13 +450,13 @@ namespace Tool.Main.Forms.BusForms
                 List<EmpResult> searchEmp = pduValidateResult.empResults.Where(item => item.EmpNo == strEmpNo && item.EmpName == strEmpName).ToList();
                 if (searchEmp.Count <= 0)
                 {
-                    string errEmp = $"第【{strNum}】行数据（Excel第{iNum + 2}行数据），负责人信息在数据库不存在！\r\n";
+                    string errEmp = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），负责人信息在数据库不存在！\r\n";
                     dr["Remark"] += errEmp;
                     sbError.Append(errEmp);
                 }
                 else if (searchEmp[0].EmpStatus != "1")
                 {
-                    string errEmp = $"第【{strNum}】行数据（Excel第{iNum + 2}行数据），负责人已离职！\r\n";
+                    string errEmp = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），负责人已离职！\r\n";
                     dr["Remark"] += errEmp;
                     sbError.Append(errEmp);
                 }
@@ -469,7 +469,7 @@ namespace Tool.Main.Forms.BusForms
                     OrgCompare oc = dicOrgName[tempKey];
                     if (oc.Count > 1)
                     {
-                        string errOrgName = $"第【{strNum}】行数据（Excel第{iNum + 2}行数据），业务组织名称重复：{oc.IndexList} 行！\r\n";
+                        string errOrgName = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），业务组织名称重复：{oc.IndexList} 行！\r\n";
                         dr["Remark"] += errOrgName;
                         sbError.Append(errOrgName);
                     }
@@ -477,13 +477,13 @@ namespace Tool.Main.Forms.BusForms
                     List<OrgResult> searchOrg = pduValidateResult.orgResults.Where(item => item.OrgNo == strBuNo && item.OrgName == strBuName).ToList();
                     if (searchOrg.Count <= 0)
                     {
-                        string errOrg = $"第【{strNum}】行数据（Excel第{iNum + 2}行数据），组织信息在数据库不存在！\r\n";
+                        string errOrg = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），组织信息在数据库不存在！\r\n";
                         dr["Remark"] = errOrg;
                         sbError.Append(errOrg);
                     }
                     else if (searchOrg[0].OrgLevel != 4)
                     {
-                        string errOrg = $"第【{strNum}】行数据（Excel第{iNum + 2}行数据），组织信息不是BU，层级为{searchOrg[0].OrgLevel}！\r\n";
+                        string errOrg = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），组织信息不是BU，层级为{searchOrg[0].OrgLevel}！\r\n";
                         dr["Remark"] = errOrg;
                         sbError.Append(errOrg);
                     }
@@ -493,7 +493,7 @@ namespace Tool.Main.Forms.BusForms
                     {
                         if (!dicOrgName.Keys.Contains(tempKey))
                         {
-                            string errParentName = $"第【{strNum}】行数据（Excel第{iNum + 2}行数据），直接上层业务组织【{tempKey}】在导入文档中不存在！\r\n";
+                            string errParentName = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），直接上层业务组织【{tempKey}】在导入文档中不存在！\r\n";
                             dr["Remark"] += errParentName;
                             sbError.Append(errParentName);
                         }
@@ -507,7 +507,7 @@ namespace Tool.Main.Forms.BusForms
                     EmpCompare ec = dicEmpNo[strEmpNo];
                     if (ec.Count > 1)
                     {
-                        string errOrgName = $"第【{strNum}】行数据（Excel第{iNum + 2}行数据），员工编号重复：{ec.IndexList} 行！\r\n";
+                        string errOrgName = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），员工编号重复：{ec.IndexList} 行！\r\n";
                         dr["Remark"] += errOrgName;
                         sbError.Append(errOrgName);
                     }
@@ -516,7 +516,7 @@ namespace Tool.Main.Forms.BusForms
                     int pduCount = pduResults.Where(item => item.OrgNo == strPduName).ToList().Count;
                     if (pduCount <= 0)
                     {
-                        string errPdu = $"第【{strNum}】行数据（Excel第{iNum + 2}行数据），PDU组织在数据库不存在！\r\n";
+                        string errPdu = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），PDU组织在数据库不存在！\r\n";
                         dr["Remark"] += errPdu;
                         sbError.Append(errPdu);
                     }

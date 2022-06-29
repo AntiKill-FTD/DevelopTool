@@ -32,7 +32,7 @@ namespace Tool.Business.Business
         /// <returns></returns>
         public List<EmpResult> GetEmpInfo(ICommonDataHelper dataHelper)
         {
-            string sql = "SELECT emp_Id AS EmpId, emp_EmployeeNo AS EmpNo, REPLACE(emp_EmployeeName,'test','') AS EmpName, emp_Status AS EmpStatus FROM PSAData..mng_Employee WITH (NOLOCK) WHERE emp_Status = 1;";
+            string sql = "SELECT emp_Id AS EmpId, emp_EmployeeNo AS EmpNo, REPLACE(emp_EmployeeName,'test','') AS EmpName, emp_Status AS EmpStatus FROM PSAData..mng_Employee WITH (NOLOCK);";
             DataTable dt = dataHelper.GetDataTable(sql, string.Empty);
             return DtToModel.GetModelFromDB<EmpResult>(dt);
         }
