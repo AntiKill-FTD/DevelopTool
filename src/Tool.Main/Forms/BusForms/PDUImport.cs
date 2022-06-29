@@ -176,6 +176,11 @@ namespace Tool.Main.Forms.BusForms
             finally
             {
                 dicOrgName.Clear();
+                if (string.IsNullOrEmpty(this.rtb_Org_FullError.Text))
+                {
+                    this.rtb_Org_FullError.Text = $"数据正确\r\n";
+                    this.rtb_Org_FullError.ForeColor = Color.Blue;
+                }
             }
         }
         #endregion
@@ -240,6 +245,11 @@ namespace Tool.Main.Forms.BusForms
             finally
             {
                 dicEmpNo.Clear();
+                if (string.IsNullOrEmpty(this.rtb_Emp_FullError.Text))
+                {
+                    this.rtb_Emp_FullError.Text = $"数据正确\r\n";
+                    this.rtb_Emp_FullError.ForeColor = Color.Blue;
+                }
             }
         }
         #endregion
