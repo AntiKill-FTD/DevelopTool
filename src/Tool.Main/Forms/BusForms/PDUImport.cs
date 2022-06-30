@@ -333,7 +333,7 @@ namespace Tool.Main.Forms.BusForms
                             }
                             //获取字段拼接表
                             int rowNum = sheet.LastRowNum;
-                            for (int j = 2; j < rowNum; j++)
+                            for (int j = 2; j <= rowNum; j++)
                             {
                                 IRow dataRow = sheet.GetRow(j);
                                 DataRow dr = dt.NewRow();
