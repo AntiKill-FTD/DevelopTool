@@ -44,18 +44,12 @@ namespace Tool.Business.Business
         /// <returns></returns>
         public List<PduResult> GetPduDepartment(ICommonDataHelper dataHelper)
         {
-            string sql = @"SELECT pdu.Dep_Id AS OrgId,
-                                 pdu.Dep_DeptNo AS OrgNo,
-                                 pdu.Dep_DeptName AS OrgName,
-                                 CASE
-                                     WHEN pduLevel.PDU_ID IS NULL THEN
-                                         0
-                                     ELSE
-                                         1
-                                 END AS IsLeaf
-                          FROM PSAData..mng_PduDepartment pdu WITH (NOLOCK)
-                              LEFT JOIN PSAData..mng_PduDepartmentLevel pduLevel WITH (NOLOCK)
-                                  ON pduLevel.PDU_DeptID = pdu.Dep_Id;";
+            string sql = @"SELECT pduLevel.PDU_DeptID AS OrgId,
+                                  pduLevel.PDU_DeptNo AS OrgNo,
+                                  pduLevel.PDU_DeptName AS OrgName,
+                                  pduLevel.DL_DeptNo4 AS BuNo,
+                                  pduLevel.DL_DeptName4 AS BuName
+                           FROM PSAData..mng_PduDepartmentLevel pduLevel WITH (NOLOCK);";
             DataTable dt = dataHelper.GetDataTable(sql, string.Empty);
             return DtToModel.GetModelFromDB<PduResult>(dt);
         }

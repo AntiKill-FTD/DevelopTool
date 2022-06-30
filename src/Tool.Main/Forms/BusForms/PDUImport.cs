@@ -468,8 +468,8 @@ namespace Tool.Main.Forms.BusForms
                 int iExcelNum = Convert.ToInt32(strNum.Split(':')[1]) + 2;
                 //获取部门信息和员工信息
                 string strOrgName = $"{dr["OrgName"]}";
-                string strBuNo = type == ImportType.Org ? $"{dr["BuNo"]}" : "";
-                string strBuName = type == ImportType.Org ? $"{dr["BuName"]}" : "";
+                string strBuNo = $"{dr["BuNo"]}";
+                string strBuName = $"{dr["BuName"]}";
                 string strEmpNo = $"{dr["EmpNo"]}";
                 string strEmpName = $"{dr["EmpName"]}";
 
@@ -554,16 +554,10 @@ namespace Tool.Main.Forms.BusForms
                     }
                     //2.【PDU业务组织】是否存在，且为末级组织
                     string strPduName = $"{dr["OrgName"]}";
-                    List<PduResult> searchPdu = pduResults.Where(item => item.OrgNo == strPduName).ToList();
+                    List<PduResult> searchPdu = pduResults.Where(item => item.BuNo == strBuNo && item.BuName == strBuName && item.OrgName == strPduName).ToList();
                     if (searchPdu.Count <= 0)
                     {
-                        string errPdu = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），PDU组织在数据库不存在！\r\n";
-                        dr["Remark"] += errPdu;
-                        sbError.Append(errPdu);
-                    }
-                    else if (searchPdu[0].IsLeaf == 0)
-                    {
-                        string errPdu = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），PDU组织不是末级节点！\r\n";
+                        string errPdu = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），PDU组织在数据库不存在或者不是末级节点！\r\n";
                         dr["Remark"] += errPdu;
                         sbError.Append(errPdu);
                     }
@@ -646,8 +640,8 @@ namespace Tool.Main.Forms.BusForms
 
         private string[][] GetEmpColumns()
         {
-            string[] engColumns = new string[4] { "EmpNo", "EmpName", "OrgName", "BeginDate" };
-            string[] chnColumns = new string[4] { "* 员工工号", "* 员工姓名", "* 所属业务组织名称（末级组织）", "生效月" };
+            string[] engColumns = new string[6] { "EmpNo", "EmpName", "OrgName", "BuName", "BuNo", "BeginDate" };
+            string[] chnColumns = new string[6] { "* 员工工号", "* 员工姓名", "* 所属业务组织名称（末级组织）", "* 所属BU", "* 所属BU编码", "生效月" };
             return new string[2][] { engColumns, chnColumns };
         }
         #endregion

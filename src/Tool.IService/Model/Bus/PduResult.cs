@@ -24,8 +24,13 @@ namespace Tool.IService.Model.Bus
         public string OrgName { get; set; }
 
         /// <summary>
-        /// 是否末级
+        /// BU编号
         /// </summary>
-        public int IsLeaf { get; set; }
+        public string BuNo { get; set; }
+
+        /// <summary>
+        /// BU名称
+        /// </summary>
+        public string BuName { get; set; }
     }
 }
