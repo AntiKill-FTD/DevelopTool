@@ -554,7 +554,7 @@ namespace Tool.Main.Forms.BusForms
                     }
                     //2.【PDU业务组织】是否存在，且为末级组织
                     string strPduName = $"{dr["OrgName"]}";
-                    List<PduResult> searchPdu = pduResults.Where(item => item.BuNo == strBuNo && item.BuName == strBuName && item.OrgName == strPduName.ToUpper()).ToList();
+                    List<PduResult> searchPdu = pduResults.Where(item => item.BuNo == strBuNo && item.BuName == strBuName && item.OrgName.ToUpper() == strPduName.ToUpper()).ToList();
                     if (searchPdu.Count <= 0)
                     {
                         string errPdu = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），PDU组织在数据库不存在或者不是末级节点！\r\n";
