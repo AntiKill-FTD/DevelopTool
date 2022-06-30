@@ -670,6 +670,11 @@ namespace Tool.Main.Forms.BusForms
         private void btn_Org_Script_Click(object sender, EventArgs e)
         {
             StringBuilder sb = new StringBuilder();
+            if (this.dv_Org.DvDataTable == null)
+            {
+                this.rtb_Org_SqlScript.Text = "error : 表没有数据";
+                return;
+            }
             DataTable dt = this.dv_Org.DvDataTable;
             foreach (DataRow row in dt.Rows)
             {
@@ -693,8 +698,13 @@ namespace Tool.Main.Forms.BusForms
         #region 生成人员脚本
         private void btn_Emp_Script_Click(object sender, EventArgs e)
         {
+            if (this.dv_Emp.DvDataTable == null)
+            {
+                this.rtb_Emp_SqlScript.Text = "error : 表没有数据";
+                return;
+            }
             StringBuilder sb = new StringBuilder();
-            DataTable dt = this.dv_Org.DvDataTable;
+            DataTable dt = this.dv_Emp.DvDataTable;
             foreach (DataRow row in dt.Rows)
             {
                 string deptNo = $"{ row["OrgNo"]}";
