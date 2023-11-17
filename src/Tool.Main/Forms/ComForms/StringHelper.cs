@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Numerics;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -85,19 +86,52 @@ namespace Tool.Main.Forms.ComForms
             List<string> disListNew = new List<string>();
             disListOld.ForEach(item =>
             {
-                if (item.StartsWith(addString))
+                //处理变量@origin，替换为自己
+                string newAddString = addString.Replace("@origin", item);
+                int newAddLength = newAddString.Length;
+                if (item.StartsWith(newAddString))
                 {
-                    item = item.Substring(addLength);
+                    item = item.Substring(newAddLength);
                 }
                 else
                 {
-                    item = addString + item;
+                    item = newAddString + item;
                 }
                 disListNew.Add(item.Trim());
             });
             //换行拼接
             string newDistination = string.Join('\n', disListNew);
             this.rtb_StringList_Distination.Text = newDistination;
+        }
+        #endregion
+
+        #region 每行个数
+        private void btn_StringList_RowSplit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //获取  【开始字符串】   和  【目标字符串】
+                string strRowCount = this.tb_StringList_RowSplit.Text;
+                int rowCount = Convert.ToInt32(strRowCount);
+                string distinaString = this.rtb_StringList_Distination.Text;
+                //按照换行取出目标字符串
+                List<string> disListOld = distinaString.Split('\n').ToList();
+                //循环取出的目标字符串，每隔目标个数添加一个换行符
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < disListOld.Count; i++)
+                {
+                    sb.Append(disListOld[i] + ",");
+                    if ((i + 1) % rowCount == 0)
+                    {
+                        sb.Append('\n');
+                    }
+                }
+                this.rtb_StringList_Distination.Text = sb.ToString();
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
         }
         #endregion
 
@@ -415,11 +449,5 @@ namespace Tool.Main.Forms.ComForms
         #endregion
 
         #endregion
-
-
-
-
-
-
     }
 }

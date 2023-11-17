@@ -28,1406 +28,1448 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.mainPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.tlp_StringList = new System.Windows.Forms.TableLayoutPanel();
-            this.rtb_StringList_Source = new System.Windows.Forms.RichTextBox();
-            this.rtb_StringList_Distination = new System.Windows.Forms.RichTextBox();
-            this.tlp_StringList_Operate = new System.Windows.Forms.TableLayoutPanel();
-            this.tlp_StringList_Operate_SplitChar = new System.Windows.Forms.TableLayoutPanel();
-            this.btn_StringList_SplitChar = new System.Windows.Forms.Button();
-            this.tb_StringList_SplitChar = new System.Windows.Forms.TextBox();
-            this.tlp_StringList_Operate_AddBEChar = new System.Windows.Forms.TableLayoutPanel();
-            this.tb_StringList_AddBEChar = new System.Windows.Forms.TextBox();
-            this.btn_StringList_AddBEChar = new System.Windows.Forms.Button();
-            this.tlp_StringList_Operate_AddEndChar = new System.Windows.Forms.TableLayoutPanel();
-            this.tb_StringList_AddEndChar = new System.Windows.Forms.TextBox();
-            this.btn_StringList_AddEndChar = new System.Windows.Forms.Button();
-            this.tlp_StringList_Operate_AddBeginChar = new System.Windows.Forms.TableLayoutPanel();
-            this.tb_StringList_AddBeginChar = new System.Windows.Forms.TextBox();
-            this.btn_StringList_AddBeginChar = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.tlp_Encrypt = new System.Windows.Forms.TableLayoutPanel();
-            this.tb_Encrypt_Decode = new System.Windows.Forms.TextBox();
-            this.btn_Encrypt_Encode = new System.Windows.Forms.Button();
-            this.btn_Encrypt_Decode = new System.Windows.Forms.Button();
-            this.lb_Encrypt_Encode = new System.Windows.Forms.TextBox();
-            this.lb_Encrypt_Decode = new System.Windows.Forms.TextBox();
-            this.tb_Encrypt_Key_De = new System.Windows.Forms.TextBox();
-            this.tb_Encrypt_IV_De = new System.Windows.Forms.TextBox();
-            this.tb_Encrypt_Encode = new System.Windows.Forms.TextBox();
-            this.rtb_Encrypt_Source = new System.Windows.Forms.RichTextBox();
-            this.rtb_Encrypt_Distination = new System.Windows.Forms.RichTextBox();
-            this.tlp_Encrypt_PlButton = new System.Windows.Forms.TableLayoutPanel();
-            this.btnMuti_EncryptDecode = new System.Windows.Forms.Button();
-            this.btnMuti_EncryptEncode = new System.Windows.Forms.Button();
-            this.tlp_Encrypt_Key = new System.Windows.Forms.TableLayoutPanel();
-            this.tb_Encrypt_Key_En = new System.Windows.Forms.TextBox();
-            this.lbl_Encrypt_key = new System.Windows.Forms.Label();
-            this.tlp_Encrypt_IV = new System.Windows.Forms.TableLayoutPanel();
-            this.tb_Encrypt_IV_En = new System.Windows.Forms.TextBox();
-            this.lbl_Encrypt_iv = new System.Windows.Forms.Label();
-            this.lbl_Encrypt_Des1 = new System.Windows.Forms.Label();
-            this.lbl_Encrypt_Des2 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.tlp_Dichotomy = new System.Windows.Forms.TableLayoutPanel();
-            this.rtb_Dichotomy_Source = new System.Windows.Forms.RichTextBox();
-            this.rtb_Dichotomy_Distination = new System.Windows.Forms.RichTextBox();
-            this.tlp_Dichotomy_Operate = new System.Windows.Forms.TableLayoutPanel();
-            this.btn_Dichotomy_UpHalf = new System.Windows.Forms.Button();
-            this.btn_Dichotomy_DownHalf = new System.Windows.Forms.Button();
-            this.btn_Dichotomy_WriteBack = new System.Windows.Forms.Button();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tlp_CodeEnCryptJSDecrypt = new System.Windows.Forms.TableLayoutPanel();
-            this.lbl_DE_Decrypt_NumberJS = new System.Windows.Forms.Label();
-            this.tb_DE_Encrypt_NumberJS = new System.Windows.Forms.TextBox();
-            this.lbl_DE_Encrypt_NumberJS = new System.Windows.Forms.Label();
-            this.tb_DE_Decrypt_NumberJS = new System.Windows.Forms.TextBox();
-            this.tb_DE_PassWord_NumberJS = new System.Windows.Forms.TextBox();
-            this.lbl_DE_PassWord_NumberJS = new System.Windows.Forms.Label();
-            this.lbl_DE_Remark_NumberJS = new System.Windows.Forms.Label();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.tlp_AES = new System.Windows.Forms.TableLayoutPanel();
-            this.tb_DE_PassWord_AES = new System.Windows.Forms.TextBox();
-            this.lbl_DE_Decrypt_AES = new System.Windows.Forms.Label();
-            this.tb_DE_Encrypt_AES = new System.Windows.Forms.TextBox();
-            this.lbl_DE_Encrypt_AES = new System.Windows.Forms.Label();
-            this.tb_DE_Decrypt_AES = new System.Windows.Forms.TextBox();
-            this.lbl_DE_PassWord_AES = new System.Windows.Forms.Label();
-            this.lbl_DE_Remark_AES = new System.Windows.Forms.Label();
-            this.tlp_DES = new System.Windows.Forms.TableLayoutPanel();
-            this.lbl_DE_Decrypt_DES = new System.Windows.Forms.Label();
-            this.tb_DE_Encrypt_DES = new System.Windows.Forms.TextBox();
-            this.lbl_DE_Encrypt_DES = new System.Windows.Forms.Label();
-            this.tb_DE_Decrypt_DES = new System.Windows.Forms.TextBox();
-            this.lbl_DE_PassWord_DES = new System.Windows.Forms.Label();
-            this.lbl_DE_Remark_DES = new System.Windows.Forms.Label();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.tb_DE_PassWord_DES_Key = new System.Windows.Forms.TextBox();
-            this.tb_DE_PassWord_DES_Iv = new System.Windows.Forms.TextBox();
-            this.tlp_MD5 = new System.Windows.Forms.TableLayoutPanel();
-            this.lbl_DE_Decrypt_MD5 = new System.Windows.Forms.Label();
-            this.tb_DE_Encrypt_MD5 = new System.Windows.Forms.TextBox();
-            this.lbl_DE_Encrypt_MD5 = new System.Windows.Forms.Label();
-            this.tb_DE_Decrypt_MD5 = new System.Windows.Forms.TextBox();
-            this.lbl_DE_Remark_MD5 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-            this.label14 = new System.Windows.Forms.Label();
-            this.textBox14 = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.textBox15 = new System.Windows.Forms.TextBox();
-            this.textBox16 = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.mainPanel.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.tlp_StringList.SuspendLayout();
-            this.tlp_StringList_Operate.SuspendLayout();
-            this.tlp_StringList_Operate_SplitChar.SuspendLayout();
-            this.tlp_StringList_Operate_AddBEChar.SuspendLayout();
-            this.tlp_StringList_Operate_AddEndChar.SuspendLayout();
-            this.tlp_StringList_Operate_AddBeginChar.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.tlp_Encrypt.SuspendLayout();
-            this.tlp_Encrypt_PlButton.SuspendLayout();
-            this.tlp_Encrypt_Key.SuspendLayout();
-            this.tlp_Encrypt_IV.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.tlp_Dichotomy.SuspendLayout();
-            this.tlp_Dichotomy_Operate.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.tlp_CodeEnCryptJSDecrypt.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.tlp_AES.SuspendLayout();
-            this.tlp_DES.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            this.tlp_MD5.SuspendLayout();
-            this.tableLayoutPanel7.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
-            this.SuspendLayout();
+            mainPanel = new TableLayoutPanel();
+            panel1 = new Panel();
+            tlp_StringList = new TableLayoutPanel();
+            rtb_StringList_Source = new RichTextBox();
+            rtb_StringList_Distination = new RichTextBox();
+            tlp_StringList_Operate = new TableLayoutPanel();
+            tlp_StringList_Operate_SplitChar = new TableLayoutPanel();
+            btn_StringList_SplitChar = new Button();
+            tb_StringList_SplitChar = new TextBox();
+            tlp_StringList_Operate_AddBEChar = new TableLayoutPanel();
+            tb_StringList_AddBEChar = new TextBox();
+            btn_StringList_AddBEChar = new Button();
+            tlp_StringList_Operate_AddEndChar = new TableLayoutPanel();
+            tb_StringList_AddEndChar = new TextBox();
+            btn_StringList_AddEndChar = new Button();
+            tlp_StringList_Operate_AddBeginChar = new TableLayoutPanel();
+            tb_StringList_AddBeginChar = new TextBox();
+            btn_StringList_AddBeginChar = new Button();
+            tlp_StringList_Operate_RowSplit = new TableLayoutPanel();
+            tb_StringList_RowSplit = new TextBox();
+            btn_StringList_RowSplit = new Button();
+            panel2 = new Panel();
+            tlp_Encrypt = new TableLayoutPanel();
+            tb_Encrypt_Decode = new TextBox();
+            btn_Encrypt_Encode = new Button();
+            btn_Encrypt_Decode = new Button();
+            lb_Encrypt_Encode = new TextBox();
+            lb_Encrypt_Decode = new TextBox();
+            tb_Encrypt_Key_De = new TextBox();
+            tb_Encrypt_IV_De = new TextBox();
+            tb_Encrypt_Encode = new TextBox();
+            rtb_Encrypt_Source = new RichTextBox();
+            rtb_Encrypt_Distination = new RichTextBox();
+            tlp_Encrypt_PlButton = new TableLayoutPanel();
+            btnMuti_EncryptDecode = new Button();
+            btnMuti_EncryptEncode = new Button();
+            tlp_Encrypt_Key = new TableLayoutPanel();
+            tb_Encrypt_Key_En = new TextBox();
+            lbl_Encrypt_key = new Label();
+            tlp_Encrypt_IV = new TableLayoutPanel();
+            tb_Encrypt_IV_En = new TextBox();
+            lbl_Encrypt_iv = new Label();
+            lbl_Encrypt_Des1 = new Label();
+            lbl_Encrypt_Des2 = new Label();
+            panel3 = new Panel();
+            tlp_Dichotomy = new TableLayoutPanel();
+            rtb_Dichotomy_Source = new RichTextBox();
+            rtb_Dichotomy_Distination = new RichTextBox();
+            tlp_Dichotomy_Operate = new TableLayoutPanel();
+            btn_Dichotomy_UpHalf = new Button();
+            btn_Dichotomy_DownHalf = new Button();
+            btn_Dichotomy_WriteBack = new Button();
+            panel4 = new Panel();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            tlp_CodeEnCryptJSDecrypt = new TableLayoutPanel();
+            lbl_DE_Decrypt_NumberJS = new Label();
+            tb_DE_Encrypt_NumberJS = new TextBox();
+            lbl_DE_Encrypt_NumberJS = new Label();
+            tb_DE_Decrypt_NumberJS = new TextBox();
+            tb_DE_PassWord_NumberJS = new TextBox();
+            lbl_DE_PassWord_NumberJS = new Label();
+            lbl_DE_Remark_NumberJS = new Label();
+            tableLayoutPanel2 = new TableLayoutPanel();
+            label1 = new Label();
+            textBox1 = new TextBox();
+            label2 = new Label();
+            textBox2 = new TextBox();
+            textBox3 = new TextBox();
+            label3 = new Label();
+            label18 = new Label();
+            tlp_AES = new TableLayoutPanel();
+            tb_DE_PassWord_AES = new TextBox();
+            lbl_DE_Decrypt_AES = new Label();
+            tb_DE_Encrypt_AES = new TextBox();
+            lbl_DE_Encrypt_AES = new Label();
+            tb_DE_Decrypt_AES = new TextBox();
+            lbl_DE_PassWord_AES = new Label();
+            lbl_DE_Remark_AES = new Label();
+            tlp_DES = new TableLayoutPanel();
+            lbl_DE_Decrypt_DES = new Label();
+            tb_DE_Encrypt_DES = new TextBox();
+            lbl_DE_Encrypt_DES = new Label();
+            tb_DE_Decrypt_DES = new TextBox();
+            lbl_DE_PassWord_DES = new Label();
+            lbl_DE_Remark_DES = new Label();
+            tableLayoutPanel3 = new TableLayoutPanel();
+            tb_DE_PassWord_DES_Key = new TextBox();
+            tb_DE_PassWord_DES_Iv = new TextBox();
+            tlp_MD5 = new TableLayoutPanel();
+            lbl_DE_Decrypt_MD5 = new Label();
+            tb_DE_Encrypt_MD5 = new TextBox();
+            lbl_DE_Encrypt_MD5 = new Label();
+            tb_DE_Decrypt_MD5 = new TextBox();
+            lbl_DE_Remark_MD5 = new Label();
+            tableLayoutPanel7 = new TableLayoutPanel();
+            label14 = new Label();
+            textBox14 = new TextBox();
+            label15 = new Label();
+            textBox15 = new TextBox();
+            textBox16 = new TextBox();
+            label16 = new Label();
+            label22 = new Label();
+            tableLayoutPanel4 = new TableLayoutPanel();
+            label7 = new Label();
+            textBox7 = new TextBox();
+            mainPanel.SuspendLayout();
+            panel1.SuspendLayout();
+            tlp_StringList.SuspendLayout();
+            tlp_StringList_Operate.SuspendLayout();
+            tlp_StringList_Operate_SplitChar.SuspendLayout();
+            tlp_StringList_Operate_AddBEChar.SuspendLayout();
+            tlp_StringList_Operate_AddEndChar.SuspendLayout();
+            tlp_StringList_Operate_AddBeginChar.SuspendLayout();
+            tlp_StringList_Operate_RowSplit.SuspendLayout();
+            panel2.SuspendLayout();
+            tlp_Encrypt.SuspendLayout();
+            tlp_Encrypt_PlButton.SuspendLayout();
+            tlp_Encrypt_Key.SuspendLayout();
+            tlp_Encrypt_IV.SuspendLayout();
+            panel3.SuspendLayout();
+            tlp_Dichotomy.SuspendLayout();
+            tlp_Dichotomy_Operate.SuspendLayout();
+            panel4.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
+            tlp_CodeEnCryptJSDecrypt.SuspendLayout();
+            tableLayoutPanel2.SuspendLayout();
+            tlp_AES.SuspendLayout();
+            tlp_DES.SuspendLayout();
+            tableLayoutPanel3.SuspendLayout();
+            tlp_MD5.SuspendLayout();
+            tableLayoutPanel7.SuspendLayout();
+            tableLayoutPanel4.SuspendLayout();
+            SuspendLayout();
             // 
             // mainPanel
             // 
-            this.mainPanel.ColumnCount = 2;
-            this.mainPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.mainPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.mainPanel.Controls.Add(this.panel1, 0, 0);
-            this.mainPanel.Controls.Add(this.panel2, 1, 0);
-            this.mainPanel.Controls.Add(this.panel3, 0, 1);
-            this.mainPanel.Controls.Add(this.panel4, 1, 1);
-            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainPanel.Location = new System.Drawing.Point(0, 0);
-            this.mainPanel.Name = "mainPanel";
-            this.mainPanel.RowCount = 2;
-            this.mainPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.mainPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.mainPanel.Size = new System.Drawing.Size(1280, 801);
-            this.mainPanel.TabIndex = 0;
+            mainPanel.ColumnCount = 2;
+            mainPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            mainPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            mainPanel.Controls.Add(panel1, 0, 0);
+            mainPanel.Controls.Add(panel2, 1, 0);
+            mainPanel.Controls.Add(panel3, 0, 1);
+            mainPanel.Controls.Add(panel4, 1, 1);
+            mainPanel.Dock = DockStyle.Fill;
+            mainPanel.Location = new Point(0, 0);
+            mainPanel.Name = "mainPanel";
+            mainPanel.RowCount = 2;
+            mainPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            mainPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            mainPanel.Size = new Size(1280, 801);
+            mainPanel.TabIndex = 0;
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.MintCream;
-            this.panel1.Controls.Add(this.tlp_StringList);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(634, 394);
-            this.panel1.TabIndex = 0;
+            panel1.BackColor = Color.MintCream;
+            panel1.Controls.Add(tlp_StringList);
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(3, 3);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(634, 394);
+            panel1.TabIndex = 0;
             // 
             // tlp_StringList
             // 
-            this.tlp_StringList.ColumnCount = 3;
-            this.tlp_StringList.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tlp_StringList.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlp_StringList.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tlp_StringList.Controls.Add(this.rtb_StringList_Source, 0, 0);
-            this.tlp_StringList.Controls.Add(this.rtb_StringList_Distination, 2, 0);
-            this.tlp_StringList.Controls.Add(this.tlp_StringList_Operate, 1, 0);
-            this.tlp_StringList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_StringList.Location = new System.Drawing.Point(0, 0);
-            this.tlp_StringList.Name = "tlp_StringList";
-            this.tlp_StringList.RowCount = 1;
-            this.tlp_StringList.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp_StringList.Size = new System.Drawing.Size(634, 394);
-            this.tlp_StringList.TabIndex = 0;
+            tlp_StringList.ColumnCount = 3;
+            tlp_StringList.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
+            tlp_StringList.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            tlp_StringList.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
+            tlp_StringList.Controls.Add(rtb_StringList_Source, 0, 0);
+            tlp_StringList.Controls.Add(rtb_StringList_Distination, 2, 0);
+            tlp_StringList.Controls.Add(tlp_StringList_Operate, 1, 0);
+            tlp_StringList.Dock = DockStyle.Fill;
+            tlp_StringList.Location = new Point(0, 0);
+            tlp_StringList.Name = "tlp_StringList";
+            tlp_StringList.RowCount = 1;
+            tlp_StringList.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tlp_StringList.Size = new Size(634, 394);
+            tlp_StringList.TabIndex = 0;
             // 
             // rtb_StringList_Source
             // 
-            this.rtb_StringList_Source.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_StringList_Source.Location = new System.Drawing.Point(3, 3);
-            this.rtb_StringList_Source.Name = "rtb_StringList_Source";
-            this.rtb_StringList_Source.Size = new System.Drawing.Size(247, 388);
-            this.rtb_StringList_Source.TabIndex = 0;
-            this.rtb_StringList_Source.Text = "";
+            rtb_StringList_Source.Dock = DockStyle.Fill;
+            rtb_StringList_Source.Location = new Point(3, 3);
+            rtb_StringList_Source.Name = "rtb_StringList_Source";
+            rtb_StringList_Source.Size = new Size(247, 388);
+            rtb_StringList_Source.TabIndex = 0;
+            rtb_StringList_Source.Text = "";
             // 
             // rtb_StringList_Distination
             // 
-            this.rtb_StringList_Distination.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_StringList_Distination.Location = new System.Drawing.Point(382, 3);
-            this.rtb_StringList_Distination.Name = "rtb_StringList_Distination";
-            this.rtb_StringList_Distination.Size = new System.Drawing.Size(249, 388);
-            this.rtb_StringList_Distination.TabIndex = 1;
-            this.rtb_StringList_Distination.Text = "";
+            rtb_StringList_Distination.Dock = DockStyle.Fill;
+            rtb_StringList_Distination.Location = new Point(382, 3);
+            rtb_StringList_Distination.Name = "rtb_StringList_Distination";
+            rtb_StringList_Distination.Size = new Size(249, 388);
+            rtb_StringList_Distination.TabIndex = 1;
+            rtb_StringList_Distination.Text = "";
             // 
             // tlp_StringList_Operate
             // 
-            this.tlp_StringList_Operate.ColumnCount = 1;
-            this.tlp_StringList_Operate.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp_StringList_Operate.Controls.Add(this.tlp_StringList_Operate_SplitChar, 0, 0);
-            this.tlp_StringList_Operate.Controls.Add(this.tlp_StringList_Operate_AddBEChar, 0, 1);
-            this.tlp_StringList_Operate.Controls.Add(this.tlp_StringList_Operate_AddEndChar, 0, 3);
-            this.tlp_StringList_Operate.Controls.Add(this.tlp_StringList_Operate_AddBeginChar, 0, 2);
-            this.tlp_StringList_Operate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_StringList_Operate.Location = new System.Drawing.Point(256, 3);
-            this.tlp_StringList_Operate.Name = "tlp_StringList_Operate";
-            this.tlp_StringList_Operate.RowCount = 10;
-            this.tlp_StringList_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_StringList_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_StringList_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_StringList_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_StringList_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_StringList_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_StringList_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_StringList_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_StringList_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_StringList_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_StringList_Operate.Size = new System.Drawing.Size(120, 388);
-            this.tlp_StringList_Operate.TabIndex = 2;
+            tlp_StringList_Operate.ColumnCount = 1;
+            tlp_StringList_Operate.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tlp_StringList_Operate.Controls.Add(tlp_StringList_Operate_SplitChar, 0, 0);
+            tlp_StringList_Operate.Controls.Add(tlp_StringList_Operate_AddBEChar, 0, 1);
+            tlp_StringList_Operate.Controls.Add(tlp_StringList_Operate_AddEndChar, 0, 3);
+            tlp_StringList_Operate.Controls.Add(tlp_StringList_Operate_AddBeginChar, 0, 2);
+            tlp_StringList_Operate.Controls.Add(tlp_StringList_Operate_RowSplit, 0, 4);
+            tlp_StringList_Operate.Dock = DockStyle.Fill;
+            tlp_StringList_Operate.Location = new Point(256, 3);
+            tlp_StringList_Operate.Name = "tlp_StringList_Operate";
+            tlp_StringList_Operate.RowCount = 10;
+            tlp_StringList_Operate.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+            tlp_StringList_Operate.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+            tlp_StringList_Operate.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+            tlp_StringList_Operate.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+            tlp_StringList_Operate.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+            tlp_StringList_Operate.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+            tlp_StringList_Operate.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+            tlp_StringList_Operate.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+            tlp_StringList_Operate.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+            tlp_StringList_Operate.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+            tlp_StringList_Operate.Size = new Size(120, 388);
+            tlp_StringList_Operate.TabIndex = 2;
             // 
             // tlp_StringList_Operate_SplitChar
             // 
-            this.tlp_StringList_Operate_SplitChar.ColumnCount = 2;
-            this.tlp_StringList_Operate_SplitChar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlp_StringList_Operate_SplitChar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
-            this.tlp_StringList_Operate_SplitChar.Controls.Add(this.btn_StringList_SplitChar, 1, 0);
-            this.tlp_StringList_Operate_SplitChar.Controls.Add(this.tb_StringList_SplitChar, 0, 0);
-            this.tlp_StringList_Operate_SplitChar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_StringList_Operate_SplitChar.Location = new System.Drawing.Point(3, 3);
-            this.tlp_StringList_Operate_SplitChar.Name = "tlp_StringList_Operate_SplitChar";
-            this.tlp_StringList_Operate_SplitChar.RowCount = 1;
-            this.tlp_StringList_Operate_SplitChar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlp_StringList_Operate_SplitChar.Size = new System.Drawing.Size(114, 32);
-            this.tlp_StringList_Operate_SplitChar.TabIndex = 0;
+            tlp_StringList_Operate_SplitChar.ColumnCount = 2;
+            tlp_StringList_Operate_SplitChar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
+            tlp_StringList_Operate_SplitChar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 66.66666F));
+            tlp_StringList_Operate_SplitChar.Controls.Add(btn_StringList_SplitChar, 1, 0);
+            tlp_StringList_Operate_SplitChar.Controls.Add(tb_StringList_SplitChar, 0, 0);
+            tlp_StringList_Operate_SplitChar.Dock = DockStyle.Fill;
+            tlp_StringList_Operate_SplitChar.Location = new Point(3, 3);
+            tlp_StringList_Operate_SplitChar.Name = "tlp_StringList_Operate_SplitChar";
+            tlp_StringList_Operate_SplitChar.RowCount = 1;
+            tlp_StringList_Operate_SplitChar.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tlp_StringList_Operate_SplitChar.Size = new Size(114, 32);
+            tlp_StringList_Operate_SplitChar.TabIndex = 0;
             // 
             // btn_StringList_SplitChar
             // 
-            this.btn_StringList_SplitChar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_StringList_SplitChar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_StringList_SplitChar.Location = new System.Drawing.Point(41, 3);
-            this.btn_StringList_SplitChar.Name = "btn_StringList_SplitChar";
-            this.btn_StringList_SplitChar.Size = new System.Drawing.Size(70, 26);
-            this.btn_StringList_SplitChar.TabIndex = 2;
-            this.btn_StringList_SplitChar.Text = "分割字符";
-            this.btn_StringList_SplitChar.UseVisualStyleBackColor = true;
-            this.btn_StringList_SplitChar.Click += new System.EventHandler(this.btn_StringList_SplitChar_Click);
+            btn_StringList_SplitChar.Dock = DockStyle.Fill;
+            btn_StringList_SplitChar.FlatStyle = FlatStyle.Flat;
+            btn_StringList_SplitChar.Location = new Point(41, 3);
+            btn_StringList_SplitChar.Name = "btn_StringList_SplitChar";
+            btn_StringList_SplitChar.Size = new Size(70, 26);
+            btn_StringList_SplitChar.TabIndex = 2;
+            btn_StringList_SplitChar.Text = "分割字符";
+            btn_StringList_SplitChar.UseVisualStyleBackColor = true;
+            btn_StringList_SplitChar.Click += btn_StringList_SplitChar_Click;
             // 
             // tb_StringList_SplitChar
             // 
-            this.tb_StringList_SplitChar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_StringList_SplitChar.Location = new System.Drawing.Point(3, 3);
-            this.tb_StringList_SplitChar.Name = "tb_StringList_SplitChar";
-            this.tb_StringList_SplitChar.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tb_StringList_SplitChar.Size = new System.Drawing.Size(32, 27);
-            this.tb_StringList_SplitChar.TabIndex = 3;
-            this.tb_StringList_SplitChar.Text = "、";
-            this.tb_StringList_SplitChar.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            tb_StringList_SplitChar.Dock = DockStyle.Fill;
+            tb_StringList_SplitChar.Location = new Point(3, 3);
+            tb_StringList_SplitChar.Name = "tb_StringList_SplitChar";
+            tb_StringList_SplitChar.RightToLeft = RightToLeft.No;
+            tb_StringList_SplitChar.Size = new Size(32, 27);
+            tb_StringList_SplitChar.TabIndex = 3;
+            tb_StringList_SplitChar.Text = "、";
+            tb_StringList_SplitChar.TextAlign = HorizontalAlignment.Center;
             // 
             // tlp_StringList_Operate_AddBEChar
             // 
-            this.tlp_StringList_Operate_AddBEChar.ColumnCount = 2;
-            this.tlp_StringList_Operate_AddBEChar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33F));
-            this.tlp_StringList_Operate_AddBEChar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.67F));
-            this.tlp_StringList_Operate_AddBEChar.Controls.Add(this.tb_StringList_AddBEChar, 0, 0);
-            this.tlp_StringList_Operate_AddBEChar.Controls.Add(this.btn_StringList_AddBEChar, 1, 0);
-            this.tlp_StringList_Operate_AddBEChar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_StringList_Operate_AddBEChar.Location = new System.Drawing.Point(3, 41);
-            this.tlp_StringList_Operate_AddBEChar.Name = "tlp_StringList_Operate_AddBEChar";
-            this.tlp_StringList_Operate_AddBEChar.RowCount = 1;
-            this.tlp_StringList_Operate_AddBEChar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp_StringList_Operate_AddBEChar.Size = new System.Drawing.Size(114, 32);
-            this.tlp_StringList_Operate_AddBEChar.TabIndex = 1;
+            tlp_StringList_Operate_AddBEChar.ColumnCount = 2;
+            tlp_StringList_Operate_AddBEChar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            tlp_StringList_Operate_AddBEChar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 66.67F));
+            tlp_StringList_Operate_AddBEChar.Controls.Add(tb_StringList_AddBEChar, 0, 0);
+            tlp_StringList_Operate_AddBEChar.Controls.Add(btn_StringList_AddBEChar, 1, 0);
+            tlp_StringList_Operate_AddBEChar.Dock = DockStyle.Fill;
+            tlp_StringList_Operate_AddBEChar.Location = new Point(3, 41);
+            tlp_StringList_Operate_AddBEChar.Name = "tlp_StringList_Operate_AddBEChar";
+            tlp_StringList_Operate_AddBEChar.RowCount = 1;
+            tlp_StringList_Operate_AddBEChar.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tlp_StringList_Operate_AddBEChar.Size = new Size(114, 32);
+            tlp_StringList_Operate_AddBEChar.TabIndex = 1;
             // 
             // tb_StringList_AddBEChar
             // 
-            this.tb_StringList_AddBEChar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_StringList_AddBEChar.Location = new System.Drawing.Point(3, 3);
-            this.tb_StringList_AddBEChar.Name = "tb_StringList_AddBEChar";
-            this.tb_StringList_AddBEChar.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tb_StringList_AddBEChar.Size = new System.Drawing.Size(31, 27);
-            this.tb_StringList_AddBEChar.TabIndex = 4;
-            this.tb_StringList_AddBEChar.Text = "\'";
-            this.tb_StringList_AddBEChar.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            tb_StringList_AddBEChar.Dock = DockStyle.Fill;
+            tb_StringList_AddBEChar.Location = new Point(3, 3);
+            tb_StringList_AddBEChar.Name = "tb_StringList_AddBEChar";
+            tb_StringList_AddBEChar.RightToLeft = RightToLeft.No;
+            tb_StringList_AddBEChar.Size = new Size(31, 27);
+            tb_StringList_AddBEChar.TabIndex = 4;
+            tb_StringList_AddBEChar.Text = "'";
+            tb_StringList_AddBEChar.TextAlign = HorizontalAlignment.Center;
             // 
             // btn_StringList_AddBEChar
             // 
-            this.btn_StringList_AddBEChar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_StringList_AddBEChar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_StringList_AddBEChar.Location = new System.Drawing.Point(40, 3);
-            this.btn_StringList_AddBEChar.Name = "btn_StringList_AddBEChar";
-            this.btn_StringList_AddBEChar.Size = new System.Drawing.Size(71, 26);
-            this.btn_StringList_AddBEChar.TabIndex = 5;
-            this.btn_StringList_AddBEChar.Text = "首尾字符";
-            this.btn_StringList_AddBEChar.UseVisualStyleBackColor = true;
-            this.btn_StringList_AddBEChar.Click += new System.EventHandler(this.btn_StringList_AddBEChar_Click);
+            btn_StringList_AddBEChar.Dock = DockStyle.Fill;
+            btn_StringList_AddBEChar.FlatStyle = FlatStyle.Flat;
+            btn_StringList_AddBEChar.Location = new Point(40, 3);
+            btn_StringList_AddBEChar.Name = "btn_StringList_AddBEChar";
+            btn_StringList_AddBEChar.Size = new Size(71, 26);
+            btn_StringList_AddBEChar.TabIndex = 5;
+            btn_StringList_AddBEChar.Text = "首尾字符";
+            btn_StringList_AddBEChar.UseVisualStyleBackColor = true;
+            btn_StringList_AddBEChar.Click += btn_StringList_AddBEChar_Click;
             // 
             // tlp_StringList_Operate_AddEndChar
             // 
-            this.tlp_StringList_Operate_AddEndChar.ColumnCount = 2;
-            this.tlp_StringList_Operate_AddEndChar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33F));
-            this.tlp_StringList_Operate_AddEndChar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.67F));
-            this.tlp_StringList_Operate_AddEndChar.Controls.Add(this.tb_StringList_AddEndChar, 0, 0);
-            this.tlp_StringList_Operate_AddEndChar.Controls.Add(this.btn_StringList_AddEndChar, 1, 0);
-            this.tlp_StringList_Operate_AddEndChar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_StringList_Operate_AddEndChar.Location = new System.Drawing.Point(3, 117);
-            this.tlp_StringList_Operate_AddEndChar.Name = "tlp_StringList_Operate_AddEndChar";
-            this.tlp_StringList_Operate_AddEndChar.RowCount = 1;
-            this.tlp_StringList_Operate_AddEndChar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp_StringList_Operate_AddEndChar.Size = new System.Drawing.Size(114, 32);
-            this.tlp_StringList_Operate_AddEndChar.TabIndex = 2;
+            tlp_StringList_Operate_AddEndChar.ColumnCount = 2;
+            tlp_StringList_Operate_AddEndChar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            tlp_StringList_Operate_AddEndChar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 66.67F));
+            tlp_StringList_Operate_AddEndChar.Controls.Add(tb_StringList_AddEndChar, 0, 0);
+            tlp_StringList_Operate_AddEndChar.Controls.Add(btn_StringList_AddEndChar, 1, 0);
+            tlp_StringList_Operate_AddEndChar.Dock = DockStyle.Fill;
+            tlp_StringList_Operate_AddEndChar.Location = new Point(3, 117);
+            tlp_StringList_Operate_AddEndChar.Name = "tlp_StringList_Operate_AddEndChar";
+            tlp_StringList_Operate_AddEndChar.RowCount = 1;
+            tlp_StringList_Operate_AddEndChar.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tlp_StringList_Operate_AddEndChar.Size = new Size(114, 32);
+            tlp_StringList_Operate_AddEndChar.TabIndex = 2;
             // 
             // tb_StringList_AddEndChar
             // 
-            this.tb_StringList_AddEndChar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_StringList_AddEndChar.Location = new System.Drawing.Point(3, 3);
-            this.tb_StringList_AddEndChar.Name = "tb_StringList_AddEndChar";
-            this.tb_StringList_AddEndChar.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tb_StringList_AddEndChar.Size = new System.Drawing.Size(31, 27);
-            this.tb_StringList_AddEndChar.TabIndex = 4;
-            this.tb_StringList_AddEndChar.Text = ",";
-            this.tb_StringList_AddEndChar.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            tb_StringList_AddEndChar.Dock = DockStyle.Fill;
+            tb_StringList_AddEndChar.Location = new Point(3, 3);
+            tb_StringList_AddEndChar.Name = "tb_StringList_AddEndChar";
+            tb_StringList_AddEndChar.RightToLeft = RightToLeft.No;
+            tb_StringList_AddEndChar.Size = new Size(31, 27);
+            tb_StringList_AddEndChar.TabIndex = 4;
+            tb_StringList_AddEndChar.Text = ",";
+            tb_StringList_AddEndChar.TextAlign = HorizontalAlignment.Center;
             // 
             // btn_StringList_AddEndChar
             // 
-            this.btn_StringList_AddEndChar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_StringList_AddEndChar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_StringList_AddEndChar.Location = new System.Drawing.Point(40, 3);
-            this.btn_StringList_AddEndChar.Name = "btn_StringList_AddEndChar";
-            this.btn_StringList_AddEndChar.Size = new System.Drawing.Size(71, 26);
-            this.btn_StringList_AddEndChar.TabIndex = 5;
-            this.btn_StringList_AddEndChar.Text = "结尾字符";
-            this.btn_StringList_AddEndChar.UseVisualStyleBackColor = true;
-            this.btn_StringList_AddEndChar.Click += new System.EventHandler(this.btn_StringList_AddEndChar_Click);
+            btn_StringList_AddEndChar.Dock = DockStyle.Fill;
+            btn_StringList_AddEndChar.FlatStyle = FlatStyle.Flat;
+            btn_StringList_AddEndChar.Location = new Point(40, 3);
+            btn_StringList_AddEndChar.Name = "btn_StringList_AddEndChar";
+            btn_StringList_AddEndChar.Size = new Size(71, 26);
+            btn_StringList_AddEndChar.TabIndex = 5;
+            btn_StringList_AddEndChar.Text = "结尾字符";
+            btn_StringList_AddEndChar.UseVisualStyleBackColor = true;
+            btn_StringList_AddEndChar.Click += btn_StringList_AddEndChar_Click;
             // 
             // tlp_StringList_Operate_AddBeginChar
             // 
-            this.tlp_StringList_Operate_AddBeginChar.ColumnCount = 2;
-            this.tlp_StringList_Operate_AddBeginChar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33F));
-            this.tlp_StringList_Operate_AddBeginChar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.67F));
-            this.tlp_StringList_Operate_AddBeginChar.Controls.Add(this.tb_StringList_AddBeginChar, 0, 0);
-            this.tlp_StringList_Operate_AddBeginChar.Controls.Add(this.btn_StringList_AddBeginChar, 1, 0);
-            this.tlp_StringList_Operate_AddBeginChar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_StringList_Operate_AddBeginChar.Location = new System.Drawing.Point(3, 79);
-            this.tlp_StringList_Operate_AddBeginChar.Name = "tlp_StringList_Operate_AddBeginChar";
-            this.tlp_StringList_Operate_AddBeginChar.RowCount = 1;
-            this.tlp_StringList_Operate_AddBeginChar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp_StringList_Operate_AddBeginChar.Size = new System.Drawing.Size(114, 32);
-            this.tlp_StringList_Operate_AddBeginChar.TabIndex = 3;
+            tlp_StringList_Operate_AddBeginChar.ColumnCount = 2;
+            tlp_StringList_Operate_AddBeginChar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            tlp_StringList_Operate_AddBeginChar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 66.67F));
+            tlp_StringList_Operate_AddBeginChar.Controls.Add(tb_StringList_AddBeginChar, 0, 0);
+            tlp_StringList_Operate_AddBeginChar.Controls.Add(btn_StringList_AddBeginChar, 1, 0);
+            tlp_StringList_Operate_AddBeginChar.Dock = DockStyle.Fill;
+            tlp_StringList_Operate_AddBeginChar.Location = new Point(3, 79);
+            tlp_StringList_Operate_AddBeginChar.Name = "tlp_StringList_Operate_AddBeginChar";
+            tlp_StringList_Operate_AddBeginChar.RowCount = 1;
+            tlp_StringList_Operate_AddBeginChar.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tlp_StringList_Operate_AddBeginChar.Size = new Size(114, 32);
+            tlp_StringList_Operate_AddBeginChar.TabIndex = 3;
             // 
             // tb_StringList_AddBeginChar
             // 
-            this.tb_StringList_AddBeginChar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_StringList_AddBeginChar.Location = new System.Drawing.Point(3, 3);
-            this.tb_StringList_AddBeginChar.Name = "tb_StringList_AddBeginChar";
-            this.tb_StringList_AddBeginChar.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tb_StringList_AddBeginChar.Size = new System.Drawing.Size(31, 27);
-            this.tb_StringList_AddBeginChar.TabIndex = 4;
-            this.tb_StringList_AddBeginChar.Text = ",";
-            this.tb_StringList_AddBeginChar.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            tb_StringList_AddBeginChar.Dock = DockStyle.Fill;
+            tb_StringList_AddBeginChar.Location = new Point(3, 3);
+            tb_StringList_AddBeginChar.Name = "tb_StringList_AddBeginChar";
+            tb_StringList_AddBeginChar.RightToLeft = RightToLeft.No;
+            tb_StringList_AddBeginChar.Size = new Size(31, 27);
+            tb_StringList_AddBeginChar.TabIndex = 4;
+            tb_StringList_AddBeginChar.Text = ",";
+            tb_StringList_AddBeginChar.TextAlign = HorizontalAlignment.Center;
             // 
             // btn_StringList_AddBeginChar
             // 
-            this.btn_StringList_AddBeginChar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_StringList_AddBeginChar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_StringList_AddBeginChar.Location = new System.Drawing.Point(40, 3);
-            this.btn_StringList_AddBeginChar.Name = "btn_StringList_AddBeginChar";
-            this.btn_StringList_AddBeginChar.Size = new System.Drawing.Size(71, 26);
-            this.btn_StringList_AddBeginChar.TabIndex = 5;
-            this.btn_StringList_AddBeginChar.Text = "开始字符";
-            this.btn_StringList_AddBeginChar.UseVisualStyleBackColor = true;
-            this.btn_StringList_AddBeginChar.Click += new System.EventHandler(this.btn_StringList_AddBeginChar_Click);
+            btn_StringList_AddBeginChar.Dock = DockStyle.Fill;
+            btn_StringList_AddBeginChar.FlatStyle = FlatStyle.Flat;
+            btn_StringList_AddBeginChar.Location = new Point(40, 3);
+            btn_StringList_AddBeginChar.Name = "btn_StringList_AddBeginChar";
+            btn_StringList_AddBeginChar.Size = new Size(71, 26);
+            btn_StringList_AddBeginChar.TabIndex = 5;
+            btn_StringList_AddBeginChar.Text = "开始字符";
+            btn_StringList_AddBeginChar.UseVisualStyleBackColor = true;
+            btn_StringList_AddBeginChar.Click += btn_StringList_AddBeginChar_Click;
+            // 
+            // tlp_StringList_Operate_RowSplit
+            // 
+            tlp_StringList_Operate_RowSplit.ColumnCount = 2;
+            tlp_StringList_Operate_RowSplit.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tlp_StringList_Operate_RowSplit.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 66.6666641F));
+            tlp_StringList_Operate_RowSplit.Controls.Add(tb_StringList_RowSplit, 0, 0);
+            tlp_StringList_Operate_RowSplit.Controls.Add(btn_StringList_RowSplit, 1, 0);
+            tlp_StringList_Operate_RowSplit.Dock = DockStyle.Fill;
+            tlp_StringList_Operate_RowSplit.Location = new Point(3, 155);
+            tlp_StringList_Operate_RowSplit.Name = "tlp_StringList_Operate_RowSplit";
+            tlp_StringList_Operate_RowSplit.RowCount = 1;
+            tlp_StringList_Operate_RowSplit.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tlp_StringList_Operate_RowSplit.Size = new Size(114, 32);
+            tlp_StringList_Operate_RowSplit.TabIndex = 4;
+            // 
+            // tb_StringList_RowSplit
+            // 
+            tb_StringList_RowSplit.Dock = DockStyle.Fill;
+            tb_StringList_RowSplit.Location = new Point(3, 3);
+            tb_StringList_RowSplit.Name = "tb_StringList_RowSplit";
+            tb_StringList_RowSplit.Size = new Size(31, 27);
+            tb_StringList_RowSplit.TabIndex = 0;
+            tb_StringList_RowSplit.Text = "15";
+            // 
+            // btn_StringList_RowSplit
+            // 
+            btn_StringList_RowSplit.Dock = DockStyle.Fill;
+            btn_StringList_RowSplit.FlatStyle = FlatStyle.Flat;
+            btn_StringList_RowSplit.Location = new Point(40, 3);
+            btn_StringList_RowSplit.Name = "btn_StringList_RowSplit";
+            btn_StringList_RowSplit.Size = new Size(71, 26);
+            btn_StringList_RowSplit.TabIndex = 1;
+            btn_StringList_RowSplit.Text = "每行个数";
+            btn_StringList_RowSplit.UseVisualStyleBackColor = true;
+            btn_StringList_RowSplit.Click += btn_StringList_RowSplit_Click;
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.Linen;
-            this.panel2.Controls.Add(this.tlp_Encrypt);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(643, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(634, 394);
-            this.panel2.TabIndex = 1;
+            panel2.BackColor = Color.Linen;
+            panel2.Controls.Add(tlp_Encrypt);
+            panel2.Dock = DockStyle.Fill;
+            panel2.Location = new Point(643, 3);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(634, 394);
+            panel2.TabIndex = 1;
             // 
             // tlp_Encrypt
             // 
-            this.tlp_Encrypt.ColumnCount = 7;
-            this.tlp_Encrypt.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tlp_Encrypt.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44F));
-            this.tlp_Encrypt.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tlp_Encrypt.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
-            this.tlp_Encrypt.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tlp_Encrypt.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44F));
-            this.tlp_Encrypt.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tlp_Encrypt.Controls.Add(this.tb_Encrypt_Decode, 1, 5);
-            this.tlp_Encrypt.Controls.Add(this.btn_Encrypt_Encode, 3, 5);
-            this.tlp_Encrypt.Controls.Add(this.btn_Encrypt_Decode, 3, 7);
-            this.tlp_Encrypt.Controls.Add(this.lb_Encrypt_Encode, 5, 5);
-            this.tlp_Encrypt.Controls.Add(this.lb_Encrypt_Decode, 5, 7);
-            this.tlp_Encrypt.Controls.Add(this.tb_Encrypt_Key_De, 5, 1);
-            this.tlp_Encrypt.Controls.Add(this.tb_Encrypt_IV_De, 5, 3);
-            this.tlp_Encrypt.Controls.Add(this.tb_Encrypt_Encode, 1, 7);
-            this.tlp_Encrypt.Controls.Add(this.rtb_Encrypt_Source, 1, 9);
-            this.tlp_Encrypt.Controls.Add(this.rtb_Encrypt_Distination, 5, 9);
-            this.tlp_Encrypt.Controls.Add(this.tlp_Encrypt_PlButton, 3, 9);
-            this.tlp_Encrypt.Controls.Add(this.tlp_Encrypt_Key, 1, 1);
-            this.tlp_Encrypt.Controls.Add(this.tlp_Encrypt_IV, 1, 3);
-            this.tlp_Encrypt.Controls.Add(this.lbl_Encrypt_Des1, 1, 0);
-            this.tlp_Encrypt.Controls.Add(this.lbl_Encrypt_Des2, 5, 0);
-            this.tlp_Encrypt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_Encrypt.Location = new System.Drawing.Point(0, 0);
-            this.tlp_Encrypt.Name = "tlp_Encrypt";
-            this.tlp_Encrypt.RowCount = 11;
-            this.tlp_Encrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tlp_Encrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12F));
-            this.tlp_Encrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tlp_Encrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12F));
-            this.tlp_Encrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tlp_Encrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12F));
-            this.tlp_Encrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tlp_Encrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12F));
-            this.tlp_Encrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tlp_Encrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52F));
-            this.tlp_Encrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tlp_Encrypt.Size = new System.Drawing.Size(634, 394);
-            this.tlp_Encrypt.TabIndex = 1;
+            tlp_Encrypt.ColumnCount = 7;
+            tlp_Encrypt.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
+            tlp_Encrypt.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 44F));
+            tlp_Encrypt.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
+            tlp_Encrypt.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 12F));
+            tlp_Encrypt.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
+            tlp_Encrypt.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 44F));
+            tlp_Encrypt.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
+            tlp_Encrypt.Controls.Add(tb_Encrypt_Decode, 1, 5);
+            tlp_Encrypt.Controls.Add(btn_Encrypt_Encode, 3, 5);
+            tlp_Encrypt.Controls.Add(btn_Encrypt_Decode, 3, 7);
+            tlp_Encrypt.Controls.Add(lb_Encrypt_Encode, 5, 5);
+            tlp_Encrypt.Controls.Add(lb_Encrypt_Decode, 5, 7);
+            tlp_Encrypt.Controls.Add(tb_Encrypt_Key_De, 5, 1);
+            tlp_Encrypt.Controls.Add(tb_Encrypt_IV_De, 5, 3);
+            tlp_Encrypt.Controls.Add(tb_Encrypt_Encode, 1, 7);
+            tlp_Encrypt.Controls.Add(rtb_Encrypt_Source, 1, 9);
+            tlp_Encrypt.Controls.Add(rtb_Encrypt_Distination, 5, 9);
+            tlp_Encrypt.Controls.Add(tlp_Encrypt_PlButton, 3, 9);
+            tlp_Encrypt.Controls.Add(tlp_Encrypt_Key, 1, 1);
+            tlp_Encrypt.Controls.Add(tlp_Encrypt_IV, 1, 3);
+            tlp_Encrypt.Controls.Add(lbl_Encrypt_Des1, 1, 0);
+            tlp_Encrypt.Controls.Add(lbl_Encrypt_Des2, 5, 0);
+            tlp_Encrypt.Dock = DockStyle.Fill;
+            tlp_Encrypt.Location = new Point(0, 0);
+            tlp_Encrypt.Name = "tlp_Encrypt";
+            tlp_Encrypt.RowCount = 11;
+            tlp_Encrypt.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
+            tlp_Encrypt.RowStyles.Add(new RowStyle(SizeType.Percent, 12F));
+            tlp_Encrypt.RowStyles.Add(new RowStyle(SizeType.Absolute, 10F));
+            tlp_Encrypt.RowStyles.Add(new RowStyle(SizeType.Percent, 12F));
+            tlp_Encrypt.RowStyles.Add(new RowStyle(SizeType.Absolute, 10F));
+            tlp_Encrypt.RowStyles.Add(new RowStyle(SizeType.Percent, 12F));
+            tlp_Encrypt.RowStyles.Add(new RowStyle(SizeType.Absolute, 10F));
+            tlp_Encrypt.RowStyles.Add(new RowStyle(SizeType.Percent, 12F));
+            tlp_Encrypt.RowStyles.Add(new RowStyle(SizeType.Absolute, 10F));
+            tlp_Encrypt.RowStyles.Add(new RowStyle(SizeType.Percent, 52F));
+            tlp_Encrypt.RowStyles.Add(new RowStyle(SizeType.Absolute, 10F));
+            tlp_Encrypt.Size = new Size(634, 394);
+            tlp_Encrypt.TabIndex = 1;
             // 
             // tb_Encrypt_Decode
             // 
-            this.tb_Encrypt_Decode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_Encrypt_Decode.Location = new System.Drawing.Point(13, 124);
-            this.tb_Encrypt_Decode.Name = "tb_Encrypt_Decode";
-            this.tb_Encrypt_Decode.Size = new System.Drawing.Size(255, 27);
-            this.tb_Encrypt_Decode.TabIndex = 1;
+            tb_Encrypt_Decode.Dock = DockStyle.Fill;
+            tb_Encrypt_Decode.Location = new Point(13, 124);
+            tb_Encrypt_Decode.Name = "tb_Encrypt_Decode";
+            tb_Encrypt_Decode.Size = new Size(255, 27);
+            tb_Encrypt_Decode.TabIndex = 1;
             // 
             // btn_Encrypt_Encode
             // 
-            this.btn_Encrypt_Encode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_Encrypt_Encode.Location = new System.Drawing.Point(284, 124);
-            this.btn_Encrypt_Encode.Name = "btn_Encrypt_Encode";
-            this.btn_Encrypt_Encode.Size = new System.Drawing.Size(65, 32);
-            this.btn_Encrypt_Encode.TabIndex = 2;
-            this.btn_Encrypt_Encode.Text = "加密";
-            this.btn_Encrypt_Encode.UseVisualStyleBackColor = true;
-            this.btn_Encrypt_Encode.Click += new System.EventHandler(this.btn_Encrypt_Encode_Click);
+            btn_Encrypt_Encode.Dock = DockStyle.Fill;
+            btn_Encrypt_Encode.Location = new Point(284, 124);
+            btn_Encrypt_Encode.Name = "btn_Encrypt_Encode";
+            btn_Encrypt_Encode.Size = new Size(65, 32);
+            btn_Encrypt_Encode.TabIndex = 2;
+            btn_Encrypt_Encode.Text = "加密";
+            btn_Encrypt_Encode.UseVisualStyleBackColor = true;
+            btn_Encrypt_Encode.Click += btn_Encrypt_Encode_Click;
             // 
             // btn_Encrypt_Decode
             // 
-            this.btn_Encrypt_Decode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_Encrypt_Decode.Location = new System.Drawing.Point(284, 172);
-            this.btn_Encrypt_Decode.Name = "btn_Encrypt_Decode";
-            this.btn_Encrypt_Decode.Size = new System.Drawing.Size(65, 32);
-            this.btn_Encrypt_Decode.TabIndex = 3;
-            this.btn_Encrypt_Decode.Text = "解密";
-            this.btn_Encrypt_Decode.UseVisualStyleBackColor = true;
-            this.btn_Encrypt_Decode.Click += new System.EventHandler(this.btn_Encrypt_Decode_Click);
+            btn_Encrypt_Decode.Dock = DockStyle.Fill;
+            btn_Encrypt_Decode.Location = new Point(284, 172);
+            btn_Encrypt_Decode.Name = "btn_Encrypt_Decode";
+            btn_Encrypt_Decode.Size = new Size(65, 32);
+            btn_Encrypt_Decode.TabIndex = 3;
+            btn_Encrypt_Decode.Text = "解密";
+            btn_Encrypt_Decode.UseVisualStyleBackColor = true;
+            btn_Encrypt_Decode.Click += btn_Encrypt_Decode_Click;
             // 
             // lb_Encrypt_Encode
             // 
-            this.lb_Encrypt_Encode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lb_Encrypt_Encode.Location = new System.Drawing.Point(365, 124);
-            this.lb_Encrypt_Encode.Name = "lb_Encrypt_Encode";
-            this.lb_Encrypt_Encode.ReadOnly = true;
-            this.lb_Encrypt_Encode.Size = new System.Drawing.Size(255, 27);
-            this.lb_Encrypt_Encode.TabIndex = 4;
+            lb_Encrypt_Encode.Dock = DockStyle.Fill;
+            lb_Encrypt_Encode.Location = new Point(365, 124);
+            lb_Encrypt_Encode.Name = "lb_Encrypt_Encode";
+            lb_Encrypt_Encode.ReadOnly = true;
+            lb_Encrypt_Encode.Size = new Size(255, 27);
+            lb_Encrypt_Encode.TabIndex = 4;
             // 
             // lb_Encrypt_Decode
             // 
-            this.lb_Encrypt_Decode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lb_Encrypt_Decode.Location = new System.Drawing.Point(365, 172);
-            this.lb_Encrypt_Decode.Name = "lb_Encrypt_Decode";
-            this.lb_Encrypt_Decode.ReadOnly = true;
-            this.lb_Encrypt_Decode.Size = new System.Drawing.Size(255, 27);
-            this.lb_Encrypt_Decode.TabIndex = 5;
+            lb_Encrypt_Decode.Dock = DockStyle.Fill;
+            lb_Encrypt_Decode.Location = new Point(365, 172);
+            lb_Encrypt_Decode.Name = "lb_Encrypt_Decode";
+            lb_Encrypt_Decode.ReadOnly = true;
+            lb_Encrypt_Decode.Size = new Size(255, 27);
+            lb_Encrypt_Decode.TabIndex = 5;
             // 
             // tb_Encrypt_Key_De
             // 
-            this.tb_Encrypt_Key_De.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_Encrypt_Key_De.Location = new System.Drawing.Point(365, 28);
-            this.tb_Encrypt_Key_De.Name = "tb_Encrypt_Key_De";
-            this.tb_Encrypt_Key_De.Size = new System.Drawing.Size(255, 27);
-            this.tb_Encrypt_Key_De.TabIndex = 6;
-            this.tb_Encrypt_Key_De.Text = "omc4good";
+            tb_Encrypt_Key_De.Dock = DockStyle.Fill;
+            tb_Encrypt_Key_De.Location = new Point(365, 28);
+            tb_Encrypt_Key_De.Name = "tb_Encrypt_Key_De";
+            tb_Encrypt_Key_De.Size = new Size(255, 27);
+            tb_Encrypt_Key_De.TabIndex = 6;
+            tb_Encrypt_Key_De.Text = "omc4good";
             // 
             // tb_Encrypt_IV_De
             // 
-            this.tb_Encrypt_IV_De.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_Encrypt_IV_De.Location = new System.Drawing.Point(365, 76);
-            this.tb_Encrypt_IV_De.Name = "tb_Encrypt_IV_De";
-            this.tb_Encrypt_IV_De.Size = new System.Drawing.Size(255, 27);
-            this.tb_Encrypt_IV_De.TabIndex = 7;
-            this.tb_Encrypt_IV_De.Text = "1s2o4f5t";
+            tb_Encrypt_IV_De.Dock = DockStyle.Fill;
+            tb_Encrypt_IV_De.Location = new Point(365, 76);
+            tb_Encrypt_IV_De.Name = "tb_Encrypt_IV_De";
+            tb_Encrypt_IV_De.Size = new Size(255, 27);
+            tb_Encrypt_IV_De.TabIndex = 7;
+            tb_Encrypt_IV_De.Text = "1s2o4f5t";
             // 
             // tb_Encrypt_Encode
             // 
-            this.tb_Encrypt_Encode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_Encrypt_Encode.Location = new System.Drawing.Point(13, 172);
-            this.tb_Encrypt_Encode.Name = "tb_Encrypt_Encode";
-            this.tb_Encrypt_Encode.Size = new System.Drawing.Size(255, 27);
-            this.tb_Encrypt_Encode.TabIndex = 8;
+            tb_Encrypt_Encode.Dock = DockStyle.Fill;
+            tb_Encrypt_Encode.Location = new Point(13, 172);
+            tb_Encrypt_Encode.Name = "tb_Encrypt_Encode";
+            tb_Encrypt_Encode.Size = new Size(255, 27);
+            tb_Encrypt_Encode.TabIndex = 8;
             // 
             // rtb_Encrypt_Source
             // 
-            this.rtb_Encrypt_Source.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_Encrypt_Source.Location = new System.Drawing.Point(13, 220);
-            this.rtb_Encrypt_Source.Name = "rtb_Encrypt_Source";
-            this.rtb_Encrypt_Source.Size = new System.Drawing.Size(255, 159);
-            this.rtb_Encrypt_Source.TabIndex = 9;
-            this.rtb_Encrypt_Source.Text = "";
+            rtb_Encrypt_Source.Dock = DockStyle.Fill;
+            rtb_Encrypt_Source.Location = new Point(13, 220);
+            rtb_Encrypt_Source.Name = "rtb_Encrypt_Source";
+            rtb_Encrypt_Source.Size = new Size(255, 159);
+            rtb_Encrypt_Source.TabIndex = 9;
+            rtb_Encrypt_Source.Text = "";
             // 
             // rtb_Encrypt_Distination
             // 
-            this.rtb_Encrypt_Distination.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_Encrypt_Distination.Location = new System.Drawing.Point(365, 220);
-            this.rtb_Encrypt_Distination.Name = "rtb_Encrypt_Distination";
-            this.rtb_Encrypt_Distination.Size = new System.Drawing.Size(255, 159);
-            this.rtb_Encrypt_Distination.TabIndex = 10;
-            this.rtb_Encrypt_Distination.Text = "";
+            rtb_Encrypt_Distination.Dock = DockStyle.Fill;
+            rtb_Encrypt_Distination.Location = new Point(365, 220);
+            rtb_Encrypt_Distination.Name = "rtb_Encrypt_Distination";
+            rtb_Encrypt_Distination.Size = new Size(255, 159);
+            rtb_Encrypt_Distination.TabIndex = 10;
+            rtb_Encrypt_Distination.Text = "";
             // 
             // tlp_Encrypt_PlButton
             // 
-            this.tlp_Encrypt_PlButton.ColumnCount = 1;
-            this.tlp_Encrypt_PlButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp_Encrypt_PlButton.Controls.Add(this.btnMuti_EncryptDecode, 0, 3);
-            this.tlp_Encrypt_PlButton.Controls.Add(this.btnMuti_EncryptEncode, 0, 1);
-            this.tlp_Encrypt_PlButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_Encrypt_PlButton.Location = new System.Drawing.Point(284, 220);
-            this.tlp_Encrypt_PlButton.Name = "tlp_Encrypt_PlButton";
-            this.tlp_Encrypt_PlButton.RowCount = 5;
-            this.tlp_Encrypt_PlButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlp_Encrypt_PlButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlp_Encrypt_PlButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlp_Encrypt_PlButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlp_Encrypt_PlButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlp_Encrypt_PlButton.Size = new System.Drawing.Size(65, 159);
-            this.tlp_Encrypt_PlButton.TabIndex = 16;
+            tlp_Encrypt_PlButton.ColumnCount = 1;
+            tlp_Encrypt_PlButton.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tlp_Encrypt_PlButton.Controls.Add(btnMuti_EncryptDecode, 0, 3);
+            tlp_Encrypt_PlButton.Controls.Add(btnMuti_EncryptEncode, 0, 1);
+            tlp_Encrypt_PlButton.Dock = DockStyle.Fill;
+            tlp_Encrypt_PlButton.Location = new Point(284, 220);
+            tlp_Encrypt_PlButton.Name = "tlp_Encrypt_PlButton";
+            tlp_Encrypt_PlButton.RowCount = 5;
+            tlp_Encrypt_PlButton.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tlp_Encrypt_PlButton.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tlp_Encrypt_PlButton.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tlp_Encrypt_PlButton.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tlp_Encrypt_PlButton.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tlp_Encrypt_PlButton.Size = new Size(65, 159);
+            tlp_Encrypt_PlButton.TabIndex = 16;
             // 
             // btnMuti_EncryptDecode
             // 
-            this.btnMuti_EncryptDecode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnMuti_EncryptDecode.Location = new System.Drawing.Point(3, 96);
-            this.btnMuti_EncryptDecode.Name = "btnMuti_EncryptDecode";
-            this.btnMuti_EncryptDecode.Size = new System.Drawing.Size(59, 25);
-            this.btnMuti_EncryptDecode.TabIndex = 12;
-            this.btnMuti_EncryptDecode.Text = "批量解密";
-            this.btnMuti_EncryptDecode.UseVisualStyleBackColor = true;
-            this.btnMuti_EncryptDecode.Click += new System.EventHandler(this.btnMuti_EncryptDecode_Click);
+            btnMuti_EncryptDecode.Dock = DockStyle.Fill;
+            btnMuti_EncryptDecode.Location = new Point(3, 96);
+            btnMuti_EncryptDecode.Name = "btnMuti_EncryptDecode";
+            btnMuti_EncryptDecode.Size = new Size(59, 25);
+            btnMuti_EncryptDecode.TabIndex = 12;
+            btnMuti_EncryptDecode.Text = "批量解密";
+            btnMuti_EncryptDecode.UseVisualStyleBackColor = true;
+            btnMuti_EncryptDecode.Click += btnMuti_EncryptDecode_Click;
             // 
             // btnMuti_EncryptEncode
             // 
-            this.btnMuti_EncryptEncode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnMuti_EncryptEncode.Location = new System.Drawing.Point(3, 34);
-            this.btnMuti_EncryptEncode.Name = "btnMuti_EncryptEncode";
-            this.btnMuti_EncryptEncode.Size = new System.Drawing.Size(59, 25);
-            this.btnMuti_EncryptEncode.TabIndex = 13;
-            this.btnMuti_EncryptEncode.Text = "批量加密";
-            this.btnMuti_EncryptEncode.UseVisualStyleBackColor = true;
-            this.btnMuti_EncryptEncode.Click += new System.EventHandler(this.btnMuti_EncryptEncode_Click);
+            btnMuti_EncryptEncode.Dock = DockStyle.Fill;
+            btnMuti_EncryptEncode.Location = new Point(3, 34);
+            btnMuti_EncryptEncode.Name = "btnMuti_EncryptEncode";
+            btnMuti_EncryptEncode.Size = new Size(59, 25);
+            btnMuti_EncryptEncode.TabIndex = 13;
+            btnMuti_EncryptEncode.Text = "批量加密";
+            btnMuti_EncryptEncode.UseVisualStyleBackColor = true;
+            btnMuti_EncryptEncode.Click += btnMuti_EncryptEncode_Click;
             // 
             // tlp_Encrypt_Key
             // 
-            this.tlp_Encrypt_Key.ColumnCount = 2;
-            this.tlp_Encrypt_Key.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.4902F));
-            this.tlp_Encrypt_Key.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 74.5098F));
-            this.tlp_Encrypt_Key.Controls.Add(this.tb_Encrypt_Key_En, 1, 0);
-            this.tlp_Encrypt_Key.Controls.Add(this.lbl_Encrypt_key, 0, 0);
-            this.tlp_Encrypt_Key.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_Encrypt_Key.Location = new System.Drawing.Point(13, 28);
-            this.tlp_Encrypt_Key.Name = "tlp_Encrypt_Key";
-            this.tlp_Encrypt_Key.RowCount = 1;
-            this.tlp_Encrypt_Key.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlp_Encrypt_Key.Size = new System.Drawing.Size(255, 32);
-            this.tlp_Encrypt_Key.TabIndex = 17;
+            tlp_Encrypt_Key.ColumnCount = 2;
+            tlp_Encrypt_Key.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25.4902F));
+            tlp_Encrypt_Key.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 74.5098F));
+            tlp_Encrypt_Key.Controls.Add(tb_Encrypt_Key_En, 1, 0);
+            tlp_Encrypt_Key.Controls.Add(lbl_Encrypt_key, 0, 0);
+            tlp_Encrypt_Key.Dock = DockStyle.Fill;
+            tlp_Encrypt_Key.Location = new Point(13, 28);
+            tlp_Encrypt_Key.Name = "tlp_Encrypt_Key";
+            tlp_Encrypt_Key.RowCount = 1;
+            tlp_Encrypt_Key.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tlp_Encrypt_Key.Size = new Size(255, 32);
+            tlp_Encrypt_Key.TabIndex = 17;
             // 
             // tb_Encrypt_Key_En
             // 
-            this.tb_Encrypt_Key_En.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_Encrypt_Key_En.Location = new System.Drawing.Point(68, 3);
-            this.tb_Encrypt_Key_En.Name = "tb_Encrypt_Key_En";
-            this.tb_Encrypt_Key_En.Size = new System.Drawing.Size(184, 27);
-            this.tb_Encrypt_Key_En.TabIndex = 13;
-            this.tb_Encrypt_Key_En.Text = "omc4good";
+            tb_Encrypt_Key_En.Dock = DockStyle.Fill;
+            tb_Encrypt_Key_En.Location = new Point(68, 3);
+            tb_Encrypt_Key_En.Name = "tb_Encrypt_Key_En";
+            tb_Encrypt_Key_En.Size = new Size(184, 27);
+            tb_Encrypt_Key_En.TabIndex = 13;
+            tb_Encrypt_Key_En.Text = "omc4good";
             // 
             // lbl_Encrypt_key
             // 
-            this.lbl_Encrypt_key.AutoSize = true;
-            this.lbl_Encrypt_key.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_Encrypt_key.Location = new System.Drawing.Point(3, 0);
-            this.lbl_Encrypt_key.Name = "lbl_Encrypt_key";
-            this.lbl_Encrypt_key.Size = new System.Drawing.Size(59, 32);
-            this.lbl_Encrypt_key.TabIndex = 14;
-            this.lbl_Encrypt_key.Text = "秘钥：";
+            lbl_Encrypt_key.AutoSize = true;
+            lbl_Encrypt_key.Dock = DockStyle.Fill;
+            lbl_Encrypt_key.Location = new Point(3, 0);
+            lbl_Encrypt_key.Name = "lbl_Encrypt_key";
+            lbl_Encrypt_key.Size = new Size(59, 32);
+            lbl_Encrypt_key.TabIndex = 14;
+            lbl_Encrypt_key.Text = "秘钥：";
             // 
             // tlp_Encrypt_IV
             // 
-            this.tlp_Encrypt_IV.ColumnCount = 2;
-            this.tlp_Encrypt_IV.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.4902F));
-            this.tlp_Encrypt_IV.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 74.5098F));
-            this.tlp_Encrypt_IV.Controls.Add(this.tb_Encrypt_IV_En, 1, 0);
-            this.tlp_Encrypt_IV.Controls.Add(this.lbl_Encrypt_iv, 0, 0);
-            this.tlp_Encrypt_IV.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_Encrypt_IV.Location = new System.Drawing.Point(13, 76);
-            this.tlp_Encrypt_IV.Name = "tlp_Encrypt_IV";
-            this.tlp_Encrypt_IV.RowCount = 1;
-            this.tlp_Encrypt_IV.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlp_Encrypt_IV.Size = new System.Drawing.Size(255, 32);
-            this.tlp_Encrypt_IV.TabIndex = 18;
+            tlp_Encrypt_IV.ColumnCount = 2;
+            tlp_Encrypt_IV.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25.4902F));
+            tlp_Encrypt_IV.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 74.5098F));
+            tlp_Encrypt_IV.Controls.Add(tb_Encrypt_IV_En, 1, 0);
+            tlp_Encrypt_IV.Controls.Add(lbl_Encrypt_iv, 0, 0);
+            tlp_Encrypt_IV.Dock = DockStyle.Fill;
+            tlp_Encrypt_IV.Location = new Point(13, 76);
+            tlp_Encrypt_IV.Name = "tlp_Encrypt_IV";
+            tlp_Encrypt_IV.RowCount = 1;
+            tlp_Encrypt_IV.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tlp_Encrypt_IV.Size = new Size(255, 32);
+            tlp_Encrypt_IV.TabIndex = 18;
             // 
             // tb_Encrypt_IV_En
             // 
-            this.tb_Encrypt_IV_En.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_Encrypt_IV_En.Location = new System.Drawing.Point(68, 3);
-            this.tb_Encrypt_IV_En.Name = "tb_Encrypt_IV_En";
-            this.tb_Encrypt_IV_En.Size = new System.Drawing.Size(184, 27);
-            this.tb_Encrypt_IV_En.TabIndex = 14;
-            this.tb_Encrypt_IV_En.Text = "1s2o4f5t";
+            tb_Encrypt_IV_En.Dock = DockStyle.Fill;
+            tb_Encrypt_IV_En.Location = new Point(68, 3);
+            tb_Encrypt_IV_En.Name = "tb_Encrypt_IV_En";
+            tb_Encrypt_IV_En.Size = new Size(184, 27);
+            tb_Encrypt_IV_En.TabIndex = 14;
+            tb_Encrypt_IV_En.Text = "1s2o4f5t";
             // 
             // lbl_Encrypt_iv
             // 
-            this.lbl_Encrypt_iv.AutoSize = true;
-            this.lbl_Encrypt_iv.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_Encrypt_iv.Location = new System.Drawing.Point(3, 0);
-            this.lbl_Encrypt_iv.Name = "lbl_Encrypt_iv";
-            this.lbl_Encrypt_iv.Size = new System.Drawing.Size(59, 32);
-            this.lbl_Encrypt_iv.TabIndex = 15;
-            this.lbl_Encrypt_iv.Text = "偏移：";
+            lbl_Encrypt_iv.AutoSize = true;
+            lbl_Encrypt_iv.Dock = DockStyle.Fill;
+            lbl_Encrypt_iv.Location = new Point(3, 0);
+            lbl_Encrypt_iv.Name = "lbl_Encrypt_iv";
+            lbl_Encrypt_iv.Size = new Size(59, 32);
+            lbl_Encrypt_iv.TabIndex = 15;
+            lbl_Encrypt_iv.Text = "偏移：";
             // 
             // lbl_Encrypt_Des1
             // 
-            this.lbl_Encrypt_Des1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lbl_Encrypt_Des1.Location = new System.Drawing.Point(68, 0);
-            this.lbl_Encrypt_Des1.Name = "lbl_Encrypt_Des1";
-            this.lbl_Encrypt_Des1.Size = new System.Drawing.Size(200, 25);
-            this.lbl_Encrypt_Des1.TabIndex = 19;
-            this.lbl_Encrypt_Des1.Text = "加密用（KEY IV）";
-            this.lbl_Encrypt_Des1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lbl_Encrypt_Des1.Dock = DockStyle.Right;
+            lbl_Encrypt_Des1.Location = new Point(68, 0);
+            lbl_Encrypt_Des1.Name = "lbl_Encrypt_Des1";
+            lbl_Encrypt_Des1.Size = new Size(200, 25);
+            lbl_Encrypt_Des1.TabIndex = 19;
+            lbl_Encrypt_Des1.Text = "加密用（KEY IV）";
+            lbl_Encrypt_Des1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lbl_Encrypt_Des2
             // 
-            this.lbl_Encrypt_Des2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lbl_Encrypt_Des2.Location = new System.Drawing.Point(365, 0);
-            this.lbl_Encrypt_Des2.Name = "lbl_Encrypt_Des2";
-            this.lbl_Encrypt_Des2.Size = new System.Drawing.Size(200, 25);
-            this.lbl_Encrypt_Des2.TabIndex = 20;
-            this.lbl_Encrypt_Des2.Text = "解密用（KEY IV）";
-            this.lbl_Encrypt_Des2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lbl_Encrypt_Des2.Dock = DockStyle.Left;
+            lbl_Encrypt_Des2.Location = new Point(365, 0);
+            lbl_Encrypt_Des2.Name = "lbl_Encrypt_Des2";
+            lbl_Encrypt_Des2.Size = new Size(200, 25);
+            lbl_Encrypt_Des2.TabIndex = 20;
+            lbl_Encrypt_Des2.Text = "解密用（KEY IV）";
+            lbl_Encrypt_Des2.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.Lavender;
-            this.panel3.Controls.Add(this.tlp_Dichotomy);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(3, 403);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(634, 395);
-            this.panel3.TabIndex = 2;
+            panel3.BackColor = Color.Lavender;
+            panel3.Controls.Add(tlp_Dichotomy);
+            panel3.Dock = DockStyle.Fill;
+            panel3.Location = new Point(3, 403);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(634, 395);
+            panel3.TabIndex = 2;
             // 
             // tlp_Dichotomy
             // 
-            this.tlp_Dichotomy.ColumnCount = 3;
-            this.tlp_Dichotomy.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tlp_Dichotomy.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlp_Dichotomy.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tlp_Dichotomy.Controls.Add(this.rtb_Dichotomy_Source, 0, 0);
-            this.tlp_Dichotomy.Controls.Add(this.rtb_Dichotomy_Distination, 2, 0);
-            this.tlp_Dichotomy.Controls.Add(this.tlp_Dichotomy_Operate, 1, 0);
-            this.tlp_Dichotomy.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_Dichotomy.Location = new System.Drawing.Point(0, 0);
-            this.tlp_Dichotomy.Name = "tlp_Dichotomy";
-            this.tlp_Dichotomy.RowCount = 1;
-            this.tlp_Dichotomy.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp_Dichotomy.Size = new System.Drawing.Size(634, 395);
-            this.tlp_Dichotomy.TabIndex = 0;
+            tlp_Dichotomy.ColumnCount = 3;
+            tlp_Dichotomy.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
+            tlp_Dichotomy.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            tlp_Dichotomy.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
+            tlp_Dichotomy.Controls.Add(rtb_Dichotomy_Source, 0, 0);
+            tlp_Dichotomy.Controls.Add(rtb_Dichotomy_Distination, 2, 0);
+            tlp_Dichotomy.Controls.Add(tlp_Dichotomy_Operate, 1, 0);
+            tlp_Dichotomy.Dock = DockStyle.Fill;
+            tlp_Dichotomy.Location = new Point(0, 0);
+            tlp_Dichotomy.Name = "tlp_Dichotomy";
+            tlp_Dichotomy.RowCount = 1;
+            tlp_Dichotomy.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tlp_Dichotomy.Size = new Size(634, 395);
+            tlp_Dichotomy.TabIndex = 0;
             // 
             // rtb_Dichotomy_Source
             // 
-            this.rtb_Dichotomy_Source.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_Dichotomy_Source.Location = new System.Drawing.Point(3, 3);
-            this.rtb_Dichotomy_Source.Name = "rtb_Dichotomy_Source";
-            this.rtb_Dichotomy_Source.Size = new System.Drawing.Size(247, 389);
-            this.rtb_Dichotomy_Source.TabIndex = 0;
-            this.rtb_Dichotomy_Source.Text = "";
+            rtb_Dichotomy_Source.Dock = DockStyle.Fill;
+            rtb_Dichotomy_Source.Location = new Point(3, 3);
+            rtb_Dichotomy_Source.Name = "rtb_Dichotomy_Source";
+            rtb_Dichotomy_Source.Size = new Size(247, 389);
+            rtb_Dichotomy_Source.TabIndex = 0;
+            rtb_Dichotomy_Source.Text = "";
             // 
             // rtb_Dichotomy_Distination
             // 
-            this.rtb_Dichotomy_Distination.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_Dichotomy_Distination.Location = new System.Drawing.Point(382, 3);
-            this.rtb_Dichotomy_Distination.Name = "rtb_Dichotomy_Distination";
-            this.rtb_Dichotomy_Distination.Size = new System.Drawing.Size(249, 389);
-            this.rtb_Dichotomy_Distination.TabIndex = 1;
-            this.rtb_Dichotomy_Distination.Text = "";
+            rtb_Dichotomy_Distination.Dock = DockStyle.Fill;
+            rtb_Dichotomy_Distination.Location = new Point(382, 3);
+            rtb_Dichotomy_Distination.Name = "rtb_Dichotomy_Distination";
+            rtb_Dichotomy_Distination.Size = new Size(249, 389);
+            rtb_Dichotomy_Distination.TabIndex = 1;
+            rtb_Dichotomy_Distination.Text = "";
             // 
             // tlp_Dichotomy_Operate
             // 
-            this.tlp_Dichotomy_Operate.ColumnCount = 1;
-            this.tlp_Dichotomy_Operate.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp_Dichotomy_Operate.Controls.Add(this.btn_Dichotomy_UpHalf, 0, 0);
-            this.tlp_Dichotomy_Operate.Controls.Add(this.btn_Dichotomy_DownHalf, 0, 1);
-            this.tlp_Dichotomy_Operate.Controls.Add(this.btn_Dichotomy_WriteBack, 0, 2);
-            this.tlp_Dichotomy_Operate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_Dichotomy_Operate.Location = new System.Drawing.Point(256, 3);
-            this.tlp_Dichotomy_Operate.Name = "tlp_Dichotomy_Operate";
-            this.tlp_Dichotomy_Operate.RowCount = 10;
-            this.tlp_Dichotomy_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_Dichotomy_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_Dichotomy_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_Dichotomy_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_Dichotomy_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_Dichotomy_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_Dichotomy_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_Dichotomy_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_Dichotomy_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_Dichotomy_Operate.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlp_Dichotomy_Operate.Size = new System.Drawing.Size(120, 389);
-            this.tlp_Dichotomy_Operate.TabIndex = 2;
+            tlp_Dichotomy_Operate.ColumnCount = 1;
+            tlp_Dichotomy_Operate.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tlp_Dichotomy_Operate.Controls.Add(btn_Dichotomy_UpHalf, 0, 0);
+            tlp_Dichotomy_Operate.Controls.Add(btn_Dichotomy_DownHalf, 0, 1);
+            tlp_Dichotomy_Operate.Controls.Add(btn_Dichotomy_WriteBack, 0, 2);
+            tlp_Dichotomy_Operate.Dock = DockStyle.Fill;
+            tlp_Dichotomy_Operate.Location = new Point(256, 3);
+            tlp_Dichotomy_Operate.Name = "tlp_Dichotomy_Operate";
+            tlp_Dichotomy_Operate.RowCount = 10;
+            tlp_Dichotomy_Operate.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+            tlp_Dichotomy_Operate.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+            tlp_Dichotomy_Operate.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+            tlp_Dichotomy_Operate.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+            tlp_Dichotomy_Operate.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+            tlp_Dichotomy_Operate.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+            tlp_Dichotomy_Operate.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+            tlp_Dichotomy_Operate.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+            tlp_Dichotomy_Operate.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+            tlp_Dichotomy_Operate.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+            tlp_Dichotomy_Operate.Size = new Size(120, 389);
+            tlp_Dichotomy_Operate.TabIndex = 2;
             // 
             // btn_Dichotomy_UpHalf
             // 
-            this.btn_Dichotomy_UpHalf.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_Dichotomy_UpHalf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Dichotomy_UpHalf.Location = new System.Drawing.Point(3, 3);
-            this.btn_Dichotomy_UpHalf.Name = "btn_Dichotomy_UpHalf";
-            this.btn_Dichotomy_UpHalf.Size = new System.Drawing.Size(114, 32);
-            this.btn_Dichotomy_UpHalf.TabIndex = 3;
-            this.btn_Dichotomy_UpHalf.Text = "上半部分->";
-            this.btn_Dichotomy_UpHalf.UseVisualStyleBackColor = true;
-            this.btn_Dichotomy_UpHalf.Click += new System.EventHandler(this.btn_Dichotomy_UpHalf_Click);
+            btn_Dichotomy_UpHalf.Dock = DockStyle.Fill;
+            btn_Dichotomy_UpHalf.FlatStyle = FlatStyle.Flat;
+            btn_Dichotomy_UpHalf.Location = new Point(3, 3);
+            btn_Dichotomy_UpHalf.Name = "btn_Dichotomy_UpHalf";
+            btn_Dichotomy_UpHalf.Size = new Size(114, 32);
+            btn_Dichotomy_UpHalf.TabIndex = 3;
+            btn_Dichotomy_UpHalf.Text = "上半部分->";
+            btn_Dichotomy_UpHalf.UseVisualStyleBackColor = true;
+            btn_Dichotomy_UpHalf.Click += btn_Dichotomy_UpHalf_Click;
             // 
             // btn_Dichotomy_DownHalf
             // 
-            this.btn_Dichotomy_DownHalf.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_Dichotomy_DownHalf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Dichotomy_DownHalf.Location = new System.Drawing.Point(3, 41);
-            this.btn_Dichotomy_DownHalf.Name = "btn_Dichotomy_DownHalf";
-            this.btn_Dichotomy_DownHalf.Size = new System.Drawing.Size(114, 32);
-            this.btn_Dichotomy_DownHalf.TabIndex = 4;
-            this.btn_Dichotomy_DownHalf.Text = "下半部分->";
-            this.btn_Dichotomy_DownHalf.UseVisualStyleBackColor = true;
-            this.btn_Dichotomy_DownHalf.Click += new System.EventHandler(this.btn_Dichotomy_DownHalf_Click);
+            btn_Dichotomy_DownHalf.Dock = DockStyle.Fill;
+            btn_Dichotomy_DownHalf.FlatStyle = FlatStyle.Flat;
+            btn_Dichotomy_DownHalf.Location = new Point(3, 41);
+            btn_Dichotomy_DownHalf.Name = "btn_Dichotomy_DownHalf";
+            btn_Dichotomy_DownHalf.Size = new Size(114, 32);
+            btn_Dichotomy_DownHalf.TabIndex = 4;
+            btn_Dichotomy_DownHalf.Text = "下半部分->";
+            btn_Dichotomy_DownHalf.UseVisualStyleBackColor = true;
+            btn_Dichotomy_DownHalf.Click += btn_Dichotomy_DownHalf_Click;
             // 
             // btn_Dichotomy_WriteBack
             // 
-            this.btn_Dichotomy_WriteBack.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_Dichotomy_WriteBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Dichotomy_WriteBack.Location = new System.Drawing.Point(3, 79);
-            this.btn_Dichotomy_WriteBack.Name = "btn_Dichotomy_WriteBack";
-            this.btn_Dichotomy_WriteBack.Size = new System.Drawing.Size(114, 32);
-            this.btn_Dichotomy_WriteBack.TabIndex = 5;
-            this.btn_Dichotomy_WriteBack.Text = "<-回写";
-            this.btn_Dichotomy_WriteBack.UseVisualStyleBackColor = true;
-            this.btn_Dichotomy_WriteBack.Click += new System.EventHandler(this.btn_Dichotomy_WriteBack_Click);
+            btn_Dichotomy_WriteBack.Dock = DockStyle.Fill;
+            btn_Dichotomy_WriteBack.FlatStyle = FlatStyle.Flat;
+            btn_Dichotomy_WriteBack.Location = new Point(3, 79);
+            btn_Dichotomy_WriteBack.Name = "btn_Dichotomy_WriteBack";
+            btn_Dichotomy_WriteBack.Size = new Size(114, 32);
+            btn_Dichotomy_WriteBack.TabIndex = 5;
+            btn_Dichotomy_WriteBack.Text = "<-回写";
+            btn_Dichotomy_WriteBack.UseVisualStyleBackColor = true;
+            btn_Dichotomy_WriteBack.Click += btn_Dichotomy_WriteBack_Click;
             // 
             // panel4
             // 
-            this.panel4.BackColor = System.Drawing.Color.LightYellow;
-            this.panel4.Controls.Add(this.tableLayoutPanel1);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(643, 403);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(634, 395);
-            this.panel4.TabIndex = 3;
+            panel4.BackColor = Color.LightYellow;
+            panel4.Controls.Add(tableLayoutPanel1);
+            panel4.Dock = DockStyle.Fill;
+            panel4.Location = new Point(643, 403);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(634, 395);
+            panel4.TabIndex = 3;
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.tlp_CodeEnCryptJSDecrypt, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tlp_AES, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tlp_DES, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tlp_MD5, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel7, 1, 2);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(634, 395);
-            this.tableLayoutPanel1.TabIndex = 0;
+            tableLayoutPanel1.ColumnCount = 2;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.Controls.Add(tlp_CodeEnCryptJSDecrypt, 0, 0);
+            tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 1, 0);
+            tableLayoutPanel1.Controls.Add(tlp_AES, 0, 1);
+            tableLayoutPanel1.Controls.Add(tlp_DES, 1, 1);
+            tableLayoutPanel1.Controls.Add(tlp_MD5, 0, 2);
+            tableLayoutPanel1.Controls.Add(tableLayoutPanel7, 1, 2);
+            tableLayoutPanel1.Dock = DockStyle.Fill;
+            tableLayoutPanel1.Location = new Point(0, 0);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 3;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33333F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33333F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33333F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel1.Size = new Size(634, 395);
+            tableLayoutPanel1.TabIndex = 0;
             // 
             // tlp_CodeEnCryptJSDecrypt
             // 
-            this.tlp_CodeEnCryptJSDecrypt.ColumnCount = 2;
-            this.tlp_CodeEnCryptJSDecrypt.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlp_CodeEnCryptJSDecrypt.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tlp_CodeEnCryptJSDecrypt.Controls.Add(this.lbl_DE_Decrypt_NumberJS, 0, 3);
-            this.tlp_CodeEnCryptJSDecrypt.Controls.Add(this.tb_DE_Encrypt_NumberJS, 1, 3);
-            this.tlp_CodeEnCryptJSDecrypt.Controls.Add(this.lbl_DE_Encrypt_NumberJS, 0, 2);
-            this.tlp_CodeEnCryptJSDecrypt.Controls.Add(this.tb_DE_Decrypt_NumberJS, 1, 2);
-            this.tlp_CodeEnCryptJSDecrypt.Controls.Add(this.tb_DE_PassWord_NumberJS, 1, 1);
-            this.tlp_CodeEnCryptJSDecrypt.Controls.Add(this.lbl_DE_PassWord_NumberJS, 0, 1);
-            this.tlp_CodeEnCryptJSDecrypt.Controls.Add(this.lbl_DE_Remark_NumberJS, 1, 0);
-            this.tlp_CodeEnCryptJSDecrypt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_CodeEnCryptJSDecrypt.Location = new System.Drawing.Point(3, 3);
-            this.tlp_CodeEnCryptJSDecrypt.Name = "tlp_CodeEnCryptJSDecrypt";
-            this.tlp_CodeEnCryptJSDecrypt.RowCount = 4;
-            this.tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlp_CodeEnCryptJSDecrypt.Size = new System.Drawing.Size(311, 125);
-            this.tlp_CodeEnCryptJSDecrypt.TabIndex = 1;
+            tlp_CodeEnCryptJSDecrypt.ColumnCount = 2;
+            tlp_CodeEnCryptJSDecrypt.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            tlp_CodeEnCryptJSDecrypt.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 80F));
+            tlp_CodeEnCryptJSDecrypt.Controls.Add(lbl_DE_Decrypt_NumberJS, 0, 3);
+            tlp_CodeEnCryptJSDecrypt.Controls.Add(tb_DE_Encrypt_NumberJS, 1, 3);
+            tlp_CodeEnCryptJSDecrypt.Controls.Add(lbl_DE_Encrypt_NumberJS, 0, 2);
+            tlp_CodeEnCryptJSDecrypt.Controls.Add(tb_DE_Decrypt_NumberJS, 1, 2);
+            tlp_CodeEnCryptJSDecrypt.Controls.Add(tb_DE_PassWord_NumberJS, 1, 1);
+            tlp_CodeEnCryptJSDecrypt.Controls.Add(lbl_DE_PassWord_NumberJS, 0, 1);
+            tlp_CodeEnCryptJSDecrypt.Controls.Add(lbl_DE_Remark_NumberJS, 1, 0);
+            tlp_CodeEnCryptJSDecrypt.Dock = DockStyle.Fill;
+            tlp_CodeEnCryptJSDecrypt.Location = new Point(3, 3);
+            tlp_CodeEnCryptJSDecrypt.Name = "tlp_CodeEnCryptJSDecrypt";
+            tlp_CodeEnCryptJSDecrypt.RowCount = 4;
+            tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tlp_CodeEnCryptJSDecrypt.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tlp_CodeEnCryptJSDecrypt.Size = new Size(311, 125);
+            tlp_CodeEnCryptJSDecrypt.TabIndex = 1;
             // 
             // lbl_DE_Decrypt_NumberJS
             // 
-            this.lbl_DE_Decrypt_NumberJS.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_DE_Decrypt_NumberJS.Location = new System.Drawing.Point(3, 93);
-            this.lbl_DE_Decrypt_NumberJS.Name = "lbl_DE_Decrypt_NumberJS";
-            this.lbl_DE_Decrypt_NumberJS.Size = new System.Drawing.Size(56, 32);
-            this.lbl_DE_Decrypt_NumberJS.TabIndex = 2;
-            this.lbl_DE_Decrypt_NumberJS.Text = "密文：";
-            this.lbl_DE_Decrypt_NumberJS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lbl_DE_Decrypt_NumberJS.Dock = DockStyle.Fill;
+            lbl_DE_Decrypt_NumberJS.Location = new Point(3, 93);
+            lbl_DE_Decrypt_NumberJS.Name = "lbl_DE_Decrypt_NumberJS";
+            lbl_DE_Decrypt_NumberJS.Size = new Size(56, 32);
+            lbl_DE_Decrypt_NumberJS.TabIndex = 2;
+            lbl_DE_Decrypt_NumberJS.Text = "密文：";
+            lbl_DE_Decrypt_NumberJS.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tb_DE_Encrypt_NumberJS
             // 
-            this.tb_DE_Encrypt_NumberJS.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_DE_Encrypt_NumberJS.Location = new System.Drawing.Point(65, 96);
-            this.tb_DE_Encrypt_NumberJS.Name = "tb_DE_Encrypt_NumberJS";
-            this.tb_DE_Encrypt_NumberJS.ReadOnly = true;
-            this.tb_DE_Encrypt_NumberJS.Size = new System.Drawing.Size(243, 27);
-            this.tb_DE_Encrypt_NumberJS.TabIndex = 3;
+            tb_DE_Encrypt_NumberJS.Dock = DockStyle.Fill;
+            tb_DE_Encrypt_NumberJS.Location = new Point(65, 96);
+            tb_DE_Encrypt_NumberJS.Name = "tb_DE_Encrypt_NumberJS";
+            tb_DE_Encrypt_NumberJS.ReadOnly = true;
+            tb_DE_Encrypt_NumberJS.Size = new Size(243, 27);
+            tb_DE_Encrypt_NumberJS.TabIndex = 3;
             // 
             // lbl_DE_Encrypt_NumberJS
             // 
-            this.lbl_DE_Encrypt_NumberJS.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_DE_Encrypt_NumberJS.Location = new System.Drawing.Point(3, 62);
-            this.lbl_DE_Encrypt_NumberJS.Name = "lbl_DE_Encrypt_NumberJS";
-            this.lbl_DE_Encrypt_NumberJS.Size = new System.Drawing.Size(56, 31);
-            this.lbl_DE_Encrypt_NumberJS.TabIndex = 1;
-            this.lbl_DE_Encrypt_NumberJS.Text = "明文：";
-            this.lbl_DE_Encrypt_NumberJS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lbl_DE_Encrypt_NumberJS.Dock = DockStyle.Fill;
+            lbl_DE_Encrypt_NumberJS.Location = new Point(3, 62);
+            lbl_DE_Encrypt_NumberJS.Name = "lbl_DE_Encrypt_NumberJS";
+            lbl_DE_Encrypt_NumberJS.Size = new Size(56, 31);
+            lbl_DE_Encrypt_NumberJS.TabIndex = 1;
+            lbl_DE_Encrypt_NumberJS.Text = "明文：";
+            lbl_DE_Encrypt_NumberJS.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tb_DE_Decrypt_NumberJS
             // 
-            this.tb_DE_Decrypt_NumberJS.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_DE_Decrypt_NumberJS.Location = new System.Drawing.Point(65, 65);
-            this.tb_DE_Decrypt_NumberJS.Name = "tb_DE_Decrypt_NumberJS";
-            this.tb_DE_Decrypt_NumberJS.Size = new System.Drawing.Size(243, 27);
-            this.tb_DE_Decrypt_NumberJS.TabIndex = 3;
-            this.tb_DE_Decrypt_NumberJS.TextChanged += new System.EventHandler(this.tb_DE_Decrypt_NumberJS_TextChanged);
+            tb_DE_Decrypt_NumberJS.Dock = DockStyle.Fill;
+            tb_DE_Decrypt_NumberJS.Location = new Point(65, 65);
+            tb_DE_Decrypt_NumberJS.Name = "tb_DE_Decrypt_NumberJS";
+            tb_DE_Decrypt_NumberJS.Size = new Size(243, 27);
+            tb_DE_Decrypt_NumberJS.TabIndex = 3;
+            tb_DE_Decrypt_NumberJS.TextChanged += tb_DE_Decrypt_NumberJS_TextChanged;
             // 
             // tb_DE_PassWord_NumberJS
             // 
-            this.tb_DE_PassWord_NumberJS.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_DE_PassWord_NumberJS.Location = new System.Drawing.Point(65, 34);
-            this.tb_DE_PassWord_NumberJS.Name = "tb_DE_PassWord_NumberJS";
-            this.tb_DE_PassWord_NumberJS.Size = new System.Drawing.Size(243, 27);
-            this.tb_DE_PassWord_NumberJS.TabIndex = 3;
-            this.tb_DE_PassWord_NumberJS.Text = "isoftstone";
+            tb_DE_PassWord_NumberJS.Dock = DockStyle.Fill;
+            tb_DE_PassWord_NumberJS.Location = new Point(65, 34);
+            tb_DE_PassWord_NumberJS.Name = "tb_DE_PassWord_NumberJS";
+            tb_DE_PassWord_NumberJS.Size = new Size(243, 27);
+            tb_DE_PassWord_NumberJS.TabIndex = 3;
+            tb_DE_PassWord_NumberJS.Text = "isoftstone";
             // 
             // lbl_DE_PassWord_NumberJS
             // 
-            this.lbl_DE_PassWord_NumberJS.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_DE_PassWord_NumberJS.Location = new System.Drawing.Point(3, 31);
-            this.lbl_DE_PassWord_NumberJS.Name = "lbl_DE_PassWord_NumberJS";
-            this.lbl_DE_PassWord_NumberJS.Size = new System.Drawing.Size(56, 31);
-            this.lbl_DE_PassWord_NumberJS.TabIndex = 0;
-            this.lbl_DE_PassWord_NumberJS.Text = "秘钥：";
-            this.lbl_DE_PassWord_NumberJS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lbl_DE_PassWord_NumberJS.Dock = DockStyle.Fill;
+            lbl_DE_PassWord_NumberJS.Location = new Point(3, 31);
+            lbl_DE_PassWord_NumberJS.Name = "lbl_DE_PassWord_NumberJS";
+            lbl_DE_PassWord_NumberJS.Size = new Size(56, 31);
+            lbl_DE_PassWord_NumberJS.TabIndex = 0;
+            lbl_DE_PassWord_NumberJS.Text = "秘钥：";
+            lbl_DE_PassWord_NumberJS.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lbl_DE_Remark_NumberJS
             // 
-            this.lbl_DE_Remark_NumberJS.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_DE_Remark_NumberJS.Location = new System.Drawing.Point(65, 0);
-            this.lbl_DE_Remark_NumberJS.Name = "lbl_DE_Remark_NumberJS";
-            this.lbl_DE_Remark_NumberJS.Size = new System.Drawing.Size(243, 31);
-            this.lbl_DE_Remark_NumberJS.TabIndex = 4;
-            this.lbl_DE_Remark_NumberJS.Text = "加密成数字JS解密";
-            this.lbl_DE_Remark_NumberJS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lbl_DE_Remark_NumberJS.Dock = DockStyle.Fill;
+            lbl_DE_Remark_NumberJS.Location = new Point(65, 0);
+            lbl_DE_Remark_NumberJS.Name = "lbl_DE_Remark_NumberJS";
+            lbl_DE_Remark_NumberJS.Size = new Size(243, 31);
+            lbl_DE_Remark_NumberJS.TabIndex = 4;
+            lbl_DE_Remark_NumberJS.Text = "加密成数字JS解密";
+            lbl_DE_Remark_NumberJS.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.textBox1, 1, 3);
-            this.tableLayoutPanel2.Controls.Add(this.label2, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.textBox2, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.textBox3, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label3, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label18, 1, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(320, 3);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 4;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(311, 125);
-            this.tableLayoutPanel2.TabIndex = 1;
+            tableLayoutPanel2.ColumnCount = 2;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 80F));
+            tableLayoutPanel2.Controls.Add(label1, 0, 3);
+            tableLayoutPanel2.Controls.Add(textBox1, 1, 3);
+            tableLayoutPanel2.Controls.Add(label2, 0, 2);
+            tableLayoutPanel2.Controls.Add(textBox2, 1, 2);
+            tableLayoutPanel2.Controls.Add(textBox3, 1, 1);
+            tableLayoutPanel2.Controls.Add(label3, 0, 1);
+            tableLayoutPanel2.Controls.Add(label18, 1, 0);
+            tableLayoutPanel2.Dock = DockStyle.Fill;
+            tableLayoutPanel2.Location = new Point(320, 3);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 4;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tableLayoutPanel2.Size = new Size(311, 125);
+            tableLayoutPanel2.TabIndex = 1;
             // 
             // label1
             // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(3, 93);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 32);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "密文：";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label1.Dock = DockStyle.Fill;
+            label1.Location = new Point(3, 93);
+            label1.Name = "label1";
+            label1.Size = new Size(56, 32);
+            label1.TabIndex = 2;
+            label1.Text = "密文：";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // textBox1
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(65, 96);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(243, 27);
-            this.textBox1.TabIndex = 3;
+            textBox1.Dock = DockStyle.Fill;
+            textBox1.Location = new Point(65, 96);
+            textBox1.Name = "textBox1";
+            textBox1.ReadOnly = true;
+            textBox1.Size = new Size(243, 27);
+            textBox1.TabIndex = 3;
             // 
             // label2
             // 
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(3, 62);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 31);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "明文：";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label2.Dock = DockStyle.Fill;
+            label2.Location = new Point(3, 62);
+            label2.Name = "label2";
+            label2.Size = new Size(56, 31);
+            label2.TabIndex = 1;
+            label2.Text = "明文：";
+            label2.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // textBox2
             // 
-            this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox2.Location = new System.Drawing.Point(65, 65);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(243, 27);
-            this.textBox2.TabIndex = 3;
+            textBox2.Dock = DockStyle.Fill;
+            textBox2.Location = new Point(65, 65);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(243, 27);
+            textBox2.TabIndex = 3;
             // 
             // textBox3
             // 
-            this.textBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox3.Location = new System.Drawing.Point(65, 34);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(243, 27);
-            this.textBox3.TabIndex = 3;
+            textBox3.Dock = DockStyle.Fill;
+            textBox3.Location = new Point(65, 34);
+            textBox3.Name = "textBox3";
+            textBox3.Size = new Size(243, 27);
+            textBox3.TabIndex = 3;
             // 
             // label3
             // 
-            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(3, 31);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 31);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "秘钥：";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label3.Dock = DockStyle.Fill;
+            label3.Location = new Point(3, 31);
+            label3.Name = "label3";
+            label3.Size = new Size(56, 31);
+            label3.TabIndex = 0;
+            label3.Text = "秘钥：";
+            label3.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label18
             // 
-            this.label18.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label18.Location = new System.Drawing.Point(65, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(243, 31);
-            this.label18.TabIndex = 4;
-            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label18.Dock = DockStyle.Fill;
+            label18.Location = new Point(65, 0);
+            label18.Name = "label18";
+            label18.Size = new Size(243, 31);
+            label18.TabIndex = 4;
+            label18.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tlp_AES
             // 
-            this.tlp_AES.ColumnCount = 2;
-            this.tlp_AES.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlp_AES.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tlp_AES.Controls.Add(this.tb_DE_PassWord_AES, 1, 1);
-            this.tlp_AES.Controls.Add(this.lbl_DE_Decrypt_AES, 0, 3);
-            this.tlp_AES.Controls.Add(this.tb_DE_Encrypt_AES, 1, 3);
-            this.tlp_AES.Controls.Add(this.lbl_DE_Encrypt_AES, 0, 2);
-            this.tlp_AES.Controls.Add(this.tb_DE_Decrypt_AES, 1, 2);
-            this.tlp_AES.Controls.Add(this.lbl_DE_PassWord_AES, 0, 1);
-            this.tlp_AES.Controls.Add(this.lbl_DE_Remark_AES, 1, 0);
-            this.tlp_AES.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_AES.Location = new System.Drawing.Point(3, 134);
-            this.tlp_AES.Name = "tlp_AES";
-            this.tlp_AES.RowCount = 4;
-            this.tlp_AES.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlp_AES.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlp_AES.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlp_AES.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlp_AES.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlp_AES.Size = new System.Drawing.Size(311, 125);
-            this.tlp_AES.TabIndex = 1;
+            tlp_AES.ColumnCount = 2;
+            tlp_AES.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            tlp_AES.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 80F));
+            tlp_AES.Controls.Add(tb_DE_PassWord_AES, 1, 1);
+            tlp_AES.Controls.Add(lbl_DE_Decrypt_AES, 0, 3);
+            tlp_AES.Controls.Add(tb_DE_Encrypt_AES, 1, 3);
+            tlp_AES.Controls.Add(lbl_DE_Encrypt_AES, 0, 2);
+            tlp_AES.Controls.Add(tb_DE_Decrypt_AES, 1, 2);
+            tlp_AES.Controls.Add(lbl_DE_PassWord_AES, 0, 1);
+            tlp_AES.Controls.Add(lbl_DE_Remark_AES, 1, 0);
+            tlp_AES.Dock = DockStyle.Fill;
+            tlp_AES.Location = new Point(3, 134);
+            tlp_AES.Name = "tlp_AES";
+            tlp_AES.RowCount = 4;
+            tlp_AES.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tlp_AES.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tlp_AES.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tlp_AES.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tlp_AES.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tlp_AES.Size = new Size(311, 125);
+            tlp_AES.TabIndex = 1;
             // 
             // tb_DE_PassWord_AES
             // 
-            this.tb_DE_PassWord_AES.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_DE_PassWord_AES.Font = new System.Drawing.Font("Microsoft YaHei UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tb_DE_PassWord_AES.Location = new System.Drawing.Point(65, 34);
-            this.tb_DE_PassWord_AES.Name = "tb_DE_PassWord_AES";
-            this.tb_DE_PassWord_AES.Size = new System.Drawing.Size(243, 22);
-            this.tb_DE_PassWord_AES.TabIndex = 6;
-            this.tb_DE_PassWord_AES.Text = "F45637A003E44C05BB498FF0CFA0BF48";
+            tb_DE_PassWord_AES.Dock = DockStyle.Fill;
+            tb_DE_PassWord_AES.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            tb_DE_PassWord_AES.Location = new Point(65, 34);
+            tb_DE_PassWord_AES.Name = "tb_DE_PassWord_AES";
+            tb_DE_PassWord_AES.Size = new Size(243, 22);
+            tb_DE_PassWord_AES.TabIndex = 6;
+            tb_DE_PassWord_AES.Text = "F45637A003E44C05BB498FF0CFA0BF48";
             // 
             // lbl_DE_Decrypt_AES
             // 
-            this.lbl_DE_Decrypt_AES.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_DE_Decrypt_AES.Location = new System.Drawing.Point(3, 93);
-            this.lbl_DE_Decrypt_AES.Name = "lbl_DE_Decrypt_AES";
-            this.lbl_DE_Decrypt_AES.Size = new System.Drawing.Size(56, 32);
-            this.lbl_DE_Decrypt_AES.TabIndex = 2;
-            this.lbl_DE_Decrypt_AES.Text = "密文：";
-            this.lbl_DE_Decrypt_AES.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lbl_DE_Decrypt_AES.Dock = DockStyle.Fill;
+            lbl_DE_Decrypt_AES.Location = new Point(3, 93);
+            lbl_DE_Decrypt_AES.Name = "lbl_DE_Decrypt_AES";
+            lbl_DE_Decrypt_AES.Size = new Size(56, 32);
+            lbl_DE_Decrypt_AES.TabIndex = 2;
+            lbl_DE_Decrypt_AES.Text = "密文：";
+            lbl_DE_Decrypt_AES.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tb_DE_Encrypt_AES
             // 
-            this.tb_DE_Encrypt_AES.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_DE_Encrypt_AES.Location = new System.Drawing.Point(65, 96);
-            this.tb_DE_Encrypt_AES.Name = "tb_DE_Encrypt_AES";
-            this.tb_DE_Encrypt_AES.ReadOnly = true;
-            this.tb_DE_Encrypt_AES.Size = new System.Drawing.Size(243, 27);
-            this.tb_DE_Encrypt_AES.TabIndex = 3;
+            tb_DE_Encrypt_AES.Dock = DockStyle.Fill;
+            tb_DE_Encrypt_AES.Location = new Point(65, 96);
+            tb_DE_Encrypt_AES.Name = "tb_DE_Encrypt_AES";
+            tb_DE_Encrypt_AES.ReadOnly = true;
+            tb_DE_Encrypt_AES.Size = new Size(243, 27);
+            tb_DE_Encrypt_AES.TabIndex = 3;
             // 
             // lbl_DE_Encrypt_AES
             // 
-            this.lbl_DE_Encrypt_AES.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_DE_Encrypt_AES.Location = new System.Drawing.Point(3, 62);
-            this.lbl_DE_Encrypt_AES.Name = "lbl_DE_Encrypt_AES";
-            this.lbl_DE_Encrypt_AES.Size = new System.Drawing.Size(56, 31);
-            this.lbl_DE_Encrypt_AES.TabIndex = 1;
-            this.lbl_DE_Encrypt_AES.Text = "明文：";
-            this.lbl_DE_Encrypt_AES.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lbl_DE_Encrypt_AES.Dock = DockStyle.Fill;
+            lbl_DE_Encrypt_AES.Location = new Point(3, 62);
+            lbl_DE_Encrypt_AES.Name = "lbl_DE_Encrypt_AES";
+            lbl_DE_Encrypt_AES.Size = new Size(56, 31);
+            lbl_DE_Encrypt_AES.TabIndex = 1;
+            lbl_DE_Encrypt_AES.Text = "明文：";
+            lbl_DE_Encrypt_AES.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tb_DE_Decrypt_AES
             // 
-            this.tb_DE_Decrypt_AES.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_DE_Decrypt_AES.Location = new System.Drawing.Point(65, 65);
-            this.tb_DE_Decrypt_AES.Name = "tb_DE_Decrypt_AES";
-            this.tb_DE_Decrypt_AES.Size = new System.Drawing.Size(243, 27);
-            this.tb_DE_Decrypt_AES.TabIndex = 3;
-            this.tb_DE_Decrypt_AES.TextChanged += new System.EventHandler(this.tb_DE_Decrypt_AES_TextChanged);
+            tb_DE_Decrypt_AES.Dock = DockStyle.Fill;
+            tb_DE_Decrypt_AES.Location = new Point(65, 65);
+            tb_DE_Decrypt_AES.Name = "tb_DE_Decrypt_AES";
+            tb_DE_Decrypt_AES.Size = new Size(243, 27);
+            tb_DE_Decrypt_AES.TabIndex = 3;
+            tb_DE_Decrypt_AES.TextChanged += tb_DE_Decrypt_AES_TextChanged;
             // 
             // lbl_DE_PassWord_AES
             // 
-            this.lbl_DE_PassWord_AES.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_DE_PassWord_AES.Location = new System.Drawing.Point(3, 31);
-            this.lbl_DE_PassWord_AES.Name = "lbl_DE_PassWord_AES";
-            this.lbl_DE_PassWord_AES.Size = new System.Drawing.Size(56, 31);
-            this.lbl_DE_PassWord_AES.TabIndex = 0;
-            this.lbl_DE_PassWord_AES.Text = "秘钥：";
-            this.lbl_DE_PassWord_AES.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lbl_DE_PassWord_AES.Dock = DockStyle.Fill;
+            lbl_DE_PassWord_AES.Location = new Point(3, 31);
+            lbl_DE_PassWord_AES.Name = "lbl_DE_PassWord_AES";
+            lbl_DE_PassWord_AES.Size = new Size(56, 31);
+            lbl_DE_PassWord_AES.TabIndex = 0;
+            lbl_DE_PassWord_AES.Text = "秘钥：";
+            lbl_DE_PassWord_AES.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lbl_DE_Remark_AES
             // 
-            this.lbl_DE_Remark_AES.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_DE_Remark_AES.Location = new System.Drawing.Point(65, 0);
-            this.lbl_DE_Remark_AES.Name = "lbl_DE_Remark_AES";
-            this.lbl_DE_Remark_AES.Size = new System.Drawing.Size(243, 31);
-            this.lbl_DE_Remark_AES.TabIndex = 4;
-            this.lbl_DE_Remark_AES.Text = "AES";
-            this.lbl_DE_Remark_AES.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lbl_DE_Remark_AES.Dock = DockStyle.Fill;
+            lbl_DE_Remark_AES.Location = new Point(65, 0);
+            lbl_DE_Remark_AES.Name = "lbl_DE_Remark_AES";
+            lbl_DE_Remark_AES.Size = new Size(243, 31);
+            lbl_DE_Remark_AES.TabIndex = 4;
+            lbl_DE_Remark_AES.Text = "AES";
+            lbl_DE_Remark_AES.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tlp_DES
             // 
-            this.tlp_DES.ColumnCount = 2;
-            this.tlp_DES.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlp_DES.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tlp_DES.Controls.Add(this.lbl_DE_Decrypt_DES, 0, 3);
-            this.tlp_DES.Controls.Add(this.tb_DE_Encrypt_DES, 1, 3);
-            this.tlp_DES.Controls.Add(this.lbl_DE_Encrypt_DES, 0, 2);
-            this.tlp_DES.Controls.Add(this.tb_DE_Decrypt_DES, 1, 2);
-            this.tlp_DES.Controls.Add(this.lbl_DE_PassWord_DES, 0, 1);
-            this.tlp_DES.Controls.Add(this.lbl_DE_Remark_DES, 1, 0);
-            this.tlp_DES.Controls.Add(this.tableLayoutPanel3, 1, 1);
-            this.tlp_DES.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_DES.Location = new System.Drawing.Point(320, 134);
-            this.tlp_DES.Name = "tlp_DES";
-            this.tlp_DES.RowCount = 4;
-            this.tlp_DES.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlp_DES.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlp_DES.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlp_DES.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlp_DES.Size = new System.Drawing.Size(311, 125);
-            this.tlp_DES.TabIndex = 1;
+            tlp_DES.ColumnCount = 2;
+            tlp_DES.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            tlp_DES.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 80F));
+            tlp_DES.Controls.Add(lbl_DE_Decrypt_DES, 0, 3);
+            tlp_DES.Controls.Add(tb_DE_Encrypt_DES, 1, 3);
+            tlp_DES.Controls.Add(lbl_DE_Encrypt_DES, 0, 2);
+            tlp_DES.Controls.Add(tb_DE_Decrypt_DES, 1, 2);
+            tlp_DES.Controls.Add(lbl_DE_PassWord_DES, 0, 1);
+            tlp_DES.Controls.Add(lbl_DE_Remark_DES, 1, 0);
+            tlp_DES.Controls.Add(tableLayoutPanel3, 1, 1);
+            tlp_DES.Dock = DockStyle.Fill;
+            tlp_DES.Location = new Point(320, 134);
+            tlp_DES.Name = "tlp_DES";
+            tlp_DES.RowCount = 4;
+            tlp_DES.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tlp_DES.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tlp_DES.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tlp_DES.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tlp_DES.Size = new Size(311, 125);
+            tlp_DES.TabIndex = 1;
             // 
             // lbl_DE_Decrypt_DES
             // 
-            this.lbl_DE_Decrypt_DES.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_DE_Decrypt_DES.Location = new System.Drawing.Point(3, 93);
-            this.lbl_DE_Decrypt_DES.Name = "lbl_DE_Decrypt_DES";
-            this.lbl_DE_Decrypt_DES.Size = new System.Drawing.Size(56, 32);
-            this.lbl_DE_Decrypt_DES.TabIndex = 2;
-            this.lbl_DE_Decrypt_DES.Text = "密文：";
-            this.lbl_DE_Decrypt_DES.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lbl_DE_Decrypt_DES.Dock = DockStyle.Fill;
+            lbl_DE_Decrypt_DES.Location = new Point(3, 93);
+            lbl_DE_Decrypt_DES.Name = "lbl_DE_Decrypt_DES";
+            lbl_DE_Decrypt_DES.Size = new Size(56, 32);
+            lbl_DE_Decrypt_DES.TabIndex = 2;
+            lbl_DE_Decrypt_DES.Text = "密文：";
+            lbl_DE_Decrypt_DES.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tb_DE_Encrypt_DES
             // 
-            this.tb_DE_Encrypt_DES.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_DE_Encrypt_DES.Location = new System.Drawing.Point(65, 96);
-            this.tb_DE_Encrypt_DES.Name = "tb_DE_Encrypt_DES";
-            this.tb_DE_Encrypt_DES.ReadOnly = true;
-            this.tb_DE_Encrypt_DES.Size = new System.Drawing.Size(243, 27);
-            this.tb_DE_Encrypt_DES.TabIndex = 3;
+            tb_DE_Encrypt_DES.Dock = DockStyle.Fill;
+            tb_DE_Encrypt_DES.Location = new Point(65, 96);
+            tb_DE_Encrypt_DES.Name = "tb_DE_Encrypt_DES";
+            tb_DE_Encrypt_DES.ReadOnly = true;
+            tb_DE_Encrypt_DES.Size = new Size(243, 27);
+            tb_DE_Encrypt_DES.TabIndex = 3;
             // 
             // lbl_DE_Encrypt_DES
             // 
-            this.lbl_DE_Encrypt_DES.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_DE_Encrypt_DES.Location = new System.Drawing.Point(3, 62);
-            this.lbl_DE_Encrypt_DES.Name = "lbl_DE_Encrypt_DES";
-            this.lbl_DE_Encrypt_DES.Size = new System.Drawing.Size(56, 31);
-            this.lbl_DE_Encrypt_DES.TabIndex = 1;
-            this.lbl_DE_Encrypt_DES.Text = "明文：";
-            this.lbl_DE_Encrypt_DES.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lbl_DE_Encrypt_DES.Dock = DockStyle.Fill;
+            lbl_DE_Encrypt_DES.Location = new Point(3, 62);
+            lbl_DE_Encrypt_DES.Name = "lbl_DE_Encrypt_DES";
+            lbl_DE_Encrypt_DES.Size = new Size(56, 31);
+            lbl_DE_Encrypt_DES.TabIndex = 1;
+            lbl_DE_Encrypt_DES.Text = "明文：";
+            lbl_DE_Encrypt_DES.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tb_DE_Decrypt_DES
             // 
-            this.tb_DE_Decrypt_DES.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_DE_Decrypt_DES.Location = new System.Drawing.Point(65, 65);
-            this.tb_DE_Decrypt_DES.Name = "tb_DE_Decrypt_DES";
-            this.tb_DE_Decrypt_DES.Size = new System.Drawing.Size(243, 27);
-            this.tb_DE_Decrypt_DES.TabIndex = 3;
-            this.tb_DE_Decrypt_DES.TextChanged += new System.EventHandler(this.tb_DE_Decrypt_DES_TextChanged);
+            tb_DE_Decrypt_DES.Dock = DockStyle.Fill;
+            tb_DE_Decrypt_DES.Location = new Point(65, 65);
+            tb_DE_Decrypt_DES.Name = "tb_DE_Decrypt_DES";
+            tb_DE_Decrypt_DES.Size = new Size(243, 27);
+            tb_DE_Decrypt_DES.TabIndex = 3;
+            tb_DE_Decrypt_DES.TextChanged += tb_DE_Decrypt_DES_TextChanged;
             // 
             // lbl_DE_PassWord_DES
             // 
-            this.lbl_DE_PassWord_DES.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_DE_PassWord_DES.Location = new System.Drawing.Point(3, 31);
-            this.lbl_DE_PassWord_DES.Name = "lbl_DE_PassWord_DES";
-            this.lbl_DE_PassWord_DES.Size = new System.Drawing.Size(56, 31);
-            this.lbl_DE_PassWord_DES.TabIndex = 0;
-            this.lbl_DE_PassWord_DES.Text = "秘钥：";
-            this.lbl_DE_PassWord_DES.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lbl_DE_PassWord_DES.Dock = DockStyle.Fill;
+            lbl_DE_PassWord_DES.Location = new Point(3, 31);
+            lbl_DE_PassWord_DES.Name = "lbl_DE_PassWord_DES";
+            lbl_DE_PassWord_DES.Size = new Size(56, 31);
+            lbl_DE_PassWord_DES.TabIndex = 0;
+            lbl_DE_PassWord_DES.Text = "秘钥：";
+            lbl_DE_PassWord_DES.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lbl_DE_Remark_DES
             // 
-            this.lbl_DE_Remark_DES.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_DE_Remark_DES.Location = new System.Drawing.Point(65, 0);
-            this.lbl_DE_Remark_DES.Name = "lbl_DE_Remark_DES";
-            this.lbl_DE_Remark_DES.Size = new System.Drawing.Size(243, 31);
-            this.lbl_DE_Remark_DES.TabIndex = 4;
-            this.lbl_DE_Remark_DES.Text = "DES";
-            this.lbl_DE_Remark_DES.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lbl_DE_Remark_DES.Dock = DockStyle.Fill;
+            lbl_DE_Remark_DES.Location = new Point(65, 0);
+            lbl_DE_Remark_DES.Name = "lbl_DE_Remark_DES";
+            lbl_DE_Remark_DES.Size = new Size(243, 31);
+            lbl_DE_Remark_DES.TabIndex = 4;
+            lbl_DE_Remark_DES.Text = "DES";
+            lbl_DE_Remark_DES.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Controls.Add(this.tb_DE_PassWord_DES_Key, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.tb_DE_PassWord_DES_Iv, 1, 0);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(62, 31);
-            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 1;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(249, 31);
-            this.tableLayoutPanel3.TabIndex = 5;
+            tableLayoutPanel3.ColumnCount = 2;
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel3.Controls.Add(tb_DE_PassWord_DES_Key, 0, 0);
+            tableLayoutPanel3.Controls.Add(tb_DE_PassWord_DES_Iv, 1, 0);
+            tableLayoutPanel3.Dock = DockStyle.Fill;
+            tableLayoutPanel3.Location = new Point(62, 31);
+            tableLayoutPanel3.Margin = new Padding(0);
+            tableLayoutPanel3.Name = "tableLayoutPanel3";
+            tableLayoutPanel3.RowCount = 1;
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel3.Size = new Size(249, 31);
+            tableLayoutPanel3.TabIndex = 5;
             // 
             // tb_DE_PassWord_DES_Key
             // 
-            this.tb_DE_PassWord_DES_Key.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_DE_PassWord_DES_Key.Location = new System.Drawing.Point(3, 3);
-            this.tb_DE_PassWord_DES_Key.Name = "tb_DE_PassWord_DES_Key";
-            this.tb_DE_PassWord_DES_Key.Size = new System.Drawing.Size(118, 27);
-            this.tb_DE_PassWord_DES_Key.TabIndex = 4;
-            this.tb_DE_PassWord_DES_Key.Text = "omc4good";
+            tb_DE_PassWord_DES_Key.Dock = DockStyle.Fill;
+            tb_DE_PassWord_DES_Key.Location = new Point(3, 3);
+            tb_DE_PassWord_DES_Key.Name = "tb_DE_PassWord_DES_Key";
+            tb_DE_PassWord_DES_Key.Size = new Size(118, 27);
+            tb_DE_PassWord_DES_Key.TabIndex = 4;
+            tb_DE_PassWord_DES_Key.Text = "omc4good";
             // 
             // tb_DE_PassWord_DES_Iv
             // 
-            this.tb_DE_PassWord_DES_Iv.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_DE_PassWord_DES_Iv.Location = new System.Drawing.Point(127, 3);
-            this.tb_DE_PassWord_DES_Iv.Name = "tb_DE_PassWord_DES_Iv";
-            this.tb_DE_PassWord_DES_Iv.Size = new System.Drawing.Size(119, 27);
-            this.tb_DE_PassWord_DES_Iv.TabIndex = 5;
-            this.tb_DE_PassWord_DES_Iv.Text = "1s2o4f5t";
+            tb_DE_PassWord_DES_Iv.Dock = DockStyle.Fill;
+            tb_DE_PassWord_DES_Iv.Location = new Point(127, 3);
+            tb_DE_PassWord_DES_Iv.Name = "tb_DE_PassWord_DES_Iv";
+            tb_DE_PassWord_DES_Iv.Size = new Size(119, 27);
+            tb_DE_PassWord_DES_Iv.TabIndex = 5;
+            tb_DE_PassWord_DES_Iv.Text = "1s2o4f5t";
             // 
             // tlp_MD5
             // 
-            this.tlp_MD5.ColumnCount = 2;
-            this.tlp_MD5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlp_MD5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tlp_MD5.Controls.Add(this.lbl_DE_Decrypt_MD5, 0, 2);
-            this.tlp_MD5.Controls.Add(this.tb_DE_Encrypt_MD5, 1, 2);
-            this.tlp_MD5.Controls.Add(this.lbl_DE_Encrypt_MD5, 0, 1);
-            this.tlp_MD5.Controls.Add(this.tb_DE_Decrypt_MD5, 1, 1);
-            this.tlp_MD5.Controls.Add(this.lbl_DE_Remark_MD5, 1, 0);
-            this.tlp_MD5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_MD5.Location = new System.Drawing.Point(3, 265);
-            this.tlp_MD5.Name = "tlp_MD5";
-            this.tlp_MD5.RowCount = 3;
-            this.tlp_MD5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlp_MD5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlp_MD5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlp_MD5.Size = new System.Drawing.Size(311, 127);
-            this.tlp_MD5.TabIndex = 1;
+            tlp_MD5.ColumnCount = 2;
+            tlp_MD5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            tlp_MD5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 80F));
+            tlp_MD5.Controls.Add(lbl_DE_Decrypt_MD5, 0, 2);
+            tlp_MD5.Controls.Add(tb_DE_Encrypt_MD5, 1, 2);
+            tlp_MD5.Controls.Add(lbl_DE_Encrypt_MD5, 0, 1);
+            tlp_MD5.Controls.Add(tb_DE_Decrypt_MD5, 1, 1);
+            tlp_MD5.Controls.Add(lbl_DE_Remark_MD5, 1, 0);
+            tlp_MD5.Dock = DockStyle.Fill;
+            tlp_MD5.Location = new Point(3, 265);
+            tlp_MD5.Name = "tlp_MD5";
+            tlp_MD5.RowCount = 3;
+            tlp_MD5.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tlp_MD5.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tlp_MD5.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tlp_MD5.Size = new Size(311, 127);
+            tlp_MD5.TabIndex = 1;
             // 
             // lbl_DE_Decrypt_MD5
             // 
-            this.lbl_DE_Decrypt_MD5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_DE_Decrypt_MD5.Location = new System.Drawing.Point(3, 94);
-            this.lbl_DE_Decrypt_MD5.Name = "lbl_DE_Decrypt_MD5";
-            this.lbl_DE_Decrypt_MD5.Size = new System.Drawing.Size(56, 33);
-            this.lbl_DE_Decrypt_MD5.TabIndex = 2;
-            this.lbl_DE_Decrypt_MD5.Text = "密文：";
-            this.lbl_DE_Decrypt_MD5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lbl_DE_Decrypt_MD5.Dock = DockStyle.Fill;
+            lbl_DE_Decrypt_MD5.Location = new Point(3, 94);
+            lbl_DE_Decrypt_MD5.Name = "lbl_DE_Decrypt_MD5";
+            lbl_DE_Decrypt_MD5.Size = new Size(56, 33);
+            lbl_DE_Decrypt_MD5.TabIndex = 2;
+            lbl_DE_Decrypt_MD5.Text = "密文：";
+            lbl_DE_Decrypt_MD5.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tb_DE_Encrypt_MD5
             // 
-            this.tb_DE_Encrypt_MD5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_DE_Encrypt_MD5.Location = new System.Drawing.Point(65, 97);
-            this.tb_DE_Encrypt_MD5.Name = "tb_DE_Encrypt_MD5";
-            this.tb_DE_Encrypt_MD5.ReadOnly = true;
-            this.tb_DE_Encrypt_MD5.Size = new System.Drawing.Size(243, 27);
-            this.tb_DE_Encrypt_MD5.TabIndex = 3;
+            tb_DE_Encrypt_MD5.Dock = DockStyle.Fill;
+            tb_DE_Encrypt_MD5.Location = new Point(65, 97);
+            tb_DE_Encrypt_MD5.Name = "tb_DE_Encrypt_MD5";
+            tb_DE_Encrypt_MD5.ReadOnly = true;
+            tb_DE_Encrypt_MD5.Size = new Size(243, 27);
+            tb_DE_Encrypt_MD5.TabIndex = 3;
             // 
             // lbl_DE_Encrypt_MD5
             // 
-            this.lbl_DE_Encrypt_MD5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_DE_Encrypt_MD5.Location = new System.Drawing.Point(3, 63);
-            this.lbl_DE_Encrypt_MD5.Name = "lbl_DE_Encrypt_MD5";
-            this.lbl_DE_Encrypt_MD5.Size = new System.Drawing.Size(56, 31);
-            this.lbl_DE_Encrypt_MD5.TabIndex = 1;
-            this.lbl_DE_Encrypt_MD5.Text = "明文：";
-            this.lbl_DE_Encrypt_MD5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lbl_DE_Encrypt_MD5.Dock = DockStyle.Fill;
+            lbl_DE_Encrypt_MD5.Location = new Point(3, 63);
+            lbl_DE_Encrypt_MD5.Name = "lbl_DE_Encrypt_MD5";
+            lbl_DE_Encrypt_MD5.Size = new Size(56, 31);
+            lbl_DE_Encrypt_MD5.TabIndex = 1;
+            lbl_DE_Encrypt_MD5.Text = "明文：";
+            lbl_DE_Encrypt_MD5.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tb_DE_Decrypt_MD5
             // 
-            this.tb_DE_Decrypt_MD5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_DE_Decrypt_MD5.Location = new System.Drawing.Point(65, 66);
-            this.tb_DE_Decrypt_MD5.Name = "tb_DE_Decrypt_MD5";
-            this.tb_DE_Decrypt_MD5.Size = new System.Drawing.Size(243, 27);
-            this.tb_DE_Decrypt_MD5.TabIndex = 3;
-            this.tb_DE_Decrypt_MD5.TextChanged += new System.EventHandler(this.tb_DE_Decrypt_MD5_TextChanged);
+            tb_DE_Decrypt_MD5.Dock = DockStyle.Fill;
+            tb_DE_Decrypt_MD5.Location = new Point(65, 66);
+            tb_DE_Decrypt_MD5.Name = "tb_DE_Decrypt_MD5";
+            tb_DE_Decrypt_MD5.Size = new Size(243, 27);
+            tb_DE_Decrypt_MD5.TabIndex = 3;
+            tb_DE_Decrypt_MD5.TextChanged += tb_DE_Decrypt_MD5_TextChanged;
             // 
             // lbl_DE_Remark_MD5
             // 
-            this.lbl_DE_Remark_MD5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_DE_Remark_MD5.Location = new System.Drawing.Point(65, 0);
-            this.lbl_DE_Remark_MD5.Name = "lbl_DE_Remark_MD5";
-            this.lbl_DE_Remark_MD5.Size = new System.Drawing.Size(243, 63);
-            this.lbl_DE_Remark_MD5.TabIndex = 4;
-            this.lbl_DE_Remark_MD5.Text = "MD5";
-            this.lbl_DE_Remark_MD5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lbl_DE_Remark_MD5.Dock = DockStyle.Fill;
+            lbl_DE_Remark_MD5.Location = new Point(65, 0);
+            lbl_DE_Remark_MD5.Name = "lbl_DE_Remark_MD5";
+            lbl_DE_Remark_MD5.Size = new Size(243, 63);
+            lbl_DE_Remark_MD5.TabIndex = 4;
+            lbl_DE_Remark_MD5.Text = "MD5";
+            lbl_DE_Remark_MD5.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel7
             // 
-            this.tableLayoutPanel7.ColumnCount = 2;
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tableLayoutPanel7.Controls.Add(this.label14, 0, 3);
-            this.tableLayoutPanel7.Controls.Add(this.textBox14, 1, 3);
-            this.tableLayoutPanel7.Controls.Add(this.label15, 0, 2);
-            this.tableLayoutPanel7.Controls.Add(this.textBox15, 1, 2);
-            this.tableLayoutPanel7.Controls.Add(this.textBox16, 1, 1);
-            this.tableLayoutPanel7.Controls.Add(this.label16, 0, 1);
-            this.tableLayoutPanel7.Controls.Add(this.label22, 1, 0);
-            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(320, 265);
-            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
-            this.tableLayoutPanel7.RowCount = 4;
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(311, 127);
-            this.tableLayoutPanel7.TabIndex = 1;
+            tableLayoutPanel7.ColumnCount = 2;
+            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 80F));
+            tableLayoutPanel7.Controls.Add(label14, 0, 3);
+            tableLayoutPanel7.Controls.Add(textBox14, 1, 3);
+            tableLayoutPanel7.Controls.Add(label15, 0, 2);
+            tableLayoutPanel7.Controls.Add(textBox15, 1, 2);
+            tableLayoutPanel7.Controls.Add(textBox16, 1, 1);
+            tableLayoutPanel7.Controls.Add(label16, 0, 1);
+            tableLayoutPanel7.Controls.Add(label22, 1, 0);
+            tableLayoutPanel7.Dock = DockStyle.Fill;
+            tableLayoutPanel7.Location = new Point(320, 265);
+            tableLayoutPanel7.Name = "tableLayoutPanel7";
+            tableLayoutPanel7.RowCount = 4;
+            tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tableLayoutPanel7.Size = new Size(311, 127);
+            tableLayoutPanel7.TabIndex = 1;
             // 
             // label14
             // 
-            this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label14.Location = new System.Drawing.Point(3, 93);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(56, 34);
-            this.label14.TabIndex = 2;
-            this.label14.Text = "密文：";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label14.Dock = DockStyle.Fill;
+            label14.Location = new Point(3, 93);
+            label14.Name = "label14";
+            label14.Size = new Size(56, 34);
+            label14.TabIndex = 2;
+            label14.Text = "密文：";
+            label14.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // textBox14
             // 
-            this.textBox14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox14.Location = new System.Drawing.Point(65, 96);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.ReadOnly = true;
-            this.textBox14.Size = new System.Drawing.Size(243, 27);
-            this.textBox14.TabIndex = 3;
+            textBox14.Dock = DockStyle.Fill;
+            textBox14.Location = new Point(65, 96);
+            textBox14.Name = "textBox14";
+            textBox14.ReadOnly = true;
+            textBox14.Size = new Size(243, 27);
+            textBox14.TabIndex = 3;
             // 
             // label15
             // 
-            this.label15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label15.Location = new System.Drawing.Point(3, 62);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(56, 31);
-            this.label15.TabIndex = 1;
-            this.label15.Text = "明文：";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label15.Dock = DockStyle.Fill;
+            label15.Location = new Point(3, 62);
+            label15.Name = "label15";
+            label15.Size = new Size(56, 31);
+            label15.TabIndex = 1;
+            label15.Text = "明文：";
+            label15.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // textBox15
             // 
-            this.textBox15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox15.Location = new System.Drawing.Point(65, 65);
-            this.textBox15.Name = "textBox15";
-            this.textBox15.Size = new System.Drawing.Size(243, 27);
-            this.textBox15.TabIndex = 3;
+            textBox15.Dock = DockStyle.Fill;
+            textBox15.Location = new Point(65, 65);
+            textBox15.Name = "textBox15";
+            textBox15.Size = new Size(243, 27);
+            textBox15.TabIndex = 3;
             // 
             // textBox16
             // 
-            this.textBox16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox16.Location = new System.Drawing.Point(65, 34);
-            this.textBox16.Name = "textBox16";
-            this.textBox16.Size = new System.Drawing.Size(243, 27);
-            this.textBox16.TabIndex = 3;
+            textBox16.Dock = DockStyle.Fill;
+            textBox16.Location = new Point(65, 34);
+            textBox16.Name = "textBox16";
+            textBox16.Size = new Size(243, 27);
+            textBox16.TabIndex = 3;
             // 
             // label16
             // 
-            this.label16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label16.Location = new System.Drawing.Point(3, 31);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(56, 31);
-            this.label16.TabIndex = 0;
-            this.label16.Text = "秘钥：";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label16.Dock = DockStyle.Fill;
+            label16.Location = new Point(3, 31);
+            label16.Name = "label16";
+            label16.Size = new Size(56, 31);
+            label16.TabIndex = 0;
+            label16.Text = "秘钥：";
+            label16.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label22
             // 
-            this.label22.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label22.Location = new System.Drawing.Point(65, 0);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(243, 31);
-            this.label22.TabIndex = 4;
-            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label22.Dock = DockStyle.Fill;
+            label22.Location = new Point(65, 0);
+            label22.Name = "label22";
+            label22.Size = new Size(243, 31);
+            label22.TabIndex = 4;
+            label22.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel4
             // 
-            this.tableLayoutPanel4.ColumnCount = 2;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tableLayoutPanel4.Controls.Add(this.label7, 0, 3);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 4;
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(200, 100);
-            this.tableLayoutPanel4.TabIndex = 0;
+            tableLayoutPanel4.ColumnCount = 2;
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 80F));
+            tableLayoutPanel4.Controls.Add(label7, 0, 3);
+            tableLayoutPanel4.Location = new Point(0, 0);
+            tableLayoutPanel4.Name = "tableLayoutPanel4";
+            tableLayoutPanel4.RowCount = 4;
+            tableLayoutPanel4.Size = new Size(200, 100);
+            tableLayoutPanel4.TabIndex = 0;
             // 
             // label7
             // 
-            this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Location = new System.Drawing.Point(3, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(34, 100);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "密文：";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label7.Dock = DockStyle.Fill;
+            label7.Location = new Point(3, 0);
+            label7.Name = "label7";
+            label7.Size = new Size(34, 100);
+            label7.TabIndex = 2;
+            label7.Text = "密文：";
+            label7.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // textBox7
             // 
-            this.textBox7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox7.Location = new System.Drawing.Point(43, 3);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.ReadOnly = true;
-            this.textBox7.Size = new System.Drawing.Size(154, 27);
-            this.textBox7.TabIndex = 3;
+            textBox7.Dock = DockStyle.Fill;
+            textBox7.Location = new Point(43, 3);
+            textBox7.Name = "textBox7";
+            textBox7.ReadOnly = true;
+            textBox7.Size = new Size(154, 27);
+            textBox7.TabIndex = 3;
             // 
             // StringHelper
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1280, 801);
-            this.Controls.Add(this.mainPanel);
-            this.Name = "StringHelper";
-            this.Text = "StringHelper";
-            this.mainPanel.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.tlp_StringList.ResumeLayout(false);
-            this.tlp_StringList_Operate.ResumeLayout(false);
-            this.tlp_StringList_Operate_SplitChar.ResumeLayout(false);
-            this.tlp_StringList_Operate_SplitChar.PerformLayout();
-            this.tlp_StringList_Operate_AddBEChar.ResumeLayout(false);
-            this.tlp_StringList_Operate_AddBEChar.PerformLayout();
-            this.tlp_StringList_Operate_AddEndChar.ResumeLayout(false);
-            this.tlp_StringList_Operate_AddEndChar.PerformLayout();
-            this.tlp_StringList_Operate_AddBeginChar.ResumeLayout(false);
-            this.tlp_StringList_Operate_AddBeginChar.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.tlp_Encrypt.ResumeLayout(false);
-            this.tlp_Encrypt.PerformLayout();
-            this.tlp_Encrypt_PlButton.ResumeLayout(false);
-            this.tlp_Encrypt_Key.ResumeLayout(false);
-            this.tlp_Encrypt_Key.PerformLayout();
-            this.tlp_Encrypt_IV.ResumeLayout(false);
-            this.tlp_Encrypt_IV.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.tlp_Dichotomy.ResumeLayout(false);
-            this.tlp_Dichotomy_Operate.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tlp_CodeEnCryptJSDecrypt.ResumeLayout(false);
-            this.tlp_CodeEnCryptJSDecrypt.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
-            this.tlp_AES.ResumeLayout(false);
-            this.tlp_AES.PerformLayout();
-            this.tlp_DES.ResumeLayout(false);
-            this.tlp_DES.PerformLayout();
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
-            this.tlp_MD5.ResumeLayout(false);
-            this.tlp_MD5.PerformLayout();
-            this.tableLayoutPanel7.ResumeLayout(false);
-            this.tableLayoutPanel7.PerformLayout();
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(9F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1280, 801);
+            Controls.Add(mainPanel);
+            Name = "StringHelper";
+            Text = "StringHelper";
+            mainPanel.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            tlp_StringList.ResumeLayout(false);
+            tlp_StringList_Operate.ResumeLayout(false);
+            tlp_StringList_Operate_SplitChar.ResumeLayout(false);
+            tlp_StringList_Operate_SplitChar.PerformLayout();
+            tlp_StringList_Operate_AddBEChar.ResumeLayout(false);
+            tlp_StringList_Operate_AddBEChar.PerformLayout();
+            tlp_StringList_Operate_AddEndChar.ResumeLayout(false);
+            tlp_StringList_Operate_AddEndChar.PerformLayout();
+            tlp_StringList_Operate_AddBeginChar.ResumeLayout(false);
+            tlp_StringList_Operate_AddBeginChar.PerformLayout();
+            tlp_StringList_Operate_RowSplit.ResumeLayout(false);
+            tlp_StringList_Operate_RowSplit.PerformLayout();
+            panel2.ResumeLayout(false);
+            tlp_Encrypt.ResumeLayout(false);
+            tlp_Encrypt.PerformLayout();
+            tlp_Encrypt_PlButton.ResumeLayout(false);
+            tlp_Encrypt_Key.ResumeLayout(false);
+            tlp_Encrypt_Key.PerformLayout();
+            tlp_Encrypt_IV.ResumeLayout(false);
+            tlp_Encrypt_IV.PerformLayout();
+            panel3.ResumeLayout(false);
+            tlp_Dichotomy.ResumeLayout(false);
+            tlp_Dichotomy_Operate.ResumeLayout(false);
+            panel4.ResumeLayout(false);
+            tableLayoutPanel1.ResumeLayout(false);
+            tlp_CodeEnCryptJSDecrypt.ResumeLayout(false);
+            tlp_CodeEnCryptJSDecrypt.PerformLayout();
+            tableLayoutPanel2.ResumeLayout(false);
+            tableLayoutPanel2.PerformLayout();
+            tlp_AES.ResumeLayout(false);
+            tlp_AES.PerformLayout();
+            tlp_DES.ResumeLayout(false);
+            tlp_DES.PerformLayout();
+            tableLayoutPanel3.ResumeLayout(false);
+            tableLayoutPanel3.PerformLayout();
+            tlp_MD5.ResumeLayout(false);
+            tlp_MD5.PerformLayout();
+            tableLayoutPanel7.ResumeLayout(false);
+            tableLayoutPanel7.PerformLayout();
+            tableLayoutPanel4.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion
@@ -1534,5 +1576,8 @@
         private TextBox tb_DE_PassWord_DES_Key;
         private TextBox tb_DE_PassWord_DES_Iv;
         private TextBox tb_DE_PassWord_AES;
+        private TableLayoutPanel tlp_StringList_Operate_RowSplit;
+        private TextBox tb_StringList_RowSplit;
+        private Button btn_StringList_RowSplit;
     }
 }
