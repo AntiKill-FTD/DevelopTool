@@ -319,6 +319,8 @@ namespace Tool.Main.Forms.BusForms
                         ISheet sheet = workbook.GetSheetAt(i);
                         if (sheet != null)
                         {
+                            #region 判断sheet列字段是否正确
+
                             //sheet名称
                             string sheetName = sheet.SheetName;
                             //字段行
@@ -344,6 +346,9 @@ namespace Tool.Main.Forms.BusForms
                                     return false;
                                 }
                             }
+
+                            #endregion
+
                             //获取字段拼接表
                             int rowNum = sheet.LastRowNum;
                             for (int j = 2; j <= rowNum; j++)
