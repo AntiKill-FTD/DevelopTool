@@ -275,6 +275,8 @@ namespace Tool.Main.Forms.BusForms
             IWorkbook workbook = null;
             try
             {
+                #region 记录上次打开路径，为空打开桌面
+
                 //记录文件路径
                 string filePath = string.Empty;
                 //打开导入文件对话框
@@ -301,6 +303,9 @@ namespace Tool.Main.Forms.BusForms
                 {
                     return false;
                 }
+
+                #endregion
+
                 //读取文档
                 using (fs = File.Open(filePath, FileMode.Open, FileAccess.Read))
                 {
