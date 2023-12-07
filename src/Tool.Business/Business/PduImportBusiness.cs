@@ -20,7 +20,11 @@ namespace Tool.Business.Business
         /// <returns></returns>
         public List<OriginOrgFourResult> GetOriginLevelFourOrg(ICommonDataHelper dataHelper)
         {
-            string sql = "SELECT OrgId, OrgName, OrgNo, level AS OrgLevel FROM dbo.mng_OrgFive WITH (NOLOCK);";
+            string sql = @"SELECT OrgId,
+                                  OrgName,
+                                  OrgNo,
+                                  level AS OrgLevel
+                           FROM dbo.mng_OrgFive WITH (NOLOCK);";
             DataTable dt = dataHelper.GetDataTable(sql, string.Empty);
             return DtToModel.GetModelFromDB<OriginOrgFourResult>(dt);
         }
@@ -32,7 +36,11 @@ namespace Tool.Business.Business
         /// <returns></returns>
         public List<OriginEmpResult> GetOriginEmpInfo(ICommonDataHelper dataHelper)
         {
-            string sql = "SELECT emp_Id AS EmpId, emp_EmployeeNo AS EmpNo, REPLACE(emp_EmployeeName,'test','') AS EmpName, emp_Status AS EmpStatus FROM PSAData..mng_Employee WITH (NOLOCK);";
+            string sql = @"SELECT emp_Id AS EmpId,
+                                  emp_EmployeeNo AS EmpNo,
+                                  REPLACE(emp_EmployeeName,'test','') AS EmpName,
+                                  emp_Status AS EmpStatus
+                           FROM PSAData..mng_Employee WITH (NOLOCK);";
             DataTable dt = dataHelper.GetDataTable(sql, string.Empty);
             return DtToModel.GetModelFromDB<OriginEmpResult>(dt);
         }
@@ -70,7 +78,7 @@ namespace Tool.Business.Business
                                   pduDepart.Dep_DeptNo AS OrgNo,
                                   pduDepart.Dep_DeptName AS OrgName,
                                   pduEmp.EmployeeNo AS EmpNo,
-                                  emp.emp_EmployeeName AS EmpName,
+                                  emp.emp_EmployeeName AS EmpName
                            FROM PSAData..mng_Pdu_Employee pduEmp WITH (NOLOCK)
                            LEFT JOIN PSAData..mng_PduDepartment pduDepart WITH (NOLOCK) ON pduDepart.Dep_DeptNo = pduEmp.Dep_No
                            LEFT JOIN PSAData..mng_Employee emp ON emp.emp_EmployeeNo = pduEmp.EmployeeNo;";

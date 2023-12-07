@@ -267,6 +267,15 @@ namespace Tool.Main.Forms.BusForms
         #endregion
 
         #region 校验Excel并读取数据
+        /// <summary>
+        /// 此方法只校验Excel格式，列字段信息;
+        /// 并记录文档重复数据到dic字典（需要修改，重复要与数据库比对，生成的pdu编号也要重新计算）
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="columns"></param>
+        /// <param name="dt"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
         private bool GetExcelData(ImportType type, string[] columns, ref DataTable dt, ref string message)
         {
             //文件流
