@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Tool.IService.Model.Bus
+﻿namespace Tool.IService.Model.Bus
 {
-    public class EmpResult
+    public class OriginEmpResult
     {
         /// <summary>
         /// 员工Id
         /// </summary>
-        public Int64 EmpId { get; set; }
+        public long EmpId { get; set; }
 
         /// <summary>
         /// 员工编号

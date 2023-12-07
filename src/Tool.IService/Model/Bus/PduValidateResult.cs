@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Tool.IService.Model.Bus
+﻿namespace Tool.IService.Model.Bus
 {
     public class PduValidateResult
     {
-        public List<OrgResult> orgResults { get; set; }
+        public List<OriginOrgFourResult> OriginLevelFourOrgResult { get; set; }
 
-        public List<EmpResult> empResults { get; set; }
+        public List<OriginEmpResult> OriginEmpResult { get; set; }
+
+        public List<PduDepartmentResult> PduDepartmentResult { get; set; }
+
+        public List<PduEmployeeResult> PduEmployeeResult { get; set; }
     }
 }

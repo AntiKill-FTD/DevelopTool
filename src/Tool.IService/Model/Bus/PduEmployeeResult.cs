@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Tool.IService.Model.Bus
 {
-    public class OrgResult
+    public class PduEmployeeResult
     {
         /// <summary>
-        /// 组织ID
+        /// 组织Id
         /// </summary>
-        public Int64 OrgId { get; set; }
+        public long OrgId { get; set; }
 
         /// <summary>
-        /// 组织编号
+        /// 组织编码
         /// </summary>
         public string OrgNo { get; set; }
 
@@ -24,8 +24,13 @@ namespace Tool.IService.Model.Bus
         public string OrgName { get; set; }
 
         /// <summary>
-        /// 组织层级
+        /// 员工编号
         /// </summary>
-        public Int64 OrgLevel { get; set; }
+        public string EmpNo { get; set; }
+
+        /// <summary>
+        /// 员工姓名
+        /// </summary>
+        public string EmpName { get; set; }
     }
 }

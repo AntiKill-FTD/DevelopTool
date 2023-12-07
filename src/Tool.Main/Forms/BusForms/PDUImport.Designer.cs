@@ -28,537 +28,536 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tlp_Main = new System.Windows.Forms.TableLayoutPanel();
-            this.tlp_Connect = new System.Windows.Forms.TableLayoutPanel();
-            this.lbl_IP = new System.Windows.Forms.Label();
-            this.cmb_IP = new System.Windows.Forms.ComboBox();
-            this.tlp_Info = new System.Windows.Forms.TableLayoutPanel();
-            this.tb_LoginAccount = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.tb_LoginPassword = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.tb_DataBase = new System.Windows.Forms.TextBox();
-            this.btnConnect = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tlp_CheckSplit = new System.Windows.Forms.TableLayoutPanel();
-            this.cb_IsProb = new System.Windows.Forms.CheckBox();
-            this.cb_IsFilterEmp = new System.Windows.Forms.CheckBox();
-            this.tlp_Main_Org = new System.Windows.Forms.TableLayoutPanel();
-            this.dv_Org = new Tool.CusControls.DataGridViewEx.DataGridViewEx();
-            this.tlp_Org_Script = new System.Windows.Forms.TableLayoutPanel();
-            this.rtb_Org_FullError = new System.Windows.Forms.RichTextBox();
-            this.rtb_Org_RowError = new System.Windows.Forms.RichTextBox();
-            this.rtb_Org_SqlScript = new System.Windows.Forms.RichTextBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btn_Org_Import = new System.Windows.Forms.Button();
-            this.btn_Org_Script = new System.Windows.Forms.Button();
-            this.tlp_Main_Emp = new System.Windows.Forms.TableLayoutPanel();
-            this.dv_Emp = new Tool.CusControls.DataGridViewEx.DataGridViewEx();
-            this.tlp_Emp_Script = new System.Windows.Forms.TableLayoutPanel();
-            this.rtb_Emp_FullError = new System.Windows.Forms.RichTextBox();
-            this.rtb_Emp_RowError = new System.Windows.Forms.RichTextBox();
-            this.rtb_Emp_SqlScript = new System.Windows.Forms.RichTextBox();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.btn_Emp_Import = new System.Windows.Forms.Button();
-            this.btn_Emp_Script = new System.Windows.Forms.Button();
-            this.tlp_Main.SuspendLayout();
-            this.tlp_Connect.SuspendLayout();
-            this.tlp_Info.SuspendLayout();
-            this.tlp_CheckSplit.SuspendLayout();
-            this.tlp_Main_Org.SuspendLayout();
-            this.tlp_Org_Script.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.tlp_Main_Emp.SuspendLayout();
-            this.tlp_Emp_Script.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.SuspendLayout();
+            tlp_Main = new TableLayoutPanel();
+            tlp_Connect = new TableLayoutPanel();
+            lbl_IP = new Label();
+            cmb_IP = new ComboBox();
+            tlp_Info = new TableLayoutPanel();
+            tb_LoginAccount = new TextBox();
+            label2 = new Label();
+            tb_LoginPassword = new TextBox();
+            label3 = new Label();
+            tb_DataBase = new TextBox();
+            btnConnect = new Button();
+            label1 = new Label();
+            tlp_CheckSplit = new TableLayoutPanel();
+            cb_IsProb = new CheckBox();
+            cb_IsFilterEmp = new CheckBox();
+            tlp_Main_Org = new TableLayoutPanel();
+            dv_Org = new CusControls.DataGridViewEx.DataGridViewEx();
+            tlp_Org_Script = new TableLayoutPanel();
+            rtb_Org_FullError = new RichTextBox();
+            rtb_Org_RowError = new RichTextBox();
+            rtb_Org_SqlScript = new RichTextBox();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            btn_Org_Import = new Button();
+            btn_Org_Script = new Button();
+            tlp_Main_Emp = new TableLayoutPanel();
+            dv_Emp = new CusControls.DataGridViewEx.DataGridViewEx();
+            tlp_Emp_Script = new TableLayoutPanel();
+            rtb_Emp_FullError = new RichTextBox();
+            rtb_Emp_RowError = new RichTextBox();
+            rtb_Emp_SqlScript = new RichTextBox();
+            tableLayoutPanel2 = new TableLayoutPanel();
+            btn_Emp_Import = new Button();
+            btn_Emp_Script = new Button();
+            tlp_Main.SuspendLayout();
+            tlp_Connect.SuspendLayout();
+            tlp_Info.SuspendLayout();
+            tlp_CheckSplit.SuspendLayout();
+            tlp_Main_Org.SuspendLayout();
+            tlp_Org_Script.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
+            tlp_Main_Emp.SuspendLayout();
+            tlp_Emp_Script.SuspendLayout();
+            tableLayoutPanel2.SuspendLayout();
+            SuspendLayout();
             // 
             // tlp_Main
             // 
-            this.tlp_Main.BackColor = System.Drawing.Color.Azure;
-            this.tlp_Main.ColumnCount = 1;
-            this.tlp_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp_Main.Controls.Add(this.tlp_Connect, 0, 0);
-            this.tlp_Main.Controls.Add(this.tlp_Main_Org, 0, 1);
-            this.tlp_Main.Controls.Add(this.tlp_Main_Emp, 0, 2);
-            this.tlp_Main.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_Main.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.tlp_Main.Location = new System.Drawing.Point(0, 0);
-            this.tlp_Main.Name = "tlp_Main";
-            this.tlp_Main.RowCount = 3;
-            this.tlp_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 75F));
-            this.tlp_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlp_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlp_Main.Size = new System.Drawing.Size(1355, 942);
-            this.tlp_Main.TabIndex = 0;
+            tlp_Main.BackColor = Color.Azure;
+            tlp_Main.ColumnCount = 1;
+            tlp_Main.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tlp_Main.Controls.Add(tlp_Connect, 0, 0);
+            tlp_Main.Controls.Add(tlp_Main_Org, 0, 1);
+            tlp_Main.Controls.Add(tlp_Main_Emp, 0, 2);
+            tlp_Main.Dock = DockStyle.Fill;
+            tlp_Main.ForeColor = Color.CornflowerBlue;
+            tlp_Main.Location = new Point(0, 0);
+            tlp_Main.Name = "tlp_Main";
+            tlp_Main.RowCount = 3;
+            tlp_Main.RowStyles.Add(new RowStyle(SizeType.Absolute, 75F));
+            tlp_Main.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tlp_Main.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tlp_Main.Size = new Size(1355, 942);
+            tlp_Main.TabIndex = 0;
             // 
             // tlp_Connect
             // 
-            this.tlp_Connect.ColumnCount = 5;
-            this.tlp_Connect.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlp_Connect.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.52941F));
-            this.tlp_Connect.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.82353F));
-            this.tlp_Connect.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.64706F));
-            this.tlp_Connect.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlp_Connect.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlp_Connect.Controls.Add(this.lbl_IP, 1, 0);
-            this.tlp_Connect.Controls.Add(this.cmb_IP, 2, 0);
-            this.tlp_Connect.Controls.Add(this.tlp_Info, 2, 1);
-            this.tlp_Connect.Controls.Add(this.btnConnect, 3, 1);
-            this.tlp_Connect.Controls.Add(this.label1, 1, 1);
-            this.tlp_Connect.Controls.Add(this.tlp_CheckSplit, 3, 0);
-            this.tlp_Connect.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_Connect.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.tlp_Connect.Location = new System.Drawing.Point(0, 0);
-            this.tlp_Connect.Margin = new System.Windows.Forms.Padding(0);
-            this.tlp_Connect.Name = "tlp_Connect";
-            this.tlp_Connect.RowCount = 2;
-            this.tlp_Connect.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
-            this.tlp_Connect.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tlp_Connect.Size = new System.Drawing.Size(1355, 75);
-            this.tlp_Connect.TabIndex = 1;
+            tlp_Connect.ColumnCount = 5;
+            tlp_Connect.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tlp_Connect.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 23.52941F));
+            tlp_Connect.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 58.82353F));
+            tlp_Connect.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 17.64706F));
+            tlp_Connect.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tlp_Connect.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tlp_Connect.Controls.Add(lbl_IP, 1, 0);
+            tlp_Connect.Controls.Add(cmb_IP, 2, 0);
+            tlp_Connect.Controls.Add(tlp_Info, 2, 1);
+            tlp_Connect.Controls.Add(btnConnect, 3, 1);
+            tlp_Connect.Controls.Add(label1, 1, 1);
+            tlp_Connect.Controls.Add(tlp_CheckSplit, 3, 0);
+            tlp_Connect.Dock = DockStyle.Fill;
+            tlp_Connect.ForeColor = SystemColors.ControlText;
+            tlp_Connect.Location = new Point(0, 0);
+            tlp_Connect.Margin = new Padding(0);
+            tlp_Connect.Name = "tlp_Connect";
+            tlp_Connect.RowCount = 2;
+            tlp_Connect.RowStyles.Add(new RowStyle(SizeType.Absolute, 33F));
+            tlp_Connect.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+            tlp_Connect.Size = new Size(1355, 75);
+            tlp_Connect.TabIndex = 1;
             // 
             // lbl_IP
             // 
-            this.lbl_IP.AutoSize = true;
-            this.lbl_IP.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_IP.Location = new System.Drawing.Point(23, 0);
-            this.lbl_IP.Name = "lbl_IP";
-            this.lbl_IP.Size = new System.Drawing.Size(303, 33);
-            this.lbl_IP.TabIndex = 0;
-            this.lbl_IP.Text = "数据库地址：";
-            this.lbl_IP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lbl_IP.AutoSize = true;
+            lbl_IP.Dock = DockStyle.Fill;
+            lbl_IP.Location = new Point(23, 0);
+            lbl_IP.Name = "lbl_IP";
+            lbl_IP.Size = new Size(303, 33);
+            lbl_IP.TabIndex = 0;
+            lbl_IP.Text = "数据库地址：";
+            lbl_IP.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // cmb_IP
             // 
-            this.cmb_IP.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmb_IP.FormattingEnabled = true;
-            this.cmb_IP.Location = new System.Drawing.Point(332, 3);
-            this.cmb_IP.Name = "cmb_IP";
-            this.cmb_IP.Size = new System.Drawing.Size(767, 28);
-            this.cmb_IP.TabIndex = 1;
-            this.cmb_IP.Text = "10.136.0.114";
+            cmb_IP.Dock = DockStyle.Fill;
+            cmb_IP.FormattingEnabled = true;
+            cmb_IP.Location = new Point(332, 3);
+            cmb_IP.Name = "cmb_IP";
+            cmb_IP.Size = new Size(767, 28);
+            cmb_IP.TabIndex = 1;
+            cmb_IP.Text = "10.136.0.114";
             // 
             // tlp_Info
             // 
-            this.tlp_Info.ColumnCount = 5;
-            this.tlp_Info.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlp_Info.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlp_Info.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlp_Info.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlp_Info.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlp_Info.Controls.Add(this.tb_LoginAccount, 0, 0);
-            this.tlp_Info.Controls.Add(this.label2, 1, 0);
-            this.tlp_Info.Controls.Add(this.tb_LoginPassword, 2, 0);
-            this.tlp_Info.Controls.Add(this.label3, 3, 0);
-            this.tlp_Info.Controls.Add(this.tb_DataBase, 4, 0);
-            this.tlp_Info.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_Info.Location = new System.Drawing.Point(332, 36);
-            this.tlp_Info.Name = "tlp_Info";
-            this.tlp_Info.RowCount = 1;
-            this.tlp_Info.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp_Info.Size = new System.Drawing.Size(767, 36);
-            this.tlp_Info.TabIndex = 2;
+            tlp_Info.ColumnCount = 5;
+            tlp_Info.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            tlp_Info.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            tlp_Info.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            tlp_Info.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            tlp_Info.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            tlp_Info.Controls.Add(tb_LoginAccount, 0, 0);
+            tlp_Info.Controls.Add(label2, 1, 0);
+            tlp_Info.Controls.Add(tb_LoginPassword, 2, 0);
+            tlp_Info.Controls.Add(label3, 3, 0);
+            tlp_Info.Controls.Add(tb_DataBase, 4, 0);
+            tlp_Info.Dock = DockStyle.Fill;
+            tlp_Info.Location = new Point(332, 36);
+            tlp_Info.Name = "tlp_Info";
+            tlp_Info.RowCount = 1;
+            tlp_Info.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tlp_Info.Size = new Size(767, 36);
+            tlp_Info.TabIndex = 2;
             // 
             // tb_LoginAccount
             // 
-            this.tb_LoginAccount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_LoginAccount.Location = new System.Drawing.Point(3, 3);
-            this.tb_LoginAccount.Name = "tb_LoginAccount";
-            this.tb_LoginAccount.Size = new System.Drawing.Size(147, 27);
-            this.tb_LoginAccount.TabIndex = 1;
-            this.tb_LoginAccount.Text = "hruser";
+            tb_LoginAccount.Dock = DockStyle.Fill;
+            tb_LoginAccount.Location = new Point(3, 3);
+            tb_LoginAccount.Name = "tb_LoginAccount";
+            tb_LoginAccount.Size = new Size(147, 27);
+            tb_LoginAccount.TabIndex = 1;
+            tb_LoginAccount.Text = "hruser";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(156, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(147, 36);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "登陆密码：";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label2.AutoSize = true;
+            label2.Dock = DockStyle.Fill;
+            label2.Location = new Point(156, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(147, 36);
+            label2.TabIndex = 0;
+            label2.Text = "登陆密码：";
+            label2.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tb_LoginPassword
             // 
-            this.tb_LoginPassword.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_LoginPassword.Location = new System.Drawing.Point(309, 3);
-            this.tb_LoginPassword.Name = "tb_LoginPassword";
-            this.tb_LoginPassword.Size = new System.Drawing.Size(147, 27);
-            this.tb_LoginPassword.TabIndex = 1;
-            this.tb_LoginPassword.Text = "rmohr123@abc";
+            tb_LoginPassword.Dock = DockStyle.Fill;
+            tb_LoginPassword.Location = new Point(309, 3);
+            tb_LoginPassword.Name = "tb_LoginPassword";
+            tb_LoginPassword.Size = new Size(147, 27);
+            tb_LoginPassword.TabIndex = 1;
+            tb_LoginPassword.Text = "rmohr123@abc";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(462, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(147, 36);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "数据库名称：";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label3.AutoSize = true;
+            label3.Dock = DockStyle.Fill;
+            label3.Location = new Point(462, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(147, 36);
+            label3.TabIndex = 0;
+            label3.Text = "数据库名称：";
+            label3.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tb_DataBase
             // 
-            this.tb_DataBase.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_DataBase.Location = new System.Drawing.Point(615, 3);
-            this.tb_DataBase.Name = "tb_DataBase";
-            this.tb_DataBase.Size = new System.Drawing.Size(149, 27);
-            this.tb_DataBase.TabIndex = 3;
-            this.tb_DataBase.Text = "IOA";
+            tb_DataBase.Dock = DockStyle.Fill;
+            tb_DataBase.Location = new Point(615, 3);
+            tb_DataBase.Name = "tb_DataBase";
+            tb_DataBase.Size = new Size(149, 27);
+            tb_DataBase.TabIndex = 3;
+            tb_DataBase.Text = "IOA";
             // 
             // btnConnect
             // 
-            this.btnConnect.BackColor = System.Drawing.Color.DarkTurquoise;
-            this.btnConnect.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnConnect.Location = new System.Drawing.Point(1237, 36);
-            this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(94, 36);
-            this.btnConnect.TabIndex = 4;
-            this.btnConnect.Text = "测试连接";
-            this.btnConnect.UseVisualStyleBackColor = false;
-            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
+            btnConnect.BackColor = Color.DarkTurquoise;
+            btnConnect.Dock = DockStyle.Right;
+            btnConnect.Location = new Point(1237, 36);
+            btnConnect.Name = "btnConnect";
+            btnConnect.Size = new Size(94, 36);
+            btnConnect.TabIndex = 4;
+            btnConnect.Text = "测试连接";
+            btnConnect.UseVisualStyleBackColor = false;
+            btnConnect.Click += btnConnect_Click;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(23, 33);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(303, 42);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "登陆账号：";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label1.AutoSize = true;
+            label1.Dock = DockStyle.Fill;
+            label1.Location = new Point(23, 33);
+            label1.Name = "label1";
+            label1.Size = new Size(303, 42);
+            label1.TabIndex = 5;
+            label1.Text = "登陆账号：";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tlp_CheckSplit
             // 
-            this.tlp_CheckSplit.ColumnCount = 2;
-            this.tlp_CheckSplit.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.56897F));
-            this.tlp_CheckSplit.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.43103F));
-            this.tlp_CheckSplit.Controls.Add(this.cb_IsProb, 0, 0);
-            this.tlp_CheckSplit.Controls.Add(this.cb_IsFilterEmp, 1, 0);
-            this.tlp_CheckSplit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_CheckSplit.Location = new System.Drawing.Point(1102, 0);
-            this.tlp_CheckSplit.Margin = new System.Windows.Forms.Padding(0);
-            this.tlp_CheckSplit.Name = "tlp_CheckSplit";
-            this.tlp_CheckSplit.RowCount = 1;
-            this.tlp_CheckSplit.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlp_CheckSplit.Size = new System.Drawing.Size(232, 33);
-            this.tlp_CheckSplit.TabIndex = 6;
+            tlp_CheckSplit.ColumnCount = 2;
+            tlp_CheckSplit.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 49.56897F));
+            tlp_CheckSplit.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50.43103F));
+            tlp_CheckSplit.Controls.Add(cb_IsProb, 0, 0);
+            tlp_CheckSplit.Controls.Add(cb_IsFilterEmp, 1, 0);
+            tlp_CheckSplit.Dock = DockStyle.Fill;
+            tlp_CheckSplit.Location = new Point(1102, 0);
+            tlp_CheckSplit.Margin = new Padding(0);
+            tlp_CheckSplit.Name = "tlp_CheckSplit";
+            tlp_CheckSplit.RowCount = 1;
+            tlp_CheckSplit.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tlp_CheckSplit.Size = new Size(232, 33);
+            tlp_CheckSplit.TabIndex = 6;
             // 
             // cb_IsProb
             // 
-            this.cb_IsProb.AutoSize = true;
-            this.cb_IsProb.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cb_IsProb.Location = new System.Drawing.Point(3, 3);
-            this.cb_IsProb.Name = "cb_IsProb";
-            this.cb_IsProb.Size = new System.Drawing.Size(109, 27);
-            this.cb_IsProb.TabIndex = 0;
-            this.cb_IsProb.Text = "是否生产";
-            this.cb_IsProb.UseVisualStyleBackColor = true;
-            this.cb_IsProb.CheckedChanged += new System.EventHandler(this.cb_IsProb_CheckedChanged);
+            cb_IsProb.AutoSize = true;
+            cb_IsProb.Dock = DockStyle.Fill;
+            cb_IsProb.Location = new Point(3, 3);
+            cb_IsProb.Name = "cb_IsProb";
+            cb_IsProb.Size = new Size(109, 27);
+            cb_IsProb.TabIndex = 0;
+            cb_IsProb.Text = "是否生产";
+            cb_IsProb.UseVisualStyleBackColor = true;
+            cb_IsProb.CheckedChanged += cb_IsProb_CheckedChanged;
             // 
             // cb_IsFilterEmp
             // 
-            this.cb_IsFilterEmp.AutoSize = true;
-            this.cb_IsFilterEmp.Checked = true;
-            this.cb_IsFilterEmp.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_IsFilterEmp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cb_IsFilterEmp.Location = new System.Drawing.Point(118, 3);
-            this.cb_IsFilterEmp.Name = "cb_IsFilterEmp";
-            this.cb_IsFilterEmp.Size = new System.Drawing.Size(111, 27);
-            this.cb_IsFilterEmp.TabIndex = 1;
-            this.cb_IsFilterEmp.Text = "是否校验员工";
-            this.cb_IsFilterEmp.UseVisualStyleBackColor = true;
+            cb_IsFilterEmp.AutoSize = true;
+            cb_IsFilterEmp.Checked = true;
+            cb_IsFilterEmp.CheckState = CheckState.Checked;
+            cb_IsFilterEmp.Dock = DockStyle.Fill;
+            cb_IsFilterEmp.Location = new Point(118, 3);
+            cb_IsFilterEmp.Name = "cb_IsFilterEmp";
+            cb_IsFilterEmp.Size = new Size(111, 27);
+            cb_IsFilterEmp.TabIndex = 1;
+            cb_IsFilterEmp.Text = "是否校验员工";
+            cb_IsFilterEmp.UseVisualStyleBackColor = true;
             // 
             // tlp_Main_Org
             // 
-            this.tlp_Main_Org.BackColor = System.Drawing.Color.FloralWhite;
-            this.tlp_Main_Org.ColumnCount = 1;
-            this.tlp_Main_Org.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp_Main_Org.Controls.Add(this.dv_Org, 0, 1);
-            this.tlp_Main_Org.Controls.Add(this.tlp_Org_Script, 0, 2);
-            this.tlp_Main_Org.Controls.Add(this.tableLayoutPanel1, 0, 0);
-            this.tlp_Main_Org.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_Main_Org.Location = new System.Drawing.Point(0, 75);
-            this.tlp_Main_Org.Margin = new System.Windows.Forms.Padding(0);
-            this.tlp_Main_Org.Name = "tlp_Main_Org";
-            this.tlp_Main_Org.RowCount = 3;
-            this.tlp_Main_Org.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tlp_Main_Org.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tlp_Main_Org.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tlp_Main_Org.Size = new System.Drawing.Size(1355, 433);
-            this.tlp_Main_Org.TabIndex = 2;
+            tlp_Main_Org.BackColor = Color.FloralWhite;
+            tlp_Main_Org.ColumnCount = 1;
+            tlp_Main_Org.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tlp_Main_Org.Controls.Add(dv_Org, 0, 1);
+            tlp_Main_Org.Controls.Add(tlp_Org_Script, 0, 2);
+            tlp_Main_Org.Controls.Add(tableLayoutPanel1, 0, 0);
+            tlp_Main_Org.Dock = DockStyle.Fill;
+            tlp_Main_Org.Location = new Point(0, 75);
+            tlp_Main_Org.Margin = new Padding(0);
+            tlp_Main_Org.Name = "tlp_Main_Org";
+            tlp_Main_Org.RowCount = 3;
+            tlp_Main_Org.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
+            tlp_Main_Org.RowStyles.Add(new RowStyle(SizeType.Percent, 70F));
+            tlp_Main_Org.RowStyles.Add(new RowStyle(SizeType.Percent, 30F));
+            tlp_Main_Org.Size = new Size(1355, 433);
+            tlp_Main_Org.TabIndex = 2;
             // 
             // dv_Org
             // 
-            this.dv_Org.DataHelper = null;
-            this.dv_Org.DataSourceSql = null;
-            this.dv_Org.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dv_Org.DvDataTable = null;
-            this.dv_Org.DvSelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dv_Org.IsPage = false;
-            this.dv_Org.IsShowFirstCheckBox = false;
-            this.dv_Org.IsSort = false;
-            this.dv_Org.Location = new System.Drawing.Point(0, 50);
-            this.dv_Org.Margin = new System.Windows.Forms.Padding(0);
-            this.dv_Org.Name = "dv_Org";
-            this.dv_Org.RowEdit = false;
-            this.dv_Org.Size = new System.Drawing.Size(1355, 268);
-            this.dv_Org.TabIndex = 0;
+            dv_Org.DataHelper = null;
+            dv_Org.DataSourceSql = null;
+            dv_Org.Dock = DockStyle.Fill;
+            dv_Org.DvDataTable = null;
+            dv_Org.DvSelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dv_Org.IsPage = false;
+            dv_Org.IsShowFirstCheckBox = false;
+            dv_Org.IsSort = false;
+            dv_Org.Location = new Point(0, 50);
+            dv_Org.Margin = new Padding(0);
+            dv_Org.Name = "dv_Org";
+            dv_Org.RowEdit = false;
+            dv_Org.Size = new Size(1355, 268);
+            dv_Org.TabIndex = 0;
             // 
             // tlp_Org_Script
             // 
-            this.tlp_Org_Script.ColumnCount = 3;
-            this.tlp_Org_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlp_Org_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlp_Org_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlp_Org_Script.Controls.Add(this.rtb_Org_FullError, 0, 0);
-            this.tlp_Org_Script.Controls.Add(this.rtb_Org_RowError, 1, 0);
-            this.tlp_Org_Script.Controls.Add(this.rtb_Org_SqlScript, 2, 0);
-            this.tlp_Org_Script.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_Org_Script.Location = new System.Drawing.Point(0, 318);
-            this.tlp_Org_Script.Margin = new System.Windows.Forms.Padding(0);
-            this.tlp_Org_Script.Name = "tlp_Org_Script";
-            this.tlp_Org_Script.RowCount = 1;
-            this.tlp_Org_Script.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp_Org_Script.Size = new System.Drawing.Size(1355, 115);
-            this.tlp_Org_Script.TabIndex = 1;
+            tlp_Org_Script.ColumnCount = 3;
+            tlp_Org_Script.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
+            tlp_Org_Script.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
+            tlp_Org_Script.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
+            tlp_Org_Script.Controls.Add(rtb_Org_FullError, 0, 0);
+            tlp_Org_Script.Controls.Add(rtb_Org_RowError, 1, 0);
+            tlp_Org_Script.Controls.Add(rtb_Org_SqlScript, 2, 0);
+            tlp_Org_Script.Dock = DockStyle.Fill;
+            tlp_Org_Script.Location = new Point(0, 318);
+            tlp_Org_Script.Margin = new Padding(0);
+            tlp_Org_Script.Name = "tlp_Org_Script";
+            tlp_Org_Script.RowCount = 1;
+            tlp_Org_Script.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tlp_Org_Script.Size = new Size(1355, 115);
+            tlp_Org_Script.TabIndex = 1;
             // 
             // rtb_Org_FullError
             // 
-            this.rtb_Org_FullError.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_Org_FullError.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.rtb_Org_FullError.Location = new System.Drawing.Point(0, 0);
-            this.rtb_Org_FullError.Margin = new System.Windows.Forms.Padding(0);
-            this.rtb_Org_FullError.Name = "rtb_Org_FullError";
-            this.rtb_Org_FullError.Size = new System.Drawing.Size(451, 115);
-            this.rtb_Org_FullError.TabIndex = 0;
-            this.rtb_Org_FullError.Text = "";
+            rtb_Org_FullError.Dock = DockStyle.Fill;
+            rtb_Org_FullError.ForeColor = SystemColors.WindowText;
+            rtb_Org_FullError.Location = new Point(0, 0);
+            rtb_Org_FullError.Margin = new Padding(0);
+            rtb_Org_FullError.Name = "rtb_Org_FullError";
+            rtb_Org_FullError.Size = new Size(451, 115);
+            rtb_Org_FullError.TabIndex = 0;
+            rtb_Org_FullError.Text = "";
             // 
             // rtb_Org_RowError
             // 
-            this.rtb_Org_RowError.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_Org_RowError.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.rtb_Org_RowError.Location = new System.Drawing.Point(451, 0);
-            this.rtb_Org_RowError.Margin = new System.Windows.Forms.Padding(0);
-            this.rtb_Org_RowError.Name = "rtb_Org_RowError";
-            this.rtb_Org_RowError.Size = new System.Drawing.Size(451, 115);
-            this.rtb_Org_RowError.TabIndex = 1;
-            this.rtb_Org_RowError.Text = "";
+            rtb_Org_RowError.Dock = DockStyle.Fill;
+            rtb_Org_RowError.ForeColor = SystemColors.WindowText;
+            rtb_Org_RowError.Location = new Point(451, 0);
+            rtb_Org_RowError.Margin = new Padding(0);
+            rtb_Org_RowError.Name = "rtb_Org_RowError";
+            rtb_Org_RowError.Size = new Size(451, 115);
+            rtb_Org_RowError.TabIndex = 1;
+            rtb_Org_RowError.Text = "";
             // 
             // rtb_Org_SqlScript
             // 
-            this.rtb_Org_SqlScript.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_Org_SqlScript.Location = new System.Drawing.Point(902, 0);
-            this.rtb_Org_SqlScript.Margin = new System.Windows.Forms.Padding(0);
-            this.rtb_Org_SqlScript.Name = "rtb_Org_SqlScript";
-            this.rtb_Org_SqlScript.Size = new System.Drawing.Size(453, 115);
-            this.rtb_Org_SqlScript.TabIndex = 2;
-            this.rtb_Org_SqlScript.Text = "";
+            rtb_Org_SqlScript.Dock = DockStyle.Fill;
+            rtb_Org_SqlScript.Location = new Point(902, 0);
+            rtb_Org_SqlScript.Margin = new Padding(0);
+            rtb_Org_SqlScript.Name = "rtb_Org_SqlScript";
+            rtb_Org_SqlScript.Size = new Size(453, 115);
+            rtb_Org_SqlScript.TabIndex = 2;
+            rtb_Org_SqlScript.Text = "";
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 5;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Controls.Add(this.btn_Org_Import, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btn_Org_Script, 3, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.ForeColor = System.Drawing.Color.Black;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1355, 50);
-            this.tableLayoutPanel1.TabIndex = 2;
+            tableLayoutPanel1.ColumnCount = 5;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 80F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 80F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel1.Controls.Add(btn_Org_Import, 1, 0);
+            tableLayoutPanel1.Controls.Add(btn_Org_Script, 3, 0);
+            tableLayoutPanel1.Dock = DockStyle.Fill;
+            tableLayoutPanel1.ForeColor = Color.Black;
+            tableLayoutPanel1.Location = new Point(0, 0);
+            tableLayoutPanel1.Margin = new Padding(0);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 1;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.Size = new Size(1355, 50);
+            tableLayoutPanel1.TabIndex = 2;
             // 
             // btn_Org_Import
             // 
-            this.btn_Org_Import.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_Org_Import.Location = new System.Drawing.Point(587, 0);
-            this.btn_Org_Import.Margin = new System.Windows.Forms.Padding(0);
-            this.btn_Org_Import.Name = "btn_Org_Import";
-            this.btn_Org_Import.Size = new System.Drawing.Size(80, 50);
-            this.btn_Org_Import.TabIndex = 1;
-            this.btn_Org_Import.Text = "导入";
-            this.btn_Org_Import.UseVisualStyleBackColor = true;
-            this.btn_Org_Import.Click += new System.EventHandler(this.btn_Org_Import_Click);
+            btn_Org_Import.Dock = DockStyle.Fill;
+            btn_Org_Import.Location = new Point(587, 0);
+            btn_Org_Import.Margin = new Padding(0);
+            btn_Org_Import.Name = "btn_Org_Import";
+            btn_Org_Import.Size = new Size(80, 50);
+            btn_Org_Import.TabIndex = 1;
+            btn_Org_Import.Text = "导入";
+            btn_Org_Import.UseVisualStyleBackColor = true;
+            btn_Org_Import.Click += btn_Org_Import_Click;
             // 
             // btn_Org_Script
             // 
-            this.btn_Org_Script.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_Org_Script.Location = new System.Drawing.Point(687, 0);
-            this.btn_Org_Script.Margin = new System.Windows.Forms.Padding(0);
-            this.btn_Org_Script.Name = "btn_Org_Script";
-            this.btn_Org_Script.Size = new System.Drawing.Size(80, 50);
-            this.btn_Org_Script.TabIndex = 2;
-            this.btn_Org_Script.Text = "生成";
-            this.btn_Org_Script.UseVisualStyleBackColor = true;
-            this.btn_Org_Script.Click += new System.EventHandler(this.btn_Org_Script_Click);
+            btn_Org_Script.Dock = DockStyle.Fill;
+            btn_Org_Script.Location = new Point(687, 0);
+            btn_Org_Script.Margin = new Padding(0);
+            btn_Org_Script.Name = "btn_Org_Script";
+            btn_Org_Script.Size = new Size(80, 50);
+            btn_Org_Script.TabIndex = 2;
+            btn_Org_Script.Text = "生成";
+            btn_Org_Script.UseVisualStyleBackColor = true;
+            btn_Org_Script.Click += btn_Org_Script_Click;
             // 
             // tlp_Main_Emp
             // 
-            this.tlp_Main_Emp.BackColor = System.Drawing.Color.Beige;
-            this.tlp_Main_Emp.ColumnCount = 1;
-            this.tlp_Main_Emp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp_Main_Emp.Controls.Add(this.dv_Emp, 0, 1);
-            this.tlp_Main_Emp.Controls.Add(this.tlp_Emp_Script, 0, 2);
-            this.tlp_Main_Emp.Controls.Add(this.tableLayoutPanel2, 0, 0);
-            this.tlp_Main_Emp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_Main_Emp.Location = new System.Drawing.Point(0, 508);
-            this.tlp_Main_Emp.Margin = new System.Windows.Forms.Padding(0);
-            this.tlp_Main_Emp.Name = "tlp_Main_Emp";
-            this.tlp_Main_Emp.RowCount = 3;
-            this.tlp_Main_Emp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
-            this.tlp_Main_Emp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tlp_Main_Emp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tlp_Main_Emp.Size = new System.Drawing.Size(1355, 434);
-            this.tlp_Main_Emp.TabIndex = 3;
+            tlp_Main_Emp.BackColor = Color.Beige;
+            tlp_Main_Emp.ColumnCount = 1;
+            tlp_Main_Emp.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tlp_Main_Emp.Controls.Add(dv_Emp, 0, 1);
+            tlp_Main_Emp.Controls.Add(tlp_Emp_Script, 0, 2);
+            tlp_Main_Emp.Controls.Add(tableLayoutPanel2, 0, 0);
+            tlp_Main_Emp.Dock = DockStyle.Fill;
+            tlp_Main_Emp.Location = new Point(0, 508);
+            tlp_Main_Emp.Margin = new Padding(0);
+            tlp_Main_Emp.Name = "tlp_Main_Emp";
+            tlp_Main_Emp.RowCount = 3;
+            tlp_Main_Emp.RowStyles.Add(new RowStyle(SizeType.Absolute, 62F));
+            tlp_Main_Emp.RowStyles.Add(new RowStyle(SizeType.Percent, 70F));
+            tlp_Main_Emp.RowStyles.Add(new RowStyle(SizeType.Percent, 30F));
+            tlp_Main_Emp.Size = new Size(1355, 434);
+            tlp_Main_Emp.TabIndex = 3;
             // 
             // dv_Emp
             // 
-            this.dv_Emp.DataHelper = null;
-            this.dv_Emp.DataSourceSql = null;
-            this.dv_Emp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dv_Emp.DvDataTable = null;
-            this.dv_Emp.DvSelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dv_Emp.IsPage = false;
-            this.dv_Emp.IsShowFirstCheckBox = false;
-            this.dv_Emp.IsSort = false;
-            this.dv_Emp.Location = new System.Drawing.Point(0, 62);
-            this.dv_Emp.Margin = new System.Windows.Forms.Padding(0);
-            this.dv_Emp.Name = "dv_Emp";
-            this.dv_Emp.RowEdit = false;
-            this.dv_Emp.Size = new System.Drawing.Size(1355, 260);
-            this.dv_Emp.TabIndex = 0;
+            dv_Emp.DataHelper = null;
+            dv_Emp.DataSourceSql = null;
+            dv_Emp.Dock = DockStyle.Fill;
+            dv_Emp.DvDataTable = null;
+            dv_Emp.DvSelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dv_Emp.IsPage = false;
+            dv_Emp.IsShowFirstCheckBox = false;
+            dv_Emp.IsSort = false;
+            dv_Emp.Location = new Point(0, 62);
+            dv_Emp.Margin = new Padding(0);
+            dv_Emp.Name = "dv_Emp";
+            dv_Emp.RowEdit = false;
+            dv_Emp.Size = new Size(1355, 260);
+            dv_Emp.TabIndex = 0;
             // 
             // tlp_Emp_Script
             // 
-            this.tlp_Emp_Script.ColumnCount = 3;
-            this.tlp_Emp_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlp_Emp_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlp_Emp_Script.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlp_Emp_Script.Controls.Add(this.rtb_Emp_FullError, 0, 0);
-            this.tlp_Emp_Script.Controls.Add(this.rtb_Emp_RowError, 1, 0);
-            this.tlp_Emp_Script.Controls.Add(this.rtb_Emp_SqlScript, 2, 0);
-            this.tlp_Emp_Script.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_Emp_Script.Location = new System.Drawing.Point(0, 322);
-            this.tlp_Emp_Script.Margin = new System.Windows.Forms.Padding(0);
-            this.tlp_Emp_Script.Name = "tlp_Emp_Script";
-            this.tlp_Emp_Script.RowCount = 1;
-            this.tlp_Emp_Script.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp_Emp_Script.Size = new System.Drawing.Size(1355, 112);
-            this.tlp_Emp_Script.TabIndex = 1;
+            tlp_Emp_Script.ColumnCount = 3;
+            tlp_Emp_Script.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
+            tlp_Emp_Script.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
+            tlp_Emp_Script.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
+            tlp_Emp_Script.Controls.Add(rtb_Emp_FullError, 0, 0);
+            tlp_Emp_Script.Controls.Add(rtb_Emp_RowError, 1, 0);
+            tlp_Emp_Script.Controls.Add(rtb_Emp_SqlScript, 2, 0);
+            tlp_Emp_Script.Dock = DockStyle.Fill;
+            tlp_Emp_Script.Location = new Point(0, 322);
+            tlp_Emp_Script.Margin = new Padding(0);
+            tlp_Emp_Script.Name = "tlp_Emp_Script";
+            tlp_Emp_Script.RowCount = 1;
+            tlp_Emp_Script.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tlp_Emp_Script.Size = new Size(1355, 112);
+            tlp_Emp_Script.TabIndex = 1;
             // 
             // rtb_Emp_FullError
             // 
-            this.rtb_Emp_FullError.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_Emp_FullError.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.rtb_Emp_FullError.Location = new System.Drawing.Point(0, 0);
-            this.rtb_Emp_FullError.Margin = new System.Windows.Forms.Padding(0);
-            this.rtb_Emp_FullError.Name = "rtb_Emp_FullError";
-            this.rtb_Emp_FullError.Size = new System.Drawing.Size(451, 112);
-            this.rtb_Emp_FullError.TabIndex = 0;
-            this.rtb_Emp_FullError.Text = "";
+            rtb_Emp_FullError.Dock = DockStyle.Fill;
+            rtb_Emp_FullError.ForeColor = SystemColors.WindowText;
+            rtb_Emp_FullError.Location = new Point(0, 0);
+            rtb_Emp_FullError.Margin = new Padding(0);
+            rtb_Emp_FullError.Name = "rtb_Emp_FullError";
+            rtb_Emp_FullError.Size = new Size(451, 112);
+            rtb_Emp_FullError.TabIndex = 0;
+            rtb_Emp_FullError.Text = "";
             // 
             // rtb_Emp_RowError
             // 
-            this.rtb_Emp_RowError.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_Emp_RowError.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.rtb_Emp_RowError.Location = new System.Drawing.Point(451, 0);
-            this.rtb_Emp_RowError.Margin = new System.Windows.Forms.Padding(0);
-            this.rtb_Emp_RowError.Name = "rtb_Emp_RowError";
-            this.rtb_Emp_RowError.Size = new System.Drawing.Size(451, 112);
-            this.rtb_Emp_RowError.TabIndex = 1;
-            this.rtb_Emp_RowError.Text = "";
+            rtb_Emp_RowError.Dock = DockStyle.Fill;
+            rtb_Emp_RowError.ForeColor = SystemColors.WindowText;
+            rtb_Emp_RowError.Location = new Point(451, 0);
+            rtb_Emp_RowError.Margin = new Padding(0);
+            rtb_Emp_RowError.Name = "rtb_Emp_RowError";
+            rtb_Emp_RowError.Size = new Size(451, 112);
+            rtb_Emp_RowError.TabIndex = 1;
+            rtb_Emp_RowError.Text = "";
             // 
             // rtb_Emp_SqlScript
             // 
-            this.rtb_Emp_SqlScript.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_Emp_SqlScript.Location = new System.Drawing.Point(902, 0);
-            this.rtb_Emp_SqlScript.Margin = new System.Windows.Forms.Padding(0);
-            this.rtb_Emp_SqlScript.Name = "rtb_Emp_SqlScript";
-            this.rtb_Emp_SqlScript.Size = new System.Drawing.Size(453, 112);
-            this.rtb_Emp_SqlScript.TabIndex = 2;
-            this.rtb_Emp_SqlScript.Text = "";
+            rtb_Emp_SqlScript.Dock = DockStyle.Fill;
+            rtb_Emp_SqlScript.Location = new Point(902, 0);
+            rtb_Emp_SqlScript.Margin = new Padding(0);
+            rtb_Emp_SqlScript.Name = "rtb_Emp_SqlScript";
+            rtb_Emp_SqlScript.Size = new Size(453, 112);
+            rtb_Emp_SqlScript.TabIndex = 2;
+            rtb_Emp_SqlScript.Text = "";
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 5;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Controls.Add(this.btn_Emp_Import, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btn_Emp_Script, 3, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.ForeColor = System.Drawing.Color.Black;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1355, 62);
-            this.tableLayoutPanel2.TabIndex = 2;
+            tableLayoutPanel2.ColumnCount = 5;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 80F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 80F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel2.Controls.Add(btn_Emp_Import, 1, 0);
+            tableLayoutPanel2.Controls.Add(btn_Emp_Script, 3, 0);
+            tableLayoutPanel2.Dock = DockStyle.Fill;
+            tableLayoutPanel2.ForeColor = Color.Black;
+            tableLayoutPanel2.Location = new Point(0, 0);
+            tableLayoutPanel2.Margin = new Padding(0);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 1;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel2.Size = new Size(1355, 62);
+            tableLayoutPanel2.TabIndex = 2;
             // 
             // btn_Emp_Import
             // 
-            this.btn_Emp_Import.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_Emp_Import.Location = new System.Drawing.Point(587, 0);
-            this.btn_Emp_Import.Margin = new System.Windows.Forms.Padding(0);
-            this.btn_Emp_Import.Name = "btn_Emp_Import";
-            this.btn_Emp_Import.Size = new System.Drawing.Size(80, 62);
-            this.btn_Emp_Import.TabIndex = 1;
-            this.btn_Emp_Import.Text = "导入";
-            this.btn_Emp_Import.UseVisualStyleBackColor = true;
-            this.btn_Emp_Import.Click += new System.EventHandler(this.btn_Emp_Import_Click);
+            btn_Emp_Import.Dock = DockStyle.Fill;
+            btn_Emp_Import.Location = new Point(587, 0);
+            btn_Emp_Import.Margin = new Padding(0);
+            btn_Emp_Import.Name = "btn_Emp_Import";
+            btn_Emp_Import.Size = new Size(80, 62);
+            btn_Emp_Import.TabIndex = 1;
+            btn_Emp_Import.Text = "导入";
+            btn_Emp_Import.UseVisualStyleBackColor = true;
+            btn_Emp_Import.Click += btn_Emp_Import_Click;
             // 
             // btn_Emp_Script
             // 
-            this.btn_Emp_Script.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_Emp_Script.Location = new System.Drawing.Point(687, 0);
-            this.btn_Emp_Script.Margin = new System.Windows.Forms.Padding(0);
-            this.btn_Emp_Script.Name = "btn_Emp_Script";
-            this.btn_Emp_Script.Size = new System.Drawing.Size(80, 62);
-            this.btn_Emp_Script.TabIndex = 2;
-            this.btn_Emp_Script.Text = "生成";
-            this.btn_Emp_Script.UseVisualStyleBackColor = true;
-            this.btn_Emp_Script.Click += new System.EventHandler(this.btn_Emp_Script_Click);
+            btn_Emp_Script.Dock = DockStyle.Fill;
+            btn_Emp_Script.Location = new Point(687, 0);
+            btn_Emp_Script.Margin = new Padding(0);
+            btn_Emp_Script.Name = "btn_Emp_Script";
+            btn_Emp_Script.Size = new Size(80, 62);
+            btn_Emp_Script.TabIndex = 2;
+            btn_Emp_Script.Text = "生成";
+            btn_Emp_Script.UseVisualStyleBackColor = true;
+            btn_Emp_Script.Click += btn_Emp_Script_Click;
             // 
             // PduImport
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1355, 942);
-            this.Controls.Add(this.tlp_Main);
-            this.Name = "PduImport";
-            this.Text = "PDUImport";
-            this.Load += new System.EventHandler(this.PDUImport_Load);
-            this.tlp_Main.ResumeLayout(false);
-            this.tlp_Connect.ResumeLayout(false);
-            this.tlp_Connect.PerformLayout();
-            this.tlp_Info.ResumeLayout(false);
-            this.tlp_Info.PerformLayout();
-            this.tlp_CheckSplit.ResumeLayout(false);
-            this.tlp_CheckSplit.PerformLayout();
-            this.tlp_Main_Org.ResumeLayout(false);
-            this.tlp_Org_Script.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tlp_Main_Emp.ResumeLayout(false);
-            this.tlp_Emp_Script.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(9F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1355, 942);
+            Controls.Add(tlp_Main);
+            Name = "PduImport";
+            Text = "PDUImport";
+            Load += PDUImport_Load;
+            tlp_Main.ResumeLayout(false);
+            tlp_Connect.ResumeLayout(false);
+            tlp_Connect.PerformLayout();
+            tlp_Info.ResumeLayout(false);
+            tlp_Info.PerformLayout();
+            tlp_CheckSplit.ResumeLayout(false);
+            tlp_CheckSplit.PerformLayout();
+            tlp_Main_Org.ResumeLayout(false);
+            tlp_Org_Script.ResumeLayout(false);
+            tableLayoutPanel1.ResumeLayout(false);
+            tlp_Main_Emp.ResumeLayout(false);
+            tlp_Emp_Script.ResumeLayout(false);
+            tableLayoutPanel2.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion

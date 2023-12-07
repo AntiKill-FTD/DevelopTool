@@ -25,8 +25,8 @@ namespace Tool.Main.Forms.BusForms
         private ICommonDataHelper dataHelper;   //数据库操作类
         private bool isConnect = false;         //判断是否连接成功
         private string lastChoosePath = string.Empty; //上次打开的文件夹路径
-        private Dictionary<string, OrgCompare> dicOrgName = new Dictionary<string, OrgCompare>(); //存储PDU业务名称，用来校验重复
-        private Dictionary<string, EmpCompare> dicEmpNo = new Dictionary<string, EmpCompare>(); //存储EmpNo，用来校验重复
+        private Dictionary<string, CompareOrg> dicOrgName = new Dictionary<string, CompareOrg>(); //存储PDU业务名称，用来校验重复
+        private Dictionary<string, CompareEmp> dicEmpNo = new Dictionary<string, CompareEmp>(); //存储EmpNo，用来校验重复
         private Dictionary<string, int> dicBuNo = new Dictionary<string, int>(); //存储BuNo，用来生成序号
 
         #endregion
@@ -44,40 +44,6 @@ namespace Tool.Main.Forms.BusForms
             //行点击事件
             this.dv_Org.Dv.CellClick += Org_Dv_CellClick;
             this.dv_Emp.Dv.CellClick += Emp_Dv_CellClick;
-        }
-        #endregion
-
-        #region 网格行选中事件
-        private void Org_Dv_CellClick(object? sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex > -1)
-            {
-                if (this.dv_Org.GetRow(e.RowIndex).Cells["Remark"] != null)
-                {
-                    this.rtb_Org_RowError.Text = this.dv_Org.GetRow(e.RowIndex).Cells["Remark"].Value.ToString();
-                    this.rtb_Org_RowError.ForeColor = Color.Red;
-                }
-                else
-                {
-                    this.rtb_Org_RowError.Clear();
-                }
-            }
-        }
-
-        private void Emp_Dv_CellClick(object? sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex > -1)
-            {
-                if (this.dv_Emp.GetRow(e.RowIndex).Cells["Remark"] != null)
-                {
-                    this.rtb_Emp_RowError.Text = this.dv_Emp.GetRow(e.RowIndex).Cells["Remark"].Value.ToString();
-                    this.rtb_Emp_RowError.ForeColor = Color.Red;
-                }
-                else
-                {
-                    this.rtb_Emp_RowError.Clear();
-                }
-            }
         }
         #endregion
 
@@ -118,9 +84,59 @@ namespace Tool.Main.Forms.BusForms
         }
         #endregion
 
-        #region 组织按钮事件
+        #region 切换生产库
+        private void cb_IsProb_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_IsProb.Checked)
+            {
+                this.cmb_IP.Text = "127.0.0.1,7002";
+                this.tb_LoginAccount.Text = "recruit_w";
+                this.tb_LoginPassword.Text = "wL1z26E5";
+            }
+            else
+            {
+                this.cmb_IP.Text = "10.136.0.114";
+                this.tb_LoginAccount.Text = "hruser";
+                this.tb_LoginPassword.Text = "rmohr123@abc";
+            }
+        }
+        #endregion
 
-        #region 导入
+        #region 网格行选中事件
+        private void Org_Dv_CellClick(object? sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1)
+            {
+                if (this.dv_Org.GetRow(e.RowIndex).Cells["Remark"] != null)
+                {
+                    this.rtb_Org_RowError.Text = this.dv_Org.GetRow(e.RowIndex).Cells["Remark"].Value.ToString();
+                    this.rtb_Org_RowError.ForeColor = Color.Red;
+                }
+                else
+                {
+                    this.rtb_Org_RowError.Clear();
+                }
+            }
+        }
+
+        private void Emp_Dv_CellClick(object? sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1)
+            {
+                if (this.dv_Emp.GetRow(e.RowIndex).Cells["Remark"] != null)
+                {
+                    this.rtb_Emp_RowError.Text = this.dv_Emp.GetRow(e.RowIndex).Cells["Remark"].Value.ToString();
+                    this.rtb_Emp_RowError.ForeColor = Color.Red;
+                }
+                else
+                {
+                    this.rtb_Emp_RowError.Clear();
+                }
+            }
+        }
+        #endregion
+
+        #region 组织导入按钮
         private void btn_Org_Import_Click(object sender, EventArgs e)
         {
             //记录处理时间
@@ -185,11 +201,7 @@ namespace Tool.Main.Forms.BusForms
         }
         #endregion
 
-        #endregion
-
-        #region 人员按钮事件
-
-        #region 导入
+        #region 人员导入按钮
         private void btn_Emp_Import_Click(object sender, EventArgs e)
         {
             //记录处理时间
@@ -253,10 +265,6 @@ namespace Tool.Main.Forms.BusForms
             }
         }
         #endregion
-
-        #endregion
-
-        #region 校验
 
         #region 校验Excel并读取数据
         private bool GetExcelData(ImportType type, string[] columns, ref DataTable dt, ref string message)
@@ -370,14 +378,14 @@ namespace Tool.Main.Forms.BusForms
                                     //重复存值
                                     if (dicOrgName.Keys.Contains(tempKey))
                                     {
-                                        OrgCompare oc = dicOrgName[tempKey];
+                                        CompareOrg oc = dicOrgName[tempKey];
                                         oc.Count++;
                                         oc.IndexList += $",【{dr["序号"]}】";
                                         dicOrgName[tempKey] = oc;
                                     }
                                     else
                                     {
-                                        OrgCompare oc = new OrgCompare { Count = 1, IndexList = $"【{dr["序号"]}】", BuNo = $"{ dr["BuNo"]}", OrgNo = $"{dr["OrgNo"]}" };
+                                        CompareOrg oc = new CompareOrg { Count = 1, IndexList = $"【{dr["序号"]}】", BuNo = $"{dr["BuNo"]}", OrgNo = $"{dr["OrgNo"]}" };
                                         dicOrgName.Add(tempKey, oc);
                                     }
                                 }
@@ -391,14 +399,14 @@ namespace Tool.Main.Forms.BusForms
                                     //重复存值
                                     if (dicEmpNo.Keys.Contains(tempKey))
                                     {
-                                        EmpCompare ec = dicEmpNo[tempKey];
+                                        CompareEmp ec = dicEmpNo[tempKey];
                                         ec.Count++;
                                         ec.IndexList += $",【{dr["序号"]}】";
                                         dicEmpNo[tempKey] = ec;
                                     }
                                     else
                                     {
-                                        EmpCompare ec = new EmpCompare { Count = 1, IndexList = $"【{dr["序号"]}】" };
+                                        CompareEmp ec = new CompareEmp { Count = 1, IndexList = $"【{dr["序号"]}】" };
                                         dicEmpNo.Add(tempKey, ec);
                                     }
                                 }
@@ -453,13 +461,6 @@ namespace Tool.Main.Forms.BusForms
             dt.Columns.Add("Remark", typeof(string));
             //获取业务数据
             PduValidateResult pduValidateResult = GetBusinessData();
-            //获取PDU部门数据
-            List<PduResult> pduResults = null;
-            if (type == ImportType.Emp)
-            {
-                PduImportBusiness piBusi = new PduImportBusiness();
-                pduResults = piBusi.GetPduDepartment(dataHelper);
-            }
             //循环
             foreach (DataRow dr in dt.Rows)
             {
@@ -476,7 +477,7 @@ namespace Tool.Main.Forms.BusForms
                 if (cb_IsFilterEmp.Checked)
                 {
                     //0.判断【负责人工号+负责人姓名】是否存在-组织、人员 都需要判断
-                    List<EmpResult> searchEmp = pduValidateResult.empResults.Where(item => item.EmpNo == strEmpNo && item.EmpName == strEmpName).ToList();
+                    List<OriginEmpResult> searchEmp = pduValidateResult.OriginEmpResult.Where(item => item.EmpNo == strEmpNo && item.EmpName == strEmpName).ToList();
                     if (searchEmp.Count <= 0)
                     {
                         string errEmp = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），负责人信息在数据库不存在！\r\n";
@@ -500,7 +501,7 @@ namespace Tool.Main.Forms.BusForms
                 {
                     //1.【业务组织名称】是否存在重复
                     string tempKey = $"{strBuNo}&&&{strOrgName}";
-                    OrgCompare oc = dicOrgName[tempKey];
+                    CompareOrg oc = dicOrgName[tempKey];
                     if (oc.Count > 1)
                     {
                         string errOrgName = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），业务组织名称重复：{oc.IndexList} 行！\r\n";
@@ -508,7 +509,7 @@ namespace Tool.Main.Forms.BusForms
                         sbError.Append(errOrgName);
                     }
                     //2.判断【BU编号+BU名称】是否存在，且为BU
-                    List<OrgResult> searchOrg = pduValidateResult.orgResults.Where(item => item.OrgNo == strBuNo && item.OrgName == strBuName).ToList();
+                    List<OriginOrgFourResult> searchOrg = pduValidateResult.OriginLevelFourOrgResult.Where(item => item.OrgNo == strBuNo && item.OrgName == strBuName).ToList();
                     if (searchOrg.Count <= 0)
                     {
                         string errOrg = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），组织信息在数据库不存在！\r\n";
@@ -545,7 +546,7 @@ namespace Tool.Main.Forms.BusForms
                 if (type == ImportType.Emp)
                 {
                     //1.【员工工号】是否存在重复
-                    EmpCompare ec = dicEmpNo[strEmpNo];
+                    CompareEmp ec = dicEmpNo[strEmpNo];
                     if (ec.Count > 1)
                     {
                         string errOrgName = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），员工编号重复：{ec.IndexList} 行！\r\n";
@@ -554,7 +555,7 @@ namespace Tool.Main.Forms.BusForms
                     }
                     //2.【PDU业务组织】是否存在，且为末级组织
                     string strPduName = $"{dr["OrgName"]}";
-                    List<PduResult> searchPdu = pduResults.Where(item => item.BuNo == strBuNo && item.BuName == strBuName && item.OrgName.ToUpper() == strPduName.ToUpper()).ToList();
+                    List<PduDepartmentResult> searchPdu = pduValidateResult.PduDepartmentResult.Where(item => item.BuNo == strBuNo && item.BuName == strBuName && item.OrgName.ToUpper() == strPduName.ToUpper()).ToList();
                     if (searchPdu.Count <= 0)
                     {
                         string errPdu = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），PDU组织在数据库不存在或者不是末级节点！\r\n";
@@ -579,12 +580,12 @@ namespace Tool.Main.Forms.BusForms
             //获取业务数据
             PduValidateResult pduValidateResult = new PduValidateResult();
             PduImportBusiness piBusi = new PduImportBusiness();
-            pduValidateResult.orgResults = piBusi.GetLevelFourOrg(dataHelper);
-            pduValidateResult.empResults = piBusi.GetEmpInfo(dataHelper);
+            pduValidateResult.OriginLevelFourOrgResult = piBusi.GetOriginLevelFourOrg(dataHelper);
+            pduValidateResult.OriginEmpResult = piBusi.GetOriginEmpInfo(dataHelper);
+            pduValidateResult.PduDepartmentResult = piBusi.GetPduDepartment(dataHelper);
+            pduValidateResult.PduEmployeeResult = piBusi.GetPduEmployee(dataHelper);
             return pduValidateResult;
         }
-        #endregion
-
         #endregion
 
         #region 构建全局表对象字段
@@ -646,26 +647,6 @@ namespace Tool.Main.Forms.BusForms
         }
         #endregion
 
-        #region 切换生产库
-        private void cb_IsProb_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cb_IsProb.Checked)
-            {
-                this.cmb_IP.Text = "127.0.0.1,7002";
-                this.tb_LoginAccount.Text = "recruit_w";
-                this.tb_LoginPassword.Text = "wL1z26E5";
-            }
-            else
-            {
-                this.cmb_IP.Text = "10.136.0.114";
-                this.tb_LoginAccount.Text = "hruser";
-                this.tb_LoginPassword.Text = "rmohr123@abc";
-            }
-        }
-        #endregion
-
-        #region 生成脚本
-
         #region 生成组织脚本
         private void btn_Org_Script_Click(object sender, EventArgs e)
         {
@@ -678,17 +659,17 @@ namespace Tool.Main.Forms.BusForms
             DataTable dt = this.dv_Org.DvDataTable;
             foreach (DataRow row in dt.Rows)
             {
-                string deptNo = $"{ row["OrgNo"]}";
-                string deptName = $"{ row["OrgName"]}";
-                string parentNo = $"{ row["ParentNo"]}";
-                string buNo = $"{ row["BuNo"]}";
-                Int64? leaderId = row["LeaderId"] != System.DBNull.Value ? Convert.ToInt64($"{ row["LeaderId"]}") : null;
-                string empNo = $"{ row["EmpNo"]}";
-                string empName = $"{ row["EmpName"]}";
+                string deptNo = $"{row["OrgNo"]}";
+                string deptName = $"{row["OrgName"]}";
+                string parentNo = $"{row["ParentNo"]}";
+                string buNo = $"{row["BuNo"]}";
+                Int64? leaderId = row["LeaderId"] != System.DBNull.Value ? Convert.ToInt64($"{row["LeaderId"]}") : null;
+                string empNo = $"{row["EmpNo"]}";
+                string empName = $"{row["EmpName"]}";
                 string remark = $"{row["Remark"]}";
                 //if (string.IsNullOrEmpty(remark))
                 //{
-                    sb.AppendLine($@"INSERT INTO PSAData..mng_PduDepartment ( Dep_DeptNo, Dep_DeptName, Dep_DeptShortName, Dep_ParDeptNo, Dep_Level4DeptNo, Dep_Level, Dep_DeptEnglishName, Dep_DeptEnglishShortName, Dep_LeaderId, Dep_EmpNo, Dep_EmpName, Dep_BeginDate, Dep_EndDate, Creator, CreateDate, Modifier, ModifyDate, Dep_Status, Dep_Description ) VALUES('{deptNo}', '{deptName}', '', '{parentNo}', '{buNo}', 0, '', '', { leaderId}, '{empNo}', '{empName}', GETDATE(), GETDATE(), 'changls', GETDATE(), 'changls', GETDATE(), 0, '' );");
+                sb.AppendLine($@"INSERT INTO PSAData..mng_PduDepartment ( Dep_DeptNo, Dep_DeptName, Dep_DeptShortName, Dep_ParDeptNo, Dep_Level4DeptNo, Dep_Level, Dep_DeptEnglishName, Dep_DeptEnglishShortName, Dep_LeaderId, Dep_EmpNo, Dep_EmpName, Dep_BeginDate, Dep_EndDate, Creator, CreateDate, Modifier, ModifyDate, Dep_Status, Dep_Description ) VALUES('{deptNo}', '{deptName}', '', '{parentNo}', '{buNo}', 0, '', '', {leaderId}, '{empNo}', '{empName}', GETDATE(), GETDATE(), 'changls', GETDATE(), 'changls', GETDATE(), 0, '' );");
                 //}
             }
             this.rtb_Org_SqlScript.Text = sb.ToString();
@@ -707,18 +688,16 @@ namespace Tool.Main.Forms.BusForms
             DataTable dt = this.dv_Emp.DvDataTable;
             foreach (DataRow row in dt.Rows)
             {
-                string deptNo = $"{ row["OrgNo"]}";
-                string empNo = $"{ row["EmpNo"]}";
+                string deptNo = $"{row["OrgNo"]}";
+                string empNo = $"{row["EmpNo"]}";
                 string remark = $"{row["Remark"]}";
                 //if (string.IsNullOrEmpty(remark))
                 //{
-                    sb.AppendLine($@"INSERT INTO PSAData..mng_Pdu_Employee ( Dep_No, EmployeeNo, Dep_BeginDate, Dep_EndDate, Creator, CreateDate, Modifier, ModifyDate ) VALUES ('{deptNo}', '{empNo}', GETDATE(), GETDATE(), 'changls', GETDATE(), 'changls', GETDATE());");
+                sb.AppendLine($@"INSERT INTO PSAData..mng_Pdu_Employee ( Dep_No, EmployeeNo, Dep_BeginDate, Dep_EndDate, Creator, CreateDate, Modifier, ModifyDate ) VALUES ('{deptNo}', '{empNo}', GETDATE(), GETDATE(), 'changls', GETDATE(), 'changls', GETDATE());");
                 //}
             }
             this.rtb_Emp_SqlScript.Text = sb.ToString();
         }
-        #endregion
-
         #endregion
 
     }
