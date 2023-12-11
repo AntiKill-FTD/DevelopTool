@@ -165,13 +165,11 @@ namespace Tool.Main.Forms.BusForms
                     return;
                 }
                 //准备校验数据
-                this.rtb_Org_FullError.Text += $"{DateTime.Now}:Excel取数已完成，开始校验数据\r\n";
-                this.rtb_Org_FullError.Refresh();
+                AppendLog(ImportType.Org, $"{DateTime.Now}:Excel取数已完成，开始校验数据");
                 //DT 序号+原始数据+Remark
                 ValidateData(ImportType.Org, ref dt, ref sbError);
                 //校验数据完成
-                this.rtb_Org_FullError.Text += $"{DateTime.Now}:Excel校验已完成\r\n";
-                this.rtb_Org_FullError.Refresh();
+                AppendLog(ImportType.Org, $"{DateTime.Now}:Excel校验已完成");
                 //绑定网格，展示数据校验明细
                 this.dv_Org.DvDataTable = dt;
                 this.dv_Org.ViewDataBind(CusControls.DataGridViewEx.DataGridViewBindType.DataTable, false, false);
@@ -238,13 +236,11 @@ namespace Tool.Main.Forms.BusForms
                     return;
                 }
                 //准备校验数据
-                this.rtb_Emp_FullError.Text += $"{DateTime.Now}:Excel取数已完成，开始校验数据\r\n";
-                this.rtb_Emp_FullError.Refresh();
+                AppendLog(ImportType.Emp, $"{DateTime.Now}:Excel取数已完成，开始校验数据");
                 //DT 序号+原始数据+Remark
                 ValidateData(ImportType.Emp, ref dt, ref sbError);
                 //校验数据完成
-                this.rtb_Emp_FullError.Text += $"{DateTime.Now}:Excel校验已完成\r\n";
-                this.rtb_Emp_FullError.Refresh();
+                AppendLog(ImportType.Emp, $"{DateTime.Now}:Excel校验已完成");
                 //绑定网格，展示数据校验明细
                 this.dv_Emp.DvDataTable = dt;
                 this.dv_Emp.ViewDataBind(CusControls.DataGridViewEx.DataGridViewBindType.DataTable, false, false);
@@ -327,18 +323,8 @@ namespace Tool.Main.Forms.BusForms
 
                 #endregion
 
-                #region 记录日志
-                if (type == ImportType.Org)
-                {
-                    this.rtb_Org_FullError.Text += $"{DateTime.Now}:开始读取Excel\r\n";
-                    this.rtb_Org_FullError.Refresh();
-                }
-                else if (type == ImportType.Emp)
-                {
-                    this.rtb_Emp_FullError.Text += $"{DateTime.Now}:开始读取Excel\r\n";
-                    this.rtb_Emp_FullError.Refresh();
-                }
-                #endregion
+                //记录日志
+                AppendLog(type, $"{DateTime.Now}:开始读取Excel");
 
                 //读取文档
                 using (fs = File.Open(filePath, FileMode.Open, FileAccess.Read))
@@ -452,8 +438,9 @@ namespace Tool.Main.Forms.BusForms
             //dt添加备注列
             dt.Columns.Add("Remark", typeof(string));
             //获取业务数据
+            AppendLog(type, $"{DateTime.Now}:开始获取业务数据");
             PduValidateResult pduValidateResult = GetBusinessData();
-
+            AppendLog(type, $"{DateTime.Now}:业务数据获取完成");
             //循环
             foreach (DataRow dr in dt.Rows)
             {
@@ -599,6 +586,22 @@ namespace Tool.Main.Forms.BusForms
                 //}
             }
             this.rtb_Emp_SqlScript.Text = sb.ToString();
+        }
+        #endregion
+
+        #region 记录日志
+        private void AppendLog(ImportType type, string message)
+        {
+            if (type == ImportType.Org)
+            {
+                this.rtb_Org_FullError.Text += $"{DateTime.Now}:{message}\r\n";
+                this.rtb_Org_FullError.Refresh();
+            }
+            else if (type == ImportType.Emp)
+            {
+                this.rtb_Emp_FullError.Text += $"{DateTime.Now}:{message}\r\n";
+                this.rtb_Emp_FullError.Refresh();
+            }
         }
         #endregion
 
