@@ -425,12 +425,12 @@ namespace Tool.Main.Forms.BusForms
         {
             //dt添加备注列
             dt.Columns.Add("Remark", typeof(string));
+            //获取业务数据
+            PduValidateResult pduValidateResult = GetBusinessData();
 
             //修改Validate;调试中
             return;
 
-            //获取业务数据
-            PduValidateResult pduValidateResult = GetBusinessData();
             //循环
             foreach (DataRow dr in dt.Rows)
             {
