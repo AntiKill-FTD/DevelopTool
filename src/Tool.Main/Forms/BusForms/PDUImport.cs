@@ -156,7 +156,6 @@ namespace Tool.Main.Forms.BusForms
                 //DT 序号+原始数据
                 DataTable dt = CreateOrgTable();
                 //开始读取数据
-                this.rtb_Org_FullError.Text += $"{DateTime.Now}:开始读取Excel\r\n";
                 bool validateSheetResult = GetExcelData(ImportType.Org, GetOrgColumns()[1], ref dt, ref errorMessage);
                 if (!validateSheetResult)
                 {
@@ -225,7 +224,6 @@ namespace Tool.Main.Forms.BusForms
                 //DT 序号+原始数据
                 DataTable dt = CreateEmpTable();
                 //开始读取数据
-                this.rtb_Emp_FullError.Text += $"{DateTime.Now}:开始读取Excel\r\n";
                 bool validateSheetResult = GetExcelData(ImportType.Emp, GetEmpColumns()[1], ref dt, ref errorMessage);
                 if (!validateSheetResult)
                 {
@@ -317,6 +315,17 @@ namespace Tool.Main.Forms.BusForms
                     return false;
                 }
 
+                #endregion
+
+                #region 记录日志
+                if (type == ImportType.Org)
+                {
+                    this.rtb_Org_FullError.Text += $"{DateTime.Now}:开始读取Excel\r\n";
+                }
+                else if (type == ImportType.Emp)
+                {
+                    this.rtb_Emp_FullError.Text += $"{DateTime.Now}:开始读取Excel\r\n";
+                }
                 #endregion
 
                 //读取文档
