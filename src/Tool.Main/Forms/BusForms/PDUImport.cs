@@ -26,8 +26,6 @@ namespace Tool.Main.Forms.BusForms
         private bool isConnect = false;         //判断是否连接成功
         private string lastChoosePath = string.Empty; //上次打开的文件夹路径
         private Dictionary<string, CompareOrg> dicOrgName = new Dictionary<string, CompareOrg>(); //存储PDU业务名称，用来校验重复
-        private Dictionary<string, CompareEmp> dicEmpNo = new Dictionary<string, CompareEmp>(); //存储EmpNo，用来校验重复
-        private Dictionary<string, int> dicBuNo = new Dictionary<string, int>(); //存储BuNo，用来生成序号
 
         #endregion
 
@@ -141,6 +139,8 @@ namespace Tool.Main.Forms.BusForms
         {
             //记录处理时间
             Stopwatch timeWatch = Stopwatch.StartNew();
+            //错误信息
+            StringBuilder sbError = new StringBuilder();
             try
             {
                 //判断数据库连接
@@ -153,22 +153,22 @@ namespace Tool.Main.Forms.BusForms
                 string errorMessage = string.Empty;
                 //DT 序号+原始数据
                 DataTable dt = CreateOrgTable();
+                //开始读取数据
+                this.rtb_Org_FullError.Text += $"{DateTime.Now}:开始读取Excel";
                 bool validateSheetResult = GetExcelData(ImportType.Org, GetOrgColumns()[1], ref dt, ref errorMessage);
                 if (!validateSheetResult)
                 {
-                    this.rtb_Org_FullError.Text = $"{timeWatch.Elapsed.ToString()}\r\n";
+                    this.rtb_Org_FullError.Text = $"{DateTime.Now}:{timeWatch.Elapsed}\r\n";
                     this.rtb_Org_FullError.Text += errorMessage;
                     this.rtb_Org_FullError.ForeColor = Color.Red;
                     return;
                 }
-                else
-                {
-                    this.rtb_Org_FullError.Clear();
-                }
-                //校验数据
-                StringBuilder sbError = new StringBuilder();
+                //准备校验数据
+                this.rtb_Org_FullError.Text += $"{DateTime.Now}:Excel取数已完成，开始校验数据";
                 //DT 序号+原始数据+Remark
                 ValidateData(ImportType.Org, ref dt, ref sbError);
+                //校验数据完成
+                this.rtb_Org_FullError.Text += $"{DateTime.Now}:Excel校验已完成";
                 //绑定网格，展示数据校验明细
                 this.dv_Org.DvDataTable = dt;
                 this.dv_Org.ViewDataBind(CusControls.DataGridViewEx.DataGridViewBindType.DataTable, false, false);
@@ -177,24 +177,24 @@ namespace Tool.Main.Forms.BusForms
                 //显示错误信息
                 if (!string.IsNullOrEmpty(sbError.ToString()))
                 {
-                    this.rtb_Org_FullError.Text = $"{timeWatch.Elapsed.ToString()}\r\n";
+                    this.rtb_Org_FullError.Text = $"{DateTime.Now}:{timeWatch.Elapsed}\r\n";
                     this.rtb_Org_FullError.Text += sbError.ToString();
                     this.rtb_Org_FullError.ForeColor = Color.Red;
                 }
             }
             catch (Exception ex)
             {
-                this.rtb_Org_FullError.Text = $"{timeWatch.Elapsed.ToString()}\r\n";
-                this.rtb_Org_FullError.Text += $"错误\r{ex.Message}";
+                this.rtb_Org_FullError.Text = $"{DateTime.Now}:{timeWatch.Elapsed}:程序异常\r\n";
+                this.rtb_Org_FullError.Text += $"错误如下===>\r{ex.Message}";
                 this.rtb_Org_FullError.ForeColor = Color.Red;
                 return;
             }
             finally
             {
                 dicOrgName.Clear();
-                if (string.IsNullOrEmpty(this.rtb_Org_FullError.Text))
+                if (string.IsNullOrEmpty(sbError.ToString()))
                 {
-                    this.rtb_Org_FullError.Text = $"数据正确\r\n";
+                    this.rtb_Org_FullError.Text += $"{DateTime.Now}:数据正确\r\n";
                     this.rtb_Org_FullError.ForeColor = Color.Blue;
                 }
             }
@@ -206,6 +206,8 @@ namespace Tool.Main.Forms.BusForms
         {
             //记录处理时间
             Stopwatch timeWatch = Stopwatch.StartNew();
+            //错误信息
+            StringBuilder sbError = new StringBuilder();
             try
             {
                 //判断数据库连接
@@ -218,22 +220,22 @@ namespace Tool.Main.Forms.BusForms
                 string errorMessage = string.Empty;
                 //DT 序号+原始数据
                 DataTable dt = CreateEmpTable();
+                //开始读取数据
+                this.rtb_Emp_FullError.Text += $"{DateTime.Now}:开始读取Excel";
                 bool validateSheetResult = GetExcelData(ImportType.Emp, GetEmpColumns()[1], ref dt, ref errorMessage);
                 if (!validateSheetResult)
                 {
-                    this.rtb_Emp_FullError.Text = $"{timeWatch.Elapsed.ToString()}\r\n";
+                    this.rtb_Emp_FullError.Text = $"{DateTime.Now}:{timeWatch.Elapsed}\r\n";
                     this.rtb_Emp_FullError.Text += errorMessage;
                     this.rtb_Emp_FullError.ForeColor = Color.Red;
                     return;
                 }
-                else
-                {
-                    this.rtb_Emp_FullError.Clear();
-                }
-                //校验数据
-                StringBuilder sbError = new StringBuilder();
+                //准备校验数据
+                this.rtb_Emp_FullError.Text += $"{DateTime.Now}:Excel取数已完成，开始校验数据";
                 //DT 序号+原始数据+Remark
                 ValidateData(ImportType.Emp, ref dt, ref sbError);
+                //校验数据完成
+                this.rtb_Emp_FullError.Text += $"{DateTime.Now}:Excel校验已完成";
                 //绑定网格，展示数据校验明细
                 this.dv_Emp.DvDataTable = dt;
                 this.dv_Emp.ViewDataBind(CusControls.DataGridViewEx.DataGridViewBindType.DataTable, false, false);
@@ -242,24 +244,23 @@ namespace Tool.Main.Forms.BusForms
                 //显示错误信息
                 if (!string.IsNullOrEmpty(sbError.ToString()))
                 {
-                    this.rtb_Emp_FullError.Text = $"{timeWatch.Elapsed.ToString()}\r\n";
+                    this.rtb_Emp_FullError.Text = $"{DateTime.Now}:{timeWatch.Elapsed}\r\n";
                     this.rtb_Emp_FullError.Text += sbError.ToString();
                     this.rtb_Emp_FullError.ForeColor = Color.Red;
                 }
             }
             catch (Exception ex)
             {
-                this.rtb_Emp_FullError.Text = $"{timeWatch.Elapsed.ToString()}\r\n";
-                this.rtb_Emp_FullError.Text += $"错误\r{ex.Message}";
+                this.rtb_Emp_FullError.Text = $"{DateTime.Now}:{timeWatch.Elapsed}:程序异常\r\n";
+                this.rtb_Emp_FullError.Text += $"错误如下===>\r{ex.Message}";
                 this.rtb_Emp_FullError.ForeColor = Color.Red;
                 return;
             }
             finally
             {
-                dicEmpNo.Clear();
-                if (string.IsNullOrEmpty(this.rtb_Emp_FullError.Text))
+                if (string.IsNullOrEmpty(sbError.ToString()))
                 {
-                    this.rtb_Emp_FullError.Text = $"数据正确\r\n";
+                    this.rtb_Emp_FullError.Text += $"{DateTime.Now}:数据正确\r\n";
                     this.rtb_Emp_FullError.ForeColor = Color.Blue;
                 }
             }
