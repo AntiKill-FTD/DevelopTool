@@ -441,7 +441,7 @@ namespace Tool.Main.Forms.BusForms
                 string strEmpNo = $"{dr["EmpNo"]}";
                 string strEmpName = $"{dr["EmpName"]}";
                 //获取父级信息
-                string strParentName = type == ImportType.Org ? $"{dr["ParentNO"]}" : "";
+                string strParentName = type == ImportType.Org ? $"{dr["ParentName"]}" : "";
 
                 int wait = 0;
             }
