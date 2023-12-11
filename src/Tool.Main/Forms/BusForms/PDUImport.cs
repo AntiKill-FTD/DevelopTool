@@ -166,10 +166,12 @@ namespace Tool.Main.Forms.BusForms
                 }
                 //准备校验数据
                 this.rtb_Org_FullError.Text += $"{DateTime.Now}:Excel取数已完成，开始校验数据\r\n";
+                this.rtb_Org_FullError.Refresh();
                 //DT 序号+原始数据+Remark
                 ValidateData(ImportType.Org, ref dt, ref sbError);
                 //校验数据完成
                 this.rtb_Org_FullError.Text += $"{DateTime.Now}:Excel校验已完成\r\n";
+                this.rtb_Org_FullError.Refresh();
                 //绑定网格，展示数据校验明细
                 this.dv_Org.DvDataTable = dt;
                 this.dv_Org.ViewDataBind(CusControls.DataGridViewEx.DataGridViewBindType.DataTable, false, false);
@@ -181,6 +183,7 @@ namespace Tool.Main.Forms.BusForms
                     this.rtb_Org_FullError.Text = $"{DateTime.Now}:{timeWatch.Elapsed}\r\n";
                     this.rtb_Org_FullError.Text += sbError.ToString();
                     this.rtb_Org_FullError.ForeColor = Color.Red;
+                    this.rtb_Org_FullError.Refresh();
                 }
             }
             catch (Exception ex)
@@ -188,6 +191,7 @@ namespace Tool.Main.Forms.BusForms
                 this.rtb_Org_FullError.Text = $"{DateTime.Now}:{timeWatch.Elapsed}:程序异常\r\n";
                 this.rtb_Org_FullError.Text += $"错误如下===>\r{ex.Message}";
                 this.rtb_Org_FullError.ForeColor = Color.Red;
+                this.rtb_Org_FullError.Refresh();
                 return;
             }
             finally
@@ -197,6 +201,7 @@ namespace Tool.Main.Forms.BusForms
                 {
                     this.rtb_Org_FullError.Text += $"{DateTime.Now}:数据正确\r\n";
                     this.rtb_Org_FullError.ForeColor = Color.Blue;
+                    this.rtb_Org_FullError.Refresh();
                 }
             }
         }
@@ -234,10 +239,12 @@ namespace Tool.Main.Forms.BusForms
                 }
                 //准备校验数据
                 this.rtb_Emp_FullError.Text += $"{DateTime.Now}:Excel取数已完成，开始校验数据\r\n";
+                this.rtb_Emp_FullError.Refresh();
                 //DT 序号+原始数据+Remark
                 ValidateData(ImportType.Emp, ref dt, ref sbError);
                 //校验数据完成
                 this.rtb_Emp_FullError.Text += $"{DateTime.Now}:Excel校验已完成\r\n";
+                this.rtb_Emp_FullError.Refresh();
                 //绑定网格，展示数据校验明细
                 this.dv_Emp.DvDataTable = dt;
                 this.dv_Emp.ViewDataBind(CusControls.DataGridViewEx.DataGridViewBindType.DataTable, false, false);
@@ -249,6 +256,7 @@ namespace Tool.Main.Forms.BusForms
                     this.rtb_Emp_FullError.Text = $"{DateTime.Now}:{timeWatch.Elapsed}\r\n";
                     this.rtb_Emp_FullError.Text += sbError.ToString();
                     this.rtb_Emp_FullError.ForeColor = Color.Red;
+                    this.rtb_Emp_FullError.Refresh();
                 }
             }
             catch (Exception ex)
@@ -256,6 +264,7 @@ namespace Tool.Main.Forms.BusForms
                 this.rtb_Emp_FullError.Text = $"{DateTime.Now}:{timeWatch.Elapsed}:程序异常\r\n";
                 this.rtb_Emp_FullError.Text += $"错误如下===>\r{ex.Message}";
                 this.rtb_Emp_FullError.ForeColor = Color.Red;
+                this.rtb_Emp_FullError.Refresh();
                 return;
             }
             finally
@@ -264,6 +273,7 @@ namespace Tool.Main.Forms.BusForms
                 {
                     this.rtb_Emp_FullError.Text += $"{DateTime.Now}:数据正确\r\n";
                     this.rtb_Emp_FullError.ForeColor = Color.Blue;
+                    this.rtb_Emp_FullError.Refresh();
                 }
             }
         }
@@ -321,10 +331,12 @@ namespace Tool.Main.Forms.BusForms
                 if (type == ImportType.Org)
                 {
                     this.rtb_Org_FullError.Text += $"{DateTime.Now}:开始读取Excel\r\n";
+                    this.rtb_Org_FullError.Refresh();
                 }
                 else if (type == ImportType.Emp)
                 {
                     this.rtb_Emp_FullError.Text += $"{DateTime.Now}:开始读取Excel\r\n";
+                    this.rtb_Emp_FullError.Refresh();
                 }
                 #endregion
 
