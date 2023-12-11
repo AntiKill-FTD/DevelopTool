@@ -141,6 +141,8 @@ namespace Tool.Main.Forms.BusForms
             Stopwatch timeWatch = Stopwatch.StartNew();
             //错误信息
             StringBuilder sbError = new StringBuilder();
+            //清除历史日志
+            this.rtb_Org_FullError.Text = string.Empty;
             try
             {
                 //判断数据库连接
@@ -154,7 +156,7 @@ namespace Tool.Main.Forms.BusForms
                 //DT 序号+原始数据
                 DataTable dt = CreateOrgTable();
                 //开始读取数据
-                this.rtb_Org_FullError.Text += $"{DateTime.Now}:开始读取Excel";
+                this.rtb_Org_FullError.Text += $"{DateTime.Now}:开始读取Excel\r\n";
                 bool validateSheetResult = GetExcelData(ImportType.Org, GetOrgColumns()[1], ref dt, ref errorMessage);
                 if (!validateSheetResult)
                 {
@@ -164,11 +166,11 @@ namespace Tool.Main.Forms.BusForms
                     return;
                 }
                 //准备校验数据
-                this.rtb_Org_FullError.Text += $"{DateTime.Now}:Excel取数已完成，开始校验数据";
+                this.rtb_Org_FullError.Text += $"{DateTime.Now}:Excel取数已完成，开始校验数据\r\n";
                 //DT 序号+原始数据+Remark
                 ValidateData(ImportType.Org, ref dt, ref sbError);
                 //校验数据完成
-                this.rtb_Org_FullError.Text += $"{DateTime.Now}:Excel校验已完成";
+                this.rtb_Org_FullError.Text += $"{DateTime.Now}:Excel校验已完成\r\n";
                 //绑定网格，展示数据校验明细
                 this.dv_Org.DvDataTable = dt;
                 this.dv_Org.ViewDataBind(CusControls.DataGridViewEx.DataGridViewBindType.DataTable, false, false);
@@ -208,6 +210,8 @@ namespace Tool.Main.Forms.BusForms
             Stopwatch timeWatch = Stopwatch.StartNew();
             //错误信息
             StringBuilder sbError = new StringBuilder();
+            //清除历史日志
+            this.rtb_Emp_FullError.Text = string.Empty;
             try
             {
                 //判断数据库连接
@@ -221,7 +225,7 @@ namespace Tool.Main.Forms.BusForms
                 //DT 序号+原始数据
                 DataTable dt = CreateEmpTable();
                 //开始读取数据
-                this.rtb_Emp_FullError.Text += $"{DateTime.Now}:开始读取Excel";
+                this.rtb_Emp_FullError.Text += $"{DateTime.Now}:开始读取Excel\r\n";
                 bool validateSheetResult = GetExcelData(ImportType.Emp, GetEmpColumns()[1], ref dt, ref errorMessage);
                 if (!validateSheetResult)
                 {
@@ -231,11 +235,11 @@ namespace Tool.Main.Forms.BusForms
                     return;
                 }
                 //准备校验数据
-                this.rtb_Emp_FullError.Text += $"{DateTime.Now}:Excel取数已完成，开始校验数据";
+                this.rtb_Emp_FullError.Text += $"{DateTime.Now}:Excel取数已完成，开始校验数据\r\n";
                 //DT 序号+原始数据+Remark
                 ValidateData(ImportType.Emp, ref dt, ref sbError);
                 //校验数据完成
-                this.rtb_Emp_FullError.Text += $"{DateTime.Now}:Excel校验已完成";
+                this.rtb_Emp_FullError.Text += $"{DateTime.Now}:Excel校验已完成\r\n";
                 //绑定网格，展示数据校验明细
                 this.dv_Emp.DvDataTable = dt;
                 this.dv_Emp.ViewDataBind(CusControls.DataGridViewEx.DataGridViewBindType.DataTable, false, false);
