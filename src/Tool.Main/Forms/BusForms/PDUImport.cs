@@ -269,7 +269,6 @@ namespace Tool.Main.Forms.BusForms
         #region 校验Excel并读取数据
         /// <summary>
         /// 此方法只校验Excel格式，列字段信息;
-        /// 并记录文档重复数据到dic字典（需要修改，重复要与数据库比对，生成的pdu编号也要重新计算）
         /// </summary>
         /// <param name="type"></param>
         /// <param name="columns"></param>
@@ -358,6 +357,8 @@ namespace Tool.Main.Forms.BusForms
 
                             #endregion
 
+                            #region 读取Excel内容
+
                             //获取字段拼接表
                             int rowNum = sheet.LastRowNum;
                             for (int j = 2; j <= rowNum; j++)
@@ -373,63 +374,9 @@ namespace Tool.Main.Forms.BusForms
                                 }
                                 //插入行
                                 dt.Rows.Add(dr);
-                                //如果是【ORG】导入，记录OrgName：
-                                //Key：BuNo&&&OrgName
-                                //Value：OrgCompare { Count, IndexList, BuNo }
-                                if (type == ImportType.Org)
-                                {
-                                    //临时变量
-                                    string tempBuNo = $"{dr["BuNo"]}";
-                                    string tempOrgName = $"{dr["OrgName"]}";
-                                    string tempKey = $"{tempBuNo}&&&{tempOrgName}";
-                                    //数量存值，生成OrgNo
-                                    //Org导入的时候，写入OrgNo列，写入规则：：{BuNo}_PDU_序号
-                                    //Org.ParentNO列比对的时候才写入；Emp.OrgNo列比对的时候才写入；
-                                    if (dicBuNo.Keys.Contains(tempBuNo))
-                                    {
-                                        dicBuNo[tempBuNo]++;
-                                    }
-                                    else
-                                    {
-                                        dicBuNo.Add(tempBuNo, 1);
-                                    }
-                                    dr["OrgNo"] = $"{tempBuNo}_PDU_{dicBuNo[tempBuNo]}";
-                                    //重复存值
-                                    if (dicOrgName.Keys.Contains(tempKey))
-                                    {
-                                        CompareOrg oc = dicOrgName[tempKey];
-                                        oc.Count++;
-                                        oc.IndexList += $",【{dr["序号"]}】";
-                                        dicOrgName[tempKey] = oc;
-                                    }
-                                    else
-                                    {
-                                        CompareOrg oc = new CompareOrg { Count = 1, IndexList = $"【{dr["序号"]}】", BuNo = $"{dr["BuNo"]}", OrgNo = $"{dr["OrgNo"]}" };
-                                        dicOrgName.Add(tempKey, oc);
-                                    }
-                                }
-                                //如果是【EMP】导入，记录EmpNo：
-                                //Key：EmpNo
-                                //Value：EmpCompare { Count, IndexList }
-                                if (type == ImportType.Emp)
-                                {
-                                    //临时变量
-                                    string tempKey = $"{dr["EmpNo"]}";
-                                    //重复存值
-                                    if (dicEmpNo.Keys.Contains(tempKey))
-                                    {
-                                        CompareEmp ec = dicEmpNo[tempKey];
-                                        ec.Count++;
-                                        ec.IndexList += $",【{dr["序号"]}】";
-                                        dicEmpNo[tempKey] = ec;
-                                    }
-                                    else
-                                    {
-                                        CompareEmp ec = new CompareEmp { Count = 1, IndexList = $"【{dr["序号"]}】" };
-                                        dicEmpNo.Add(tempKey, ec);
-                                    }
-                                }
                             }
+
+                            #endregion
                         }
                         else
                         {
@@ -478,6 +425,10 @@ namespace Tool.Main.Forms.BusForms
         {
             //dt添加备注列
             dt.Columns.Add("Remark", typeof(string));
+
+            //修改Validate;调试中
+            return;
+
             //获取业务数据
             PduValidateResult pduValidateResult = GetBusinessData();
             //循环
