@@ -428,9 +428,6 @@ namespace Tool.Main.Forms.BusForms
             //获取业务数据
             PduValidateResult pduValidateResult = GetBusinessData();
 
-            //修改Validate;调试中
-            return;
-
             //循环
             foreach (DataRow dr in dt.Rows)
             {
@@ -443,102 +440,10 @@ namespace Tool.Main.Forms.BusForms
                 string strBuName = $"{dr["BuName"]}";
                 string strEmpNo = $"{dr["EmpNo"]}";
                 string strEmpName = $"{dr["EmpName"]}";
+                //获取父级信息
+                string strParentName = type == ImportType.Org ? $"{dr["ParentNO"]}" : "";
 
-                if (cb_IsFilterEmp.Checked)
-                {
-                    //0.判断【负责人工号+负责人姓名】是否存在-组织、人员 都需要判断
-                    List<OriginEmpResult> searchEmp = pduValidateResult.OriginEmpResult.Where(item => item.EmpNo == strEmpNo && item.EmpName == strEmpName).ToList();
-                    if (searchEmp.Count <= 0)
-                    {
-                        string errEmp = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），负责人信息在数据库不存在！\r\n";
-                        dr["Remark"] += errEmp;
-                        sbError.Append(errEmp);
-                    }
-                    else if (searchEmp[0].EmpStatus != "1")
-                    {
-                        string errEmp = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），负责人已离职！\r\n";
-                        dr["Remark"] += errEmp;
-                        sbError.Append(errEmp);
-                    }
-                    else
-                    {
-                        dr["LeaderId"] = searchEmp[0].EmpId;
-                    }
-                }
-
-                //如果导入的是组织清单，还需要校验如下几点
-                if (type == ImportType.Org)
-                {
-                    //1.【业务组织名称】是否存在重复
-                    string tempKey = $"{strBuNo}&&&{strOrgName}";
-                    CompareOrg oc = dicOrgName[tempKey];
-                    if (oc.Count > 1)
-                    {
-                        string errOrgName = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），业务组织名称重复：{oc.IndexList} 行！\r\n";
-                        dr["Remark"] += errOrgName;
-                        sbError.Append(errOrgName);
-                    }
-                    //2.判断【BU编号+BU名称】是否存在，且为BU
-                    List<OriginOrgFourResult> searchOrg = pduValidateResult.OriginLevelFourOrgResult.Where(item => item.OrgNo == strBuNo && item.OrgName == strBuName).ToList();
-                    if (searchOrg.Count <= 0)
-                    {
-                        string errOrg = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），组织信息在数据库不存在！\r\n";
-                        dr["Remark"] = errOrg;
-                        sbError.Append(errOrg);
-                    }
-                    else if (searchOrg[0].OrgLevel != 4)
-                    {
-                        string errOrg = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），组织信息不是BU，层级为{searchOrg[0].OrgLevel}！\r\n";
-                        dr["Remark"] = errOrg;
-                        sbError.Append(errOrg);
-                    }
-                    //3.【直接上层业务组织】是否在【业务组织名称】存在 （BuNo一致的才认为是上层组织）
-                    string strParentName = $"{dr["ParentName"]}";
-                    if (!string.IsNullOrEmpty(strParentName))
-                    {
-                        string tempParentKey = $"{strBuNo}&&&{strParentName}";
-                        if (!dicOrgName.Keys.Contains(tempParentKey))
-                        {
-                            string errParentName = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），直接上层业务组织【{tempParentKey}】在导入文档中不存在！\r\n";
-                            dr["Remark"] += errParentName;
-                            sbError.Append(errParentName);
-                        }
-                        else
-                        {
-                            //Org导入的时候，写入OrgNo列，写入规则：：{BuNo}_PDU_序号
-                            //Org.ParentNO列比对的时候才写入；Emp.OrgNo列比对的时候才写入；
-                            dr["ParentNo"] = dicOrgName[tempParentKey].OrgNo;
-                        }
-                    }
-                }
-
-                //如果导入的是人员清单，还需要校验如下几点
-                if (type == ImportType.Emp)
-                {
-                    //1.【员工工号】是否存在重复
-                    CompareEmp ec = dicEmpNo[strEmpNo];
-                    if (ec.Count > 1)
-                    {
-                        string errOrgName = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），员工编号重复：{ec.IndexList} 行！\r\n";
-                        dr["Remark"] += errOrgName;
-                        sbError.Append(errOrgName);
-                    }
-                    //2.【PDU业务组织】是否存在，且为末级组织
-                    string strPduName = $"{dr["OrgName"]}";
-                    List<PduDepartmentResult> searchPdu = pduValidateResult.PduDepartmentResult.Where(item => item.BuNo == strBuNo && item.BuName == strBuName && item.OrgName.ToUpper() == strPduName.ToUpper()).ToList();
-                    if (searchPdu.Count <= 0)
-                    {
-                        string errPdu = $"第【{strNum}】行数据（Excel第{iExcelNum}行数据），PDU组织在数据库不存在或者不是末级节点！\r\n";
-                        dr["Remark"] += errPdu;
-                        sbError.Append(errPdu);
-                    }
-                    else
-                    {
-                        //Org导入的时候，写入OrgNo列，写入规则：：{BuNo}_PDU_序号
-                        //Org.ParentNO列比对的时候才写入；Emp.OrgNo列比对的时候才写入；
-                        dr["OrgNo"] = searchPdu[0].OrgNo;
-                    }
-                }
+                int wait = 0;
             }
         }
 
