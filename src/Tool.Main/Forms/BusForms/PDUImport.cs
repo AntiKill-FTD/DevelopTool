@@ -363,14 +363,14 @@ namespace Tool.Main.Forms.BusForms
                             int rowNum = sheet.LastRowNum;
                             for (int j = 2; j <= rowNum; j++)
                             {
-                                IRow dataRow = sheet.GetRow(j);
                                 DataRow dr = dt.NewRow();
                                 //写入序号列
                                 dr[0] = $"{sheetName}:{j - 1}";
                                 //添加字段列
                                 for (int k = 0; k < columns.Length; k++)
                                 {
-                                    dr[k + 1] = dataRow.Cells[k].ToString();
+                                    var objValue = sheet.GetRow(j).GetCell(k);
+                                    dr[k + 1] = objValue == null ? "" : objValue.ToString();
                                 }
                                 //插入行
                                 dt.Rows.Add(dr);
