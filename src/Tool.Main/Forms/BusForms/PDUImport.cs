@@ -434,16 +434,17 @@ namespace Tool.Main.Forms.BusForms
                 //获取序号信息
                 string strNum = $"{dr["序号"]}";
                 int iExcelNum = Convert.ToInt32(strNum.Split(':')[1]) + 2;
-                //获取部门信息和员工信息
+                //获取PDU信息
                 string strOrgName = $"{dr["OrgName"]}";
+                //获取PDU信息 - 获取父级信息
+                string strParentName = type == ImportType.Org ? $"{dr["ParentName"]}" : "";
+                //获取BU信息
                 string strBuNo = $"{dr["BuNo"]}";
                 string strBuName = $"{dr["BuName"]}";
+                //获取员工信息
                 string strEmpNo = $"{dr["EmpNo"]}";
                 string strEmpName = $"{dr["EmpName"]}";
-                //获取父级信息
-                string strParentName = type == ImportType.Org ? $"{dr["ParentName"]}" : "";
 
-                int wait = 0;
             }
         }
 
