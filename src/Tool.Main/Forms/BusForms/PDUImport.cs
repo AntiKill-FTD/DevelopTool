@@ -583,8 +583,8 @@ namespace Tool.Main.Forms.BusForms
                     if (orgInfo == null)
                     {
                         dataResultHasError = true;
-                        item.Remark += $"所属业务组织名称和所属BU在系统不存在;\r\n";
-                        AppendError(type, $"{item.SheetIndex}:所属业务组织名称和所属BU在系统不存在;");
+                        item.Remark += $"所属业务组织名称在系统不存在;\r\n";
+                        AppendError(type, $"{item.SheetIndex}:所属业务组织名称在系统不存在;");
                     }
                     //3.2.2 所属业务组织名称 + 所属BU 是否是末级PDU组织
                     else
@@ -592,8 +592,8 @@ namespace Tool.Main.Forms.BusForms
                         if (orgInfo.ChildCount != 0)
                         {
                             dataResultHasError = true;
-                            item.Remark += $"所属业务组织名称和所属BU不是末级PDU组织;\r\n";
-                            AppendError(type, $"{item.SheetIndex}:所属业务组织名称和所属BU不是末级PDU组织;");
+                            item.Remark += $"所属业务组织名称不是末级PDU组织;\r\n";
+                            AppendError(type, $"{item.SheetIndex}:所属业务组织名称不是末级PDU组织;");
                         }
                     }
                     if (!dataResultHasError)
