@@ -845,5 +845,227 @@ namespace Tool.Main.Forms.BusForms
         }
         #endregion
 
+        #region Level字段处理SQL + Level表处理SQL
+
+        private void btn_LevelField_Click(object sender, EventArgs e)
+        {
+            string sql = $@" 
+                                --更新所有层级为-1
+                                UPDATE dbo.mng_PduDepartment SET Dep_Level = -1;
+                                --更新bu编号和pardeptno一致的层级为1
+                                UPDATE dbo.mng_PduDepartment SET Dep_Level = 1 WHERE Dep_ParDeptNo = Dep_Level4DeptNo;
+                                --递归层级，计算子集层级
+                                UPDATE level2
+                                SET level2.Dep_Level = 2
+                                FROM PSAData..mng_PduDepartment level1
+                                    LEFT JOIN PSAData..mng_PduDepartment level2
+                                        ON level2.Dep_ParDeptNo = level1.Dep_DeptNo
+                                    LEFT JOIN PSAData..mng_PduDepartment level3
+                                        ON level3.Dep_ParDeptNo = level2.Dep_DeptNo
+                                    LEFT JOIN PSAData..mng_PduDepartment level4
+                                        ON level4.Dep_ParDeptNo = level3.Dep_DeptNo
+                                    LEFT JOIN PSAData..mng_PduDepartment level5
+                                        ON level5.Dep_ParDeptNo = level4.Dep_DeptNo
+                                    LEFT JOIN PSAData..mng_PduDepartment level6
+                                        ON level6.Dep_ParDeptNo = level5.Dep_DeptNo
+                                WHERE level1.Dep_Level = 1;
+
+                                UPDATE level3
+                                SET level3.Dep_Level = 3
+                                FROM PSAData..mng_PduDepartment level1
+                                    LEFT JOIN PSAData..mng_PduDepartment level2
+                                        ON level2.Dep_ParDeptNo = level1.Dep_DeptNo
+                                    LEFT JOIN PSAData..mng_PduDepartment level3
+                                        ON level3.Dep_ParDeptNo = level2.Dep_DeptNo
+                                    LEFT JOIN PSAData..mng_PduDepartment level4
+                                        ON level4.Dep_ParDeptNo = level3.Dep_DeptNo
+                                    LEFT JOIN PSAData..mng_PduDepartment level5
+                                        ON level5.Dep_ParDeptNo = level4.Dep_DeptNo
+                                    LEFT JOIN PSAData..mng_PduDepartment level6
+                                        ON level6.Dep_ParDeptNo = level5.Dep_DeptNo
+                                WHERE level1.Dep_Level = 1;
+
+                                UPDATE level4
+                                SET level4.Dep_Level = 4
+                                FROM PSAData..mng_PduDepartment level1
+                                    LEFT JOIN PSAData..mng_PduDepartment level2
+                                        ON level2.Dep_ParDeptNo = level1.Dep_DeptNo
+                                    LEFT JOIN PSAData..mng_PduDepartment level3
+                                        ON level3.Dep_ParDeptNo = level2.Dep_DeptNo
+                                    LEFT JOIN PSAData..mng_PduDepartment level4
+                                        ON level4.Dep_ParDeptNo = level3.Dep_DeptNo
+                                    LEFT JOIN PSAData..mng_PduDepartment level5
+                                        ON level5.Dep_ParDeptNo = level4.Dep_DeptNo
+                                    LEFT JOIN PSAData..mng_PduDepartment level6
+                                        ON level6.Dep_ParDeptNo = level5.Dep_DeptNo
+                                WHERE level1.Dep_Level = 1;
+
+                                UPDATE level5
+                                SET level5.Dep_Level = 5
+                                FROM PSAData..mng_PduDepartment level1
+                                    LEFT JOIN PSAData..mng_PduDepartment level2
+                                        ON level2.Dep_ParDeptNo = level1.Dep_DeptNo
+                                    LEFT JOIN PSAData..mng_PduDepartment level3
+                                        ON level3.Dep_ParDeptNo = level2.Dep_DeptNo
+                                    LEFT JOIN PSAData..mng_PduDepartment level4
+                                        ON level4.Dep_ParDeptNo = level3.Dep_DeptNo
+                                    LEFT JOIN PSAData..mng_PduDepartment level5
+                                        ON level5.Dep_ParDeptNo = level4.Dep_DeptNo
+                                    LEFT JOIN PSAData..mng_PduDepartment level6
+                                        ON level6.Dep_ParDeptNo = level5.Dep_DeptNo
+                                WHERE level1.Dep_Level = 1;
+
+                                UPDATE level6
+                                SET level6.Dep_Level = 6
+                                FROM PSAData..mng_PduDepartment level1
+                                    LEFT JOIN PSAData..mng_PduDepartment level2
+                                        ON level2.Dep_ParDeptNo = level1.Dep_DeptNo
+                                    LEFT JOIN PSAData..mng_PduDepartment level3
+                                        ON level3.Dep_ParDeptNo = level2.Dep_DeptNo
+                                    LEFT JOIN PSAData..mng_PduDepartment level4
+                                        ON level4.Dep_ParDeptNo = level3.Dep_DeptNo
+                                    LEFT JOIN PSAData..mng_PduDepartment level5
+                                        ON level5.Dep_ParDeptNo = level4.Dep_DeptNo
+                                    LEFT JOIN PSAData..mng_PduDepartment level6
+                                        ON level6.Dep_ParDeptNo = level5.Dep_DeptNo
+                                WHERE level1.Dep_Level = 1;
+
+                                --查询Level仍然为-1的数据，为错误数据
+                                SELECT * FROM dbo.mng_PduDepartment WHERE Dep_Level = -1;";
+            this.rtb_Org_RowError.Text = sql;
+        }
+
+        private void btn_LevelTable_Click(object sender, EventArgs e)
+        {
+            string sql = $@" 
+                                --删除历史pdu表
+                                DELETE FROM dbo.mng_PduDepartmentLevel;
+                                --同步PDU层级表
+                                --插入末级节点
+                                INSERT INTO dbo.mng_PduDepartmentLevel
+                                (
+                                    PDU_DeptID,
+                                    PDU_DeptNo,
+                                    PDU_DeptName,
+                                    PDU_Level
+                                )
+                                SELECT PduDept.Dep_Id,
+                                       PduDept.Dep_DeptNo,
+                                       PduDept.Dep_DeptName,
+                                       PduDept.Dep_Level
+                                FROM dbo.mng_PduDepartment PduDept WITH (NOLOCK)
+                                WHERE NOT EXISTS
+                                (
+                                    SELECT *
+                                    FROM mng_PduDepartment PduDept1
+                                    WHERE PduDept1.Dep_ParDeptNo = PduDept.Dep_DeptNo
+                                );
+
+                                --将层级字段全部更新成和DepartMent一致
+                                UPDATE PduLevel
+                                SET PduLevel.DL_DeptID1 = RecusionLevel.DL_DeptID1,
+                                    PduLevel.DL_DeptNo1 = RecusionLevel.DL_DeptNo1,
+                                    PduLevel.DL_DeptName1 = RecusionLevel.DL_DeptName1,
+                                    PduLevel.DL_DeptID2 = RecusionLevel.DL_DeptID2,
+                                    PduLevel.DL_DeptNo2 = RecusionLevel.DL_DeptNo2,
+                                    PduLevel.DL_DeptName2 = RecusionLevel.DL_DeptName2,
+                                    PduLevel.DL_DeptID3 = RecusionLevel.DL_DeptID3,
+                                    PduLevel.DL_DeptNo3 = RecusionLevel.DL_DeptNo3,
+                                    PduLevel.DL_DeptName3 = RecusionLevel.DL_DeptName3,
+                                    PduLevel.DL_DeptID4 = RecusionLevel.DL_DeptID4,
+                                    PduLevel.DL_DeptNo4 = RecusionLevel.DL_DeptNo4,
+                                    PduLevel.DL_DeptName4 = RecusionLevel.DL_DeptName4,
+                                    PduLevel.PDU_DeptID1 = RecusionLevel.PDU_DeptID1,
+                                    PduLevel.PDU_DeptNo1 = RecusionLevel.PDU_DeptNo1,
+                                    PduLevel.PDU_DeptName1 = RecusionLevel.PDU_DeptName1,
+                                    PduLevel.PDU_DeptID2 = RecusionLevel.PDU_DeptID2,
+                                    PduLevel.PDU_DeptNo2 = RecusionLevel.PDU_DeptNo2,
+                                    PduLevel.PDU_DeptName2 = RecusionLevel.PDU_DeptName2,
+                                    PduLevel.PDU_DeptID3 = RecusionLevel.PDU_DeptID3,
+                                    PduLevel.PDU_DeptNo3 = RecusionLevel.PDU_DeptNo3,
+                                    PduLevel.PDU_DeptName3 = RecusionLevel.PDU_DeptName3,
+                                    PduLevel.PDU_DeptID4 = RecusionLevel.PDU_DeptID4,
+                                    PduLevel.PDU_DeptNo4 = RecusionLevel.PDU_DeptNo4,
+                                    PduLevel.PDU_DeptName4 = RecusionLevel.PDU_DeptName4,
+                                    PduLevel.PDU_DeptID5 = RecusionLevel.PDU_DeptID5,
+                                    PduLevel.PDU_DeptNo5 = RecusionLevel.PDU_DeptNo5,
+                                    PduLevel.PDU_DeptName5 = RecusionLevel.PDU_DeptName5,
+                                    PduLevel.PDU_DeptID6 = RecusionLevel.PDU_DeptID6,
+                                    PduLevel.PDU_DeptNo6 = RecusionLevel.PDU_DeptNo6,
+                                    PduLevel.PDU_DeptName6 = RecusionLevel.PDU_DeptName6,
+                                    PduLevel.DL_Status = 1,
+                                    PduLevel.DL_BuildDate = GETDATE()
+                                FROM mng_PduDepartmentLevel AS PduLevel WITH (NOLOCK)
+                                    LEFT JOIN
+                                    (
+                                        SELECT HROrg01.Dep_Id AS DL_DeptID1,
+                                               HROrg01.Dep_DeptNo AS DL_DeptNo1,
+                                               HROrg01.Dep_DeptName AS DL_DeptName1,
+                                               HROrg02.Dep_Id AS DL_DeptID2,
+                                               HROrg02.Dep_DeptNo AS DL_DeptNo2,
+                                               HROrg02.Dep_DeptName AS DL_DeptName2,
+                                               HROrg03.Dep_Id AS DL_DeptID3,
+                                               HROrg03.Dep_DeptNo AS DL_DeptNo3,
+                                               HROrg03.Dep_DeptName AS DL_DeptName3,
+                                               HROrg04.Dep_Id AS DL_DeptID4,
+                                               HROrg04.Dep_DeptNo AS DL_DeptNo4,
+                                               HROrg04.Dep_DeptName AS DL_DeptName4,
+                                               PduORG01.Dep_Id AS PDU_DeptID1,
+                                               PduORG01.Dep_DeptNo AS PDU_DeptNo1,
+                                               PduORG01.Dep_DeptName AS PDU_DeptName1,
+                                               PduORG02.Dep_Id AS PDU_DeptID2,
+                                               PduORG02.Dep_DeptNo AS PDU_DeptNo2,
+                                               PduORG02.Dep_DeptName AS PDU_DeptName2,
+                                               PduORG03.Dep_Id AS PDU_DeptID3,
+                                               PduORG03.Dep_DeptNo AS PDU_DeptNo3,
+                                               PduORG03.Dep_DeptName AS PDU_DeptName3,
+                                               PduORG04.Dep_Id AS PDU_DeptID4,
+                                               PduORG04.Dep_DeptNo AS PDU_DeptNo4,
+                                               PduORG04.Dep_DeptName AS PDU_DeptName4,
+                                               PduORG05.Dep_Id AS PDU_DeptID5,
+                                               PduORG05.Dep_DeptNo AS PDU_DeptNo5,
+                                               PduORG05.Dep_DeptName AS PDU_DeptName5,
+                                               PduORG06.Dep_Id AS PDU_DeptID6,
+                                               PduORG06.Dep_DeptNo AS PDU_DeptNo6,
+                                               PduORG06.Dep_DeptName AS PDU_DeptName6
+                                        FROM mng_department AS HROrg01 WITH (NOLOCK)
+                                            LEFT JOIN mng_department AS HROrg02 WITH (NOLOCK)
+                                                ON HROrg01.Dep_DeptNo = HROrg02.Dep_ParDeptNo
+                                                   AND HROrg02.Dep_IsValidate = 1
+                                            LEFT JOIN mng_department AS HROrg03 WITH (NOLOCK)
+                                                ON HROrg02.Dep_DeptNo = HROrg03.Dep_ParDeptNo
+                                                   AND HROrg03.Dep_IsValidate = 1
+                                            LEFT JOIN mng_department AS HROrg04 WITH (NOLOCK)
+                                                ON HROrg03.Dep_DeptNo = HROrg04.Dep_ParDeptNo
+                                                   AND HROrg04.Dep_IsValidate = 1
+                                            LEFT JOIN mng_PduDepartment AS PduORG01 WITH (NOLOCK)
+                                                ON HROrg04.Dep_DeptNo = PduORG01.Dep_ParDeptNo
+                                            LEFT JOIN mng_PduDepartment AS PduORG02 WITH (NOLOCK)
+                                                ON PduORG01.Dep_DeptNo = PduORG02.Dep_ParDeptNo
+                                            LEFT JOIN mng_PduDepartment AS PduORG03 WITH (NOLOCK)
+                                                ON PduORG02.Dep_DeptNo = PduORG03.Dep_ParDeptNo
+                                            LEFT JOIN mng_PduDepartment AS PduORG04 WITH (NOLOCK)
+                                                ON PduORG03.Dep_DeptNo = PduORG04.Dep_ParDeptNo
+                                            LEFT JOIN mng_PduDepartment AS PduORG05 WITH (NOLOCK)
+                                                ON PduORG04.Dep_DeptNo = PduORG05.Dep_ParDeptNo
+                                            LEFT JOIN mng_PduDepartment AS PduORG06 WITH (NOLOCK)
+                                                ON PduORG05.Dep_DeptNo = PduORG06.Dep_ParDeptNo
+                                        WHERE HROrg01.Dep_DeptArea = 0
+                                              AND HROrg01.Dep_IsValidate = 1
+                                              AND HROrg01.Dep_DeptNo = '10000000'
+                                    ) AS RecusionLevel
+                                        ON (
+                                               PduLevel.PDU_DeptNo = RecusionLevel.PDU_DeptNo1
+                                               OR PduLevel.PDU_DeptNo = RecusionLevel.PDU_DeptNo2
+                                               OR PduLevel.PDU_DeptNo = RecusionLevel.PDU_DeptNo3
+                                               OR PduLevel.PDU_DeptNo = RecusionLevel.PDU_DeptNo4
+                                               OR PduLevel.PDU_DeptNo = RecusionLevel.PDU_DeptNo5
+                                               OR PduLevel.PDU_DeptNo = RecusionLevel.PDU_DeptNo6
+                                           );";
+            this.rtb_Emp_RowError.Text = sql;
+        }
+
+        #endregion
+
     }
 }

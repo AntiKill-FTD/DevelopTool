@@ -52,6 +52,8 @@
             tableLayoutPanel1 = new TableLayoutPanel();
             btn_Org_Import = new Button();
             btn_Org_Script = new Button();
+            btn_LevelField = new Button();
+            btn_LevelTable = new Button();
             tlp_Main_Emp = new TableLayoutPanel();
             dv_Emp = new CusControls.DataGridViewEx.DataGridViewEx();
             tlp_Emp_Script = new TableLayoutPanel();
@@ -361,15 +363,19 @@
             // 
             // tableLayoutPanel1
             // 
-            tableLayoutPanel1.ColumnCount = 5;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.ColumnCount = 8;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 80F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 80F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.Controls.Add(btn_Org_Import, 1, 0);
-            tableLayoutPanel1.Controls.Add(btn_Org_Script, 3, 0);
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60F));
+            tableLayoutPanel1.Controls.Add(btn_Org_Import, 4, 0);
+            tableLayoutPanel1.Controls.Add(btn_Org_Script, 6, 0);
+            tableLayoutPanel1.Controls.Add(btn_LevelField, 0, 0);
+            tableLayoutPanel1.Controls.Add(btn_LevelTable, 2, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.ForeColor = Color.Black;
             tableLayoutPanel1.Location = new Point(0, 0);
@@ -383,7 +389,7 @@
             // btn_Org_Import
             // 
             btn_Org_Import.Dock = DockStyle.Fill;
-            btn_Org_Import.Location = new Point(587, 0);
+            btn_Org_Import.Location = new Point(662, 0);
             btn_Org_Import.Margin = new Padding(0);
             btn_Org_Import.Name = "btn_Org_Import";
             btn_Org_Import.Size = new Size(80, 50);
@@ -395,7 +401,7 @@
             // btn_Org_Script
             // 
             btn_Org_Script.Dock = DockStyle.Fill;
-            btn_Org_Script.Location = new Point(687, 0);
+            btn_Org_Script.Location = new Point(762, 0);
             btn_Org_Script.Margin = new Padding(0);
             btn_Org_Script.Name = "btn_Org_Script";
             btn_Org_Script.Size = new Size(80, 50);
@@ -403,6 +409,30 @@
             btn_Org_Script.Text = "生成";
             btn_Org_Script.UseVisualStyleBackColor = true;
             btn_Org_Script.Click += btn_Org_Script_Click;
+            // 
+            // btn_LevelField
+            // 
+            btn_LevelField.Dock = DockStyle.Fill;
+            btn_LevelField.Location = new Point(0, 0);
+            btn_LevelField.Margin = new Padding(0);
+            btn_LevelField.Name = "btn_LevelField";
+            btn_LevelField.Size = new Size(150, 50);
+            btn_LevelField.TabIndex = 3;
+            btn_LevelField.Text = "Level字段SQL";
+            btn_LevelField.UseVisualStyleBackColor = true;
+            btn_LevelField.Click += btn_LevelField_Click;
+            // 
+            // btn_LevelTable
+            // 
+            btn_LevelTable.Dock = DockStyle.Fill;
+            btn_LevelTable.Location = new Point(170, 0);
+            btn_LevelTable.Margin = new Padding(0);
+            btn_LevelTable.Name = "btn_LevelTable";
+            btn_LevelTable.Size = new Size(150, 50);
+            btn_LevelTable.TabIndex = 4;
+            btn_LevelTable.Text = "Level表SQL";
+            btn_LevelTable.UseVisualStyleBackColor = true;
+            btn_LevelTable.Click += btn_LevelTable_Click;
             // 
             // tlp_Main_Emp
             // 
@@ -595,5 +625,7 @@
         private TableLayoutPanel tlp_CheckSplit;
         private CheckBox cb_IsProb;
         private CheckBox cb_CheckEmpStatus;
+        private Button btn_LevelField;
+        private Button btn_LevelTable;
     }
 }
