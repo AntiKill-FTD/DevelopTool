@@ -130,6 +130,7 @@ namespace Tool.Main.Forms.BusForms
         {
             //清除历史日志
             this.rtb_Org_FullError.Text = string.Empty;
+            this.rtb_Org_FullError.ForeColor = Color.Black;
             try
             {
                 //判断数据库连接
@@ -151,11 +152,11 @@ namespace Tool.Main.Forms.BusForms
                     return;
                 }
                 //准备校验数据
-                AppendLog(ImportType.Org, $"{DateTime.Now}:Excel取数已完成，开始校验数据");
+                AppendLog(ImportType.Org, $"Excel取数已完成，开始校验数据");
                 //DT 序号+原始数据+Remark
                 ValidateData(ImportType.Org, orgList, null);
                 //校验数据完成
-                AppendLog(ImportType.Org, $"{DateTime.Now}:Excel校验已完成");
+                AppendLog(ImportType.Org, $"Excel校验已完成");
                 //绑定网格，展示数据校验明细
                 this.dv_Org.SetDvObject(orgList);
                 this.dv_Org.ViewDataBind(CusControls.DataGridViewEx.DataGridViewBindType.Object, false, false);
@@ -164,8 +165,7 @@ namespace Tool.Main.Forms.BusForms
             }
             catch (Exception ex)
             {
-                this.rtb_Org_FullError.Text = $"{DateTime.Now}:程序异常\r\n";
-                this.rtb_Org_FullError.Text += $"错误如下===>\r{ex.Message}";
+                this.rtb_Org_FullError.Text = $"程序异常,错误如下===>\r{ex.Message}\r\n";
                 this.rtb_Org_FullError.ForeColor = Color.Red;
                 this.rtb_Org_FullError.Refresh();
                 return;
@@ -178,6 +178,7 @@ namespace Tool.Main.Forms.BusForms
         {
             //清除历史日志
             this.rtb_Emp_FullError.Text = string.Empty;
+            this.rtb_Emp_FullError.ForeColor = Color.Black;
             try
             {
                 //判断数据库连接
@@ -199,11 +200,11 @@ namespace Tool.Main.Forms.BusForms
                     return;
                 }
                 //准备校验数据
-                AppendLog(ImportType.Emp, $"{DateTime.Now}:Excel取数已完成，开始校验数据");
+                AppendLog(ImportType.Emp, $"Excel取数已完成，开始校验数据");
                 //DT 序号+原始数据+Remark
                 ValidateData(ImportType.Emp, null, empList);
                 //校验数据完成
-                AppendLog(ImportType.Emp, $"{DateTime.Now}:Excel校验已完成");
+                AppendLog(ImportType.Emp, $"Excel校验已完成");
                 //绑定网格，展示数据校验明细
                 this.dv_Emp.SetDvObject(empList);
                 this.dv_Emp.ViewDataBind(CusControls.DataGridViewEx.DataGridViewBindType.Object, false, false);
@@ -212,8 +213,8 @@ namespace Tool.Main.Forms.BusForms
             }
             catch (Exception ex)
             {
-                this.rtb_Emp_FullError.Text = $"{DateTime.Now}:程序异常\r\n";
-                this.rtb_Emp_FullError.Text += $"错误如下===>\r{ex.Message}";
+                this.rtb_Emp_FullError.Text = $"程序异常,错误如下===>\r{ex.Message}\r\n";
+                this.rtb_Emp_FullError.Text += $"";
                 this.rtb_Emp_FullError.ForeColor = Color.Red;
                 this.rtb_Emp_FullError.Refresh();
                 return;
@@ -276,7 +277,7 @@ namespace Tool.Main.Forms.BusForms
                 #endregion
 
                 //记录日志
-                AppendLog(type, $"{DateTime.Now}:开始读取Excel");
+                AppendLog(type, $"开始读取Excel");
 
                 //读取文档
                 using (fs = File.Open(filePath, FileMode.Open, FileAccess.Read))
@@ -405,7 +406,7 @@ namespace Tool.Main.Forms.BusForms
             #region 判断文档重复数据
 
             //1.判断重复：
-            AppendLog(type, $"{DateTime.Now}:开始校验文档重复数据");
+            AppendLog(type, $"开始校验文档重复数据");
             bool hasRepeat = false;
             //1.1 组织清单：业务组织名称 + 所属BU编码 是否重复
             if (type == ImportType.Org)
@@ -450,7 +451,7 @@ namespace Tool.Main.Forms.BusForms
                     });
             }
             string strHasRepeat = hasRepeat ? "【是】存在重复数据;" : "【否】不存在重复数据";
-            AppendLog(type, $"{DateTime.Now}:文档重复数据校验完成;{strHasRepeat}");
+            AppendLog(type, $"文档重复数据校验完成;{strHasRepeat}");
             if (hasRepeat) return;
 
             #endregion
@@ -458,9 +459,9 @@ namespace Tool.Main.Forms.BusForms
             #region 获取业务数据
 
             //2.获取业务数据
-            AppendLog(type, $"{DateTime.Now}:开始获取业务数据");
+            AppendLog(type, $"开始获取业务数据");
             BusinessData pduValidateResult = GetBusinessData();
-            AppendLog(type, $"{DateTime.Now}:业务数据获取完成");
+            AppendLog(type, $"业务数据获取完成");
 
             #endregion
 
@@ -468,7 +469,7 @@ namespace Tool.Main.Forms.BusForms
 
             //3.判断数据正确：
             //3.1 组织清单：
-            AppendLog(type, $"{DateTime.Now}:开始校验业务数据匹配相关");
+            AppendLog(type, $"开始校验业务数据匹配相关");
             bool dataResultHasError = false;
             if (type == ImportType.Org)
             {
@@ -625,7 +626,7 @@ namespace Tool.Main.Forms.BusForms
             }
             //记录日志
             string strDataResultHasError = dataResultHasError ? "【是】数据存在错误;" : "【否】数据正确;";
-            AppendLog(type, $"{DateTime.Now}:业务数据匹配相关校验完成;{strDataResultHasError}");
+            AppendLog(type, $"业务数据匹配相关校验完成;{strDataResultHasError}");
             if (dataResultHasError) return;
 
             #endregion
@@ -725,6 +726,7 @@ namespace Tool.Main.Forms.BusForms
             if (type == ImportType.Org)
             {
                 this.rtb_Org_FullError.Text += $"{DateTime.Now}:{message}\r\n";
+                this.rtb_Org_FullError.ForeColor = this.rtb_Org_FullError.ForeColor == Color.Red ? Color.Red : Color.Blue;
                 this.rtb_Org_FullError.SelectionStart = this.rtb_Org_FullError.Text.Length;
                 this.rtb_Org_FullError.ScrollToCaret();
                 this.rtb_Org_FullError.Refresh();
@@ -732,6 +734,7 @@ namespace Tool.Main.Forms.BusForms
             else if (type == ImportType.Emp)
             {
                 this.rtb_Emp_FullError.Text += $"{DateTime.Now}:{message}\r\n";
+                this.rtb_Emp_FullError.ForeColor = this.rtb_Emp_FullError.ForeColor == Color.Red ? Color.Red : Color.Blue;
                 this.rtb_Emp_FullError.SelectionStart = this.rtb_Emp_FullError.Text.Length;
                 this.rtb_Emp_FullError.ScrollToCaret();
                 this.rtb_Emp_FullError.Refresh();
