@@ -53,5 +53,10 @@ namespace Tool.IService.Model.Bus
         /// </summary>
 
         public string LeaderEmpName { get; set; }
+
+        /// <summary>
+        /// 子集个数
+        /// </summary>
+        public int ChildCount { get; set; }
     }
 }

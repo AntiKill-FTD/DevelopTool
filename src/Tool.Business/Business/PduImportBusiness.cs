@@ -52,17 +52,23 @@ namespace Tool.Business.Business
         /// <returns></returns>
         public List<BusiPduDepartmentResult> GetPduDepartment(ICommonDataHelper dataHelper)
         {
-            string sql = @"SELECT pduDepart.Dep_Id AS OrgId,
-                                  pduDepart.Dep_DeptNo AS OrgNo,
-                                  pduDepart.Dep_DeptName AS OrgName,
-                                  pduDepart.Dep_ParDeptNo AS ParentOrgNo,
-                                  pduDepart.Dep_Level4DeptNo AS BuNo,
-                                  depart.Dep_DeptName AS BuName,
-                                  pduDepart.Dep_LeaderId AS LeaderEmpId,
-                                  pduDepart.Dep_EmpNo AS LeaderEmpNo,
-                                  pduDepart.Dep_EmpName AS LeaderEmpName
-                           FROM PSAData..mng_PduDepartment pduDepart WITH (NOLOCK)
-                           LEFT JOIN PSAData..mng_department depart WITH (NOLOCK) ON depart.Dep_DeptNo = pduDepart.Dep_Level4DeptNo;";
+            string sql = @" SELECT pduDepart.Dep_Id AS OrgId,
+                                   pduDepart.Dep_DeptNo AS OrgNo,
+                                   pduDepart.Dep_DeptName AS OrgName,
+                                   pduDepart.Dep_ParDeptNo AS ParentOrgNo,
+                                   pduDepart.Dep_Level4DeptNo AS BuNo,
+                                   depart.Dep_DeptName AS BuName,
+                                   pduDepart.Dep_LeaderId AS LeaderEmpId,
+                                   pduDepart.Dep_EmpNo AS LeaderEmpNo,
+                                   pduDepart.Dep_EmpName AS LeaderEmpName,
+                                   (
+                                       SELECT COUNT(*)
+                                       FROM PSADATA..mng_PduDepartment
+                                       WHERE Dep_ParDeptNo = pduDepart.Dep_DeptNo
+                                   ) AS ChildCount
+                            FROM PSADATA..mng_PduDepartment pduDepart WITH (NOLOCK)
+                                LEFT JOIN PSADATA..mng_department depart WITH (NOLOCK)
+                                    ON depart.Dep_DeptNo = pduDepart.Dep_Level4DeptNo;";
             DataTable dt = dataHelper.GetDataTable(sql, string.Empty);
             return DtToModel.GetModelFromDB<BusiPduDepartmentResult>(dt);
         }

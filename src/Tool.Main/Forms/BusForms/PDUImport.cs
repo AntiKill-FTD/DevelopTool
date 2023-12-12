@@ -499,21 +499,91 @@ namespace Tool.Main.Forms.BusForms
                             AppendError(type, $"{item.SheetIndex}:所属BU编号和BU名称不一致;");
                         }
                     }
-                });
 
-                //3.1.4 部门负责人工号 是否存在
-                //3.1.5 部门负责人工号 + 部门负责人姓名 是否一致
-                //3.1.6 部门负责人工号 是否在职（根据勾选区分是否判断）
+                    //3.1.4 部门负责人工号 是否存在
+                    BusiOriginEmpResult empInfo = pduValidateResult.OriginEmpResult.Where(originItem => item.EmpNo.Equals(originItem.EmpNo)).FirstOrDefault();
+                    if (empInfo == null)
+                    {
+                        dataResultHasError = true;
+                        item.Remark += $"部门负责人工号在系统不存在;\r\n";
+                        AppendError(type, $"{item.SheetIndex}:部门负责人工号在系统不存在;");
+                    }
+                    else
+                    {
+                        //3.1.5 部门负责人工号 + 部门负责人姓名 是否一致
+                        if (!item.EmpName.Equals(empInfo.EmpName))
+                        {
+                            dataResultHasError = true;
+                            item.Remark += $"部门负责人工号和部门负责人姓名不一致;\r\n";
+                            AppendError(type, $"{item.SheetIndex}:部门负责人工号和部门负责人姓名不一致;");
+                        }
+                        //3.1.6 部门负责人工号 是否在职（根据勾选区分是否判断）
+                        if (cb_CheckEmpStatus.Checked)
+                        {
+                            if (!"1".Equals(empInfo.EmpStatus))
+                            {
+                                dataResultHasError = true;
+                                item.Remark += $"部门负责人不在职;\r\n";
+                                AppendError(type, $"{item.SheetIndex}:部门负责人不在职;");
+                            }
+                        }
+                    }
+
+                });
             }
             //3.2 人员清单：
             if (type == ImportType.Emp)
             {
                 //3.2.1 所属业务组织名称 + 所属BU 是否存在
-                //3.2.2 所属业务组织名称 + 所属BU 是否是末级PDU组织
+                listEmp.ForEach(item =>
+                {
+                    BusiPduDepartmentResult orgInfo = pduValidateResult.PduDepartmentResult.Where(originItem => item.OrgName.Equals(originItem.OrgName) && item.BuNo.Equals(originItem.BuNo)).FirstOrDefault();
+                    if (orgInfo == null)
+                    {
+                        dataResultHasError = true;
+                        item.Remark += $"所属业务组织名称和所属BU在系统不存在;\r\n";
+                        AppendError(type, $"{item.SheetIndex}:所属业务组织名称和所属BU在系统不存在;");
+                    }
+                    else
+                    {
+                        //3.2.2 所属业务组织名称 + 所属BU 是否是末级PDU组织
+                        if (orgInfo.ChildCount != 0)
+                        {
+                            dataResultHasError = true;
+                            item.Remark += $"所属业务组织名称和所属BU不是末级PDU组织;\r\n";
+                            AppendError(type, $"{item.SheetIndex}:所属业务组织名称和所属BU不是末级PDU组织;");
+                        }
+                    }
 
-                //3.2.3 员工工号 是否存在
-                //3.2.4 员工工号 + 员工姓名 是否一致
-                //3.2.5 员工工号 是否在职（根据勾选区分是否判断）
+                    //3.2.3 员工工号 是否存在
+                    BusiOriginEmpResult empInfo = pduValidateResult.OriginEmpResult.Where(originItem => item.EmpNo.Equals(originItem.EmpNo)).FirstOrDefault();
+                    if (empInfo == null)
+                    {
+                        dataResultHasError = true;
+                        item.Remark += $"员工工号在系统不存在;\r\n";
+                        AppendError(type, $"{item.SheetIndex}:员工工号在系统不存在;");
+                    }
+                    else
+                    {
+                        //3.2.4 员工工号 + 员工姓名 是否一致
+                        if (!item.EmpName.Equals(empInfo.EmpName))
+                        {
+                            dataResultHasError = true;
+                            item.Remark += $"员工工号和员工姓名不一致;\r\n";
+                            AppendError(type, $"{item.SheetIndex}:员工工号和员工姓名不一致;");
+                        }
+                        //3.2.5 员工工号 是否在职（根据勾选区分是否判断）
+                        if (cb_CheckEmpStatus.Checked)
+                        {
+                            if (!"1".Equals(empInfo.EmpStatus))
+                            {
+                                dataResultHasError = true;
+                                item.Remark += $"部门负责人不在职;\r\n";
+                                AppendError(type, $"{item.SheetIndex}:部门负责人不在职;");
+                            }
+                        }
+                    }
+                });
             }
             //记录日志
             string strDataResultHasError = dataResultHasError ? "【是】数据存在错误;" : "【否】数据正确;";

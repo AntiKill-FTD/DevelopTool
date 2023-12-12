@@ -42,7 +42,7 @@
             label1 = new Label();
             tlp_CheckSplit = new TableLayoutPanel();
             cb_IsProb = new CheckBox();
-            cb_IsFilterEmp = new CheckBox();
+            cb_CheckEmpStatus = new CheckBox();
             tlp_Main_Org = new TableLayoutPanel();
             dv_Org = new CusControls.DataGridViewEx.DataGridViewEx();
             tlp_Org_Script = new TableLayoutPanel();
@@ -238,7 +238,7 @@
             tlp_CheckSplit.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 49.56897F));
             tlp_CheckSplit.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50.43103F));
             tlp_CheckSplit.Controls.Add(cb_IsProb, 0, 0);
-            tlp_CheckSplit.Controls.Add(cb_IsFilterEmp, 1, 0);
+            tlp_CheckSplit.Controls.Add(cb_CheckEmpStatus, 1, 0);
             tlp_CheckSplit.Dock = DockStyle.Fill;
             tlp_CheckSplit.Location = new Point(1102, 0);
             tlp_CheckSplit.Margin = new Padding(0);
@@ -260,18 +260,18 @@
             cb_IsProb.UseVisualStyleBackColor = true;
             cb_IsProb.CheckedChanged += cb_IsProb_CheckedChanged;
             // 
-            // cb_IsFilterEmp
+            // cb_CheckEmpStatus
             // 
-            cb_IsFilterEmp.AutoSize = true;
-            cb_IsFilterEmp.Checked = true;
-            cb_IsFilterEmp.CheckState = CheckState.Checked;
-            cb_IsFilterEmp.Dock = DockStyle.Fill;
-            cb_IsFilterEmp.Location = new Point(118, 3);
-            cb_IsFilterEmp.Name = "cb_IsFilterEmp";
-            cb_IsFilterEmp.Size = new Size(111, 27);
-            cb_IsFilterEmp.TabIndex = 1;
-            cb_IsFilterEmp.Text = "是否校验员工";
-            cb_IsFilterEmp.UseVisualStyleBackColor = true;
+            cb_CheckEmpStatus.AutoSize = true;
+            cb_CheckEmpStatus.Checked = true;
+            cb_CheckEmpStatus.CheckState = CheckState.Checked;
+            cb_CheckEmpStatus.Dock = DockStyle.Fill;
+            cb_CheckEmpStatus.Location = new Point(118, 3);
+            cb_CheckEmpStatus.Name = "cb_CheckEmpStatus";
+            cb_CheckEmpStatus.Size = new Size(111, 27);
+            cb_CheckEmpStatus.TabIndex = 1;
+            cb_CheckEmpStatus.Text = "校验员工在职";
+            cb_CheckEmpStatus.UseVisualStyleBackColor = true;
             // 
             // tlp_Main_Org
             // 
@@ -594,6 +594,6 @@
         private Button btn_Emp_Script;
         private TableLayoutPanel tlp_CheckSplit;
         private CheckBox cb_IsProb;
-        private CheckBox cb_IsFilterEmp;
+        private CheckBox cb_CheckEmpStatus;
     }
 }
