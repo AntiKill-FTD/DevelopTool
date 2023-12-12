@@ -500,7 +500,24 @@ namespace Tool.Main.Forms.BusForms
                         }
                     }
 
-                    //3.1.4 部门负责人工号 是否存在
+                    //3.1.4 判定父级是否存在(只有【直接上层组织】不为空需要判断);
+                    //      判定条件 所属BU编码 + 直接上层业务组织 在当前文档、或者数据库存在
+                    if (!string.IsNullOrEmpty(item.ParentName))
+                    {
+                        int countParent = listOrg.Where(parentItem => item.BuNo.Equals(parentItem.BuNo) && item.ParentName.Equals(parentItem.OrgName)).ToList().Count();
+                        if (countParent == 0)
+                        {
+                            countParent = pduValidateResult.PduDepartmentResult.Where(parentItem => item.BuNo.Equals(parentItem.BuNo) && item.ParentName.Equals(parentItem.OrgName)).ToList().Count();
+                            if (countParent == 0)
+                            {
+                                dataResultHasError = true;
+                                item.Remark += $"在当前文档以及数据库均未找到父级组织;\r\n";
+                                AppendError(type, $"{item.SheetIndex}:在当前文档以及数据库均未找到父级组织;");
+                            }
+                        }
+                    }
+
+                    //3.1.5 部门负责人工号 是否存在
                     BusiOriginEmpResult empInfo = pduValidateResult.OriginEmpResult.Where(originItem => item.EmpNo.Equals(originItem.EmpNo)).FirstOrDefault();
                     if (empInfo == null)
                     {
@@ -508,8 +525,8 @@ namespace Tool.Main.Forms.BusForms
                         item.Remark += $"部门负责人工号在系统不存在;\r\n";
                         AppendError(type, $"{item.SheetIndex}:部门负责人工号在系统不存在;");
                     }
-                    //3.1.5 部门负责人工号 + 部门负责人姓名 是否一致
-                    //3.1.6 部门负责人工号 是否在职（根据勾选区分是否判断）
+                    //3.1.6 部门负责人工号 + 部门负责人姓名 是否一致
+                    //3.1.7 部门负责人工号 是否在职（根据勾选区分是否判断）
                     else
                     {
                         if (!item.EmpName.Equals(empInfo.EmpName))
@@ -529,7 +546,7 @@ namespace Tool.Main.Forms.BusForms
                         }
                     }
 
-                    //3.1.7 判定该条数据是新增还是插入
+                    //3.1.8 判定该条数据是新增还是插入
                     BusiPduDepartmentResult orgResult = pduValidateResult.PduDepartmentResult.Where(originItem => item.OrgName.Equals(originItem.OrgName) && item.BuNo.Equals(originItem.BuNo)).FirstOrDefault();
                     if (orgResult == null)
                     {
@@ -613,9 +630,7 @@ namespace Tool.Main.Forms.BusForms
 
             #endregion
 
-            //4.判定是更新还是插入
-
-            //5.生成PDU编号
+            //4.生成PDU编号，组织和人员都要生成
 
         }
 
