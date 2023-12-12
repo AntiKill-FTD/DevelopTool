@@ -582,6 +582,10 @@ namespace Tool.Main.Forms.BusForms
                             AppendError(type, $"{item.SheetIndex}:所属业务组织名称和所属BU不是末级PDU组织;");
                         }
                     }
+                    if (!dataResultHasError)
+                    {
+                        item.OrgNo = orgInfo.OrgNo;
+                    }
 
                     //3.2.3 员工工号 是否存在
                     BusiOriginEmpResult empInfo = pduValidateResult.OriginEmpResult.Where(originItem => item.EmpNo.Equals(originItem.EmpNo)).FirstOrDefault();
@@ -610,6 +614,10 @@ namespace Tool.Main.Forms.BusForms
                                 AppendError(type, $"{item.SheetIndex}:部门负责人不在职;");
                             }
                         }
+                    }
+                    if (!dataResultHasError)
+                    {
+                        item.LeaderId = empInfo.EmpId.ToString();
                     }
 
                     //3.2.6 判定该条数据是新增还是插入
