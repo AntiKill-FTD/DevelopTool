@@ -770,10 +770,50 @@ namespace Tool.Main.Forms.BusForms
                 string empNo = $"{row["EmpNo"]}";
                 string empName = $"{row["EmpName"]}";
                 string remark = $"{row["Remark"]}";
-                //if (string.IsNullOrEmpty(remark))
-                //{
-                sb.AppendLine($@"INSERT INTO PSAData..mng_PduDepartment ( Dep_DeptNo, Dep_DeptName, Dep_DeptShortName, Dep_ParDeptNo, Dep_Level4DeptNo, Dep_Level, Dep_DeptEnglishName, Dep_DeptEnglishShortName, Dep_LeaderId, Dep_EmpNo, Dep_EmpName, Dep_BeginDate, Dep_EndDate, Creator, CreateDate, Modifier, ModifyDate, Dep_Status, Dep_Description ) VALUES('{deptNo}', '{deptName}', '', '{parentNo}', '{buNo}', 0, '', '', {leaderId}, '{empNo}', '{empName}', GETDATE(), GETDATE(), 'changls', GETDATE(), 'changls', GETDATE(), 0, '' );");
-                //}
+                sb.AppendLine($@"INSERT INTO PSAData..mng_PduDepartment ( 
+                                                                            Dep_DeptNo,
+                                                                            Dep_DeptName,
+                                                                            Dep_DeptShortName,
+                                                                            Dep_ParDeptNo,
+                                                                            Dep_Level4DeptNo,
+                                                                            Dep_Level,
+                                                                            Dep_DeptEnglishName,
+                                                                            Dep_DeptEnglishShortName,
+                                                                            Dep_LeaderId,
+                                                                            Dep_EmpNo,
+                                                                            Dep_EmpName,
+                                                                            Dep_BeginDate,
+                                                                            Dep_EndDate,
+                                                                            Creator,
+                                                                            CreateDate,
+                                                                            Modifier,
+                                                                            ModifyDate,
+                                                                            Dep_Status,
+                                                                            Dep_Description
+                                                                        ) 
+                                                                            VALUES (
+                                                                            '{deptNo}',
+                                                                            '{deptName}',
+                                                                            '', 
+                                                                            '{parentNo}',
+                                                                            '{buNo}',
+                                                                            0,
+                                                                            '',
+                                                                            '',
+                                                                            {leaderId},
+                                                                            '{empNo}',
+                                                                            '{empName}',
+                                                                            GETDATE(),
+                                                                            GETDATE(),
+                                                                            'changls',
+                                                                            GETDATE(),
+                                                                            'changls',
+                                                                            GETDATE(),
+                                                                            0,
+                                                                            '' 
+                                                                            );"
+                                                                            .Replace("\r\n                                                                            ", "")
+                                                                            .Replace("\r\n                                                                        ", ""));
             }
             this.rtb_Org_SqlScript.Text = sb.ToString();
         }
@@ -794,10 +834,28 @@ namespace Tool.Main.Forms.BusForms
                 string deptNo = $"{row["OrgNo"]}";
                 string empNo = $"{row["EmpNo"]}";
                 string remark = $"{row["Remark"]}";
-                //if (string.IsNullOrEmpty(remark))
-                //{
-                sb.AppendLine($@"INSERT INTO PSAData..mng_Pdu_Employee ( Dep_No, EmployeeNo, Dep_BeginDate, Dep_EndDate, Creator, CreateDate, Modifier, ModifyDate ) VALUES ('{deptNo}', '{empNo}', GETDATE(), GETDATE(), 'changls', GETDATE(), 'changls', GETDATE());");
-                //}
+                sb.AppendLine($@"INSERT INTO PSAData..mng_Pdu_Employee ( 
+                                                                            Dep_No,
+                                                                            EmployeeNo,
+                                                                            Dep_BeginDate,
+                                                                            Dep_EndDate,
+                                                                            Creator,
+                                                                            CreateDate,
+                                                                            Modifier,
+                                                                            ModifyDate
+                                                                        ) 
+                                                                            VALUES (
+                                                                            '{deptNo}',
+                                                                            '{empNo}',
+                                                                            GETDATE(),
+                                                                            GETDATE(),
+                                                                            'changls',
+                                                                            GETDATE(),
+                                                                            'changls',
+                                                                            GETDATE()
+                                                                            );"
+                                                                            .Replace("\r\n                                                                            ", "")
+                                                                            .Replace("\r\n                                                                        ", ""));
             }
             this.rtb_Emp_SqlScript.Text = sb.ToString();
         }
