@@ -168,7 +168,7 @@ namespace Tool.Main.Forms.BusForms
                 //准备校验数据
                 AppendLog(ImportType.Org, $"{DateTime.Now}:Excel取数已完成，开始校验数据");
                 //DT 序号+原始数据+Remark
-                //ValidateData(ImportType.Org, ref dt, ref sbError);
+                ValidateData(ImportType.Org, orgList, null, ref sbError);
                 //校验数据完成
                 AppendLog(ImportType.Org, $"{DateTime.Now}:Excel校验已完成");
                 //绑定网格，展示数据校验明细
@@ -239,7 +239,7 @@ namespace Tool.Main.Forms.BusForms
                 //准备校验数据
                 AppendLog(ImportType.Emp, $"{DateTime.Now}:Excel取数已完成，开始校验数据");
                 //DT 序号+原始数据+Remark
-                //ValidateData(ImportType.Emp, ref dt, ref sbError);
+                ValidateData(ImportType.Emp, null, empList, ref sbError);
                 //校验数据完成
                 AppendLog(ImportType.Emp, $"{DateTime.Now}:Excel校验已完成");
                 //绑定网格，展示数据校验明细
@@ -455,13 +455,11 @@ namespace Tool.Main.Forms.BusForms
         #endregion
 
         #region 校验数据
-        private void ValidateData(ImportType type, ref DataTable dt, ref StringBuilder sbError)
+        private void ValidateData(ImportType type, List<ImportOrg>? listOrg, List<ImportEmp>? listEmp, ref StringBuilder sbError)
         {
-            //dt添加备注列
-            dt.Columns.Add("Remark", typeof(string));
             //1.获取业务数据
             AppendLog(type, $"{DateTime.Now}:开始获取业务数据");
-            //BusinessData pduValidateResult = GetBusinessData();
+            BusinessData pduValidateResult = GetBusinessData();
             AppendLog(type, $"{DateTime.Now}:业务数据获取完成");
 
             //2.判断重复：
@@ -491,24 +489,6 @@ namespace Tool.Main.Forms.BusForms
             //4.判定是更新还是插入
             //5.生成PDU编号
 
-            //循环
-            foreach (DataRow dr in dt.Rows)
-            {
-                //获取序号信息
-                string strNum = $"{dr["序号"]}";
-                int iExcelNum = Convert.ToInt32(strNum.Split(':')[1]) + 2;
-                //获取PDU信息
-                string strOrgName = $"{dr["OrgName"]}";
-                //获取PDU信息 - 获取父级信息
-                string strParentName = type == ImportType.Org ? $"{dr["ParentName"]}" : "";
-                //获取BU信息
-                string strBuNo = $"{dr["BuNo"]}";
-                string strBuName = $"{dr["BuName"]}";
-                //获取员工信息
-                string strEmpNo = $"{dr["EmpNo"]}";
-                string strEmpName = $"{dr["EmpName"]}";
-
-            }
         }
 
         #endregion
