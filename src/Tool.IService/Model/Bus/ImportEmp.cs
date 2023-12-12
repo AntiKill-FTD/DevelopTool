@@ -36,5 +36,8 @@ namespace Tool.IService.Model.Bus
 
         [Description("备注")]
         public string Remark { get; set; }
+
+        [Description("导入类型")]
+        public SqlType SqlType { get; set; }
     }
 }

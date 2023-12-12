@@ -529,6 +529,16 @@ namespace Tool.Main.Forms.BusForms
                         }
                     }
 
+                    //3.1.7 判定该条数据是新增还是插入
+                    BusiPduDepartmentResult orgResult = pduValidateResult.PduDepartmentResult.Where(originItem => item.OrgName.Equals(originItem.OrgName) && item.BuNo.Equals(originItem.BuNo)).FirstOrDefault();
+                    if (orgResult == null)
+                    {
+                        item.SqlType = SqlType.Insert;
+                    }
+                    else
+                    {
+                        item.SqlType = SqlType.Update;
+                    }
                 });
             }
             //3.2 人员清单：
@@ -582,6 +592,17 @@ namespace Tool.Main.Forms.BusForms
                                 AppendError(type, $"{item.SheetIndex}:部门负责人不在职;");
                             }
                         }
+                    }
+
+                    //3.2.6 判定该条数据是新增还是插入
+                    BusiPduEmployeeResult empResult = pduValidateResult.PduEmployeeResult.Where(originItem => item.EmpNo.Equals(originItem.EmpNo)).FirstOrDefault();
+                    if (empResult == null)
+                    {
+                        item.SqlType = SqlType.Insert;
+                    }
+                    else
+                    {
+                        item.SqlType = SqlType.Update;
                     }
                 });
             }
