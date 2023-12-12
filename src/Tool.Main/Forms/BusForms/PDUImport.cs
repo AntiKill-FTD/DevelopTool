@@ -820,7 +820,17 @@ namespace Tool.Main.Forms.BusForms
                 }
                 else
                 {
-
+                    sb.AppendLine($@"UPDATE PSAData..mng_PduDepartment SET 
+                                                                            Dep_ParDeptNo = '{parentNo}',
+                                                                            Dep_LeaderId = {leaderId},
+                                                                            Dep_EmpNo = '{empNo}',
+                                                                            Dep_EmpName = '{empName}',
+                                                                            Dep_BeginDate = '{beginDate}',
+                                                                            Dep_EndDate = '{beginDate}',
+                                                                            ModifyDate = GETDATE() 
+                                                                            WHERE Dep_DeptNo = '{deptNo}';"
+                                                                            .Replace("\r\n                                                                            ", "")
+                                                                            .Replace("\r\n                                                                        ", ""));
                 }
             }
             this.rtb_Org_SqlScript.Text = sb.ToString();
