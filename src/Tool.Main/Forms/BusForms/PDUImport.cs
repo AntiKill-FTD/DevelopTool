@@ -482,16 +482,16 @@ namespace Tool.Main.Forms.BusForms
                         item.Remark += $"所属BU编号在系统不存在;\r\n";
                         AppendError(type, $"{item.SheetIndex}:所属BU编号在系统不存在;");
                     }
+                    //3.1.2 所属BU编码 + 所属BU 是否一致
+                    //3.1.3 所属BU编码 是否是人事4级组织
                     else
                     {
-                        //3.1.2 所属BU编码 + 所属BU 是否一致
                         if (!item.BuName.Equals(buInfo.OrgName))
                         {
                             dataResultHasError = true;
                             item.Remark += $"所属BU编号和BU名称不一致;\r\n";
                             AppendError(type, $"{item.SheetIndex}:所属BU编号和BU名称不一致;");
                         }
-                        //3.1.3 所属BU编码 是否是人事4级组织
                         if (buInfo.OrgLevel != 4)
                         {
                             dataResultHasError = true;
@@ -508,16 +508,16 @@ namespace Tool.Main.Forms.BusForms
                         item.Remark += $"部门负责人工号在系统不存在;\r\n";
                         AppendError(type, $"{item.SheetIndex}:部门负责人工号在系统不存在;");
                     }
+                    //3.1.5 部门负责人工号 + 部门负责人姓名 是否一致
+                    //3.1.6 部门负责人工号 是否在职（根据勾选区分是否判断）
                     else
                     {
-                        //3.1.5 部门负责人工号 + 部门负责人姓名 是否一致
                         if (!item.EmpName.Equals(empInfo.EmpName))
                         {
                             dataResultHasError = true;
                             item.Remark += $"部门负责人工号和部门负责人姓名不一致;\r\n";
                             AppendError(type, $"{item.SheetIndex}:部门负责人工号和部门负责人姓名不一致;");
                         }
-                        //3.1.6 部门负责人工号 是否在职（根据勾选区分是否判断）
                         if (cb_CheckEmpStatus.Checked)
                         {
                             if (!"1".Equals(empInfo.EmpStatus))
@@ -544,9 +544,9 @@ namespace Tool.Main.Forms.BusForms
             //3.2 人员清单：
             if (type == ImportType.Emp)
             {
-                //3.2.1 所属业务组织名称 + 所属BU 是否存在
                 listEmp.ForEach(item =>
                 {
+                    //3.2.1 所属业务组织名称 + 所属BU 是否存在
                     BusiPduDepartmentResult orgInfo = pduValidateResult.PduDepartmentResult.Where(originItem => item.OrgName.Equals(originItem.OrgName) && item.BuNo.Equals(originItem.BuNo)).FirstOrDefault();
                     if (orgInfo == null)
                     {
@@ -554,9 +554,9 @@ namespace Tool.Main.Forms.BusForms
                         item.Remark += $"所属业务组织名称和所属BU在系统不存在;\r\n";
                         AppendError(type, $"{item.SheetIndex}:所属业务组织名称和所属BU在系统不存在;");
                     }
+                    //3.2.2 所属业务组织名称 + 所属BU 是否是末级PDU组织
                     else
                     {
-                        //3.2.2 所属业务组织名称 + 所属BU 是否是末级PDU组织
                         if (orgInfo.ChildCount != 0)
                         {
                             dataResultHasError = true;
@@ -573,16 +573,16 @@ namespace Tool.Main.Forms.BusForms
                         item.Remark += $"员工工号在系统不存在;\r\n";
                         AppendError(type, $"{item.SheetIndex}:员工工号在系统不存在;");
                     }
+                    //3.2.4 员工工号 + 员工姓名 是否一致
+                    //3.2.5 员工工号 是否在职（根据勾选区分是否判断）
                     else
                     {
-                        //3.2.4 员工工号 + 员工姓名 是否一致
                         if (!item.EmpName.Equals(empInfo.EmpName))
                         {
                             dataResultHasError = true;
                             item.Remark += $"员工工号和员工姓名不一致;\r\n";
                             AppendError(type, $"{item.SheetIndex}:员工工号和员工姓名不一致;");
                         }
-                        //3.2.5 员工工号 是否在职（根据勾选区分是否判断）
                         if (cb_CheckEmpStatus.Checked)
                         {
                             if (!"1".Equals(empInfo.EmpStatus))
