@@ -559,6 +559,8 @@ namespace Tool.Main.Forms.BusForms
                     }
                     else
                     {
+                        //绑定以前的OrgNo
+                        item.OrgNo = orgResult.OrgNo;
                         item.SqlType = SqlType.Update;
                     }
                 });
