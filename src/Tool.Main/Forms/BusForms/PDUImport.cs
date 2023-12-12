@@ -455,30 +455,75 @@ namespace Tool.Main.Forms.BusForms
 
             #endregion
 
+            #region 获取业务数据
+
             //2.获取业务数据
             AppendLog(type, $"{DateTime.Now}:开始获取业务数据");
-            //BusinessData pduValidateResult = GetBusinessData();
+            BusinessData pduValidateResult = GetBusinessData();
             AppendLog(type, $"{DateTime.Now}:业务数据获取完成");
 
+            #endregion
 
+            #region 校验业务数据匹配相关
 
             //3.判断数据正确：
             //3.1 组织清单：
-            //3.1.1 所属BU编码 是否存在
-            //3.1.2 所属BU编码 + 所属BU 是否一致
-            //3.1.3 所属BU编码 是否是人事4级组织
-            //3.1.4 部门负责人工号 是否存在
-            //3.1.5 部门负责人工号 + 部门负责人姓名 是否一致
-            //3.1.6 部门负责人工号 是否在职（根据勾选区分是否判断）
+            AppendLog(type, $"{DateTime.Now}:开始校验业务数据匹配相关");
+            bool dataResultHasError = false;
+            if (type == ImportType.Org)
+            {
+                listOrg.ForEach(item =>
+                {
+                    //3.1.1 所属BU编码 是否存在
+                    BusiOriginOrgFourResult buInfo = pduValidateResult.OriginLevelFourOrgResult.Where(originItem => item.BuNo.Equals(originItem.OrgNo)).FirstOrDefault();
+                    if (buInfo == null)
+                    {
+                        dataResultHasError = true;
+                        item.Remark += $"所属BU编号在系统不存在;\r\n";
+                        AppendError(type, $"{item.SheetIndex}:所属BU编号在系统不存在;");
+                    }
+                    else
+                    {
+                        //3.1.2 所属BU编码 + 所属BU 是否一致
+                        if (!item.BuName.Equals(buInfo.OrgName))
+                        {
+                            dataResultHasError = true;
+                            item.Remark += $"所属BU编号和BU名称不一致;\r\n";
+                            AppendError(type, $"{item.SheetIndex}:所属BU编号和BU名称不一致;");
+                        }
+                        //3.1.3 所属BU编码 是否是人事4级组织
+                        if (buInfo.OrgLevel != 4)
+                        {
+                            dataResultHasError = true;
+                            item.Remark += $"所属BU编号和BU名称不一致;\r\n";
+                            AppendError(type, $"{item.SheetIndex}:所属BU编号和BU名称不一致;");
+                        }
+                    }
+                });
 
+                //3.1.4 部门负责人工号 是否存在
+                //3.1.5 部门负责人工号 + 部门负责人姓名 是否一致
+                //3.1.6 部门负责人工号 是否在职（根据勾选区分是否判断）
+            }
             //3.2 人员清单：
-            //3.2.1 所属业务组织名称 + 所属BU 是否存在
-            //3.2.2 所属业务组织名称 + 所属BU 是否是末级PDU组织
-            //3.2.3 员工工号 是否存在
-            //3.2.4 员工工号 + 员工姓名 是否一致
-            //3.2.5 员工工号 是否在职（根据勾选区分是否判断）
+            if (type == ImportType.Emp)
+            {
+                //3.2.1 所属业务组织名称 + 所属BU 是否存在
+                //3.2.2 所属业务组织名称 + 所属BU 是否是末级PDU组织
+
+                //3.2.3 员工工号 是否存在
+                //3.2.4 员工工号 + 员工姓名 是否一致
+                //3.2.5 员工工号 是否在职（根据勾选区分是否判断）
+            }
+            //记录日志
+            string strDataResultHasError = dataResultHasError ? "【是】数据存在错误;" : "【否】数据正确;";
+            AppendLog(type, $"{DateTime.Now}:业务数据匹配相关校验完成;{strDataResultHasError}");
+            if (dataResultHasError) return;
+
+            #endregion
 
             //4.判定是更新还是插入
+
             //5.生成PDU编号
 
         }
@@ -574,11 +619,15 @@ namespace Tool.Main.Forms.BusForms
             if (type == ImportType.Org)
             {
                 this.rtb_Org_FullError.Text += $"{DateTime.Now}:{message}\r\n";
+                this.rtb_Org_FullError.SelectionStart = this.rtb_Org_FullError.Text.Length;
+                this.rtb_Org_FullError.ScrollToCaret();
                 this.rtb_Org_FullError.Refresh();
             }
             else if (type == ImportType.Emp)
             {
                 this.rtb_Emp_FullError.Text += $"{DateTime.Now}:{message}\r\n";
+                this.rtb_Emp_FullError.SelectionStart = this.rtb_Emp_FullError.Text.Length;
+                this.rtb_Emp_FullError.ScrollToCaret();
                 this.rtb_Emp_FullError.Refresh();
             }
         }
@@ -589,12 +638,16 @@ namespace Tool.Main.Forms.BusForms
             {
                 this.rtb_Org_FullError.Text += $"{DateTime.Now}:{message}\r\n";
                 this.rtb_Org_FullError.ForeColor = Color.Red;
+                this.rtb_Org_FullError.SelectionStart = this.rtb_Org_FullError.Text.Length;
+                this.rtb_Org_FullError.ScrollToCaret();
                 this.rtb_Org_FullError.Refresh();
             }
             else if (type == ImportType.Emp)
             {
                 this.rtb_Emp_FullError.Text += $"{DateTime.Now}:{message}\r\n";
                 this.rtb_Emp_FullError.ForeColor = Color.Red;
+                this.rtb_Emp_FullError.SelectionStart = this.rtb_Emp_FullError.Text.Length;
+                this.rtb_Emp_FullError.ScrollToCaret();
                 this.rtb_Emp_FullError.Refresh();
             }
         }
