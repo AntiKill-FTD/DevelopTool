@@ -1,21 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using Tool.Business.Business;
 using Tool.Data;
 using Tool.Data.DataHelper;
 using Tool.IService.Model.Bus;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Tool.Main.Forms.BusForms
 {
@@ -26,7 +17,6 @@ namespace Tool.Main.Forms.BusForms
         private ICommonDataHelper dataHelper;   //数据库操作类
         private bool isConnect = false;         //判断是否连接成功
         private string lastChoosePath = string.Empty; //上次打开的文件夹路径
-        private Dictionary<string, CompareOrg> dicOrgName = new Dictionary<string, CompareOrg>(); //存储PDU业务名称，用来校验重复
 
         #endregion
 
@@ -138,10 +128,6 @@ namespace Tool.Main.Forms.BusForms
         #region 组织导入按钮
         private void btn_Org_Import_Click(object sender, EventArgs e)
         {
-            //记录处理时间
-            Stopwatch timeWatch = Stopwatch.StartNew();
-            //错误信息
-            StringBuilder sbError = new StringBuilder();
             //清除历史日志
             this.rtb_Org_FullError.Text = string.Empty;
             try
@@ -160,15 +146,14 @@ namespace Tool.Main.Forms.BusForms
                 bool validateSheetResult = GetExcelData(ImportType.Org, orgList, null, ref errorMessage);
                 if (!validateSheetResult)
                 {
-                    this.rtb_Org_FullError.Text = $"{DateTime.Now}:{timeWatch.Elapsed}\r\n";
-                    this.rtb_Org_FullError.Text += errorMessage;
+                    this.rtb_Org_FullError.Text = $"{DateTime.Now}:{errorMessage}\r\n";
                     this.rtb_Org_FullError.ForeColor = Color.Red;
                     return;
                 }
                 //准备校验数据
                 AppendLog(ImportType.Org, $"{DateTime.Now}:Excel取数已完成，开始校验数据");
                 //DT 序号+原始数据+Remark
-                ValidateData(ImportType.Org, orgList, null, ref sbError);
+                ValidateData(ImportType.Org, orgList, null);
                 //校验数据完成
                 AppendLog(ImportType.Org, $"{DateTime.Now}:Excel校验已完成");
                 //绑定网格，展示数据校验明细
@@ -176,32 +161,14 @@ namespace Tool.Main.Forms.BusForms
                 this.dv_Org.ViewDataBind(CusControls.DataGridViewEx.DataGridViewBindType.Object, false, false);
                 //禁止排序
                 this.dv_Org.IsSort = false;
-                //显示错误信息
-                if (!string.IsNullOrEmpty(sbError.ToString()))
-                {
-                    this.rtb_Org_FullError.Text = $"{DateTime.Now}:{timeWatch.Elapsed}\r\n";
-                    this.rtb_Org_FullError.Text += sbError.ToString();
-                    this.rtb_Org_FullError.ForeColor = Color.Red;
-                    this.rtb_Org_FullError.Refresh();
-                }
             }
             catch (Exception ex)
             {
-                this.rtb_Org_FullError.Text = $"{DateTime.Now}:{timeWatch.Elapsed}:程序异常\r\n";
+                this.rtb_Org_FullError.Text = $"{DateTime.Now}:程序异常\r\n";
                 this.rtb_Org_FullError.Text += $"错误如下===>\r{ex.Message}";
                 this.rtb_Org_FullError.ForeColor = Color.Red;
                 this.rtb_Org_FullError.Refresh();
                 return;
-            }
-            finally
-            {
-                dicOrgName.Clear();
-                if (string.IsNullOrEmpty(sbError.ToString()))
-                {
-                    this.rtb_Org_FullError.Text += $"{DateTime.Now}:数据正确\r\n";
-                    this.rtb_Org_FullError.ForeColor = Color.Blue;
-                    this.rtb_Org_FullError.Refresh();
-                }
             }
         }
         #endregion
@@ -209,10 +176,6 @@ namespace Tool.Main.Forms.BusForms
         #region 人员导入按钮
         private void btn_Emp_Import_Click(object sender, EventArgs e)
         {
-            //记录处理时间
-            Stopwatch timeWatch = Stopwatch.StartNew();
-            //错误信息
-            StringBuilder sbError = new StringBuilder();
             //清除历史日志
             this.rtb_Emp_FullError.Text = string.Empty;
             try
@@ -231,15 +194,14 @@ namespace Tool.Main.Forms.BusForms
                 bool validateSheetResult = GetExcelData(ImportType.Emp, null, empList, ref errorMessage);
                 if (!validateSheetResult)
                 {
-                    this.rtb_Emp_FullError.Text = $"{DateTime.Now}:{timeWatch.Elapsed}\r\n";
-                    this.rtb_Emp_FullError.Text += errorMessage;
+                    this.rtb_Emp_FullError.Text = $"{DateTime.Now}:{errorMessage}\r\n";
                     this.rtb_Emp_FullError.ForeColor = Color.Red;
                     return;
                 }
                 //准备校验数据
                 AppendLog(ImportType.Emp, $"{DateTime.Now}:Excel取数已完成，开始校验数据");
                 //DT 序号+原始数据+Remark
-                ValidateData(ImportType.Emp, null, empList, ref sbError);
+                ValidateData(ImportType.Emp, null, empList);
                 //校验数据完成
                 AppendLog(ImportType.Emp, $"{DateTime.Now}:Excel校验已完成");
                 //绑定网格，展示数据校验明细
@@ -247,31 +209,14 @@ namespace Tool.Main.Forms.BusForms
                 this.dv_Emp.ViewDataBind(CusControls.DataGridViewEx.DataGridViewBindType.Object, false, false);
                 //禁止排序
                 this.dv_Emp.IsSort = false;
-                //显示错误信息
-                if (!string.IsNullOrEmpty(sbError.ToString()))
-                {
-                    this.rtb_Emp_FullError.Text = $"{DateTime.Now}:{timeWatch.Elapsed}\r\n";
-                    this.rtb_Emp_FullError.Text += sbError.ToString();
-                    this.rtb_Emp_FullError.ForeColor = Color.Red;
-                    this.rtb_Emp_FullError.Refresh();
-                }
             }
             catch (Exception ex)
             {
-                this.rtb_Emp_FullError.Text = $"{DateTime.Now}:{timeWatch.Elapsed}:程序异常\r\n";
+                this.rtb_Emp_FullError.Text = $"{DateTime.Now}:程序异常\r\n";
                 this.rtb_Emp_FullError.Text += $"错误如下===>\r{ex.Message}";
                 this.rtb_Emp_FullError.ForeColor = Color.Red;
                 this.rtb_Emp_FullError.Refresh();
                 return;
-            }
-            finally
-            {
-                if (string.IsNullOrEmpty(sbError.ToString()))
-                {
-                    this.rtb_Emp_FullError.Text += $"{DateTime.Now}:数据正确\r\n";
-                    this.rtb_Emp_FullError.ForeColor = Color.Blue;
-                    this.rtb_Emp_FullError.Refresh();
-                }
             }
         }
         #endregion
@@ -455,20 +400,67 @@ namespace Tool.Main.Forms.BusForms
         #endregion
 
         #region 校验数据
-        private void ValidateData(ImportType type, List<ImportOrg>? listOrg, List<ImportEmp>? listEmp, ref StringBuilder sbError)
+        private void ValidateData(ImportType type, List<ImportOrg>? listOrg, List<ImportEmp>? listEmp)
         {
-            //1.获取业务数据
+            #region 判断文档重复数据
+
+            //1.判断重复：
+            AppendLog(type, $"{DateTime.Now}:开始校验文档重复数据");
+            bool hasRepeat = false;
+            //1.1 组织清单：业务组织名称 + 所属BU编码 是否重复
+            if (type == ImportType.Org)
+            {
+                listOrg.GroupBy(item => (item.OrgName, item.BuNo))
+                    .ToList().ForEach(s =>
+                    {
+                        if (s.ToList().Count > 1)
+                        {
+                            hasRepeat = true;
+                            string tempRemark = $"【{string.Join("】【", s.ToList().Select(list => list.SheetIndex).ToList())}】存在相同的业务组织名称和BU编号;";
+                            s.ToList().ForEach(repeatItem =>
+                            {
+                                listOrg.Where(findRepeat => findRepeat.SheetIndex.Equals(repeatItem.SheetIndex)).ToList().ForEach(setItem =>
+                                {
+                                    setItem.Remark += tempRemark;
+                                });
+                            });
+                            AppendError(ImportType.Org, tempRemark);
+                        }
+                    });
+            }
+            //1.2 人员清单：员工工号 是否重复
+            if (type == ImportType.Emp)
+            {
+                listEmp.GroupBy(item => (item.EmpNo))
+                    .ToList().ForEach(s =>
+                    {
+                        if (s.ToList().Count > 1)
+                        {
+                            hasRepeat = true;
+                            string tempRemark = $"【{string.Join("】【", s.ToList().Select(list => list.SheetIndex).ToList())}】存在相同的员工编号;";
+                            s.ToList().ForEach(repeatItem =>
+                            {
+                                listEmp.Where(findRepeat => findRepeat.SheetIndex.Equals(repeatItem.SheetIndex)).ToList().ForEach(setItem =>
+                                {
+                                    setItem.Remark += tempRemark;
+                                });
+                            });
+                            AppendError(ImportType.Emp, tempRemark);
+                        }
+                    });
+            }
+            string strHasRepeat = hasRepeat ? "【是】存在重复数据;" : "【否】不存在重复数据";
+            AppendLog(type, $"{DateTime.Now}:文档重复数据校验完成;{strHasRepeat}");
+            if (hasRepeat) return;
+
+            #endregion
+
+            //2.获取业务数据
             AppendLog(type, $"{DateTime.Now}:开始获取业务数据");
-            BusinessData pduValidateResult = GetBusinessData();
+            //BusinessData pduValidateResult = GetBusinessData();
             AppendLog(type, $"{DateTime.Now}:业务数据获取完成");
 
-            //2.判断重复：
-            AppendLog(type, $"{DateTime.Now}:开始校验文档重复数据");
-            //2.1 组织清单：业务组织名称 + 所属BU编码 是否重复
 
-            //2.2 人员清单：员工工号 是否重复
-
-            AppendLog(type, $"{DateTime.Now}:文档重复数据校验完成");
 
             //3.判断数据正确：
             //3.1 组织清单：
@@ -521,7 +513,7 @@ namespace Tool.Main.Forms.BusForms
             pduValidateResult.PduEmployeeResult = piBusi.GetPduEmployee(dataHelper);
             return pduValidateResult;
         }
-        #endregion       
+        #endregion
 
         #region 生成组织脚本
         private void btn_Org_Script_Click(object sender, EventArgs e)
@@ -587,6 +579,22 @@ namespace Tool.Main.Forms.BusForms
             else if (type == ImportType.Emp)
             {
                 this.rtb_Emp_FullError.Text += $"{DateTime.Now}:{message}\r\n";
+                this.rtb_Emp_FullError.Refresh();
+            }
+        }
+
+        private void AppendError(ImportType type, string message)
+        {
+            if (type == ImportType.Org)
+            {
+                this.rtb_Org_FullError.Text += $"{DateTime.Now}:{message}\r\n";
+                this.rtb_Org_FullError.ForeColor = Color.Red;
+                this.rtb_Org_FullError.Refresh();
+            }
+            else if (type == ImportType.Emp)
+            {
+                this.rtb_Emp_FullError.Text += $"{DateTime.Now}:{message}\r\n";
+                this.rtb_Emp_FullError.ForeColor = Color.Red;
                 this.rtb_Emp_FullError.Refresh();
             }
         }
