@@ -243,8 +243,8 @@ namespace Tool.Main.Forms.BusForms
                 //校验数据完成
                 AppendLog(ImportType.Emp, $"{DateTime.Now}:Excel校验已完成");
                 //绑定网格，展示数据校验明细
-                this.dv_Org.SetDvObject(empList);
-                this.dv_Org.ViewDataBind(CusControls.DataGridViewEx.DataGridViewBindType.Object, false, false);
+                this.dv_Emp.SetDvObject(empList);
+                this.dv_Emp.ViewDataBind(CusControls.DataGridViewEx.DataGridViewBindType.Object, false, false);
                 //禁止排序
                 this.dv_Emp.IsSort = false;
                 //显示错误信息
@@ -308,6 +308,7 @@ namespace Tool.Main.Forms.BusForms
                 {
                     ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                 }
+                ofd.InitialDirectory = @"E:\00任务\任务00010_业务交付组织\10.准备完整开发导数工具+业务新导数excel\2.第二版\2.开发调整列导数excel";
                 ofd.Multiselect = false;
                 //打开确认
                 if (ofd.ShowDialog() == DialogResult.OK)

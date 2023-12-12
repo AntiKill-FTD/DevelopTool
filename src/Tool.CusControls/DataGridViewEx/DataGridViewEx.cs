@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections.ObjectModel;
+using System.Data;
 using System.Reflection;
 using Tool.CusControls.Common;
 using Tool.Data.DataHelper;
@@ -623,7 +624,7 @@ namespace Tool.CusControls.DataGridViewEx
         /// <summary>
         /// 数据源实体
         /// </summary>
-        private dynamic _dvObject;
+        private List<dynamic> _dvObject;
 
         /// <summary>
         /// 数据源实体类型
@@ -635,7 +636,14 @@ namespace Tool.CusControls.DataGridViewEx
         /// </summary>
         public void SetDvObject<T>(List<T> obj)
         {
-            _dvObject = obj;
+            if (_dvObject == null)
+            {
+                _dvObject = new();
+            }
+            obj.ForEach(item =>
+            {
+                _dvObject.Add(item);
+            });
             _dvObjectType = typeof(T);
         }
 
@@ -643,7 +651,7 @@ namespace Tool.CusControls.DataGridViewEx
         /// 数据源实体
         /// </summary>
         /// <returns></returns>
-        public dynamic GetDvObject()
+        public List<dynamic> GetDvObject()
         {
             return _dvObject;
         }
@@ -1003,8 +1011,23 @@ namespace Tool.CusControls.DataGridViewEx
                 {
                     //dvObject 转换为 DataTable
                     PropertyInfo[] pis = _dvObjectType.GetProperties();
-
-
+                    DataTable dt = new DataTable();
+                    foreach (var item in pis)
+                    {
+                        dt.Columns.Add(item.Name);
+                    }
+                    //循环实体创建row
+                    foreach (var row in GetDvObject())
+                    {
+                        DataRow dataRow = dt.NewRow();
+                        foreach (var field in pis)
+                        {
+                            dataRow[field.Name] = field.GetValue(row);
+                        }
+                        dt.Rows.Add(dataRow);
+                    }
+                    //存放到dvDataTable
+                    _dvDataTabel = dt.Copy();
                     //如果是查询，置为首页
                     if (isQuery)
                     {
