@@ -1,6 +1,6 @@
 ﻿namespace Tool.IService.Model.Bus
 {
-    public class PduValidateResult
+    public class BusinessData
     {
         public List<OriginOrgFourResult> OriginLevelFourOrgResult { get; set; }
 

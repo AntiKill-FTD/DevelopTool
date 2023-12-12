@@ -421,30 +421,22 @@ namespace Tool.Main.Forms.BusForms
         #endregion
 
         #region 校验数据
-        /// <summary>
-        /// 校验数据和数据库是否匹配
-        /// 如果导入的是组织清单，还需要校验： ---- 后期还需要和数据库对比脚本（本次不做）
-        /// 1.【业务组织名称】是否存在重复
-        /// 2.【直接上层业务组织】是否在【业务组织名称】存在 （BuNo一致的才认为是上层组织）
-        /// 如果导入的是人员清单，还需要校验
-        /// 1.【员工工号】是否存在重复
-        /// 2.【PDU业务组织】是否存在
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="dt"></param>
-        /// <param name="sbError"></param>
         private void ValidateData(ImportType type, ref DataTable dt, ref StringBuilder sbError)
         {
             //dt添加备注列
             dt.Columns.Add("Remark", typeof(string));
             //1.获取业务数据
             AppendLog(type, $"{DateTime.Now}:开始获取业务数据");
-            PduValidateResult pduValidateResult = GetBusinessData();
+            BusinessData pduValidateResult = GetBusinessData();
             AppendLog(type, $"{DateTime.Now}:业务数据获取完成");
 
             //2.判断重复：
+            AppendLog(type, $"{DateTime.Now}:开始校验文档重复数据");
             //2.1 组织清单：业务组织名称 + 所属BU编码 是否重复
+
             //2.2 人员清单：员工工号 是否重复
+
+            AppendLog(type, $"{DateTime.Now}:文档重复数据校验完成");
 
             //3.判断数据正确：
             //3.1 组织清单：
@@ -488,10 +480,10 @@ namespace Tool.Main.Forms.BusForms
         #endregion
 
         #region 获取业务数据
-        private PduValidateResult GetBusinessData()
+        private BusinessData GetBusinessData()
         {
             //获取业务数据
-            PduValidateResult pduValidateResult = new PduValidateResult();
+            BusinessData pduValidateResult = new BusinessData();
             PduImportBusiness piBusi = new PduImportBusiness();
             pduValidateResult.OriginLevelFourOrgResult = piBusi.GetOriginLevelFourOrg(dataHelper);
             pduValidateResult.OriginEmpResult = piBusi.GetOriginEmpInfo(dataHelper);
