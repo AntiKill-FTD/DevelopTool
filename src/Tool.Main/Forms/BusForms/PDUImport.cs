@@ -691,6 +691,25 @@ namespace Tool.Main.Forms.BusForms
                         //赋值组织编号
                         item.OrgNo = $"{tempBuNo}_PDU_{buIndexDic[tempBuNo]}";
                     }
+                    //寻找父级编号
+                    if (!string.IsNullOrEmpty(item.ParentName))
+                    {
+                        ImportOrg parentOrg = listOrg.Where(parentItem => item.BuNo.Equals(parentItem.BuNo) && item.ParentName.Equals(parentItem.OrgName)).FirstOrDefault();
+                        BusiPduDepartmentResult parentOrgData = null;
+                        if (parentOrg == null)
+                        {
+                            parentOrgData = pduValidateResult.PduDepartmentResult.Where(parentItem => item.BuNo.Equals(parentItem.BuNo) && item.ParentName.Equals(parentItem.OrgName)).FirstOrDefault();
+                            item.ParentNO = parentOrgData.OrgNo;
+                        }
+                        else
+                        {
+                            item.ParentNO = parentOrg.OrgNo;
+                        }
+                    }
+                    else
+                    {
+                        item.ParentNO = item.BuNo;
+                    }
                 });
             }
             AppendLog(type, $"组织导入,处理PDU编号、父级编号完成;");
