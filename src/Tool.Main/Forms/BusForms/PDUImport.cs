@@ -2,6 +2,7 @@
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using System.Data;
+using System.Linq;
 using System.Text;
 using Tool.Business.Business;
 using Tool.Data;
@@ -17,6 +18,7 @@ namespace Tool.Main.Forms.BusForms
         private ICommonDataHelper dataHelper;   //数据库操作类
         private bool isConnect = false;         //判断是否连接成功
         private string lastChoosePath = string.Empty; //上次打开的文件夹路径
+        private Dictionary<string, int> buIndexDic = new Dictionary<string, int>(); //BU名称+序号
 
         #endregion
 
@@ -131,6 +133,10 @@ namespace Tool.Main.Forms.BusForms
             //清除历史日志
             this.rtb_Org_FullError.Text = string.Empty;
             this.rtb_Org_FullError.ForeColor = Color.Black;
+            //清除字典
+            buIndexDic.Clear();
+            //清除网格
+            this.dv_Org.ClearRow();
             try
             {
                 //判断数据库连接
@@ -179,6 +185,8 @@ namespace Tool.Main.Forms.BusForms
             //清除历史日志
             this.rtb_Emp_FullError.Text = string.Empty;
             this.rtb_Emp_FullError.ForeColor = Color.Black;
+            //清除网格
+            this.dv_Emp.ClearRow();
             try
             {
                 //判断数据库连接
@@ -653,7 +661,36 @@ namespace Tool.Main.Forms.BusForms
             {
                 listOrg.ForEach(item =>
                 {
-
+                    //只有PDU编号为空的需要处理
+                    if (string.IsNullOrEmpty(item.OrgNo))
+                    {
+                        //提取BU编号
+                        string tempBuNo = item.BuNo;
+                        if (buIndexDic.Keys.Contains(tempBuNo))
+                        {
+                            //如果存在BU编号，序号+1
+                            buIndexDic[tempBuNo]++;
+                        }
+                        else
+                        {
+                            //查询数据库是否存在该BU下的PDU
+                            BusiPduDepartmentResult buInfo = pduValidateResult.PduDepartmentResult
+                            .Where(originItem => tempBuNo.Equals(originItem.BuNo))
+                            .OrderBy(originItem => originItem.OrgNo)
+                            .FirstOrDefault();
+                            //如果不存在BU编号，查询数据库是否存在BU对应序号，存在则+1，不存在则为1
+                            if (buInfo != null)
+                            {
+                                buIndexDic[tempBuNo] = Convert.ToInt32(buInfo.OrgNo.Split('_').ToList()[2]) + 1;
+                            }
+                            else
+                            {
+                                buIndexDic[tempBuNo] = 1;
+                            }
+                        }
+                        //赋值组织编号
+                        item.OrgNo = $"{tempBuNo}_PDU_{buIndexDic[tempBuNo]}";
+                    }
                 });
             }
             AppendLog(type, $"组织导入,处理PDU编号、父级编号完成;");

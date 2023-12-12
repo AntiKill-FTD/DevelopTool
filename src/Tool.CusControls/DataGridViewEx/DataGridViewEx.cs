@@ -640,6 +640,10 @@ namespace Tool.CusControls.DataGridViewEx
             {
                 _dvObject = new();
             }
+            else
+            {
+                _dvObject.Clear();
+            }
             obj.ForEach(item =>
             {
                 _dvObject.Add(item);
