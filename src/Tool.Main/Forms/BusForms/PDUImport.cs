@@ -15,6 +15,7 @@ using Tool.Business.Business;
 using Tool.Data;
 using Tool.Data.DataHelper;
 using Tool.IService.Model.Bus;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Tool.Main.Forms.BusForms
 {
@@ -153,10 +154,10 @@ namespace Tool.Main.Forms.BusForms
                 }
                 //获取文档数据
                 string errorMessage = string.Empty;
-                //DT 序号+原始数据
-                DataTable dt = CreateOrgTable();
+                //原始数据
+                List<ImportOrg> orgList = new List<ImportOrg>();
                 //开始读取数据
-                bool validateSheetResult = GetExcelData(ImportType.Org, GetOrgColumns()[1], ref dt, ref errorMessage);
+                bool validateSheetResult = GetExcelData(ImportType.Org, orgList, null, ref errorMessage);
                 if (!validateSheetResult)
                 {
                     this.rtb_Org_FullError.Text = $"{DateTime.Now}:{timeWatch.Elapsed}\r\n";
@@ -167,12 +168,12 @@ namespace Tool.Main.Forms.BusForms
                 //准备校验数据
                 AppendLog(ImportType.Org, $"{DateTime.Now}:Excel取数已完成，开始校验数据");
                 //DT 序号+原始数据+Remark
-                ValidateData(ImportType.Org, ref dt, ref sbError);
+                //ValidateData(ImportType.Org, ref dt, ref sbError);
                 //校验数据完成
                 AppendLog(ImportType.Org, $"{DateTime.Now}:Excel校验已完成");
                 //绑定网格，展示数据校验明细
-                this.dv_Org.DvDataTable = dt;
-                this.dv_Org.ViewDataBind(CusControls.DataGridViewEx.DataGridViewBindType.DataTable, false, false);
+                this.dv_Org.SetDvObject(orgList);
+                this.dv_Org.ViewDataBind(CusControls.DataGridViewEx.DataGridViewBindType.Object, false, false);
                 //禁止排序
                 this.dv_Org.IsSort = false;
                 //显示错误信息
@@ -224,10 +225,10 @@ namespace Tool.Main.Forms.BusForms
                 }
                 //获取文档数据
                 string errorMessage = string.Empty;
-                //DT 序号+原始数据
-                DataTable dt = CreateEmpTable();
+                //原始数据
+                List<ImportEmp> empList = new List<ImportEmp>();
                 //开始读取数据
-                bool validateSheetResult = GetExcelData(ImportType.Emp, GetEmpColumns()[1], ref dt, ref errorMessage);
+                bool validateSheetResult = GetExcelData(ImportType.Emp, null, empList, ref errorMessage);
                 if (!validateSheetResult)
                 {
                     this.rtb_Emp_FullError.Text = $"{DateTime.Now}:{timeWatch.Elapsed}\r\n";
@@ -238,12 +239,12 @@ namespace Tool.Main.Forms.BusForms
                 //准备校验数据
                 AppendLog(ImportType.Emp, $"{DateTime.Now}:Excel取数已完成，开始校验数据");
                 //DT 序号+原始数据+Remark
-                ValidateData(ImportType.Emp, ref dt, ref sbError);
+                //ValidateData(ImportType.Emp, ref dt, ref sbError);
                 //校验数据完成
                 AppendLog(ImportType.Emp, $"{DateTime.Now}:Excel校验已完成");
                 //绑定网格，展示数据校验明细
-                this.dv_Emp.DvDataTable = dt;
-                this.dv_Emp.ViewDataBind(CusControls.DataGridViewEx.DataGridViewBindType.DataTable, false, false);
+                this.dv_Org.SetDvObject(empList);
+                this.dv_Org.ViewDataBind(CusControls.DataGridViewEx.DataGridViewBindType.Object, false, false);
                 //禁止排序
                 this.dv_Emp.IsSort = false;
                 //显示错误信息
@@ -280,11 +281,10 @@ namespace Tool.Main.Forms.BusForms
         /// 此方法只校验Excel格式，列字段信息;
         /// </summary>
         /// <param name="type"></param>
-        /// <param name="columns"></param>
         /// <param name="dt"></param>
         /// <param name="message"></param>
         /// <returns></returns>
-        private bool GetExcelData(ImportType type, string[] columns, ref DataTable dt, ref string message)
+        private bool GetExcelData(ImportType type, List<ImportOrg>? listOrg, List<ImportEmp>? listEmp, ref string message)
         {
             //文件流
             FileStream fs = null;
@@ -320,6 +320,12 @@ namespace Tool.Main.Forms.BusForms
                 {
                     return false;
                 }
+
+                #endregion
+
+                #region 根据导入类型获取文档规定列
+
+                string[] columns = type == ImportType.Org ? GetOrgColumns()[1] : GetEmpColumns()[1];
 
                 #endregion
 
@@ -371,21 +377,48 @@ namespace Tool.Main.Forms.BusForms
 
                             #region 读取Excel内容
 
-                            //获取字段拼接表
+                            //获取最后一行
                             int rowNum = sheet.LastRowNum;
+                            //循环有效数据行
                             for (int j = 2; j <= rowNum; j++)
                             {
-                                DataRow dr = dt.NewRow();
-                                //写入序号列
-                                dr[0] = $"{sheetName}:{j - 1}";
-                                //添加字段列
-                                for (int k = 0; k < columns.Length; k++)
+                                //组织
+                                if (type == ImportType.Org)
                                 {
-                                    var objValue = sheet.GetRow(j).GetCell(k);
-                                    dr[k + 1] = objValue == null ? "" : objValue.ToString();
+                                    //定义组织数据
+                                    ImportOrg orgInfo = new ImportOrg();
+                                    //写入序号列
+                                    orgInfo.SheetIndex = $"{sheetName}:{j + 1}";
+                                    orgInfo.Index = j - 1;
+                                    //添加字段列
+                                    orgInfo.OrgName = sheet.GetRow(j).GetCell(0)?.ToString();
+                                    orgInfo.ParentName = sheet.GetRow(j).GetCell(1)?.ToString();
+                                    orgInfo.BuName = sheet.GetRow(j).GetCell(2)?.ToString();
+                                    orgInfo.BuNo = sheet.GetRow(j).GetCell(3)?.ToString();
+                                    orgInfo.EmpName = sheet.GetRow(j).GetCell(4)?.ToString();
+                                    orgInfo.EmpNo = sheet.GetRow(j).GetCell(5)?.ToString();
+                                    orgInfo.BeginDate = sheet.GetRow(j).GetCell(6)?.ToString();
+                                    //添加到集合
+                                    listOrg.Add(orgInfo);
                                 }
-                                //插入行
-                                dt.Rows.Add(dr);
+                                //人员
+                                if (type == ImportType.Emp)
+                                {
+                                    //定义人员数据
+                                    ImportEmp empInfo = new ImportEmp();
+                                    //写入序号列
+                                    empInfo.SheetIndex = $"{sheetName}:{j + 1}";
+                                    empInfo.Index = j - 1;
+                                    //添加字段列
+                                    empInfo.EmpNo = sheet.GetRow(j).GetCell(0)?.ToString();
+                                    empInfo.EmpName = sheet.GetRow(j).GetCell(1)?.ToString();
+                                    empInfo.OrgName = sheet.GetRow(j).GetCell(2)?.ToString();
+                                    empInfo.BuName = sheet.GetRow(j).GetCell(3)?.ToString();
+                                    empInfo.BuNo = sheet.GetRow(j).GetCell(4)?.ToString();
+                                    empInfo.BeginDate = sheet.GetRow(j).GetCell(5)?.ToString();
+                                    //添加到集合
+                                    listEmp.Add(empInfo);
+                                }
                             }
 
                             #endregion
@@ -427,7 +460,7 @@ namespace Tool.Main.Forms.BusForms
             dt.Columns.Add("Remark", typeof(string));
             //1.获取业务数据
             AppendLog(type, $"{DateTime.Now}:开始获取业务数据");
-            BusinessData pduValidateResult = GetBusinessData();
+            //BusinessData pduValidateResult = GetBusinessData();
             AppendLog(type, $"{DateTime.Now}:业务数据获取完成");
 
             //2.判断重复：
@@ -479,64 +512,7 @@ namespace Tool.Main.Forms.BusForms
 
         #endregion
 
-        #region 获取业务数据
-        private BusinessData GetBusinessData()
-        {
-            //获取业务数据
-            BusinessData pduValidateResult = new BusinessData();
-            PduImportBusiness piBusi = new PduImportBusiness();
-            pduValidateResult.OriginLevelFourOrgResult = piBusi.GetOriginLevelFourOrg(dataHelper);
-            pduValidateResult.OriginEmpResult = piBusi.GetOriginEmpInfo(dataHelper);
-            pduValidateResult.PduDepartmentResult = piBusi.GetPduDepartment(dataHelper);
-            pduValidateResult.PduEmployeeResult = piBusi.GetPduEmployee(dataHelper);
-            return pduValidateResult;
-        }
-        #endregion
-
-        #region 构建全局表对象字段
-        private DataTable CreateOrgTable()
-        {
-            //获取字段列
-            string[] columns = GetOrgColumns()[0];
-            //创建表
-            DataTable dt = new DataTable();
-            //添加序号列
-            dt.Columns.Add("序号", typeof(string));
-            //添加字段列
-            foreach (string col in columns)
-            {
-                dt.Columns.Add(col);
-            }
-            //添加OrgNo，ParentNO，LeaderId列
-            dt.Columns.Add("OrgNo", typeof(string));
-            dt.Columns.Add("ParentNO", typeof(string));
-            dt.Columns.Add("LeaderId", typeof(Int64));
-            //返回表
-            return dt;
-        }
-
-        private DataTable CreateEmpTable()
-        {
-            //获取字段列
-            string[] columns = GetEmpColumns()[0];
-            //创建表
-            DataTable dt = new DataTable();
-            //添加序号列
-            dt.Columns.Add("序号", typeof(string));
-            //添加字段列
-            foreach (string col in columns)
-            {
-                dt.Columns.Add(col);
-            }
-            //添加OrgNo，LeaderId
-            dt.Columns.Add("OrgNo", typeof(string));
-            dt.Columns.Add("LeaderId", typeof(Int64));
-            //返回表
-            return dt;
-        }
-        #endregion
-
-        #region 获取字段清单
+        #region 获取定义导入文档的字段清单
         private string[][] GetOrgColumns()
         {
             string[] engColumns = new string[7] { "OrgName", "ParentName", "BuName", "BuNo", "EmpName", "EmpNo", "BeginDate" };
@@ -551,6 +527,20 @@ namespace Tool.Main.Forms.BusForms
             return new string[2][] { engColumns, chnColumns };
         }
         #endregion
+
+        #region 获取业务数据
+        private BusinessData GetBusinessData()
+        {
+            //获取业务数据
+            BusinessData pduValidateResult = new BusinessData();
+            PduImportBusiness piBusi = new PduImportBusiness();
+            pduValidateResult.OriginLevelFourOrgResult = piBusi.GetOriginLevelFourOrg(dataHelper);
+            pduValidateResult.OriginEmpResult = piBusi.GetOriginEmpInfo(dataHelper);
+            pduValidateResult.PduDepartmentResult = piBusi.GetPduDepartment(dataHelper);
+            pduValidateResult.PduEmployeeResult = piBusi.GetPduEmployee(dataHelper);
+            return pduValidateResult;
+        }
+        #endregion       
 
         #region 生成组织脚本
         private void btn_Org_Script_Click(object sender, EventArgs e)

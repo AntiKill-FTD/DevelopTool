@@ -18,7 +18,7 @@ namespace Tool.Business.Business
         /// </summary>
         /// <param name="dataHelper"></param>
         /// <returns></returns>
-        public List<OriginOrgFourResult> GetOriginLevelFourOrg(ICommonDataHelper dataHelper)
+        public List<BusiOriginOrgFourResult> GetOriginLevelFourOrg(ICommonDataHelper dataHelper)
         {
             string sql = @"SELECT OrgId,
                                   OrgName,
@@ -26,7 +26,7 @@ namespace Tool.Business.Business
                                   level AS OrgLevel
                            FROM dbo.mng_OrgFive WITH (NOLOCK);";
             DataTable dt = dataHelper.GetDataTable(sql, string.Empty);
-            return DtToModel.GetModelFromDB<OriginOrgFourResult>(dt);
+            return DtToModel.GetModelFromDB<BusiOriginOrgFourResult>(dt);
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Tool.Business.Business
         /// </summary>
         /// <param name="dataHelper"></param>
         /// <returns></returns>
-        public List<OriginEmpResult> GetOriginEmpInfo(ICommonDataHelper dataHelper)
+        public List<BusiOriginEmpResult> GetOriginEmpInfo(ICommonDataHelper dataHelper)
         {
             string sql = @"SELECT emp_Id AS EmpId,
                                   emp_EmployeeNo AS EmpNo,
@@ -42,7 +42,7 @@ namespace Tool.Business.Business
                                   emp_Status AS EmpStatus
                            FROM PSAData..mng_Employee WITH (NOLOCK);";
             DataTable dt = dataHelper.GetDataTable(sql, string.Empty);
-            return DtToModel.GetModelFromDB<OriginEmpResult>(dt);
+            return DtToModel.GetModelFromDB<BusiOriginEmpResult>(dt);
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Tool.Business.Business
         /// </summary>
         /// <param name="dataHelper"></param>
         /// <returns></returns>
-        public List<PduDepartmentResult> GetPduDepartment(ICommonDataHelper dataHelper)
+        public List<BusiPduDepartmentResult> GetPduDepartment(ICommonDataHelper dataHelper)
         {
             string sql = @"SELECT pduDepart.Dep_Id AS OrgId,
                                   pduDepart.Dep_DeptNo AS OrgNo,
@@ -64,7 +64,7 @@ namespace Tool.Business.Business
                            FROM PSAData..mng_PduDepartment pduDepart WITH (NOLOCK)
                            LEFT JOIN PSAData..mng_department depart WITH (NOLOCK) ON depart.Dep_DeptNo = pduDepart.Dep_Level4DeptNo;";
             DataTable dt = dataHelper.GetDataTable(sql, string.Empty);
-            return DtToModel.GetModelFromDB<PduDepartmentResult>(dt);
+            return DtToModel.GetModelFromDB<BusiPduDepartmentResult>(dt);
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Tool.Business.Business
         /// </summary>
         /// <param name="dataHelper"></param>
         /// <returns></returns>
-        public List<PduEmployeeResult> GetPduEmployee(ICommonDataHelper dataHelper)
+        public List<BusiPduEmployeeResult> GetPduEmployee(ICommonDataHelper dataHelper)
         {
             string sql = @"SELECT pduDepart.Dep_Id AS OrgId,
                                   pduDepart.Dep_DeptNo AS OrgNo,
@@ -83,7 +83,7 @@ namespace Tool.Business.Business
                            LEFT JOIN PSAData..mng_PduDepartment pduDepart WITH (NOLOCK) ON pduDepart.Dep_DeptNo = pduEmp.Dep_No
                            LEFT JOIN PSAData..mng_Employee emp ON emp.emp_EmployeeNo = pduEmp.EmployeeNo;";
             DataTable dt = dataHelper.GetDataTable(sql, string.Empty);
-            return DtToModel.GetModelFromDB<PduEmployeeResult>(dt);
+            return DtToModel.GetModelFromDB<BusiPduEmployeeResult>(dt);
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace Tool.Business.Business
         /// </summary>
         /// <param name="dataHelper"></param>
         /// <returns></returns>
-        public List<PduDepartmentResult> GetPduDepartmentLevel(ICommonDataHelper dataHelper)
+        public List<BusiPduDepartmentResult> GetPduDepartmentLevel(ICommonDataHelper dataHelper)
         {
             string sql = @"SELECT pduLevel.PDU_DeptID AS OrgId,
                                   pduLevel.PDU_DeptNo AS OrgNo,
@@ -100,7 +100,7 @@ namespace Tool.Business.Business
                                   pduLevel.DL_DeptName4 AS BuName
                            FROM PSAData..mng_PduDepartmentLevel pduLevel WITH (NOLOCK);";
             DataTable dt = dataHelper.GetDataTable(sql, string.Empty);
-            return DtToModel.GetModelFromDB<PduDepartmentResult>(dt);
+            return DtToModel.GetModelFromDB<BusiPduDepartmentResult>(dt);
         }
     }
 }

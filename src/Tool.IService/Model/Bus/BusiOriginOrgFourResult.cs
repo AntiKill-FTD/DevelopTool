@@ -1,6 +1,6 @@
 ﻿namespace Tool.IService.Model.Bus
 {
-    public class OriginOrgFourResult
+    public class BusiOriginOrgFourResult
     {
         /// <summary>
         /// 组织ID

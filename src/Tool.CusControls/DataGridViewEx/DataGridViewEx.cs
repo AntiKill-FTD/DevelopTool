@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Reflection;
 using Tool.CusControls.Common;
 using Tool.Data.DataHelper;
 using Tool.IService.Model.Common;
@@ -619,6 +620,34 @@ namespace Tool.CusControls.DataGridViewEx
         }
         #endregion
 
+        /// <summary>
+        /// 数据源实体
+        /// </summary>
+        private dynamic _dvObject;
+
+        /// <summary>
+        /// 数据源实体类型
+        /// </summary>
+        private Type _dvObjectType;
+
+        /// <summary>
+        /// 数据源实体
+        /// </summary>
+        public void SetDvObject<T>(List<T> obj)
+        {
+            _dvObject = obj;
+            _dvObjectType = typeof(T);
+        }
+
+        /// <summary>
+        /// 数据源实体
+        /// </summary>
+        /// <returns></returns>
+        public dynamic GetDvObject()
+        {
+            return _dvObject;
+        }
+
         #region CheckBox
 
         #region 是否展示首列单选框
@@ -968,6 +997,51 @@ namespace Tool.CusControls.DataGridViewEx
                     PageCount = 0;
                 }
             }
+            else if (dataGridViewBindType == DataGridViewBindType.Object)
+            {
+                if (_dvObject != null)
+                {
+                    //dvObject 转换为 DataTable
+                    PropertyInfo[] pis = _dvObjectType.GetProperties();
+
+
+                    //如果是查询，置为首页
+                    if (isQuery)
+                    {
+                        CurrentPageIndex = 1;
+                    }
+                    //根据分页加载需要显示dt
+                    int beginRowNum = ((int)CurrentPageIndex - 1) * (int)PerPageCount + 1;
+                    int endRowNum = (int)CurrentPageIndex * (int)PerPageCount;
+                    if (isPage)
+                    {
+                        DataTable tempDt = _dvDataTabel.Clone();
+                        for (int i = beginRowNum; i <= endRowNum; i++)
+                        {
+                            tempDt.Rows.Add(_dvDataTabel.Rows[i]);
+                        }
+                        //绑定数据
+                        if (_dvDataTabel.Columns.Contains("RowNum"))
+                        {
+                            _dvDataTabel.Columns.Remove("RowNum");
+                        }
+                        _dv.DataSource = tempDt;
+                    }
+                    else
+                    {
+                        _dv.DataSource = _dvDataTabel;
+                    }
+                    DataCount = _dvDataTabel.Rows.Count;
+                    PageCount = DataCount % (int)PerPageCount == 0 ? DataCount / (int)PerPageCount : DataCount / (int)PerPageCount + 1;
+                    //更新绑定方式记录
+                    DvDataGridViewBindType = DataGridViewBindType.DataTable;
+                }
+                else
+                {
+                    DataCount = 0;
+                    PageCount = 0;
+                }
+            }
 
             //设置按钮显示
             SetPageBtn();
@@ -1142,7 +1216,8 @@ namespace Tool.CusControls.DataGridViewEx
     public enum DataGridViewBindType
     {
         DicSql = 1,
-        DataTable = 2
+        DataTable = 2,
+        Object = 3,
     }
 
     /// <summary>

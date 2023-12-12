@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tool.IService.Model.Bus
 {
-    public class PduDepartmentResult
+    public class BusiPduDepartmentResult
     {
         /// <summary>
         /// 组织Id

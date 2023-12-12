@@ -1,6 +1,6 @@
 ﻿namespace Tool.IService.Model.Bus
 {
-    public class OriginEmpResult
+    public class BusiOriginEmpResult
     {
         /// <summary>
         /// 员工Id
