@@ -871,10 +871,10 @@ namespace Tool.Main.Forms.BusForms
                 else
                 {
                     sb.AppendLine($@"UPDATE PSAData..mng_Pdu_Employee SET 
-                                                                            Dep_No = '{deptNo}',,
+                                                                            Dep_No = '{deptNo}',
                                                                             Dep_BeginDate = '{beginDate}',
                                                                             Dep_EndDate = '{beginDate}',
-                                                                            ModifyDate = GETDATE()
+                                                                            ModifyDate = GETDATE() 
                                                                             WHERE EmployeeNo = '{empNo}';"
                                                                             .Replace("\r\n                                                                            ", "")
                                                                             .Replace("\r\n                                                                        ", ""));
