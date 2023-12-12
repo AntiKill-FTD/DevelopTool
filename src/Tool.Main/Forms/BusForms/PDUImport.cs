@@ -676,7 +676,7 @@ namespace Tool.Main.Forms.BusForms
                             //查询数据库是否存在该BU下的PDU
                             BusiPduDepartmentResult buInfo = pduValidateResult.PduDepartmentResult
                             .Where(originItem => tempBuNo.Equals(originItem.BuNo))
-                            .OrderBy(originItem => originItem.OrgNo)
+                            .OrderByDescending(originItem => originItem.OrgNo)
                             .FirstOrDefault();
                             //如果不存在BU编号，查询数据库是否存在BU对应序号，存在则+1，不存在则为1
                             if (buInfo != null)
