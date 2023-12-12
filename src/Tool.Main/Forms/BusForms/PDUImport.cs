@@ -546,6 +546,10 @@ namespace Tool.Main.Forms.BusForms
                             }
                         }
                     }
+                    if (!dataResultHasError)
+                    {
+                        item.LeaderId = empInfo.EmpId.ToString();
+                    }
 
                     //3.1.8 判定该条数据是新增还是插入
                     BusiPduDepartmentResult orgResult = pduValidateResult.PduDepartmentResult.Where(originItem => item.OrgName.Equals(originItem.OrgName) && item.BuNo.Equals(originItem.BuNo)).FirstOrDefault();
@@ -639,7 +643,20 @@ namespace Tool.Main.Forms.BusForms
 
             #endregion
 
-            //4.生成PDU编号，组织和人员都要生成
+            #region 生成PDU编号、绑定父级编号
+
+            //4.组织导入:生成PDU编号、绑定父级编号
+            AppendLog(type, $"组织导入,开始处理PDU编号、父级编号;");
+            if (type == ImportType.Org)
+            {
+                listOrg.ForEach(item =>
+                {
+
+                });
+            }
+            AppendLog(type, $"组织导入,处理PDU编号、父级编号完成;");
+
+            #endregion
 
         }
 
