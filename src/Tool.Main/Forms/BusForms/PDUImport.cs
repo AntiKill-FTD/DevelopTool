@@ -769,8 +769,11 @@ namespace Tool.Main.Forms.BusForms
                 Int64? leaderId = row["LeaderId"] != System.DBNull.Value ? Convert.ToInt64($"{row["LeaderId"]}") : null;
                 string empNo = $"{row["EmpNo"]}";
                 string empName = $"{row["EmpName"]}";
-                string remark = $"{row["Remark"]}";
-                sb.AppendLine($@"INSERT INTO PSAData..mng_PduDepartment ( 
+                string beginDate = $"{row["BeginDate"]}";
+                string sqlType = $"{row["SqlType"]}";
+                if ("Insert".Equals(sqlType))
+                {
+                    sb.AppendLine($@"INSERT INTO PSAData..mng_PduDepartment ( 
                                                                             Dep_DeptNo,
                                                                             Dep_DeptName,
                                                                             Dep_DeptShortName,
@@ -803,8 +806,8 @@ namespace Tool.Main.Forms.BusForms
                                                                             {leaderId},
                                                                             '{empNo}',
                                                                             '{empName}',
-                                                                            GETDATE(),
-                                                                            GETDATE(),
+                                                                            '{beginDate}',
+                                                                            '{beginDate}',
                                                                             'changls',
                                                                             GETDATE(),
                                                                             'changls',
@@ -812,8 +815,13 @@ namespace Tool.Main.Forms.BusForms
                                                                             0,
                                                                             '' 
                                                                             );"
-                                                                            .Replace("\r\n                                                                            ", "")
-                                                                            .Replace("\r\n                                                                        ", ""));
+                                                                                .Replace("\r\n                                                                            ", "")
+                                                                                .Replace("\r\n                                                                        ", ""));
+                }
+                else
+                {
+
+                }
             }
             this.rtb_Org_SqlScript.Text = sb.ToString();
         }
@@ -833,8 +841,11 @@ namespace Tool.Main.Forms.BusForms
             {
                 string deptNo = $"{row["OrgNo"]}";
                 string empNo = $"{row["EmpNo"]}";
-                string remark = $"{row["Remark"]}";
-                sb.AppendLine($@"INSERT INTO PSAData..mng_Pdu_Employee ( 
+                string beginDate = $"{row["BeginDate"]}";
+                string sqlType = $"{row["SqlType"]}";
+                if ("Insert".Equals(sqlType))
+                {
+                    sb.AppendLine($@"INSERT INTO PSAData..mng_Pdu_Employee ( 
                                                                             Dep_No,
                                                                             EmployeeNo,
                                                                             Dep_BeginDate,
@@ -847,8 +858,8 @@ namespace Tool.Main.Forms.BusForms
                                                                             VALUES (
                                                                             '{deptNo}',
                                                                             '{empNo}',
-                                                                            GETDATE(),
-                                                                            GETDATE(),
+                                                                            '{beginDate}',
+                                                                            '{beginDate}',
                                                                             'changls',
                                                                             GETDATE(),
                                                                             'changls',
@@ -856,6 +867,18 @@ namespace Tool.Main.Forms.BusForms
                                                                             );"
                                                                             .Replace("\r\n                                                                            ", "")
                                                                             .Replace("\r\n                                                                        ", ""));
+                }
+                else
+                {
+                    sb.AppendLine($@"UPDATE PSAData..mng_Pdu_Employee SET 
+                                                                            Dep_No = '{deptNo}',,
+                                                                            Dep_BeginDate = '{beginDate}',
+                                                                            Dep_EndDate = '{beginDate}',
+                                                                            ModifyDate = GETDATE()
+                                                                            WHERE EmployeeNo = '{empNo}';"
+                                                                            .Replace("\r\n                                                                            ", "")
+                                                                            .Replace("\r\n                                                                        ", ""));
+                }
             }
             this.rtb_Emp_SqlScript.Text = sb.ToString();
         }
