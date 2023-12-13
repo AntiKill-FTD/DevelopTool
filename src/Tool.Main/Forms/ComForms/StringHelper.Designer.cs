@@ -133,6 +133,7 @@
             tableLayoutPanel4 = new TableLayoutPanel();
             label7 = new Label();
             textBox7 = new TextBox();
+            cb_StringList_RowSplit = new CheckBox();
             mainPanel.SuspendLayout();
             panel1.SuspendLayout();
             tlp_StringList.SuspendLayout();
@@ -234,6 +235,7 @@
             tlp_StringList_Operate.Controls.Add(tlp_StringList_Operate_AddEndChar, 0, 3);
             tlp_StringList_Operate.Controls.Add(tlp_StringList_Operate_AddBeginChar, 0, 2);
             tlp_StringList_Operate.Controls.Add(tlp_StringList_Operate_RowSplit, 0, 4);
+            tlp_StringList_Operate.Controls.Add(cb_StringList_RowSplit, 0, 5);
             tlp_StringList_Operate.Dock = DockStyle.Fill;
             tlp_StringList_Operate.Location = new Point(256, 3);
             tlp_StringList_Operate.Name = "tlp_StringList_Operate";
@@ -1419,6 +1421,19 @@
             textBox7.Size = new Size(154, 27);
             textBox7.TabIndex = 3;
             // 
+            // cb_StringList_RowSplit
+            // 
+            cb_StringList_RowSplit.AutoSize = true;
+            cb_StringList_RowSplit.Checked = true;
+            cb_StringList_RowSplit.CheckState = CheckState.Checked;
+            cb_StringList_RowSplit.Dock = DockStyle.Fill;
+            cb_StringList_RowSplit.Location = new Point(3, 193);
+            cb_StringList_RowSplit.Name = "cb_StringList_RowSplit";
+            cb_StringList_RowSplit.Size = new Size(114, 32);
+            cb_StringList_RowSplit.TabIndex = 5;
+            cb_StringList_RowSplit.Text = "一行多条加,";
+            cb_StringList_RowSplit.UseVisualStyleBackColor = true;
+            // 
             // StringHelper
             // 
             AutoScaleDimensions = new SizeF(9F, 20F);
@@ -1431,6 +1446,7 @@
             panel1.ResumeLayout(false);
             tlp_StringList.ResumeLayout(false);
             tlp_StringList_Operate.ResumeLayout(false);
+            tlp_StringList_Operate.PerformLayout();
             tlp_StringList_Operate_SplitChar.ResumeLayout(false);
             tlp_StringList_Operate_SplitChar.PerformLayout();
             tlp_StringList_Operate_AddBEChar.ResumeLayout(false);
@@ -1579,5 +1595,6 @@
         private TableLayoutPanel tlp_StringList_Operate_RowSplit;
         private TextBox tb_StringList_RowSplit;
         private Button btn_StringList_RowSplit;
+        private CheckBox cb_StringList_RowSplit;
     }
 }

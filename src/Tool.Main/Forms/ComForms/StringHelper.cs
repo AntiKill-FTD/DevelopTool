@@ -120,7 +120,14 @@ namespace Tool.Main.Forms.ComForms
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < disListOld.Count; i++)
                 {
-                    sb.Append(disListOld[i] + ",");
+                    if (cb_StringList_RowSplit.Checked)
+                    {
+                        sb.Append(disListOld[i] + ",");
+                    }
+                    else
+                    {
+                        sb.Append(disListOld[i]);
+                    }
                     if ((i + 1) % rowCount == 0)
                     {
                         sb.Append('\n');
