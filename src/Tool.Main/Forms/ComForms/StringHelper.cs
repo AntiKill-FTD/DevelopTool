@@ -1,14 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Numerics;
-using System.Resources;
+﻿using System.Numerics;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using Tool.Business.Common;
 
 namespace Tool.Main.Forms.ComForms
@@ -97,7 +88,7 @@ namespace Tool.Main.Forms.ComForms
                 {
                     item = newAddString + item;
                 }
-                disListNew.Add(item.Trim());
+                disListNew.Add(item);
             });
             //换行拼接
             string newDistination = string.Join('\n', disListNew);
@@ -163,7 +154,7 @@ namespace Tool.Main.Forms.ComForms
                 {
                     item = item + addString;
                 }
-                disListNew.Add(item.Trim());
+                disListNew.Add(item);
             });
             //换行拼接
             string newDistination = string.Join('\n', disListNew);
